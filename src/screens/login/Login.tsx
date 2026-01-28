@@ -14,14 +14,18 @@ import type { LoginCredentials } from "./LoginCredentails"
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react"
 
 export default function Login() {
   const { mutateAsync, isPending} = useLogin();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
 
   const handleLogin = async (values: LoginCredentials) => {
+    setFormError(null)
     try {
       await mutateAsync(values);
 
@@ -30,8 +34,9 @@ export default function Login() {
         duration: 2000,
       });
 
-      navigate("/home");
+      navigate("/verify");
     } catch (e) {
+      setFormError("Login failed. Please check your credentials.");
       console.log("Login error:", e);
 
       toast.error("Login failed", {
@@ -76,10 +81,34 @@ export default function Login() {
                   Forgot your password?
                 </button>
               </div>
-              <Input id="password" 
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="pr-10"
+                />
+
+                 <Button
+                   type="button"
+                   variant="ghost"
+                   size="icon"
+                   onClick={() => setShowPassword((prev) => !prev)}
+                   className="absolute top-1/2 right-2 -translate-y-1/2"
+                  >
+                   {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+      )}
+                 </Button>
+               </div>
+               {formError && (
+                 <p className="text-sm text-destructive">
+                   {formError}
+                 </p>
+               )}
             </div>
           </div>
         </form>
@@ -100,4 +129,3 @@ export default function Login() {
     </div>
   )
 }
-
