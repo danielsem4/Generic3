@@ -24,8 +24,8 @@ export default function Home() {
 
     if (error) return <div>Error loading data</div>;
     return (
-    <div className="min-h-screen p-8 bg-slate-50">
-    <div className="max-w-7xl mx-auto flex flex-col gap-8">
+    <div className="min-h-screen p-4 bg-slate-50">
+    <div className="w-full flex flex-col gap-6">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     {/* Patients Card */}
     <div className="bg-blue-500 text-white p-6 rounded-xl shadow-sm flex flex-col justify-between min-h-[140px] group cursor-pointer hover:bg-blue-600 transition-all">
@@ -60,8 +60,8 @@ export default function Home() {
     </div>
     </div>
 
-        <Card className="w-full max-w-7xl shadow-lg border-none">
-          <CardHeader className="pb-4">
+            <Card className="w-full shadow-lg border-none overflow-hidden">
+              <CardHeader className="pb-4">
             <CardDescription className="text-3xl font-bold text-slate-800">
             Latest users
           </CardDescription>
