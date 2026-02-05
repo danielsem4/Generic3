@@ -9,7 +9,7 @@ export type HomeDataResponse = {
   method: string;
   amount: number;
 };
-async function HomeData(): Promise<IAuthUser> {
+async function homedata(): Promise<IAuthUser> {
   const response = await axios.get<IAuthUser>(
     `${import.meta.env.VITE_API_URL_DEV}auth/home/`,
     { withXSRFToken: true }
@@ -20,6 +20,6 @@ async function HomeData(): Promise<IAuthUser> {
 export const useHomeData = () => {
   return useQuery <IAuthUser>({
     queryKey: ["home_data"], 
-    queryFn: HomeData,   
+    queryFn: homedata,   
   });
 };
