@@ -26,6 +26,7 @@ import { Users, Database, Calendar, FileText, Eye } from "lucide-react";
 import { useHomeData } from "./use_home";
 
 
+
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = React.useState(true);
     const { data, isLoading, error } = useHomeData();
@@ -45,16 +46,7 @@ export default function Home() {
   className={`flex-1 transition-all duration-300 ${
     sidebarOpen ? "ml-72" : "ml-0"
   }`}
->        <SiteHeader />
-        <div className="p-4">
-    <button
-      onClick={() => setSidebarOpen(!sidebarOpen)}
-      className="p-2 rounded bg-muted hover:bg-muted/80 transition"
-    >
-    {sidebarOpen ? "Close Sidebar" : "Open Sidebar"}
-    </button>
-  </div>
-
+>        <SiteHeader onToggleSidebar={() => setSidebarOpen(prev => !prev)} />  
     <div className="flex-1 min-h-screen p-8 bg-background overflow-auto transition-all duration-300">
     <div className="w-full flex flex-col gap-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
