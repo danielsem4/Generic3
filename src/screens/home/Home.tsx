@@ -22,19 +22,42 @@ import { AppSidebar } from "@/components/ui/AppSidebar";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Users, Database, Calendar, FileText, Eye } from "lucide-react";
+import { useEffect } from "react";
+import { useUserStore } from "@/store/useUserStore";
+import { toast } from "sonner";
 
-import { useHomeData } from "./use_home";
 
 
 
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = React.useState(true);
-    const { data, isLoading, error } = useHomeData();
-    if (isLoading) return <div>Loading data...</div>;
-    if (error) return <div>Error loading data</div>;
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
+
+    const { users, fetchUsers } = useUserStore();
+
+        console.log(users); 
+
+
+
+    useEffect(() => {
+  const loadUsers = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await fetchUsers("defaultClinicId", "defaultUserId"); 
+    } catch {
+      setError("Error loading users");
+      toast.error("Failed to load users");
+    } finally {
+      setLoading(false);
+    }
+  };
+  loadUsers();
+}, [fetchUsers]);
+
     const menuItems = undefined;
-    
-    
+
     return (
       <SidebarProvider
       style={{
@@ -56,7 +79,7 @@ export default function Home() {
      <Users size={24} />
      <p className="text-sm font-medium opacity-80">Patients</p>
      <div className="flex justify-between items-end">
-     <h2 className="text-3xl font-bold">{data ? (Array.isArray(data) ? data.length : 0) : 0}</h2>    
+     <h2 className="text-3xl font-bold">{users.length}</h2>
      </div>
      </div>
 
@@ -65,7 +88,9 @@ export default function Home() {
      <Database size={24} />
      <p className="text-sm font-medium opacity-80">Clinics</p>
      <div className="flex justify-between items-end">
-     <h2 className="text-3xl font-bold">{data?.clinicId}</h2>
+     <h2 className="text-3xl font-bold">
+      {new Set(users.map((u) => u.clinicId)).size}
+      </h2>
      </div>
      </div>
 
@@ -73,7 +98,9 @@ export default function Home() {
      <div className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
      <FileText size={24} />
      <p className="text-sm font-medium opacity-80">Modules</p>
-     <h2 className="text-3xl font-bold">{data?.modules?.length}</h2>
+     <h2 className="text-3xl font-bold">
+     {users.reduce((acc, user) => acc + (user.modules?.length || 0), 0)}
+     </h2>
      </div>
 
      {/* Appointments Card */}
@@ -81,7 +108,9 @@ export default function Home() {
       <Calendar size={24} />
       <p className="text-sm font-medium opacity-80">Appointments</p>
       <div className="flex justify-between items-end">
-      <h2 className="text-4xl font-bold">{data?.groups?.length}</h2>
+      <h2 className="text-4xl font-bold">
+      {users.reduce((acc, user) => acc + (user.groups?.length || 0), 0)}
+      </h2>
       </div>
     </div>
     </div>
@@ -94,6 +123,8 @@ export default function Home() {
           </CardHeader>
         <CardContent className="p-0">
 
+         {loading && <p>Loading...</p>}
+         {error && <p className="text-red-500">{error}</p>}
          <Table>
              <TableCaption>Updated just now.</TableCaption>
               <TableHeader>
@@ -108,64 +139,52 @@ export default function Home() {
               </TableHeader>
 
               <TableBody>
-              {data ? (
-             <TableRow className="bg-muted">
-             {/* First Name */}
-            <TableCell className="font-medium">
-            {data.firstName}
-            </TableCell>
-            {/* Last Name */}
-            <TableCell className="font-medium">
-            {data.lastName}
-            </TableCell>
-            {/* Email */}
-            <TableCell>
-            {data.email}
-            </TableCell>
-            {/* Phone Number */}
-            <TableCell>
-            {data.phoneNumber ?? "—"}
-            </TableCell>
-            {/* Role */}
-            <TableCell>
-            {data.isDoctor ? 'Doctor' : data.isClinicManager ? 'Administrator' : 'User'}
-            </TableCell>  
-            {/* View button */}
-            <TableCell>
-         <div className="flex justify-end">
-            <button
-              onClick={() => {}}
-              className="inline-flex items-center justify-center rounded-md border border-border p-2
-                 text-muted-foreground hover:text-foreground hover:bg-muted transition"
-               aria-label="View patient">
-              <Eye size={16} />
-              </button>
-              </div>
-               </TableCell>
-
-      </TableRow>
-      ) : (
-    <TableRow>
-      <TableCell colSpan={5} className="text-center py-10 text-muted-foreground">
-        Loading user data...
-      </TableCell>
-      <TableCell colSpan={5} className="text-center py-10 text-muted-foreground italic">
-        No user profile data available.
-      </TableCell>
-       </TableRow>
-        )}
-        </TableBody>
+                {Array.isArray(users) && users.length > 0 ? (
+                users.slice(0, 5).map((user) => (
+              <TableRow key={user.id}>
+             <TableCell className="font-medium">{user.firstName}</TableCell>
+             <TableCell className="font-medium">{user.lastName}</TableCell>
+             <TableCell className="font-medium">{user.email}</TableCell>
+             <TableCell className="font-medium">{user.phoneNumber ?? "—"}</TableCell>
+             <TableCell className="font-medium">{user.isDoctor ? 'Doctor' : user.isClinicManager ? 'Administrator' : 'User'}</TableCell>
+             <TableCell>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {}}
+                    className="inline-flex items-center justify-center rounded-md border border-border p-2
+                       text-muted-foreground hover:text-foreground hover:bg-muted transition"
+                    aria-label="View patient">
+                    <Eye size={16} />
+                  </button>
+                </div>
+              </TableCell>
+             </TableRow>
+              ))
+              ) : (
+             <TableRow>
+             <TableCell colSpan={6} className="text-center py-10 text-muted-foreground italic">
+              No user profile data available.
+             </TableCell>
+             </TableRow>
+      )}
+    </TableBody>
         </Table>
         </CardContent>
        <CardFooter className="border-t border-border bg-muted/20 pt-4">
     <p className="text-xs text-muted-foreground">
-       Showing {Array.isArray(data) ? data.length : 0} of {Array.isArray(data) ? data.length : 0} total entries.          
+       Showing {Array.isArray(users) ? users.length : 0} of {Array.isArray(users) ? users.length : 0} total entries.          
     </p>
   </CardFooter>
 </Card>
 
 </div>
 </SidebarInset>
-</SidebarProvider>    
-);
-}
+</SidebarProvider>   
+    );
+  }
+
+
+
+
+
+

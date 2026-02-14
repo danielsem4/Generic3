@@ -34,7 +34,7 @@ export default function Login() {
         duration: 2000,
       });
 
-      navigate("/verify");
+      navigate("/home");
     } catch (e) {
       setFormError("Login failed. Please check your credentials.");
       console.log("Login error:", e);
