@@ -1,18 +1,19 @@
 export interface IAuthUser {
-    id: string;
+    id: number;
     password: string;
-    lastLogin: string | null;
+    last_login: string | null;
     isSuperuser: boolean;
     username: string;
     isStaff: boolean;
-    isActive: boolean;
-    dateJoined: string;
+    date_joined: string;
     email: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    role: string;
+    is_active: boolean;
     isClinicManager: boolean;
-    isDoctor: boolean;
+    DOCTOR: boolean;
     isPatient: boolean;
     isResearchPatient: boolean;
     groups: [];

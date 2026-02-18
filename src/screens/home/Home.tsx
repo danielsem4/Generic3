@@ -24,10 +24,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Users, Database, Calendar, FileText, Eye } from "lucide-react";
 import { useEffect } from "react";
 import { useUserStore } from "@/store/useUserStore";
-import { toast } from "sonner";
-
-
-
+import toast from 'react-hot-toast';
 
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = React.useState(true);
@@ -36,25 +33,34 @@ export default function Home() {
 
     const { users, fetchUsers } = useUserStore();
 
-        console.log(users); 
-
-
+    const handleUnderConstruction = (featureName: string) => {
+    toast(`The ${featureName} page is coming soon!`, {
+      icon: '🚧',
+      duration: 3000,
+    });
+  };
 
     useEffect(() => {
   const loadUsers = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      await fetchUsers("defaultClinicId", "defaultUserId"); 
-    } catch {
-      setError("Error loading users");
-      toast.error("Failed to load users");
+  try {      
+    await fetchUsers(); 
+    } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
+        setError("Error: " + errorMessage);
     } finally {
       setLoading(false);
     }
   };
+
   loadUsers();
 }, [fetchUsers]);
+
+useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (currentPath !== "/home" && currentPath !== "/") {
+      toast.error("Page not found. Showing home dashboard instead.");
+    }
+  }, []);
 
     const menuItems = undefined;
 
@@ -75,8 +81,8 @@ export default function Home() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
     {/* Patients Card */}
-     <div className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
-     <Users size={24} />
+    <div onClick={() => handleUnderConstruction("Patients")}
+     className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3 cursor-pointer">     <Users size={24} />
      <p className="text-sm font-medium opacity-80">Patients</p>
      <div className="flex justify-between items-end">
      <h2 className="text-3xl font-bold">{users.length}</h2>
@@ -84,7 +90,8 @@ export default function Home() {
      </div>
 
     {/* Clinics Card */}
-     <div className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
+     <div onClick={() => handleUnderConstruction("Clinics")}
+     className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
      <Database size={24} />
      <p className="text-sm font-medium opacity-80">Clinics</p>
      <div className="flex justify-between items-end">
@@ -95,16 +102,18 @@ export default function Home() {
      </div>
 
     {/* Modules Card */}
-     <div className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
+     <div onClick={() => handleUnderConstruction("Modules")}
+     className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
      <FileText size={24} />
      <p className="text-sm font-medium opacity-80">Modules</p>
      <h2 className="text-3xl font-bold">
-     {users.reduce((acc, user) => acc + (user.modules?.length || 0), 0)}
-     </h2>
+      {users.reduce((acc, user) => acc + (user.modules?.length || 0), 0)}
+      </h2>
      </div>
 
      {/* Appointments Card */}
-      <div className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
+      <div onClick={() => handleUnderConstruction("Appointments")}
+      className="bg-primary text-primary-foreground p-6 rounded-xl shadow-sm hover:bg-primary/90 transition-all flex items-center gap-3">
       <Calendar size={24} />
       <p className="text-sm font-medium opacity-80">Appointments</p>
       <div className="flex justify-between items-end">
@@ -129,9 +138,9 @@ export default function Home() {
              <TableCaption>Updated just now.</TableCaption>
               <TableHeader>
               <TableRow className="bg-muted/50">
+              <TableHead className="font-bold">Email</TableHead>
               <TableHead className="font-bold">First Name</TableHead>
               <TableHead className="font-bold">Last Name</TableHead>
-              <TableHead className="font-bold">Email</TableHead>
               <TableHead className="font-bold">Phone Number</TableHead>
               <TableHead className="font-bold">Role</TableHead>
               <TableHead className="font-bold text-right">View</TableHead>
@@ -141,12 +150,15 @@ export default function Home() {
               <TableBody>
                 {Array.isArray(users) && users.length > 0 ? (
                 users.slice(0, 5).map((user) => (
-              <TableRow key={user.id}>
-             <TableCell className="font-medium">{user.firstName}</TableCell>
-             <TableCell className="font-medium">{user.lastName}</TableCell>
-             <TableCell className="font-medium">{user.email}</TableCell>
-             <TableCell className="font-medium">{user.phoneNumber ?? "—"}</TableCell>
-             <TableCell className="font-medium">{user.isDoctor ? 'Doctor' : user.isClinicManager ? 'Administrator' : 'User'}</TableCell>
+              
+<TableRow key={user.id ?? user.email}>
+  <TableCell className="font-medium">{user.first_name}</TableCell>
+  <TableCell className="font-medium">{user.last_name}</TableCell>
+  <TableCell className="font-medium">{user.email}</TableCell>
+  <TableCell className="font-medium">{user.phone_number ?? "—"}</TableCell>
+  <TableCell className="font-medium">{user.role}</TableCell>
+
+
              <TableCell>
                 <div className="flex justify-end">
                   <button

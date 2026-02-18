@@ -4,15 +4,18 @@ import type { IAuthUser } from "@/common/types/User";
 
 interface UserStore {
   users: IAuthUser[];
-  fetchUsers: (clinicId: string, otherParam?: unknown) => Promise<void>;
+  fetchUsers: () => Promise<void>;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   users: [],
-  fetchUsers: async (clinicId: string, otherParam?: unknown) => {
-    const data = await getUsers(clinicId, otherParam as string);
+  fetchUsers: async () => {
+    try {
+    const data = await getUsers();
     set({ users: data });
+  } catch (error) {
+    console.error("Store error:", error);
+  }
   },
-}));
+}   ));
 export { getUsers };
-

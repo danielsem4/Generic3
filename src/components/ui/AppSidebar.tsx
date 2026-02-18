@@ -1,4 +1,5 @@
 import React from "react";
+import toast from 'react-hot-toast';
 import { LayoutDashboard, Users, Database, Calendar, Settings } from "lucide-react";
 
 export interface MenuItem {
@@ -14,8 +15,23 @@ interface AppSidebarProps {
 }
 
 export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuItems, open = true }) => {
+
+  const handleNavigation = (e: React.MouseEvent, item: MenuItem) => {
+  const unreadyPages = ["Patients", "Clinics", "Appointments", "Settings"];
+
+  if (unreadyPages.includes(item.title)) {
+      e.preventDefault(); // עוצר את המעבר לעמוד 404
+      
+      // שימוש בפורמט של react-hot-toast
+      toast(`The ${item.title} page is coming soon!`, {
+        icon: '🚧',
+        duration: 3000,
+      });
+    }
+  };
+
   const defaultMenuItems: MenuItem[] = [
-    { title: "Dashboard", url: "/", icon: LayoutDashboard },
+    { title: "Dashboard", url: "/home", icon: LayoutDashboard },
     { title: "Patients", url: "/patients", icon: Users },
     { title: "Clinics", url: "/clinics", icon: Database },
     { title: "Appointments", url: "/appointments", icon: Calendar },
@@ -36,6 +52,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
           <a
             key={item.title}
             href={item.url} 
+            onClick={(e) => handleNavigation(e, item)}
             className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition"
           >
             <Icon size={20} />

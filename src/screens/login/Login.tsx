@@ -27,8 +27,8 @@ export default function Login() {
   const handleLogin = async (values: LoginCredentials) => {
     setFormError(null)
     try {
-      await mutateAsync(values);
-
+        const result = await mutateAsync(values);
+        console.log("LOGIN RESPONSE:", result);
       toast.success("Login successful!", {
         description: "Redirecting to home...",
         duration: 2000,
