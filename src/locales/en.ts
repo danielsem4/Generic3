@@ -1,0 +1,70 @@
+const en = {
+  login: {
+    title: "Login to your account",
+    description: "Enter your email below to login to your account",
+    email: "Email",
+    emailPlaceholder: "m@example.com",
+    password: "Password",
+    forgotPassword: "Forgot your password?",
+    submit: "Login",
+    submitting: "Logging in...",
+    success: "Login successful!",
+    successDescription: "Redirecting to home...",
+    error: "Login failed",
+    errorDescription: "Please check your credentials.",
+    formError: "Login failed. Please check your credentials.",
+  },
+  verify: {
+    title: "Verify Your Account",
+    description: "Enter the one-time password sent to your email.",
+    confirm: "Confirm",
+    resendCode: "Resend code",
+  },
+  sidebar: {
+    dashboard: "Dashboard",
+    patients: "Patients",
+    clinics: "Clinics",
+    appointments: "Appointments",
+    settings: "Settings",
+    comingSoon: "The {{page}} page is coming soon!",
+  },
+  header: {
+    title: "Dashboard",
+  },
+  settings: {
+    title: "Settings",
+    language: {
+      sectionTitle: "Language",
+      sectionDescription: "Choose the display language for the application.",
+      label: "Language",
+      saved: "Language updated successfully.",
+    },
+    account: {
+      sectionTitle: "Account",
+      sectionDescription: "Manage your account preferences.",
+    },
+  },
+  home: {
+    patients: "Patients",
+    clinics: "Clinics",
+    modules: "Modules",
+    appointments: "Appointments",
+    comingSoon: "The {{page}} page is coming soon!",
+    latestUsers: "Latest users",
+    updatedNow: "Updated just now.",
+    showing: "Showing {{shown}} of {{total}} total entries.",
+    noData: "No user profile data available.",
+    loading: "Loading...",
+    pageNotFound: "Page not found. Showing home dashboard instead.",
+    table: {
+      email: "Email",
+      firstName: "First Name",
+      lastName: "Last Name",
+      phoneNumber: "Phone Number",
+      role: "Role",
+      view: "View",
+    },
+  },
+} as const;
+
+export default en;

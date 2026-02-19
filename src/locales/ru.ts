@@ -1,0 +1,70 @@
+const ru = {
+  login: {
+    title: "Вход в аккаунт",
+    description: "Введите email ниже для входа в аккаунт",
+    email: "Email",
+    emailPlaceholder: "m@example.com",
+    password: "Пароль",
+    forgotPassword: "Забыли пароль?",
+    submit: "Войти",
+    submitting: "Вход...",
+    success: "Вход выполнен успешно!",
+    successDescription: "Переход на главную страницу...",
+    error: "Ошибка входа",
+    errorDescription: "Проверьте правильность введённых данных.",
+    formError: "Ошибка входа. Проверьте правильность введённых данных.",
+  },
+  verify: {
+    title: "Подтверждение аккаунта",
+    description: "Введите одноразовый пароль, отправленный на ваш email.",
+    confirm: "Подтвердить",
+    resendCode: "Отправить код повторно",
+  },
+  sidebar: {
+    dashboard: "Панель управления",
+    patients: "Пациенты",
+    clinics: "Клиники",
+    appointments: "Записи",
+    settings: "Настройки",
+    comingSoon: "Страница «{{page}}» скоро будет!",
+  },
+  header: {
+    title: "Панель управления",
+  },
+  settings: {
+    title: "Настройки",
+    language: {
+      sectionTitle: "Язык",
+      sectionDescription: "Выберите язык отображения приложения.",
+      label: "Язык",
+      saved: "Язык успешно обновлён.",
+    },
+    account: {
+      sectionTitle: "Аккаунт",
+      sectionDescription: "Управляйте настройками аккаунта.",
+    },
+  },
+  home: {
+    patients: "Пациенты",
+    clinics: "Клиники",
+    modules: "Модули",
+    appointments: "Записи",
+    comingSoon: "Страница «{{page}}» скоро будет!",
+    latestUsers: "Последние пользователи",
+    updatedNow: "Обновлено только что.",
+    showing: "Показано {{shown}} из {{total}} записей.",
+    noData: "Данные профиля пользователей отсутствуют.",
+    loading: "Загрузка...",
+    pageNotFound: "Страница не найдена. Показана панель управления.",
+    table: {
+      email: "Email",
+      firstName: "Имя",
+      lastName: "Фамилия",
+      phoneNumber: "Номер телефона",
+      role: "Роль",
+      view: "Просмотр",
+    },
+  },
+} as const;
+
+export default ru;

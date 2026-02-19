@@ -1,8 +1,59 @@
-# CLAUDE.md — Architecture & Engineering Rules
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
+# Architecture & Engineering Rules
 
 > **This document is the single source of truth.**
 > Claude Code MUST follow every rule here on every task.
 > If a user request conflicts with these rules, **these rules win.**
+
+---
+
+## Development Commands
+
+```bash
+npm run dev        # Start Vite dev server
+npm run build      # TypeScript check + production build
+npm run lint       # Run ESLint
+npm run preview    # Preview production build
+```
+
+There are no tests configured in this project yet.
+
+### Environment
+
+The API base URL is stored in `.env` as `VITE_API_URL_DEV`. The backend is hosted at `https://genericweb.onrender.com/api/v1/`. When creating the centralized `apiClient`, use `import.meta.env.VITE_API_URL_DEV`.
+
+---
+
+## Current Migration State
+
+**This codebase is mid-refactor.** The architecture rules below define the target state. The current source still contains forbidden folders that must be migrated:
+
+| Current (wrong) | Target (correct) |
+|---|---|
+| `src/screens/login/` | `src/features/auth/` |
+| `src/screens/home/` | `src/features/dashboard/` |
+| `src/screens/verify/` | `src/features/auth/` |
+| `src/api/usersApi.ts` | `src/features/dashboard/api/dashboard.api.ts` |
+| `src/store/useUserStore.tsx` | Zustand slice + TanStack Query |
+| `src/common/types/User.ts` | `src/types/user.types.ts` |
+| `src/components/ui/AppSidebar.tsx` | `src/components/shared/AppSidebar.tsx` |
+| `src/components/ui/SiteHeader.tsx` | `src/components/shared/SiteHeader.tsx` |
+| `src/router.tsx` | `src/app/router.tsx` (or keep at root — confirm with user) |
+
+**Missing libraries that must be installed before implementing forms:**
+- `zod` — not yet in package.json
+- `react-hook-form` + `@hookform/resolvers` — not yet in package.json
+
+**Known bugs to fix during migration:**
+- `src/routes/ProtectedRoute.tsx` redirects unauthenticated users to `/home` — must be `/`
+- `src/store/useUserStore.tsx` stores server data (users array) in Zustand — move to TanStack Query
+- `src/screens/home/Home.tsx` fetches in `useEffect` — must use `useQuery`
+- Auth uses `localStorage.setItem("isAuthenticated", "true")` — acceptable as client-side identity flag
 
 ---
 
@@ -47,10 +98,9 @@
 
 ```
 src/
-├── app/                          # Global setup only
-│   ├── App.tsx
-│   ├── router.tsx
-│   └── providers/
+│├── App.tsx
+│├── router.tsx
+│└── providers/
 │
 ├── components/                   # Reusable UI ONLY — no business logic
 │   ├── ui/                       # Shadcn primitives only
@@ -489,12 +539,12 @@ Claude Code MUST NOT:
 
 - Access environment variables ONLY through a typed config file or `import.meta.env`
 - Do not hardcode API URLs anywhere
-- Ensure `VITE_API_URL` is defined before making calls
+- The env variable for the API base URL is `VITE_API_URL_DEV`
 
 ```ts
 // lib/config.ts
 export const config = {
-  apiUrl: import.meta.env.VITE_API_URL,
+  apiUrl: import.meta.env.VITE_API_URL_DEV,
 } as const;
 ```
 

@@ -1,0 +1,70 @@
+const ar = {
+  login: {
+    title: "تسجيل الدخول إلى حسابك",
+    description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول",
+    email: "البريد الإلكتروني",
+    emailPlaceholder: "m@example.com",
+    password: "كلمة المرور",
+    forgotPassword: "نسيت كلمة المرور؟",
+    submit: "تسجيل الدخول",
+    submitting: "جارٍ تسجيل الدخول...",
+    success: "تم تسجيل الدخول بنجاح!",
+    successDescription: "جارٍ التحويل إلى الصفحة الرئيسية...",
+    error: "فشل تسجيل الدخول",
+    errorDescription: "يرجى التحقق من بياناتك.",
+    formError: "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
+  },
+  verify: {
+    title: "التحقق من حسابك",
+    description: "أدخل كلمة المرور لمرة واحدة المرسلة إلى بريدك الإلكتروني.",
+    confirm: "تأكيد",
+    resendCode: "إعادة إرسال الرمز",
+  },
+  sidebar: {
+    dashboard: "لوحة التحكم",
+    patients: "المرضى",
+    clinics: "العيادات",
+    appointments: "المواعيد",
+    settings: "الإعدادات",
+    comingSoon: "صفحة {{page}} قريباً!",
+  },
+  header: {
+    title: "لوحة التحكم",
+  },
+  settings: {
+    title: "الإعدادات",
+    language: {
+      sectionTitle: "اللغة",
+      sectionDescription: "اختر لغة عرض التطبيق.",
+      label: "اللغة",
+      saved: "تم تحديث اللغة بنجاح.",
+    },
+    account: {
+      sectionTitle: "الحساب",
+      sectionDescription: "إدارة تفضيلات حسابك.",
+    },
+  },
+  home: {
+    patients: "المرضى",
+    clinics: "العيادات",
+    modules: "الوحدات",
+    appointments: "المواعيد",
+    comingSoon: "صفحة {{page}} قريباً!",
+    latestUsers: "أحدث المستخدمين",
+    updatedNow: "تم التحديث للتو.",
+    showing: "عرض {{shown}} من أصل {{total}} إدخال.",
+    noData: "لا تتوفر بيانات الملف الشخصي.",
+    loading: "جارٍ التحميل...",
+    pageNotFound: "الصفحة غير موجودة. عرض لوحة التحكم.",
+    table: {
+      email: "البريد الإلكتروني",
+      firstName: "الاسم الأول",
+      lastName: "اسم العائلة",
+      phoneNumber: "رقم الهاتف",
+      role: "الدور",
+      view: "عرض",
+    },
+  },
+} as const;
+
+export default ar;

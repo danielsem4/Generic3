@@ -1,0 +1,70 @@
+const he = {
+  login: {
+    title: "התחברות לחשבון שלך",
+    description: "הזן את האימייל שלך כדי להתחבר לחשבון",
+    email: "אימייל",
+    emailPlaceholder: "m@example.com",
+    password: "סיסמה",
+    forgotPassword: "שכחת את הסיסמה?",
+    submit: "התחבר",
+    submitting: "מתחבר...",
+    success: "ההתחברות הצליחה!",
+    successDescription: "מעביר לדף הבית...",
+    error: "ההתחברות נכשלה",
+    errorDescription: "אנא בדוק את הפרטים שלך.",
+    formError: "ההתחברות נכשלה. אנא בדוק את הפרטים שלך.",
+  },
+  verify: {
+    title: "אימות חשבון",
+    description: "הזן את הקוד חד-פעמי שנשלח לאימייל שלך.",
+    confirm: "אשר",
+    resendCode: "שלח קוד מחדש",
+  },
+  sidebar: {
+    dashboard: "לוח מחוונים",
+    patients: "מטופלים",
+    clinics: "קליניקות",
+    appointments: "פגישות",
+    settings: "הגדרות",
+    comingSoon: "עמוד {{page}} בקרוב!",
+  },
+  header: {
+    title: "לוח מחוונים",
+  },
+  settings: {
+    title: "הגדרות",
+    language: {
+      sectionTitle: "שפה",
+      sectionDescription: "בחר את שפת התצוגה של האפליקציה.",
+      label: "שפה",
+      saved: "השפה עודכנה בהצלחה.",
+    },
+    account: {
+      sectionTitle: "חשבון",
+      sectionDescription: "נהל את העדפות החשבון שלך.",
+    },
+  },
+  home: {
+    patients: "מטופלים",
+    clinics: "קליניקות",
+    modules: "מודולים",
+    appointments: "פגישות",
+    comingSoon: "עמוד {{page}} בקרוב!",
+    latestUsers: "משתמשים אחרונים",
+    updatedNow: "עודכן זה עתה.",
+    showing: "מציג {{shown}} מתוך {{total}} רשומות.",
+    noData: "אין נתוני פרופיל משתמש.",
+    loading: "טוען...",
+    pageNotFound: "הדף לא נמצא. מציג לוח מחוונים.",
+    table: {
+      email: "אימייל",
+      firstName: "שם פרטי",
+      lastName: "שם משפחה",
+      phoneNumber: "מספר טלפון",
+      role: "תפקיד",
+      view: "צפה",
+    },
+  },
+} as const;
+
+export default he;
