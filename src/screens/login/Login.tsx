@@ -14,16 +14,36 @@ import type { LoginCredentials } from "./LoginCredentails"
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUserStore } from "@/store/useUserStore";
+import type { IAuthUser } from "@/common/types/User"
+import {Eye, EyeOff} from "lucide-react";
 
 export default function Login() {
+  const { setClinicId, setUserId } = useUserStore();
   const { mutateAsync, isPending} = useLogin();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
+  const { fetchUsers, fetchModules} = useUserStore();
+
 
   const handleLogin = async (values: LoginCredentials) => {
+    setFormError(null)
     try {
-      await mutateAsync(values);
+    const response = await mutateAsync(values);
+    const user: IAuthUser = response; 
+    if (user && user.clinicId && user.id) {
+    setClinicId(user.clinicId);
+    setUserId(Number(user.id));
+
+    fetchUsers();
+    fetchModules();
+    //fetchAppointments(); להחזיר כשיהיה API
+} else {
+  console.error("User data missing in response:", response);
+}
 
       toast.success("Login successful!", {
         description: "Redirecting to home...",
@@ -32,6 +52,7 @@ export default function Login() {
 
       navigate("/home");
     } catch (e) {
+      setFormError("Login failed. Please check your credentials and try again.");
       console.log("Login error:", e);
 
       toast.error("Login failed", {
@@ -76,10 +97,31 @@ export default function Login() {
                   Forgot your password?
                 </button>
               </div>
-              <Input id="password" 
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required />
+              <div className="relative">
+                <Input id="password" 
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                required 
+                className="pr-10"/>
+                <Button
+                   type="button"
+                   variant="ghost"
+                   size="icon"
+                   onClick={() => setShowPassword((prev) => !prev)}
+                   className="absolute top-1/2 right-2 -translate-y-1/2"
+                  >
+                   {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+      )}
+                 </Button>
+              </div>
+              {formError && (
+                 <p className="text-sm text-destructive">
+                   {formError}
+                 </p>
+               )}
             </div>
           </div>
         </form>

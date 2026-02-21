@@ -24,8 +24,9 @@ export interface IAuthUser {
     status: string;
     serverUrl: string;
   }
-  
+
   export interface IModule {
     id: number;
     name: string;
   }
+

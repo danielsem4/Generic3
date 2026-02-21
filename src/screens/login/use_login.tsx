@@ -4,7 +4,10 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 async function loginUser(credentials: LoginCredentials): Promise<IAuthUser> {
-  const response = await axios.post<IAuthUser>(`${import.meta.env.VITE_API_URL_DEV}auth/login/`, credentials, {
+  const url = "/api/v1/auth/login/"; 
+  
+  const response = await axios.post<IAuthUser>(url, credentials, {
+    withCredentials: true, // חשוב מאוד אם השרת משתמש ב-Cookies/Sessions
     withXSRFToken: true,
   });
   return response.data;
