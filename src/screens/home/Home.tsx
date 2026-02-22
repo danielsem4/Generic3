@@ -5,7 +5,7 @@ import React, { useEffect} from "react";
 import { AppSidebar } from "@/components/ui/AppSidebar";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Users, Database, Calendar, FileText, Eye, Settings } from "lucide-react";
+import { Users, Database, Calendar, FileText, Eye} from "lucide-react";
 import { useHomeData } from "./use_home";
 import { useUserStore } from "@/store/useUserStore";
 import type { IUser } from "@/common/Users";
@@ -13,7 +13,7 @@ import type { IUser } from "@/common/Users";
 export default function Home() {
     const [sidebarOpen, setSidebarOpen] = React.useState(true);
     const { users, modules, appointments, clinicId, userId, fetchUsers, fetchModules, fetchAppointments } = useUserStore();
-
+    const { data, isLoading, error } = useHomeData();
 
     useEffect(() => {
         console.log("Current Store State:", { clinicId, userId });
@@ -27,21 +27,9 @@ export default function Home() {
             console.warn("Fetch blocked: IDs are missing. Did you login correctly?");
         }
     }, [clinicId, userId]);
-
-    const { data, isLoading, error } = useHomeData();
-
-
+  
     if (isLoading) return <div>Loading data...</div>;
     if (error) return <div>Error loading data</div>;
-
-    const menuItems = [
-      {title: "Dashboard",icon: Users ,url: "/dashboard",},
-      {title: "Patients",icon: Users,url: "/patients",},
-      {title: "Clinics",icon: Database,url: "/clinics",},
-      {title: "Appointments",icon: Calendar,url: "/appointments",},
-      {title: "Modules",icon: FileText,url: "/modules",},
-      {title: "Settings",icon: Settings,url: "/settings",},
-];
     
     return (
       <SidebarProvider
@@ -49,12 +37,10 @@ export default function Home() {
         "--sidebar-width": "calc(var(--spacing) * 72)",
         "--header-height": "calc(var(--spacing) * 12)",
       } as React.CSSProperties}    >
-       <AppSidebar variant="inset" menuItems={menuItems} open={sidebarOpen} />
-<SidebarInset
-  className={`flex-1 transition-all duration-300 ${
-    sidebarOpen ? "ml-72" : "ml-0"
-  }`}
->    <SiteHeader onToggleSidebar={() => setSidebarOpen(prev => !prev)} />  
+      <AppSidebar variant="inset" open={sidebarOpen} />
+
+     <SidebarInset className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-72" : "ml-0"}`}>    
+    <SiteHeader onToggleSidebar={() => setSidebarOpen(prev => !prev)} />  
     <div className="flex-1 min-h-screen p-8 bg-background overflow-auto transition-all duration-300">
     <div className="w-full flex flex-col gap-8">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
