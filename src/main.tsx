@@ -1,4 +1,5 @@
 import './index.css'
+import './i18n';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import React from "react";
@@ -6,6 +7,7 @@ import Home from './screens/home/Home.tsx';
 import Login from './screens/login/Login.tsx';
 import NotFound from './screens/not-found/NotFound.tsx';
 import ErrorPage from './screens/error/ErrorPage.tsx';
+import Settings from './screens/settings/Settings.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProtectedRoute } from './routes/ProtectedRoute.tsx';
 import { Toaster } from 'sonner';
@@ -27,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <ProtectedRoute><Home/></ProtectedRoute>,
+    errorElement: <ErrorPage/>,
+  },
+  {
+    path: "/settings",
+    element: <ProtectedRoute><Settings/></ProtectedRoute>,
     errorElement: <ErrorPage/>,
   },
   {

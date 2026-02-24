@@ -1,0 +1,86 @@
+const ar = {
+  // Navigation & Sidebar
+  nav: {
+    dashboard: "لوحة التحكم",
+    patients: "المرضى",
+    clinics: "العيادات",
+    modules: "الوحدات",
+    appointments: "المواعيد",
+    settings: "الإعدادات",
+    reports: "التقارير",
+    pageNotReady: "صفحة {{title}} غير موجودة بعد!",
+    logout: "تسجيل الخروج",
+    logoutConfirmTitle: "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    logoutConfirmDesc: "سيتم تسجيل خروجك وإعادة توجيهك إلى شاشة تسجيل الدخول.",
+    cancel: "إلغاء",
+    logoutConfirm: "نعم، تسجيل الخروج",
+  },
+
+  // Login
+  login: {
+    title: "تسجيل الدخول إلى حسابك",
+    description: "أدخل بريدك الإلكتروني أدناه لتسجيل الدخول إلى حسابك",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    placeholder: "m@example.com",
+    forgotPassword: "نسيت كلمة المرور؟",
+    submit: "تسجيل الدخول",
+    submitting: "جارٍ تسجيل الدخول...",
+    errorMissing: "يرجى ملء جميع الحقول.",
+    errorFailed: "فشل تسجيل الدخول. يرجى التحقق من بياناتك والمحاولة مرة أخرى.",
+    successTitle: "تم تسجيل الدخول بنجاح!",
+    successDesc: "جارٍ إعادة التوجيه إلى الصفحة الرئيسية...",
+    failedTitle: "فشل تسجيل الدخول",
+    failedDesc: "يرجى التحقق من بياناتك.",
+  },
+
+  // Home / Dashboard
+  home: {
+    loading: "جارٍ تحميل البيانات...",
+    error: "خطأ في تحميل البيانات",
+    patients: "المرضى",
+    clinics: "العيادات",
+    modules: "الوحدات",
+    medications: "الأدوية",
+    latestUsers: "أحدث المستخدمين",
+    updatedNow: "تم التحديث الآن.",
+    firstName: "الاسم الأول",
+    lastName: "اسم العائلة",
+    email: "البريد الإلكتروني",
+    phone: "رقم الهاتف",
+    role: "الدور",
+    view: "عرض",
+    viewPatient: "عرض المريض",
+    noData: "لا تتوفر بيانات ملف تعريف المستخدم.",
+    showing: "عرض {{count}} من أصل {{total}} إدخالات.",
+  },
+
+  // Settings
+  settings: {
+    title: "الإعدادات",
+    language: "اللغة",
+    languageDesc: "اختر لغتك المفضلة. سيتم تحديث الواجهة فوراً.",
+  },
+
+  // Not Found / 404
+  notFound: {
+    title: "404",
+    subtitle: "الصفحة غير موجودة",
+    back: "العودة إلى لوحة التحكم",
+  },
+
+  // Error
+  error: {
+    title: "حدث خطأ ما",
+    fallback: "حدث خطأ غير متوقع",
+    back: "العودة إلى لوحة التحكم",
+  },
+
+  // Common
+  common: {
+    toggleSidebar: "تبديل الشريط الجانبي",
+    sessionExpired: "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
+  },
+} as const;
+
+export default ar;

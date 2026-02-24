@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import api from "@/lib/axios";
 import {
   AlertDialog,
@@ -33,15 +34,16 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
   const navigate = useNavigate();
   const logout = useAuthStore((s) => s.logout);
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const defaultMenuItems: MenuItem[] = [
-    { title: "Dashboard", url: "/home", icon: LayoutDashboard },
-    { title: "Patients", url: "/patients", icon: Users },
-    { title: "Clinics", url: "/clinics", icon: Database },
-    { title: "Modules", url: "/modules", icon: Database },
-    { title: "Appointments", url: "/appointments", icon: Calendar },
-    { title: "Settings", url: "/settings", icon: Settings },
-    { title: "Reports", icon: Database }
+    { title: t("nav.dashboard"), url: "/home", icon: LayoutDashboard },
+    { title: t("nav.patients"), url: "/patients", icon: Users },
+    { title: t("nav.clinics"), url: "/clinics", icon: Database },
+    { title: t("nav.modules"), url: "/modules", icon: Database },
+    { title: t("nav.appointments"), url: "/appointments", icon: Calendar },
+    { title: t("nav.settings"), url: "/settings", icon: Settings },
+    { title: t("nav.reports"), icon: Database }
   ];
 
   const items = menuItems ?? defaultMenuItems;
@@ -59,9 +61,9 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
 
   return (
 <aside
-  className={`fixed top-0 left-0 h-screen z-50 flex flex-col p-4 gap-4 transition-transform duration-300 ${
+  className={`fixed top-0 start-0 h-screen z-50 flex flex-col p-4 gap-4 transition-transform duration-300 ${
     variant === "inset" ? "w-72 bg-muted" : "w-64 bg-background"
-  } ${open ? "translate-x-0" : "-translate-x-full"}`}
+  } ${open ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"}`}
 >
       {items.map((item) => {
         const Icon = item.icon;
@@ -71,7 +73,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
             <button
               key={item.title}
               type= "button"
-              onClick={() => toast(`${item.title} page does not exist yet!`, { duration: 3000 })}
+              onClick={() => toast(t("nav.pageNotReady", { title: item.title }), { duration: 3000 })}
               className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition"
             >
               <Icon size={20} />
@@ -85,9 +87,9 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
     type="button"
     onClick={() => {
       if (item.url) navigate(item.url);
-      else toast(`${item.title} page does not exist yet!`, { duration: 3000 });
+      else toast(t("nav.pageNotReady", { title: item.title }), { duration: 3000 });
     }}
-    className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition text-left w-full"
+    className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition text-start w-full"
   >
     <Icon size={20} />
     <span>{item.title}</span>
@@ -100,23 +102,23 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
           <AlertDialogTrigger asChild>
             <button
               type="button"
-              className="flex items-center gap-2 p-2 rounded hover:bg-destructive/20 transition text-destructive w-full text-left"
+              className="flex items-center gap-2 p-2 rounded hover:bg-destructive/20 transition text-destructive w-full text-start"
             >
               <LogOut size={20} />
-              <span>Logout</span>
+              <span>{t("nav.logout")}</span>
             </button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
+              <AlertDialogTitle>{t("nav.logoutConfirmTitle")}</AlertDialogTitle>
               <AlertDialogDescription>
-                You will be signed out and redirected to the login screen.
+                {t("nav.logoutConfirmDesc")}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>{t("nav.cancel")}</AlertDialogCancel>
               <AlertDialogAction onClick={handleLogout}>
-                Yes, logout
+                {t("nav.logoutConfirm")}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
