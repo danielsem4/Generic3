@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite build:*)",
+      "Bash(git -C \"C:\\\\Users\\\\semda\\\\Desktop\\\\generic3\" diff --name-only)",
+      "Bash(git -C \"C:\\\\Users\\\\semda\\\\Desktop\\\\generic3\" show HEAD:src/screens/home/Home.tsx)",
+      "Bash(git -C \"C:\\\\Users\\\\semda\\\\Desktop\\\\generic3\" checkout HEAD -- src/screens/home/Home.tsx)",
+      "Bash(npm uninstall:*)",
+      "Bash(del \"C:\\\\Users\\\\semda\\\\Desktop\\\\generic3\\\\src\\\\App.css\")",
+      "Bash(npm run lint:*)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

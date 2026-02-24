@@ -1,15 +1,12 @@
-import axios from "axios";
-import type { IAuthUser } from "@/common/types/User";
+import api from "@/lib/axios";
+import type { IUser } from "@/common/Users";
 
+export const getUsers = async (
+  clinicId: number,
+  userId: number,
+): Promise<IUser[]> => {
+  const url = `/api/v1/users/${clinicId}/user/${userId}/`;
 
-export const getUsers = async (): Promise<IAuthUser[]> => {
-  const url = `${import.meta.env.VITE_API_URL_DEV}users/1/user/3/`;
-
-  const response = await axios.get<IAuthUser | IAuthUser[]>(url, {
-    withCredentials: true,
-  });
-
-  console.log("API response:", response.data);
+  const response = await api.get<IUser | IUser[]>(url);
   return Array.isArray(response.data) ? response.data : [response.data];
-
 };
