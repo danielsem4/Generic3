@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,54 +10,27 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useLogin } from "./useLogin";
-import type { LoginCredentials } from "./LoginCredentails";
-import { toast } from "sonner";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuthStore } from "@/store/useAuthStore";
-import type { ISafeUser } from "@/common/types/User";
 import { Eye, EyeOff } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { useLoginLogic } from "./useLoginLogic";
 
 export default function Login() {
-  const { setAuthUser, clinicId, userId } = useAuthStore();
-  const { mutateAsync, isPending } = useLogin();
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-  const { t } = useTranslation();
+  const {
+    email,
+    password,
+    showPassword,
+    formError,
+    isPending,
+    isAlreadyLoggedIn,
+    t,
+    handleEmailChange,
+    handlePasswordChange,
+    handleTogglePassword,
+    handleSubmit,
+  } = useLoginLogic();
 
-  if (clinicId && userId) {
+  if (isAlreadyLoggedIn) {
     return <Navigate to="/home" replace />;
   }
-
-  const handleLogin = async (values: LoginCredentials) => {
-    setFormError(null);
-    try {
-      const user: ISafeUser = await mutateAsync(values);
-      if (user && user.clinicId && user.id) {
-        setAuthUser(user);
-      } else {
-        console.error("User data missing in response");
-      }
-
-      toast.success(t("login.successTitle"), {
-        description: t("login.successDesc"),
-        duration: 2000,
-      });
-
-      navigate("/home");
-    } catch {
-      setFormError(t("login.errorFailed"));
-
-      toast.error(t("login.failedTitle"), {
-        description: t("login.failedDesc"),
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background">
@@ -67,12 +41,7 @@ export default function Login() {
         </CardHeader>
 
         <CardContent>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleLogin({ email, password });
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">{t("login.email")}</Label>
@@ -80,7 +49,8 @@ export default function Login() {
                   id="email"
                   type="email"
                   placeholder={t("login.placeholder")}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  onChange={handleEmailChange}
                   required
                 />
               </div>
@@ -99,7 +69,8 @@ export default function Login() {
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={handlePasswordChange}
                     required
                     className="pe-10"
                   />
@@ -107,7 +78,7 @@ export default function Login() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    onClick={() => setShowPassword((prev) => !prev)}
+                    onClick={handleTogglePassword}
                     className="absolute top-1/2 end-2 -translate-y-1/2"
                   >
                     {showPassword ? (
