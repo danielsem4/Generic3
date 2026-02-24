@@ -19,11 +19,10 @@ export const useAuthStore = create<AuthStore>()(
           clinicId: user.clinicId,
           userId: Number(user.id),
         }),
-      logout: () =>
-        set({
-          clinicId: null,
-          userId: null,
-        }),
+      logout: () => {
+        set({ clinicId: null, userId: null });
+        useAuthStore.persist.clearStorage();
+      },
     }),
     {
       name: "auth-store",
@@ -32,6 +31,6 @@ export const useAuthStore = create<AuthStore>()(
         clinicId: state.clinicId,
         userId: state.userId,
       }),
-    }
-  )
+    },
+  ),
 );

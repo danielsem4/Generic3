@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { ISafeUser } from "@/common/types/User";
-import { useLogin } from "./useLogin";
+import { useLogin } from "../useLogin";
 
 export function useLoginLogic() {
   const { setAuthUser, clinicId, userId } = useAuthStore();

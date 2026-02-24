@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
-import { useLoginLogic } from "./useLoginLogic";
+import { useLoginLogic } from "./hooks/useLoginLogic";
 
 export default function Login() {
   const {
