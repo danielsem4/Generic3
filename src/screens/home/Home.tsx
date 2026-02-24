@@ -161,8 +161,8 @@ export default function Home() {
             </CardContent>
             <CardFooter className="border-t border-border bg-muted/20 pt-4">
               <p className="text-xs text-muted-foreground">
-                Showing {Math.min(users.length, 10)} of{" "}
-                {users.length} total entries.
+                Showing {Math.min(users.length, 10)} of {users.length} total
+                entries.
               </p>
             </CardFooter>
           </Card>
