@@ -4,7 +4,9 @@ import ReactDOM from "react-dom/client";
 import React from "react";
 import Home from './screens/home/Home.tsx';
 import Login from './screens/login/Login.tsx';
+import VerifyCode from './screens/verify/VerifyCode.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ProtectedRoute } from './routes/ProtectedRoute.tsx';
 
 const queryClient = new QueryClient();
 
@@ -14,8 +16,12 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
+    path: "/verify",
+    element: <VerifyCode/>,
+  },
+  {
     path: "/home",
-    element: <Home/>,
+    element: <ProtectedRoute><Home/></ProtectedRoute>,
   },
 ]);
 

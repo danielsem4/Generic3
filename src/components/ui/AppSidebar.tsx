@@ -1,7 +1,20 @@
 import React from "react";
-import { LayoutDashboard, Users, Database, Calendar, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Database, Calendar, Settings, LogOut } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export interface MenuItem {
   title: string;
@@ -17,8 +30,11 @@ interface AppSidebarProps {
 
 export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuItems, open = true }) => {
   const navigate = useNavigate();
+  const logout = useAuthStore((s) => s.logout);
+  const queryClient = useQueryClient();
+
   const defaultMenuItems: MenuItem[] = [
-    { title: "Dashboard", url: "/", icon: LayoutDashboard },
+    { title: "Dashboard", url: "/home", icon: LayoutDashboard },
     { title: "Patients", url: "/patients", icon: Users },
     { title: "Clinics", url: "/clinics", icon: Database },
     { title: "Modules", url: "/modules", icon: Database },
@@ -28,6 +44,12 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
   ];
 
   const items = menuItems ?? defaultMenuItems;
+
+  const handleLogout = () => {
+    logout();
+    queryClient.clear();
+    navigate("/");
+  };
 
   return (
 <aside
@@ -66,6 +88,34 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
   </button>
 );
       })}
+
+      <div className="mt-auto">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <button
+              type="button"
+              className="flex items-center gap-2 p-2 rounded hover:bg-destructive/20 transition text-destructive w-full text-left"
+            >
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
+              <AlertDialogDescription>
+                You will be signed out and redirected to the login screen.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleLogout}>
+                Yes, logout
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </aside>
   );
 };

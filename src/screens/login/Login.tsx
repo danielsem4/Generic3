@@ -12,38 +12,36 @@ import { Label } from "@/components/ui/label"
 import { useLogin } from "./use_login"
 import type { LoginCredentials } from "./LoginCredentails"
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUserStore } from "@/store/useUserStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import type { IAuthUser } from "@/common/types/User"
 import {Eye, EyeOff} from "lucide-react";
 
 export default function Login() {
-  const { setClinicId, setUserId } = useUserStore();
+  const { setAuthUser, clinicId, userId } = useAuthStore();
   const { mutateAsync, isPending} = useLogin();
   const navigate = useNavigate();
+
+  if (clinicId && userId) {
+    return <Navigate to="/home" replace />;
+  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
-  const { fetchUsers, fetchModules} = useUserStore();
 
 
   const handleLogin = async (values: LoginCredentials) => {
     setFormError(null)
     try {
     const response = await mutateAsync(values);
-    const user: IAuthUser = response; 
+    const user: IAuthUser = response;
     if (user && user.clinicId && user.id) {
-    setClinicId(user.clinicId);
-    setUserId(Number(user.id));
-
-    fetchUsers();
-    fetchModules();
-    //fetchAppointments(); להחזיר כשיהיה API
-} else {
-  console.error("User data missing in response:", response);
-}
+      setAuthUser(user);
+    } else {
+      console.error("User data missing in response:", response);
+    }
 
       toast.success("Login successful!", {
         description: "Redirecting to home...",
@@ -98,10 +96,10 @@ export default function Login() {
                 </button>
               </div>
               <div className="relative">
-                <Input id="password" 
+                <Input id="password"
                 type={showPassword ? "text" : "password"}
                 onChange={(e) => setPassword(e.target.value)}
-                required 
+                required
                 className="pr-10"/>
                 <Button
                    type="button"
@@ -142,4 +140,3 @@ export default function Login() {
     </div>
   )
 }
-

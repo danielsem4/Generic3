@@ -14,11 +14,3 @@ export interface IUserModule {
   description: string;
   active: boolean;
 }
-
-export interface IAppointment {
-  id: number;
-  patientId: number;
-  doctorId: number;
-  date: string;
-  notes?: string;
-}

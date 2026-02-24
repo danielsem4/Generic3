@@ -1,5 +1,4 @@
 import { Menu } from "lucide-react";
-import React from "react";
 
 interface SiteHeaderProps {
   onToggleSidebar: () => void;

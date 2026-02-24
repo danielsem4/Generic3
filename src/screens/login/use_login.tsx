@@ -3,15 +3,19 @@ import type { LoginCredentials } from "./LoginCredentails";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
+interface LoginResponse {
+  user: IAuthUser;
+}
+
 async function loginUser(credentials: LoginCredentials): Promise<IAuthUser> {
-  const url = "/api/v1/auth/login/"; 
-  
-  const response = await axios.post<IAuthUser>(url, credentials, {
-    withCredentials: true, // חשוב מאוד אם השרת משתמש ב-Cookies/Sessions
+  const url = "/api/v1/auth/login/";
+
+  const response = await axios.post<LoginResponse>(url, credentials, {
+    withCredentials: true,
     withXSRFToken: true,
   });
-  return response.data;
-  }
+  return response.data.user;
+}
 
 export const useLogin = () => {
   return useMutation<IAuthUser, Error, LoginCredentials>({
