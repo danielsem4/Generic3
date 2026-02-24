@@ -6,7 +6,6 @@ export const getUsers = async (
   userId: number,
 ): Promise<IUser[]> => {
   const url = `/api/v1/users/${clinicId}/user/${userId}/`;
-  console.log(`we call now for url: ${url}`);
 
   const response = await api.get<IUser | IUser[]>(url);
   return Array.isArray(response.data) ? response.data : [response.data];

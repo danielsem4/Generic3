@@ -15,32 +15,31 @@ import { toast } from "sonner";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
-import type { IAuthUser } from "@/common/types/User"
+import type { ISafeUser } from "@/common/types/User"
 import {Eye, EyeOff} from "lucide-react";
 
 export default function Login() {
   const { setAuthUser, clinicId, userId } = useAuthStore();
   const { mutateAsync, isPending} = useLogin();
   const navigate = useNavigate();
-
-  if (clinicId && userId) {
-    return <Navigate to="/home" replace />;
-  }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [formError, setFormError] = useState<string | null>(null)
 
+  if (clinicId && userId) {
+    return <Navigate to="/home" replace />;
+  }
+
 
   const handleLogin = async (values: LoginCredentials) => {
     setFormError(null)
     try {
-    const response = await mutateAsync(values);
-    const user: IAuthUser = response;
+    const user: ISafeUser = await mutateAsync(values);
     if (user && user.clinicId && user.id) {
       setAuthUser(user);
     } else {
-      console.error("User data missing in response:", response);
+      console.error("User data missing in response");
     }
 
       toast.success("Login successful!", {
@@ -49,9 +48,8 @@ export default function Login() {
       });
 
       navigate("/home");
-    } catch (e) {
+    } catch {
       setFormError("Login failed. Please check your credentials and try again.");
-      console.log("Login error:", e);
 
       toast.error("Login failed", {
         description: "Please check your credentials.",
@@ -71,7 +69,7 @@ export default function Login() {
         </CardHeader>
 
       <CardContent>
-        <form>
+        <form onSubmit={(e) => { e.preventDefault(); handleLogin({ email, password }); }}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -90,7 +88,6 @@ export default function Login() {
                 <button
                   type="button"
                   className="ml-auto text-sm text-primary hover:text-primary/80 font-medium bg-transparent border-none p-0 cursor-pointer"
-                  // onClick={() => { /* handle forgot password */ }}
                 >
                   Forgot your password?
                 </button>
@@ -122,20 +119,18 @@ export default function Login() {
                )}
             </div>
           </div>
-        </form>
-      </CardContent>
 
-      <CardFooter className="flex-col gap-2">
+      <CardFooter className="flex-col gap-2 px-0 pt-6">
       <Button
         type="submit"
-        onClick={() => handleLogin({ email, password })}
         disabled={isPending || !email || !password}
         className="w-full"
       >
         {isPending ? "Logging in..." : "Login"}
        </Button>
-
       </CardFooter>
+        </form>
+      </CardContent>
     </Card>
     </div>
   )

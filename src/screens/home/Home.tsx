@@ -74,7 +74,7 @@ export default function Home() {
                 <Database size={24} />
                 <p className="text-sm font-medium opacity-80">Clinics</p>
                 <div className="flex justify-between items-end">
-                  <h2 className="text-3xl font-bold">{clinicId ?? 0}</h2>
+                  <h2 className="text-3xl font-bold">1</h2>
                 </div>
               </div>
 
@@ -136,9 +136,8 @@ export default function Home() {
                         {/* View button */}
                         <TableCell>
                           <button
-                            onClick={() => {}}
                             className="inline-flex items-center justify-center rounded-md border border-border p-2
-                 text-muted-foreground hover:text-foreground hover:bg-muted transition"
+                 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="View patient"
                           >
                             <Eye size={16} />

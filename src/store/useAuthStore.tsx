@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { IAuthUser } from "@/common/types/User";
+import type { ISafeUser } from "@/common/types/User";
 
 interface AuthStore {
   clinicId: number | null;
   userId: number | null;
-  setAuthUser: (user: IAuthUser) => void;
+  setAuthUser: (user: ISafeUser) => void;
   logout: () => void;
 }
 
@@ -14,7 +14,7 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       clinicId: null,
       userId: null,
-      setAuthUser: (user: IAuthUser) =>
+      setAuthUser: (user: ISafeUser) =>
         set({
           clinicId: user.clinicId,
           userId: Number(user.id),

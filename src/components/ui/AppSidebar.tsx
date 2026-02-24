@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
+import api from "@/lib/axios";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,7 +46,12 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
 
   const items = menuItems ?? defaultMenuItems;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await api.post("/api/v1/auth/logout/");
+    } catch {
+      // Session may already be expired — proceed with local cleanup
+    }
     logout();
     queryClient.clear();
     navigate("/");
