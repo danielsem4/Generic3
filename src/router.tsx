@@ -3,7 +3,7 @@ import Login from "@/screens/login/Login";
 import Home from "@/screens/home/Home";
 import VerifyCode from "@/screens/verify/VerifyCode";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
-
+import Modules from "@/screens/modules/modules";  
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +19,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
           <Home />    
+          </ProtectedRoute>
+        ),
+    },
+    {
+        path: "/modules",
+        element: (
+          <ProtectedRoute>
+            <Modules />
           </ProtectedRoute>
         ),
     },

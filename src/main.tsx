@@ -11,6 +11,7 @@ import Settings from './screens/settings/Settings.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ProtectedRoute } from './routes/ProtectedRoute.tsx';
 import { Toaster } from 'sonner';
+import Modules from './screens/modules/modules.tsx';  
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
     path: "/home",
     element: <ProtectedRoute><Home/></ProtectedRoute>,
     errorElement: <ErrorPage/>,
+  },
+   {
+    path: "/modules",
+    element: <ProtectedRoute><Modules /></ProtectedRoute>,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/settings",
