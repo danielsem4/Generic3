@@ -1,7 +1,4 @@
 import React from "react";
-import { AppSidebar } from "@/components/ui/AppSidebar";
-import { SiteHeader } from "@/components/ui/SiteHeader";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Users, Database, Pill, FileText } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useHome } from "./hooks/useHome";
@@ -10,27 +7,14 @@ import { UsersTable } from "./components/UsersTable";
 
 export default function Home() {
   const { t } = useTranslation();
-  const { sidebarOpen, handleToggleSidebar, users, modules, isLoading, error } =
+  const { users, modules, isLoading, error } =
     useHome();
 
   if (isLoading) return <div>{t("home.loading")}</div>;
   if (error) return <div>{t("home.error")}</div>;
 
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" open={sidebarOpen} />
-      <SidebarInset
-        className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ms-72" : "ms-0"}`}
-      >
-        <SiteHeader onToggleSidebar={handleToggleSidebar} />
-        <div className="flex-1 min-h-screen p-8 bg-background overflow-auto transition-all duration-300">
+        <div className="p-8">
           <div className="w-full flex flex-col gap-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatCard
@@ -49,7 +33,5 @@ export default function Home() {
           </div>
           <UsersTable users={users} />
         </div>
-      </SidebarInset>
-    </SidebarProvider>
   );
 }
