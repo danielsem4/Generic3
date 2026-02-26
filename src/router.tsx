@@ -5,6 +5,7 @@ import Home from "@/screens/home/Home";
 import Modules from "@/screens/modules/modules";
 import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
 import Settings from "@/screens/settings/Settings";
+import NotFound from "@/screens/not-found/NotFound";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -19,5 +20,9 @@ export const router = createBrowserRouter([
       { path: "modules", element: <Modules /> },
       { path: "settings", element: <Settings /> },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
