@@ -1,4 +1,3 @@
-import React from "react";
 import { Users, Database, Pill, FileText } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useHome } from "./hooks/useHome";
