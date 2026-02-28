@@ -55,6 +55,51 @@ const ar = {
     showing: "عرض {{count}} من أصل {{total}} إدخالات.",
   },
 
+  // Patients
+  patients: {
+  title: "إدارة المرضى",
+  description: "عرض وإدارة جميع سجلات المرضى في النظام",
+  addNew: "إضافة مريض جديد",
+  searchPlaceholder: "البحث بالاسم، البريد الإلكتروني، الهوية أو الهاتف...",
+  tableTitle: "قائمة المرضى المسجلين",
+  noResults: "لم يتم العثور على مرضى يطابقون بحثك.",
+  columnName: "الاسم الكامل",
+  columnEmail: "البريد الإلكتروني",
+  columnPhone: "رقم الهاتف",
+  columnStatus: "الحالة / الدور",
+  columnActions: "إجراءات",
+  loading: "جاري تحميل سجلات المرضى...",
+  columnId: "رقم الهوية",
+  columnLastVisit: "آخر زيارة",
+  statusActive: "نشط",
+  statusPending: "قيد المراجعة",
+  statusFollowUp: "قيد المتابعة",
+
+  errFirstName: "الاسم الأول حقل مطلوب",
+  errLastName: "اسم العائلة حقل مطلوب",
+  errEmail: "البريد الإلكتروني غير صحيح",
+  errPhone: "يجب إدخال 10 أرقام",
+  errPassMin: "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+  errPassMatch: "كلمات المرور غير متطابقة",
+  
+  registerTitle: "التسجيل",
+  registerButton: "تسجيل",
+
+  firstNameLabel: "الاسم الأول",
+  lastNameLabel: "اسم العائلة",
+  emailLabel: "البريد الإلكتروني",
+  phoneNumberLabel: "رقم الهاتف",
+  passwordLabel: "كلمة المرور",
+  confirmPasswordLabel: "تأكيد كلمة المرور",
+
+  firstNamePlaceholder: "",
+  lastNamePlaceholder: "",
+  emailPlaceholder: "",
+  phoneNumberPlaceholder: "",
+  passwordPlaceholder: "********",
+  confirmPasswordPlaceholder: "********",
+},
+
   // Settings
   settings: {
     title: "الإعدادات",

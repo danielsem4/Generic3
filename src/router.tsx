@@ -3,6 +3,7 @@ import Login from "@/screens/login/Login";
 import Home from "@/screens/home/Home";
 import VerifyCode from "@/screens/verify/VerifyCode";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
+import Patient from "./screens/patient/Patient";
 
 
 export const router = createBrowserRouter([
@@ -22,4 +23,12 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
     },
+    {
+     path: "/patient", 
+     element: (
+    <ProtectedRoute>
+      <Patient />
+    </ProtectedRoute>
+  ),
+},
 ]); 
