@@ -9,10 +9,7 @@ export const apiClient = axios.create({
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("isAuthenticated");
-      window.location.href = "/";
-    }
+    console.error("API error:", error.response?.status, error.message);
     return Promise.reject(error);
   }
 );

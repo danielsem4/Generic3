@@ -27,6 +27,7 @@ const he = {
     appointments: "פגישות",
     settings: "הגדרות",
     comingSoon: "עמוד {{page}} בקרוב!",
+    logout: "התנתק",
   },
   header: {
     title: "לוח מחוונים",

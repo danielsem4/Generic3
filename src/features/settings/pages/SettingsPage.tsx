@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { LogOut } from "lucide-react";
 import { AppSidebar } from "@/components/shared/AppSidebar";
 import { SiteHeader } from "@/components/shared/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -13,10 +14,12 @@ import {
 } from "@/components/ui/card";
 import { LANGUAGES, type LanguageCode } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { useLogout } from "@/features/auth";
 
 export const SettingsPage = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const { t, i18n } = useTranslation();
+  const logout = useLogout();
   const isRTL = i18n.dir() === "rtl";
   const currentLanguage = i18n.language as LanguageCode;
 
@@ -87,9 +90,13 @@ export const SettingsPage = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  {t("sidebar.comingSoon", { page: t("settings.account.sectionTitle") })}
-                </p>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-destructive border border-destructive hover:bg-destructive/10 transition"
+                >
+                  <LogOut size={16} />
+                  {t("sidebar.logout")}
+                </button>
               </CardContent>
             </Card>
 

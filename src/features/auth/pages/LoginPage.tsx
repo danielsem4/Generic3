@@ -32,7 +32,6 @@ export const LoginPage = () => {
     try {
       const result = await mutateAsync(values);
       console.log("LOGIN RESPONSE:", result);
-      localStorage.setItem("isAuthenticated", "true");
       toast.success(t("login.success"), {
         description: t("login.successDescription"),
         duration: 2000,

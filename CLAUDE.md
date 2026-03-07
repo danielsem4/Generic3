@@ -8,7 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 > **This document is the single source of truth.**
 > Claude Code MUST follow every rule here on every task.
-> If a user request conflicts with these rules, **these rules win.**
 
 ---
 

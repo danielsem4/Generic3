@@ -1,8 +1,9 @@
 import React from "react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import { LayoutDashboard, Users, Database, Calendar, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Database, Calendar, Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLogout } from "@/features/auth";
 
 export interface MenuItem {
   title: string;
@@ -21,6 +22,7 @@ const DISABLED_URLS = ["/patients", "/clinics", "/appointments"];
 export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuItems, open = true }) => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.dir() === "rtl";
+  const logout = useLogout();
 
   const handleNavigation = (e: React.MouseEvent, item: MenuItem) => {
     if (DISABLED_URLS.includes(item.url)) {
@@ -64,6 +66,14 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
           </a>
         );
       })}
+
+      <button
+        onClick={logout}
+        className="mt-auto flex items-center gap-2 p-2 rounded text-destructive hover:bg-destructive/10 transition w-full"
+      >
+        <LogOut size={20} />
+        <span>{t("sidebar.logout")}</span>
+      </button>
     </aside>
   );
 };

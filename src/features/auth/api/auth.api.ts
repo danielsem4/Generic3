@@ -6,3 +6,12 @@ export const loginUser = async (credentials: LoginCredentials): Promise<IAuthUse
   const { data } = await apiClient.post<IAuthUser>("auth/login/", credentials);
   return data;
 };
+
+export const getCurrentUser = async (): Promise<IAuthUser> => {
+  const { data } = await apiClient.get<IAuthUser>("users/me/");
+  return data;
+};
+
+export const logoutUser = async (): Promise<void> => {
+  await apiClient.post("auth/logout/");
+};

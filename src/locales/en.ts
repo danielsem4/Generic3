@@ -27,6 +27,7 @@ const en = {
     appointments: "Appointments",
     settings: "Settings",
     comingSoon: "The {{page}} page is coming soon!",
+    logout: "Logout",
   },
   header: {
     title: "Dashboard",

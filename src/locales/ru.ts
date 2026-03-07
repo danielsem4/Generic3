@@ -27,6 +27,7 @@ const ru = {
     appointments: "Записи",
     settings: "Настройки",
     comingSoon: "Страница «{{page}}» скоро будет!",
+    logout: "Выйти",
   },
   header: {
     title: "Панель управления",

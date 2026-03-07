@@ -27,6 +27,7 @@ const ar = {
     appointments: "المواعيد",
     settings: "الإعدادات",
     comingSoon: "صفحة {{page}} قريباً!",
+    logout: "تسجيل الخروج",
   },
   header: {
     title: "لوحة التحكم",
