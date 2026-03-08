@@ -42,6 +42,7 @@ export default function Login() {
 
         <CardContent>
           <form onSubmit={handleSubmit}>
+            <fieldset disabled={isPending}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">{t("login.email")}</Label>
@@ -103,6 +104,7 @@ export default function Login() {
                 {isPending ? t("login.submitting") : t("login.submit")}
               </Button>
             </CardFooter>
+          </fieldset>
           </form>
         </CardContent>
       </Card>

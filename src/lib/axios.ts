@@ -11,11 +11,17 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const status = error?.response?.status;
+    const url = String(error?.config?.url ?? "");
+
+    const isLoginRequest = url.includes("/api/v1/auth/login/");
+
+    if (status === 401 && !isLoginRequest) {
       useAuthStore.getState().logout();
       toast.error(i18n.t("common.sessionExpired"));
       window.location.href = "/";
     }
+
     return Promise.reject(error);
   }
 );

@@ -126,6 +126,34 @@ patients: {
     toggleSidebar: "Toggle sidebar",
     sessionExpired: "Session expired. Please log in again.",
   },
+
+  // Modules
+modules: {
+  title: "My Modules",
+  cards: {
+    exams: {
+      title: "Exams",
+      description: "Competency assessment, knowledge tests, and clinical simulations.",
+    },
+    questionnaires: {
+      title: "Questionnaires",
+      description: "Satisfaction surveys, periodic assessments, and medical questionnaires.",
+    },
+    medications: {
+      title: "Medications",
+      description: "Prescription management, dose monitoring, and allergy alerts.",
+    },
+    sensors: {
+      title: "Sensors",
+      description: "Real-time monitoring of medical devices and patient vital signs.",
+    },
+    activities: {
+      title: "Activities",
+      description: "Shift scheduling, workshops, and staff training.",
+    },
+  },
+},
+
 } as const;
 
 export default en;
