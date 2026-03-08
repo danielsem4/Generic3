@@ -2,10 +2,10 @@ const en = {
   // Navigation & Sidebar
   nav: {
     dashboard: "Dashboard",
-    patient: "Patients",
+    patients: "Patients",
     clinics: "Clinics",
     modules: "Modules",
-    appointments: "Appointments",
+    medications: "Medications",
     settings: "Settings",
     reports: "Reports",
     pageNotReady: "{{title}} page does not exist yet!",
@@ -74,6 +74,7 @@ patients: {
   statusActive: "Active",
   statusPending: "Pending Review",
   statusFollowUp: "In Follow-up",
+  view: "View Details",
 
   errFirstName: "First name is required",
   errLastName: "Last name is required",

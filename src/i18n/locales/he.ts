@@ -2,10 +2,10 @@ const he = {
   // Navigation & Sidebar
   nav: {
     dashboard: "לוח בקרה",
-    patient: "מטופלים",
+    patients: "מטופלים",
     clinics: "מרפאות",
     modules: "מודולים",
-    appointments: "תורים",
+    medications: "תרופות",
     settings: "הגדרות",
     reports: "דוחות",
     pageNotReady: "דף {{title}} עדיין לא קיים!",
@@ -74,6 +74,7 @@ patients: {
   statusActive: "פעיל",
   statusPending: "ממתין לבדיקה",
   statusFollowUp: "במעקב",
+  view: "צפייה בפרטים",
 
   errFirstName: "שם פרטי הוא שדה חובה",
   errLastName: "שם משפחה הוא שדה חובה",

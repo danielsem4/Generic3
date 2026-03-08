@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage/>,
   },
   {
-   path: "/patient",
+   path: "/patients",
    element: (
   <ProtectedRoute><Patient /></ProtectedRoute>
   ),

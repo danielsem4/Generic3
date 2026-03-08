@@ -2,10 +2,10 @@ const ru = {
   // Navigation & Sidebar
   nav: {
     dashboard: "Панель управления",
-    patient: "Пациенты",
+    patients: "Пациенты",
     clinics: "Клиники",
     modules: "Модули",
-    appointments: "Записи",
+    medications: "Лекарства",
     settings: "Настройки",
     reports: "Отчёты",
     pageNotReady: "Страница {{title}} ещё не существует!",
@@ -74,6 +74,7 @@ const ru = {
   statusActive: "Активен",
   statusPending: "Ожидает проверки",
   statusFollowUp: "Под наблюдением",
+  view: "Просмотреть детали",
 
   errFirstName: "Имя обязательно для заполнения",
   errLastName: "Фамилия обязательна для заполнения",

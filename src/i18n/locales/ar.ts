@@ -2,10 +2,10 @@ const ar = {
   // Navigation & Sidebar
   nav: {
     dashboard: "لوحة التحكم",
-    patient: "المرضى",
+    patients: "المرضى",
     clinics: "العيادات",
     modules: "الوحدات",
-    appointments: "المواعيد",
+    medications: "الأدوية",
     settings: "الإعدادات",
     reports: "التقارير",
     pageNotReady: "صفحة {{title}} غير موجودة بعد!",
@@ -74,6 +74,7 @@ const ar = {
   statusActive: "نشط",
   statusPending: "قيد المراجعة",
   statusFollowUp: "قيد المتابعة",
+  view: "عرض التفاصيل",
 
   errFirstName: "الاسم الأول حقل مطلوب",
   errLastName: "اسم العائلة حقل مطلوب",

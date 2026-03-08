@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         ),
     },
     {
-     path: "/patient", 
+     path: "/patients", 
      element: (
     <ProtectedRoute>
       <Patient />
