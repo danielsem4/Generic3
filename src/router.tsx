@@ -1,25 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "@/screens/login/Login";
-import Home from "@/screens/home/Home";
 import VerifyCode from "@/screens/verify/VerifyCode";
-import { ProtectedRoute } from "@/routes/ProtectedRoute";
-
+import Home from "@/screens/home/Home";
+import Modules from "@/screens/modules/modules";
+import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
+import Settings from "@/screens/settings/Settings";
+import NotFound from "@/screens/not-found/NotFound";
 
 export const router = createBrowserRouter([
+  { path: "/", element: <Login /> },
+  { path: "/verify", element: <VerifyCode /> },
+
   {
-    path: "/",
-    element: <Login />,
+    element: <ProtectedLayout />,
+    children: [
+      { path: "home", element: <Home /> },
+      { path: "modules", element: <Modules /> },
+      { path: "settings", element: <Settings /> },
+    ],
   },
   {
-    path: "/verify",
-    element: <VerifyCode />,
-    },
-    {
-        path: "/home",
-        element: (
-          <ProtectedRoute>
-          <Home />    
-          </ProtectedRoute>
-        ),
-    },
-]); 
+    path: "*",
+    element: <NotFound />,
+  },
+]);
