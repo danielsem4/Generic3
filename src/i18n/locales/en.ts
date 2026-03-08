@@ -2,7 +2,7 @@ const en = {
   // Navigation & Sidebar
   nav: {
     dashboard: "Dashboard",
-    patients: "Patients",
+    patient: "Patients",
     clinics: "Clinics",
     modules: "Modules",
     appointments: "Appointments",

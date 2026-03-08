@@ -38,7 +38,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
 
   const defaultMenuItems: MenuItem[] = [
     { title: t("nav.dashboard"), url: "/home", icon: LayoutDashboard },
-    { title: t("nav.patients"), url: "/patients", icon: Users },
+    { title: t("nav.patient"), url: "/patient", icon: Users },
     { title: t("nav.clinics"), url: "/clinics", icon: Database },
     { title: t("nav.modules"), url: "/modules", icon: Database },
     { title: t("nav.appointments"), url: "/appointments", icon: Calendar },

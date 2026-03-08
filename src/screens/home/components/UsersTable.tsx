@@ -17,7 +17,6 @@ import {
 import { Eye } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { IUser } from "@/common/Users";
-import { useNavigate } from "react-router-dom";
 
 const MAX_ROWS = 10;
 
@@ -28,7 +27,6 @@ interface IUsersTableProps {
 export function UsersTable({ users }: IUsersTableProps) {
   const { t } = useTranslation();
   const displayedUsers = users.slice(0, MAX_ROWS);
-  const navigate = useNavigate();
 
   return (
     <Card className="w-full shadow-lg border-none overflow-hidden bg-card text-card-foreground">
@@ -67,7 +65,6 @@ export function UsersTable({ users }: IUsersTableProps) {
                   <TableCell>{user.role}</TableCell>
                   <TableCell>
                     <button
-                      onClick={() => navigate("/patient")}
                       className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label={t("home.viewPatient")}
                     >

@@ -2,7 +2,7 @@ const ar = {
   // Navigation & Sidebar
   nav: {
     dashboard: "لوحة التحكم",
-    patients: "المرضى",
+    patient: "المرضى",
     clinics: "العيادات",
     modules: "الوحدات",
     appointments: "المواعيد",

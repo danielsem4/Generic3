@@ -2,7 +2,7 @@ const ru = {
   // Navigation & Sidebar
   nav: {
     dashboard: "Панель управления",
-    patients: "Пациенты",
+    patient: "Пациенты",
     clinics: "Клиники",
     modules: "Модули",
     appointments: "Записи",

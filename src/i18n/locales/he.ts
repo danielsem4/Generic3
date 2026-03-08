@@ -2,7 +2,7 @@ const he = {
   // Navigation & Sidebar
   nav: {
     dashboard: "לוח בקרה",
-    patients: "מטופלים",
+    patient: "מטופלים",
     clinics: "מרפאות",
     modules: "מודולים",
     appointments: "תורים",
