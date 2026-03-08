@@ -127,6 +127,32 @@ const ar = {
     toggleSidebar: "تبديل الشريط الجانبي",
     sessionExpired: "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
   },
+  // Modules
+  modules: {
+  title: "وحداتي",
+  cards: {
+    exams: {
+      title: "الاختبارات",
+      description: "تقييم الكفاءة، اختبارات المعرفة، والمحاكاة السريرية.",
+    },
+    questionnaires: {
+      title: "الاستبيانات",
+      description: "استطلاعات الرضا، تقييمات دورية، واستبيانات طبية.",
+    },
+    medications: {
+      title: "الأدوية",
+      description: "إدارة الوصفات، متابعة الجرعات، وتنبيهات الحساسية.",
+    },
+    sensors: {
+      title: "المستشعرات",
+      description: "مراقبة فورية للأجهزة الطبية والعلامات الحيوية للمريض.",
+    },
+    activities: {
+      title: "الأنشطة",
+      description: "جدولة المناوبات، ورش عمل، وتدريب الطاقم.",
+    },
+  },
+},
 } as const;
 
 export default ar;

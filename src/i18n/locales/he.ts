@@ -127,6 +127,32 @@ patients: {
     toggleSidebar: "החלף סרגל צד",
     sessionExpired: "פג תוקף ההפעלה. אנא התחבר שוב.",
   },
+  // Modules
+  modules: {
+    title: "המודולות שלי",
+    cards: {
+      exams: {
+        title: "מבחנים",
+        description: ".בדיקת כשירות, מבחני ידע, וסימולציות קלינית",
+      },
+      questionnaires: {
+        title: "שאלונים",
+        description: ".סקרי שביעות רצון, הערכות תקופתיות ושאלונים רפואיים",
+      },
+      medications: {
+        title: "תרופות",
+        description: ".ניהול מרשמים, מעקב מינונים, והתראות על רגישויות",
+      },
+      sensors: {
+        title: "חיישנים",
+        description: ".ניטור בזמן אמת של מכשור רפואי ומדדי מטופלים",
+      },
+      activities: {
+        title: "פעילויות",
+        description: ".תזמון תורנויות, סדנאות והדרכות צוות",
+      },
+    },
+  },
 } as const;
 
 export default he;
