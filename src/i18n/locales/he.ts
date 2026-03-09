@@ -5,7 +5,7 @@ const he = {
     patients: "מטופלים",
     clinics: "מרפאות",
     modules: "מודולים",
-    appointments: "תורים",
+    medications: "תרופות",
     settings: "הגדרות",
     reports: "דוחות",
     pageNotReady: "דף {{title}} עדיין לא קיים!",
@@ -54,6 +54,52 @@ const he = {
     noData: "אין נתוני פרופיל משתמש זמינים.",
     showing: "מציג {{count}} מתוך {{total}} רשומות.",
   },
+
+  // Patients
+patients: {
+  title: "ניהול מטופלים",
+  description: "צפייה וניהול כל רשומות המטופלים במערכת",
+  addNew: "הוספת מטופל חדש",
+  searchPlaceholder: "חיפוש לפי שם, אימייל, ת.ז או טלפון...",
+  tableTitle: "רשימת מטופלים רשומים",
+  noResults: "לא נמצאו מטופלים התואמים את החיפוש שלך.",
+  columnName: "שם מלא",
+  columnEmail: "כתובת אימייל",
+  columnPhone: "מספר טלפון",
+  columnStatus: "סטטוס / תפקיד",
+  columnActions: "פעולות",
+  loading: "טוען רשומות מטופלים...",
+  columnId: "תעודת זהות",
+  columnLastVisit: "ביקור אחרון",
+  statusActive: "פעיל",
+  statusPending: "ממתין לבדיקה",
+  statusFollowUp: "במעקב",
+  view: "צפייה בפרטים",
+
+  errFirstName: "שם פרטי הוא שדה חובה",
+  errLastName: "שם משפחה הוא שדה חובה",
+  errEmail: "כתובת אימייל לא תקינה",
+  errPhone: "חובה להזין 10 ספרות",
+  errPassMin: "הסיסמה חייבת להכיל 6 תווים",
+  errPassMatch: "הסיסמאות אינן זהות",
+  
+  registerTitle: "הרשמה",
+  registerButton: "הרשם",
+
+  firstNameLabel: "שם פרטי",
+  lastNameLabel: "שם משפחה",
+  emailLabel: "אימייל",
+  phoneNumberLabel: "טלפון",
+  passwordLabel: "סיסמה",
+  confirmPasswordLabel: "אימות סיסמה",
+
+  firstNamePlaceholder: "",
+  lastNamePlaceholder: "",
+  emailPlaceholder: "",
+  phoneNumberPlaceholder: "",
+  passwordPlaceholder: "********",
+  confirmPasswordPlaceholder: "********",
+},
 
   // Settings
   settings: {

@@ -5,7 +5,7 @@ const ru = {
     patients: "Пациенты",
     clinics: "Клиники",
     modules: "Модули",
-    appointments: "Записи",
+    medications: "Лекарства",
     settings: "Настройки",
     reports: "Отчёты",
     pageNotReady: "Страница {{title}} ещё не существует!",
@@ -54,6 +54,52 @@ const ru = {
     noData: "Данные профиля пользователя недоступны.",
     showing: "Показано {{count}} из {{total}} записей.",
   },
+
+  // Patients
+  patients: {
+  title: "Управление пациентами",
+  description: "Просмотр и управление всеми записями пациентов в системе",
+  addNew: "Добавить нового пациента",
+  searchPlaceholder: "Поиск по имени, email, ID или телефону...",
+  tableTitle: "Список зарегистрированных пациентов",
+  noResults: "Пациенты, соответствующие вашему поиску, не найдены.",
+  columnName: "Полное имя",
+  columnEmail: "Электронная почта",
+  columnPhone: "Номер телефона",
+  columnStatus: "Статус / Роль",
+  columnActions: "Действия",
+  loading: "Загрузка записей пациентов...",
+  columnId: "Номер удостоверения личности",
+  columnLastVisit: "Последний визит",
+  statusActive: "Активен",
+  statusPending: "Ожидает проверки",
+  statusFollowUp: "Под наблюдением",
+  view: "Просмотреть детали",
+
+  errFirstName: "Имя обязательно для заполнения",
+  errLastName: "Фамилия обязательна для заполнения",
+  errEmail: "Неверный адрес электронной почты",
+  errPhone: "Необходимо ввести 10 цифр",
+  errPassMin: "Пароль должен содержать минимум 6 символов",
+  errPassMatch: "Пароли не совпадают",
+  
+  registerTitle: "Регистрация",
+  registerButton: "Зарегистрироваться",
+
+  firstNameLabel: "Имя",
+  lastNameLabel: "Фамилия",
+  emailLabel: "Электронная почта",
+  phoneNumberLabel: "Номер телефона",
+  passwordLabel: "Пароль",
+  confirmPasswordLabel: "Подтверждение пароля",
+
+  firstNamePlaceholder: "",
+  lastNamePlaceholder: "",
+  emailPlaceholder: "",
+  phoneNumberPlaceholder: "",
+  passwordPlaceholder: "********",
+  confirmPasswordPlaceholder: "********",
+},
 
   // Settings
   settings: {

@@ -45,7 +45,7 @@ export function UsersTable({ users }: IUsersTableProps) {
               <TableHead className="font-bold">{t("home.email")}</TableHead>
               <TableHead className="font-bold">{t("home.phone")}</TableHead>
               <TableHead className="font-bold">{t("home.role")}</TableHead>
-              <TableHead className="font-bold text-end">
+              <TableHead className="font-bold text-center">
                 {t("home.view")}
               </TableHead>
             </TableRow>
@@ -63,7 +63,7 @@ export function UsersTable({ users }: IUsersTableProps) {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone_number ?? "—"}</TableCell>
                   <TableCell>{user.role}</TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <button
                       className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label={t("home.viewPatient")}

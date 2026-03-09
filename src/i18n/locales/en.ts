@@ -5,7 +5,7 @@ const en = {
     patients: "Patients",
     clinics: "Clinics",
     modules: "Modules",
-    appointments: "Appointments",
+    medications: "Medications",
     settings: "Settings",
     reports: "Reports",
     pageNotReady: "{{title}} page does not exist yet!",
@@ -54,6 +54,52 @@ const en = {
     noData: "No user profile data available.",
     showing: "Showing {{count}} of {{total}} total entries.",
   },
+
+  // Patients - English
+patients: {
+  title: "Patient Management",
+  description: "View and manage all patient records in the system",
+  addNew: "Add New Patient",
+  searchPlaceholder: "Search by name, email, ID or phone...",
+  tableTitle: "Registered Patients List",
+  noResults: "No patients found matching your search.",
+  columnName: "Full Name",
+  columnEmail: "Email Address",
+  columnPhone: "Phone Number",
+  columnStatus: "Status / Role",
+  columnActions: "Actions",
+  loading: "Loading patient records...",
+  columnId: "ID Number",
+  columnLastVisit: "Last Visit",
+  statusActive: "Active",
+  statusPending: "Pending Review",
+  statusFollowUp: "In Follow-up",
+  view: "View Details",
+
+  errFirstName: "First name is required",
+  errLastName: "Last name is required",
+  errEmail: "Invalid email address",
+  errPhone: "Phone number must be 10 digits",
+  errPassMin: "Password must be at least 6 characters",
+  errPassMatch: "Passwords do not match",
+  
+  registerTitle: "Registration",
+  registerButton: "Register",
+  
+  firstNameLabel: "First Name",
+  lastNameLabel: "Last Name",
+  emailLabel: "Email",
+  phoneNumberLabel: "Phone Number",
+  passwordLabel: "Password",
+  confirmPasswordLabel: "Confirm Password",
+
+  firstNamePlaceholder: "",
+  lastNamePlaceholder: "",
+  emailPlaceholder: "",
+  phoneNumberPlaceholder: "",
+  passwordPlaceholder: "********",
+  confirmPasswordPlaceholder: "********",
+},
 
   // Settings
   settings: {

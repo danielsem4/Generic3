@@ -41,7 +41,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
     { title: t("nav.patients"), url: "/patients", icon: Users },
     { title: t("nav.clinics"), url: "/clinics", icon: Database },
     { title: t("nav.modules"), url: "/modules", icon: Database },
-    { title: t("nav.appointments"), url: "/appointments", icon: Calendar },
+    { title: t("nav.medications"), url: "/medications", icon: Calendar },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
     { title: t("nav.reports"), icon: Database }
   ];
