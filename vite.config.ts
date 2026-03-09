@@ -14,9 +14,22 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://genericweb.onrender.com", 
+        target: "https://genericweb.onrender.com",
         changeOrigin: true,
         secure: false,
+        cookieDomainRewrite: "localhost",
+        configure: (proxy) => {
+          proxy.on("proxyRes", (proxyRes) => {
+            const setCookie = proxyRes.headers["set-cookie"];
+            if (setCookie) {
+              proxyRes.headers["set-cookie"] = setCookie.map((cookie) =>
+                cookie
+                  .replace(/;\s*Secure/gi, "")
+                  .replace(/;\s*SameSite=None/gi, "; SameSite=Lax")
+              );
+            }
+          });
+        },
       },
     },
   },
