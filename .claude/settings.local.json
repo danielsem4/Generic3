@@ -12,7 +12,9 @@
       "Bash(del \"C:\\\\Users\\\\semda\\\\Desktop\\\\generic3\\\\src\\\\App.css\")",
       "Bash(npm run lint:*)",
       "Bash(npm install:*)",
-      "Bash(git -C /Users/klutz/Desktop/genericWeb add:*)"
+      "Bash(git -C /Users/klutz/Desktop/genericWeb add:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git mv:*)"
     ]
   }
 }

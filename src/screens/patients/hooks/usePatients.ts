@@ -4,7 +4,7 @@ import { useUsersQuery } from "@/hooks/queries/useUsersQuery";
 import type { IUser } from "@/common/Users";
 import { useUserStore } from "@/store/useUserStore";
 
-interface IPatientData {
+interface IPatientsData {
   filteredUsers: IUser[];
   searchTerm: string;
   setSearchTerm: (term: string) => void;
@@ -13,7 +13,7 @@ interface IPatientData {
 }
 
 
-export function usePatient(): IPatientData {
+export function usePatients(): IPatientsData {
     
   const [searchTerm, setSearchTerm] = useState("");
   const { clinicId, userId } = useAuthStore();

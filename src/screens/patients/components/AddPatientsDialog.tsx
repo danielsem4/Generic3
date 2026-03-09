@@ -8,21 +8,21 @@ import { UserPlus } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { patientSchema, type PatientFormValues } from "../Schema/patientSchema";
+import { patientsSchema, type PatientsFormValues } from "../Schema/patientsSchema";
 import { useUserStore } from "@/store/useUserStore";
 import type { IUser } from "@/common/Users";
 import { useId } from 'react';
 
-export function AddPatientDialog() {
+export function AddPatientsDialog() {
   const { t } = useTranslation();
   const { addUser } = useUserStore();
   const baseId = useId(); 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<PatientFormValues>({
-    resolver: zodResolver(patientSchema),
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<PatientsFormValues>({
+    resolver: zodResolver(patientsSchema),
     mode: "onChange"
   });
 
-  const onSubmit = (data: PatientFormValues) => {
+  const onSubmit = (data: PatientsFormValues) => {
   const numericId = Math.abs(baseId.split(':').join('').split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
   const newUser: IUser = {
     id: numericId, 
@@ -39,7 +39,7 @@ export function AddPatientDialog() {
   console.log("Patient added:", newUser);
 };
 
-const renderField = (id: keyof PatientFormValues, type = "text") => (
+const renderField = (id: keyof PatientsFormValues, type = "text") => (
   <div key={id} className="space-y-1.5 flex-1 text-right">
     <label className="text-sm font-bold text-foreground flex items-center gap-1">
        {t(`patients.${id}Label`)}

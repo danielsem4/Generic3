@@ -1,17 +1,17 @@
 "use client"
 import React from "react";
-import { AddPatientDialog } from "./components/AddPatientDialog";
+import { AddPatientsDialog } from "./components/AddPatientsDialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search} from "lucide-react";
 
-import { usePatient } from "./hooks/usePatient";
-import { PatientsTable } from "./components/PatientTable";
+import { usePatients } from "./hooks/usePatients";
+import { PatientsTable } from "./components/PatientsTable";
 import { useTranslation } from "react-i18next";
 
-export default function Patient() { 
-  const { t } = useTranslation();  
-  const { filteredUsers, searchTerm, setSearchTerm, isLoading } = usePatient();
+export default function Patients() {
+  const { t } = useTranslation();
+  const { filteredUsers, searchTerm, setSearchTerm, isLoading } = usePatients();
   
 
 if (isLoading) return (
@@ -32,7 +32,7 @@ if (isLoading) return (
               {t("patients.description") || "View and manage all patient records in the system"}
             </p>          
             </div>
-            <AddPatientDialog />
+            <AddPatientsDialog />
         </div>
 
         <div className="relative w-full">

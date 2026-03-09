@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const patientSchema = z.object({
+export const patientsSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
   lastName: z.string().min(2, "Last name is required"),
   email: z.string().email("Invalid email address (must include @ and .)"),
@@ -16,4 +16,4 @@ export const patientSchema = z.object({
   path: ["confirmPassword"],
 });
 
-export type PatientFormValues = z.infer<typeof patientSchema>;
+export type PatientsFormValues = z.infer<typeof patientsSchema>;
