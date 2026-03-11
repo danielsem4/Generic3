@@ -110,6 +110,65 @@ patients: {
     noData: "No matching medications found", 
   },
 
+  // patient medications
+  patientMeds: {
+    title: "My Medications",
+    addMedication: "Add Medication",
+    searchPlaceholder: "Search medications...",
+    standardDosage: "Standard Dosage",
+    intakeLogTitle: "Medication Intake Log",
+    refreshData: "Refresh Data",
+    regularDosage: "Regular Dosage",
+    activeStatus: "Active",
+    newPrescription: "New Prescription",
+    configureSchedule: "Configure medication schedule and dosage.",
+    medicationLabel: "Medication",
+    timelineLabel: "Timeline",
+    dosageLabel: "Dosage",
+    startDate: "Start Date",
+    endDate: "End Date",
+    amount: "Amount",
+    unit: "Unit",
+    frequencyLabel: "Frequency & Schedule",
+    frequencyOptions: {
+      once: "Once",
+      daily: "Daily",
+      weekly: "Weekly",
+      monthly: "Monthly"},
+    timesPerDay: "Times Per Day",
+    addSlot: "Add Slot",
+    finalize: "Finalize Prescription",
+    cancel: "Cancel",
+    questions: {
+      whichDays: "Which Days of the Week?",
+      whichWeeks: "Which Weeks of the Month?"},
+    units: {
+       ml: "ml",
+       mg: "mg",
+       tabs: "Tablet(s)"},
+    days: {
+    monday: "Monday", tuesday: "Tuesday", wednesday: "Wednesday", 
+    thursday: "Thursday", friday: "Friday", saturday: "Saturday", sunday: "Sunday"},
+    weeks: {
+    1: "1st Week", 2: "2nd Week", 3: "3rd Week", 4: "4th Week"},
+    deleteConfirm: {
+    title: "Are you absolutely sure?",
+    description: "This action cannot be undone. This will permanently delete the medication from the patient's record.",
+    cancel: "Cancel",
+    confirm: "Delete Medication"},
+    filters: {
+      dateFrom: "Date From:",
+      medication: "Medication:",
+      allMeds: "All Medications"},
+    table: {
+      intakeDate: "Intake Date",
+      intakeTime: "Intake Time",
+      medId: "Med ID",
+      medName: "Med Name",
+      form: "Form",
+      dosage: "Dosage"}
+  },
+  
   // Settings
   settings: {
     title: "Settings",

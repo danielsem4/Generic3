@@ -8,6 +8,7 @@ import Settings from "@/screens/settings/Settings";
 import NotFound from "@/screens/not-found/NotFound";
 import Patients from "@/screens/patients/Patients";
 import Medications from "@/screens/medications/Medications";
+import PatientMedications from "./screens/patient-meds/PatientMedications";
 
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
       { path: "medications", element: <Medications /> },
+      { path: "patients/:patientId/medications", element: <PatientMedications /> }
     ],
   },
   {
