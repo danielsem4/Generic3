@@ -1,5 +1,5 @@
 import React from "react";
-import { LayoutDashboard, Users, Database, Calendar, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, Database, Settings, LogOut, Pill } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -41,7 +41,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
     { title: t("nav.patients"), url: "/patients", icon: Users },
     { title: t("nav.clinics"), url: "/clinics", icon: Database },
     { title: t("nav.modules"), url: "/modules", icon: Database },
-    { title: t("nav.medications"), url: "/medications", icon: Calendar },
+    { title: t("nav.medications"), url: "/medications", icon: Pill },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
     { title: t("nav.reports"), icon: Database }
   ];

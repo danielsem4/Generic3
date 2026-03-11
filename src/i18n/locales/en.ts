@@ -101,6 +101,15 @@ patients: {
   confirmPasswordPlaceholder: "********",
 },
 
+  // Medications
+  medications: {
+    title: "Medications", 
+    allMedications: "All Medications", 
+    searchPlaceholder: "...Search for a medication", 
+    sort: "Sort: A-Z", 
+    noData: "No matching medications found", 
+  },
+
   // Settings
   settings: {
     title: "Settings",
