@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import { AddPatientsDialog } from "./components/AddPatientsDialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,7 +20,7 @@ if (isLoading) return (
   );
 
   return (
-    <div className="min-h-screen bg-backgroundp-8">
+    <div className="min-h-screen bg-background p-8">
     <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
