@@ -6,9 +6,9 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export default function ProtectedLayout() {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
-  const handleToggleSidebar = React.useCallback(() => {
+  const handleToggleSidebar = () => {
     setSidebarOpen((p) => !p);
-  }, []);
+  };
 
   return (
     <SidebarProvider
