@@ -47,7 +47,11 @@ Medical clinic management dashboard — React 19 + TypeScript + Vite.
 - **Utilities:** camelCase (e.g., `dateUtils.ts`).
 - **File Limits:** Files should aim to be under **150 lines**. If a file exceeds this, refactor and split logic into smaller hooks or sub-components.
 
-### 4. Testing
+### 4. Memoization (React 19)
+
+**Do not use `useMemo` or `useCallback` manually.** This project targets React 19 with the React Compiler, which automatically handles memoization. Manual memoization adds noise without benefit and should be removed.
+
+### 5. Testing
 
 - **Mandatory Utils Testing:** Every new utility function created in `src/lib/` or `src/utils/` must have a corresponding unit test file (e.g., `MyUtil.test.ts`).
 

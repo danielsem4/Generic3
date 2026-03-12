@@ -49,7 +49,7 @@ export default function VerifyCode() {
 <Button
   className="w-full"
   disabled={value.length !== 6}
-  onClick={() => navigate("/next")}
+  onClick={() => navigate("/home")}
 >
   Confirm
 </Button>

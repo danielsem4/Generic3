@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutDashboard, Users, Database, Settings, LogOut, Pill } from "lucide-react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -72,7 +72,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
           return (
             <button
               key={item.title}
-              type= "button"
+              type="button"
               onClick={() => toast(t("nav.pageNotReady", { title: item.title }), { duration: 3000 })}
               className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition"
             >
@@ -82,19 +82,19 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ variant = "inset", menuI
           );
         }
         return (
-          <button
-    key={item.title}
-    type="button"
-    onClick={() => {
-      if (item.url) navigate(item.url);
-      else toast(t("nav.pageNotReady", { title: item.title }), { duration: 3000 });
-    }}
-    className="flex items-center gap-2 p-2 rounded hover:bg-primary/20 transition text-start w-full"
-  >
-    <Icon size={20} />
-    <span>{item.title}</span>
-  </button>
-);
+          <NavLink
+            key={item.title}
+            to={item.url}
+            className={({ isActive }) =>
+              `flex items-center gap-2 p-2 rounded transition text-start w-full ${
+                isActive ? "bg-primary/30 font-semibold" : "hover:bg-primary/20"
+              }`
+            }
+          >
+            <Icon size={20} />
+            <span>{item.title}</span>
+          </NavLink>
+        );
       })}
 
       <div className="mt-auto">
