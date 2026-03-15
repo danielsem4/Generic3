@@ -100,6 +100,14 @@ patients: {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+  // Medications
+  medications: {
+    title: "תרופות", 
+    allMedications: "כל התרופות", 
+    searchPlaceholder: "חיפוש תרופה...", 
+    sort: "'מיון: א'-ת",
+    noData: "לא נמצאו תרופות מתאימות", 
+  },
 
   // Settings
   settings: {

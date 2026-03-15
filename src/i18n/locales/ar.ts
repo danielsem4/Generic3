@@ -100,6 +100,14 @@ const ar = {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+    // Medications
+  medications: {
+    title: "الأدوية", 
+    allMedications: "جميع الأدوية", 
+    searchPlaceholder: "البحث عن دواء...", 
+    sort: "فرز: أ-ي",
+    noData: "لم يتم العثور على أدوية مطابقة", 
+  },
 
   // Settings
   settings: {

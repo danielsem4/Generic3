@@ -101,6 +101,15 @@ const ru = {
   confirmPasswordPlaceholder: "********",
 },
 
+  // Medications
+  medications: {
+    title: "Лекарства", 
+    allMedications: "Все лекарства", 
+    searchPlaceholder: "Поиск лекарства...", 
+    sort: "Сортировка: А-Я",
+    noData: "Не найдено подходящих лекарств", 
+  },
+
   // Settings
   settings: {
     title: "Настройки",
