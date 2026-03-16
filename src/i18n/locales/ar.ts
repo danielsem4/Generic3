@@ -8,6 +8,11 @@ const ar = {
     medications: "الأدوية",
     settings: "الإعدادات",
     reports: "التقارير",
+    doctors: "الأطباء",
+    clinicManagers: "مديرو العيادات",
+    manage: "إدارة",
+    statistics: "إحصائيات",
+    clinicModules: "وحدات العيادة",
     pageNotReady: "صفحة {{title}} غير موجودة بعد!",
     logout: "تسجيل الخروج",
     logoutConfirmTitle: "هل أنت متأكد أنك تريد تسجيل الخروج؟",
@@ -42,6 +47,9 @@ const ar = {
     clinics: "العيادات",
     modules: "الوحدات",
     medications: "الأدوية",
+    clinicManagers: "مديرو العيادات",
+    doctors: "الأطباء",
+    evaluations: "التقييمات",
     latestUsers: "أحدث المستخدمين",
     updatedNow: "تم التحديث الآن.",
     firstName: "الاسم الأول",
@@ -100,6 +108,18 @@ const ar = {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+  // Clinic Managers
+  clinicManagers: {
+    description: "عرض وإدارة جميع مديري العيادات في النظام",
+    searchPlaceholder: "البحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+  },
+
+  // Doctors
+  doctors: {
+    description: "عرض وإدارة جميع الأطباء في العيادة",
+    searchPlaceholder: "البحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+  },
+
     // Medications
   medications: {
     title: "الأدوية", 

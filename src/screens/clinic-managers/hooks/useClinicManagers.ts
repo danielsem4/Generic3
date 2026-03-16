@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getPatients } from "@/api/usersApi";
+import { getClinicManagers } from "@/api/usersApi";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IUser } from "@/common/Users";
 
-interface IPatientsData {
+interface IClinicManagersData {
   filteredUsers: IUser[];
   searchTerm: string;
   setSearchTerm: (term: string) => void;
@@ -12,13 +12,13 @@ interface IPatientsData {
   error: Error | null;
 }
 
-export function usePatients(): IPatientsData {
+export function useClinicManagers(): IClinicManagersData {
   const [searchTerm, setSearchTerm] = useState("");
   const userId = useAuthStore((s) => s.userId);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["users", "patients"],
-    queryFn: getPatients,
+    queryKey: ["users", "clinic-managers"],
+    queryFn: getClinicManagers,
     enabled: !!userId,
   });
 

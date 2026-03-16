@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/AppSidebar";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useRoleNavItems } from "@/hooks/common/useRoleNavItems";
 
 export default function ProtectedLayout() {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const menuItems = useRoleNavItems();
   const handleToggleSidebar = () => {
     setSidebarOpen((p) => !p);
   };
@@ -19,7 +21,7 @@ export default function ProtectedLayout() {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" open={sidebarOpen} />
+      <AppSidebar variant="inset" open={sidebarOpen} menuItems={menuItems} />
       <SidebarInset
         className={`flex-1 transition-all duration-300 ${
           sidebarOpen ? "ms-72" : "ms-0"

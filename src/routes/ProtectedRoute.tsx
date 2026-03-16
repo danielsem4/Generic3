@@ -6,9 +6,9 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { clinicId, userId } = useAuthStore();
+  const { userId, isAdmin } = useAuthStore();
 
-  if (!clinicId || !userId) {
+  if (!userId && !isAdmin) {
     return <Navigate to="/" replace />;
   }
 

@@ -14,7 +14,7 @@ api.interceptors.response.use(
     const status = error?.response?.status;
     const url = String(error?.config?.url ?? "");
 
-    const isLoginRequest = url.includes("/api/v1/auth/login/");
+    const isLoginRequest = url.includes("/api/v1/auth/sessions/");
 
     if (status === 401 && !isLoginRequest) {
       useAuthStore.getState().logout();

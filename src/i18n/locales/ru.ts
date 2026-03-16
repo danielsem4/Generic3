@@ -8,6 +8,11 @@ const ru = {
     medications: "Лекарства",
     settings: "Настройки",
     reports: "Отчёты",
+    doctors: "Врачи",
+    clinicManagers: "Менеджеры клиник",
+    manage: "Управление",
+    statistics: "Статистика",
+    clinicModules: "Модули клиники",
     pageNotReady: "Страница {{title}} ещё не существует!",
     logout: "Выйти",
     logoutConfirmTitle: "Вы уверены, что хотите выйти?",
@@ -42,6 +47,9 @@ const ru = {
     clinics: "Клиники",
     modules: "Модули",
     medications: "Лекарства",
+    clinicManagers: "Менеджеры клиник",
+    doctors: "Врачи",
+    evaluations: "Оценки",
     latestUsers: "Последние пользователи",
     updatedNow: "Обновлено только что.",
     firstName: "Имя",
@@ -100,6 +108,18 @@ const ru = {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+
+  // Clinic Managers
+  clinicManagers: {
+    description: "Просмотр и управление всеми менеджерами клиник в системе",
+    searchPlaceholder: "Поиск по имени, email или телефону...",
+  },
+
+  // Doctors
+  doctors: {
+    description: "Просмотр и управление всеми врачами клиники",
+    searchPlaceholder: "Поиск по имени, email или телефону...",
+  },
 
   // Medications
   medications: {

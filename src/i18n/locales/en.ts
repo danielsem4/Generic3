@@ -8,6 +8,11 @@ const en = {
     medications: "Medications",
     settings: "Settings",
     reports: "Reports",
+    doctors: "Doctors",
+    clinicManagers: "Clinic Managers",
+    manage: "Manage",
+    statistics: "Statistics",
+    clinicModules: "Clinic Modules",
     pageNotReady: "{{title}} page does not exist yet!",
     logout: "Logout",
     logoutConfirmTitle: "Are you sure you want to logout?",
@@ -42,6 +47,9 @@ const en = {
     clinics: "Clinics",
     modules: "Modules",
     medications: "Medications",
+    clinicManagers: "Clinic Managers",
+    doctors: "Doctors",
+    evaluations: "Evaluations",
     latestUsers: "Latest users",
     updatedNow: "Updated just now.",
     firstName: "First Name",
@@ -100,6 +108,18 @@ patients: {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+
+  // Clinic Managers
+  clinicManagers: {
+    description: "View and manage all clinic managers in the system",
+    searchPlaceholder: "Search by name, email or phone...",
+  },
+
+  // Doctors
+  doctors: {
+    description: "View and manage all doctors in this clinic",
+    searchPlaceholder: "Search by name, email or phone...",
+  },
 
   // Medications
   medications: {

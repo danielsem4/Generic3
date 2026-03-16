@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { createUser } from "@/api/usersApi";
+import { createPatient } from "@/api/usersApi";
 import type { PatientsFormValues } from "../Schema/patientsSchema";
 
 export function useAddPatient() {
@@ -10,13 +10,15 @@ export function useAddPatient() {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: PatientsFormValues) => {
       if (!clinicId) throw new Error("Missing clinicId");
-      return createUser(clinicId, {
+      console.log({ data });
+      return createPatient({
         first_name: data.firstName,
         last_name: data.lastName,
         email: data.email,
         phone_number: data.phoneNumber,
         password: data.password,
-        role: "Patient",
+        role: "PATIENT",
+        clinic_id: clinicId,
       });
     },
     onSuccess: () => {

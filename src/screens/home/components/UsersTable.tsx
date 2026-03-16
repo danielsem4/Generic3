@@ -22,17 +22,20 @@ const MAX_ROWS = 10;
 
 interface IUsersTableProps {
   users: IUser[];
+  title?: string;
 }
 
-export function UsersTable({ users }: IUsersTableProps) {
+export function UsersTable({ users, title }: IUsersTableProps) {
   const { t } = useTranslation();
-  const displayedUsers = users.slice(0, MAX_ROWS);
+  console.log({ users });
+
+  const displayedUsers = users.slice(0, MAX_ROWS) || [];
 
   return (
     <Card className="w-full shadow-lg border-none overflow-hidden bg-card text-card-foreground">
       <CardHeader className="pb-4 border-b border-border">
         <CardDescription className="text-2xl font-bold text-foreground">
-          {t("home.latestUsers")}
+          {title ?? t("home.latestUsers")}
         </CardDescription>
       </CardHeader>
       <CardContent className="p-0">

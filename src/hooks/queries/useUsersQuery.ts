@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "@/api/usersApi";
 
-export const useUsersQuery = (clinicId: number | null, userId: number | null) => {
+export const useUsersQuery = (clinicId: number | null, userId: string | null) => {
   return useQuery({
     queryKey: ["users", clinicId, userId],
     queryFn: () => {

@@ -8,6 +8,11 @@ const he = {
     medications: "תרופות",
     settings: "הגדרות",
     reports: "דוחות",
+    doctors: "רופאים",
+    clinicManagers: "מנהלי מרפאות",
+    manage: "ניהול",
+    statistics: "סטטיסטיקה",
+    clinicModules: "מודולים של המרפאה",
     pageNotReady: "דף {{title}} עדיין לא קיים!",
     logout: "התנתקות",
     logoutConfirmTitle: "האם אתה בטוח שברצונך להתנתק?",
@@ -42,6 +47,9 @@ const he = {
     clinics: "מרפאות",
     modules: "מודולים",
     medications: "תרופות",
+    clinicManagers: "מנהלי מרפאות",
+    doctors: "רופאים",
+    evaluations: "הערכות",
     latestUsers: "משתמשים אחרונים",
     updatedNow: "עודכן כעת.",
     firstName: "שם פרטי",
@@ -100,6 +108,18 @@ patients: {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
 },
+  // Clinic Managers
+  clinicManagers: {
+    description: "צפייה וניהול כל מנהלי המרפאות במערכת",
+    searchPlaceholder: "חיפוש לפי שם, אימייל או טלפון...",
+  },
+
+  // Doctors
+  doctors: {
+    description: "צפייה וניהול כל הרופאים במרפאה",
+    searchPlaceholder: "חיפוש לפי שם, אימייל או טלפון...",
+  },
+
   // Medications
   medications: {
     title: "תרופות", 
