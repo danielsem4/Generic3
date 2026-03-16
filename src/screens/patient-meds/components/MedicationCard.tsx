@@ -13,15 +13,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import type { PatientMedicine } from "../schema/patientMedicationsSchema";
+import type { IPatientMedicine } from "../schema/patientMedicationsSchema";
 
 interface MedicationCardProps {
-  prescription: PatientMedicine;
+  prescription: IPatientMedicine;
   onDelete: (id: string) => void;
 }
 
 export const MedicationCard: React.FC<MedicationCardProps> = ({ prescription, onDelete }) => {
   const { t } = useTranslation();
+
+  const handleDeleteConfirm = () => {
+    onDelete(prescription.medicine);
+  };
+
   return (
     <Card className="border-border bg-card shadow-sm rounded-md overflow-hidden w-full mb-1">
       <CardContent className="p-0 px-4 flex justify-between items-center h-12">
@@ -38,7 +43,9 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({ prescription, on
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>{t("patientMeds.deleteConfirm.cancel")}</AlertDialogCancel>
-                  <AlertDialogAction className="bg-destructive" onClick={() => onDelete(prescription.medicine)}>
+                  <AlertDialogAction 
+                  className="bg-destructive" 
+                  onClick={handleDeleteConfirm}>
                     {t("patientMeds.deleteConfirm.confirm")}
                   </AlertDialogAction>
                 </AlertDialogFooter>

@@ -9,7 +9,15 @@ import { AddMedicationModal } from "./components/AddMedicationModal";
 
 export default function PatientMedications() {
   const { t, i18n } = useTranslation();
-  const { searchTerm, setSearchTerm, filteredPrescriptions, handleDelete, isAddModalOpen, setIsAddModalOpen} = usePatientMedications("123");
+  const { searchTerm, setSearchTerm, filteredPrescriptions, handleDelete, isAddModalOpen, setIsAddModalOpen, intakeLogs} = usePatientMedications("123");
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
 
   return (
     <div className="p-4 space-y-6 bg-background min-h-screen text-left" dir={i18n.dir()}>
@@ -20,7 +28,7 @@ export default function PatientMedications() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input 
             value={searchTerm} 
-            onChange={(e) => setSearchTerm(e.target.value)} 
+            onChange={handleSearchChange}
             className="pl-10 h-10 bg-card border-border rounded-lg text-sm" 
             placeholder={t("patientMeds.searchPlaceholder")} 
           />
@@ -34,7 +42,9 @@ export default function PatientMedications() {
              <Pill className="text-primary rotate-45" size={20} />
              <span>{t("patientMeds.title")}</span>
            </div>
-           <button onClick={() => setIsAddModalOpen(true)} className="text-primary text-sm font-semibold hover:underline cursor-pointer">
+           <button 
+           onClick={openAddModal}
+           className="text-primary text-sm font-semibold hover:underline cursor-pointer">
              + {t("patientMeds.addMedication")}
            </button>
         </div>
@@ -42,12 +52,15 @@ export default function PatientMedications() {
         {/* List of Medications */}
         <div className="space-y-2">
           {filteredPrescriptions.map((pres) => (
-            <MedicationCard key={pres.medicine} prescription={pres} onDelete={handleDelete} />
+            <MedicationCard 
+            key={pres.medicine} 
+            prescription={pres} 
+            onDelete={handleDelete} />
           ))}
         </div>
 
         {/* History Table */}
-        <IntakeLogTable />
+        <IntakeLogTable intakeLogs={intakeLogs}/>
       </div>
 
       {/* Add Medication Modal */}

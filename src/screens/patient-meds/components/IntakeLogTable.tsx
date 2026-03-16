@@ -4,11 +4,28 @@ import { Calendar, RotateCcw, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { usePatientMedications } from "../hooks/usePatientMedications";
+import type { IIntakeLog } from "../schema/patientMedicationsSchema";
 
-export function IntakeLogTable() {
-  const { t } = useTranslation();
-  const { intakeLogs } = usePatientMedications("123");
+interface IntakeLogRowProps {
+  log: IIntakeLog;
+}
+
+const IntakeLogRow: React.FC<IntakeLogRowProps> = ({ log }) => (
+  <TableRow className="hover:bg-muted/5 border-border transition-colors">
+    <TableCell className="text-success font-bold">{log.intakeDate}</TableCell>
+    <TableCell className="text-muted-foreground">{log.intakeTime}</TableCell>
+    <TableCell className="text-muted-foreground">{log.medicineId}</TableCell>
+    <TableCell className="font-bold text-foreground">{log.medName}</TableCell>
+    <TableCell className="text-muted-foreground">{log.medForm || 'TAB'}</TableCell>
+    <TableCell className="text-muted-foreground">{log.dosage}</TableCell>
+  </TableRow>
+);
+
+interface IntakeLogTableProps {
+  intakeLogs: IIntakeLog[];
+}
+
+export function IntakeLogTable({ intakeLogs }: IntakeLogTableProps) {  const { t } = useTranslation();
 
   return (
     <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden mt-10">
@@ -49,14 +66,7 @@ export function IntakeLogTable() {
         </TableHeader>
         <TableBody className="text-[12px]">
           {intakeLogs.map((log, i) => (
-            <TableRow key={i} className="hover:bg-muted/5 border-border transition-colors">
-              <TableCell className="text-success font-bold">{log.intakeDate}</TableCell>
-              <TableCell className="text-muted-foreground">{log.intakeTime}</TableCell>
-              <TableCell className="text-muted-foreground">{log.medicineId}</TableCell>
-              <TableCell className="font-bold text-foreground">{log.medName}</TableCell>
-              <TableCell className="text-muted-foreground">{log.medForm || 'TAB'}</TableCell>
-              <TableCell className="text-muted-foreground">{log.dosage}</TableCell>
-            </TableRow>
+            <IntakeLogRow key={i} log={log} />
           ))}
         </TableBody>
       </Table>
