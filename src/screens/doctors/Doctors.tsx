@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PatientsTable } from "@/screens/patients/components/PatientsTable";
 import { useDoctors } from "./hooks/useDoctors";
+import { AddDoctorDialog } from "./components/AddDoctorDialog";
 
 export default function Doctors() {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ export default function Doctors() {
               {t("doctors.description")}
             </p>
           </div>
+          <AddDoctorDialog />
         </div>
 
         <div className="relative w-full">

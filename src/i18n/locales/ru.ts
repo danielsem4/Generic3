@@ -91,6 +91,9 @@ const ru = {
   errPassMin: "Пароль должен содержать минимум 6 символов",
   errPassMatch: "Пароли не совпадают",
   
+  togglePatient: "Пациент",
+  toggleResearch: "Исследовательский пациент",
+
   registerTitle: "Регистрация",
   registerButton: "Зарегистрироваться",
 
@@ -119,6 +122,17 @@ const ru = {
   doctors: {
     description: "Просмотр и управление всеми врачами клиники",
     searchPlaceholder: "Поиск по имени, email или телефону...",
+    addNew: "Добавить врача",
+    registerTitle: "Регистрация врача",
+    registerButton: "Зарегистрировать",
+    firstNameLabel: "Имя",
+    lastNameLabel: "Фамилия",
+    emailLabel: "Email",
+    phoneNumberLabel: "Номер телефона",
+    firstNamePlaceholder: "",
+    lastNamePlaceholder: "",
+    emailPlaceholder: "",
+    phoneNumberPlaceholder: "",
   },
 
   // Medications

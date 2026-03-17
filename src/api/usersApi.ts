@@ -6,7 +6,7 @@ export interface ICreatePatientPayload {
   last_name: string;
   email: string;
   phone_number: string;
-  password: string;
+  password?: string;
   role: string;
   clinic_id: string | number;
 }
@@ -46,5 +46,21 @@ export const createPatient = async (
 ): Promise<IUser> => {
   console.log({ payload });
   const response = await api.post<IUser>(`/api/v1/users/patients/`, payload);
+  return response.data;
+};
+
+export interface ICreateDoctorPayload {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  role: string;
+  clinic_id: string | number;
+}
+
+export const createDoctor = async (
+  payload: ICreateDoctorPayload,
+): Promise<IUser> => {
+  const response = await api.post<IUser>(`/api/v1/users/doctors/`, payload);
   return response.data;
 };

@@ -91,6 +91,9 @@ patients: {
   errPassMin: "Password must be at least 6 characters",
   errPassMatch: "Passwords do not match",
   
+  togglePatient: "Patient",
+  toggleResearch: "Research Patient",
+
   registerTitle: "Registration",
   registerButton: "Register",
   
@@ -119,6 +122,17 @@ patients: {
   doctors: {
     description: "View and manage all doctors in this clinic",
     searchPlaceholder: "Search by name, email or phone...",
+    addNew: "Add New Doctor",
+    registerTitle: "Register Doctor",
+    registerButton: "Register",
+    firstNameLabel: "First Name",
+    lastNameLabel: "Last Name",
+    emailLabel: "Email",
+    phoneNumberLabel: "Phone Number",
+    firstNamePlaceholder: "",
+    lastNamePlaceholder: "",
+    emailPlaceholder: "",
+    phoneNumberPlaceholder: "",
   },
 
   // Medications

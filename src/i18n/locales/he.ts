@@ -91,6 +91,9 @@ patients: {
   errPassMin: "הסיסמה חייבת להכיל 6 תווים",
   errPassMatch: "הסיסמאות אינן זהות",
   
+  togglePatient: "מטופל",
+  toggleResearch: "מטופל מחקר",
+
   registerTitle: "הרשמה",
   registerButton: "הרשם",
 
@@ -118,6 +121,17 @@ patients: {
   doctors: {
     description: "צפייה וניהול כל הרופאים במרפאה",
     searchPlaceholder: "חיפוש לפי שם, אימייל או טלפון...",
+    addNew: "הוסף רופא חדש",
+    registerTitle: "רישום רופא",
+    registerButton: "הרשם",
+    firstNameLabel: "שם פרטי",
+    lastNameLabel: "שם משפחה",
+    emailLabel: "אימייל",
+    phoneNumberLabel: "מספר טלפון",
+    firstNamePlaceholder: "",
+    lastNamePlaceholder: "",
+    emailPlaceholder: "",
+    phoneNumberPlaceholder: "",
   },
 
   // Medications

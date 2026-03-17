@@ -91,6 +91,9 @@ const ar = {
   errPassMin: "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
   errPassMatch: "كلمات المرور غير متطابقة",
   
+  togglePatient: "مريض",
+  toggleResearch: "مريض بحثي",
+
   registerTitle: "التسجيل",
   registerButton: "تسجيل",
 
@@ -118,6 +121,17 @@ const ar = {
   doctors: {
     description: "عرض وإدارة جميع الأطباء في العيادة",
     searchPlaceholder: "البحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+    addNew: "إضافة طبيب جديد",
+    registerTitle: "تسجيل طبيب",
+    registerButton: "تسجيل",
+    firstNameLabel: "الاسم الأول",
+    lastNameLabel: "اسم العائلة",
+    emailLabel: "البريد الإلكتروني",
+    phoneNumberLabel: "رقم الهاتف",
+    firstNamePlaceholder: "",
+    lastNamePlaceholder: "",
+    emailPlaceholder: "",
+    phoneNumberPlaceholder: "",
   },
 
     // Medications
