@@ -29,6 +29,8 @@ const ar = {
     password: "كلمة المرور",
     placeholder: "m@example.com",
     forgotPassword: "نسيت كلمة المرور؟",
+    rememberMe: "تذكرني",
+    welcomeBack: "مرحباً بعودتك",
     submit: "تسجيل الدخول",
     submitting: "جارٍ تسجيل الدخول...",
     errorMissing: "يرجى ملء جميع الحقول.",

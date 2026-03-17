@@ -29,6 +29,8 @@ const he = {
     password: "סיסמה",
     placeholder: "m@example.com",
     forgotPassword: "שכחת את הסיסמה?",
+    rememberMe: "זכור אותי",
+    welcomeBack: "ברוך שובך",
     submit: "התחברות",
     submitting: "מתחבר...",
     errorMissing: "אנא מלא את כל השדות.",

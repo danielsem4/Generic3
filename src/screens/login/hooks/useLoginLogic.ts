@@ -17,6 +17,7 @@ export function useLoginLogic() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const isAlreadyLoggedIn = Boolean(userId);
 
@@ -30,6 +31,10 @@ export function useLoginLogic() {
 
   const handleTogglePassword = () => {
     setShowPassword((prev) => !prev);
+  };
+
+  const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRememberMe(e.target.checked);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,10 +73,12 @@ export function useLoginLogic() {
     formError,
     isPending,
     isAlreadyLoggedIn,
+    rememberMe,
     t,
     handleEmailChange,
     handlePasswordChange,
     handleTogglePassword,
+    handleRememberMeChange,
     handleSubmit,
   };
 }

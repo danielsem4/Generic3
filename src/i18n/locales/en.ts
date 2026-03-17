@@ -29,6 +29,8 @@ const en = {
     password: "Password",
     placeholder: "m@example.com",
     forgotPassword: "Forgot your password?",
+    rememberMe: "Remember me",
+    welcomeBack: "Welcome back",
     submit: "Login",
     submitting: "Logging in...",
     errorMissing: "Please fill in all fields.",
