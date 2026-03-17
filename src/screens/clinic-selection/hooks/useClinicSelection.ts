@@ -21,7 +21,7 @@ export function useClinicSelection() {
     setIsPending(true);
     try {
       const res = await selectClinic({ user_id: userId, clinic_id: clinicId });
-      const safe = sanitizeUser(res.data.user);
+      const safe = sanitizeUser(res.data.user, clinicId);
       setAuthUser(safe);
       toast.success(t("login.successTitle"), { duration: 2000 });
       navigate(ROLE_HOME_PATH[safe.role]);

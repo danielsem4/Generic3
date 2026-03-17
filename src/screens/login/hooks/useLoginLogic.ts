@@ -56,6 +56,7 @@ export function useLoginLogic() {
     setFormError(null);
     try {
       const response = await mutateAsync({ email, password });
+      console.log({ response });
 
       if ("requires_2fa" in response) {
         setPendingUserId(response.user_id);
@@ -73,7 +74,9 @@ export function useLoginLogic() {
       handleSuccess(sanitizeUser(response.user));
     } catch {
       setFormError(t("login.errorFailed"));
-      toast.error(t("login.failedTitle"), { description: t("login.failedDesc") });
+      toast.error(t("login.failedTitle"), {
+        description: t("login.failedDesc"),
+      });
     }
   };
 
@@ -104,8 +107,11 @@ export function useLoginLogic() {
   const handleClinicSelect = async (clinicId: string) => {
     setIsClinicPending(true);
     try {
-      const res = await selectClinic({ user_id: pendingUserId, clinic_id: clinicId });
-      handleSuccess(sanitizeUser(res.data.user));
+      const res = await selectClinic({
+        user_id: pendingUserId,
+        clinic_id: clinicId,
+      });
+      handleSuccess(sanitizeUser(res.data.user, clinicId));
     } catch {
       toast.error(t("login.failedTitle"));
     } finally {

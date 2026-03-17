@@ -8,9 +8,8 @@ export function useInitAuth() {
     queryKey: ["me"],
     queryFn: async () => {
       const res = await getCurrentUser();
-      console.log({ data: res.data });
-
-      useAuthStore.getState().setAuthUser(sanitizeUser(res.data));
+      const activeClinicId = useAuthStore.getState().clinicId ?? undefined;
+      useAuthStore.getState().setAuthUser(sanitizeUser(res.data, activeClinicId));
       return res.data;
     },
     retry: false,
