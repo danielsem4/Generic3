@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "@/screens/login/Login";
 import VerifyCode from "@/screens/verify/VerifyCode";
+import ClinicSelection from "@/screens/clinic-selection/ClinicSelection";
 import Modules from "@/screens/modules/modules";
 import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
 import Settings from "@/screens/settings/Settings";
@@ -20,6 +21,7 @@ function HomeRedirect() {
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   { path: "/verify", element: <VerifyCode /> },
+  { path: "/clinic-selection", element: <ClinicSelection /> },
 
   {
     element: <ProtectedLayout />,

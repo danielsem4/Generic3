@@ -13,6 +13,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import api from "@/lib/axios";
+import { ClinicSwitcher } from "@/components/ui/ClinicSwitcher";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -75,14 +76,15 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         variant === "inset" ? "w-72 bg-muted" : "w-64 bg-background"
       } ${open ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"}`}
     >
-      {firstName && (
-        <div className="px-2 pb-2 border-b border-border/50">
-          <p className="text-md text-muted-foreground">
+      <div className="flex flex-col gap-1 pb-2 border-b border-border/50">
+        <ClinicSwitcher />
+        {firstName && (
+          <p className="text-sm text-muted-foreground px-2">
             Hello,{" "}
             <span className="font-semibold text-foreground">{firstName}</span>
           </p>
-        </div>
-      )}
+        )}
+      </div>
 
       {items.map((item) => {
         const Icon = item.icon;

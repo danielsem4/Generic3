@@ -55,7 +55,6 @@ export interface ICreateDoctorPayload {
   email: string;
   phone_number: string;
   role: string;
-  clinic_id: string | number;
 }
 
 export const createDoctor = async (

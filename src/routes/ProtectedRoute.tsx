@@ -3,14 +3,15 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  isLoading: boolean;
 }
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { userId, isAdmin } = useAuthStore();
+export const ProtectedRoute = ({ children, isLoading }: ProtectedRouteProps) => {
+  const userId = useAuthStore((s) => s.userId);
 
-  if (!userId && !isAdmin) {
-    return <Navigate to="/" replace />;
-  }
+  if (isLoading) return null;
+
+  if (!userId) return <Navigate to="/" replace />;
 
   return children;
 };

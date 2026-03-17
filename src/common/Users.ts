@@ -14,7 +14,6 @@ export interface IUser {
   phone_number: string | null;
   role: string;
   is_active: boolean;
-  is_staff: boolean;
   is_2fa_enabled: boolean;
   created_at: string;
   clinics: IUserClinic[];
