@@ -1,6 +1,11 @@
+import type { UserRole } from "@/common/types/Role";
+
 export interface IClinic {
-  id: number;
-  name: string;
+  id: string;
+  clinic_name: string;
+  clinic_url: string;
+  clinic_image_url: string | null;
+  is_research_clinic: boolean;
 }
 
 export interface IAuthUser {
@@ -11,58 +16,46 @@ export interface IAuthUser {
   phone_number: string | null;
   role: string;
   is_active: boolean;
-  is_staff: boolean;
   is_2fa_enabled: boolean;
   created_at: string;
   clinics: IClinic[];
   modules?: IModule[];
 }
 
-/** Sanitized user data safe to persist in localStorage. */
+export interface IModule {
+  id: number;
+  name: string;
+}
+
 export interface ISafeUser {
   id: string;
   username: string;
   firstName: string;
   lastName: string;
-  clinicId: number | null;
+  role: UserRole;
+  clinicId: string | null;
   clinicName: string;
-  clinicImage: string;
-  isAdmin: boolean;
-  isDoctor: boolean;
-  isPatient: boolean;
-  isClinicManager: boolean;
-  isResearchPatient: boolean;
+  clinicImage: string | null;
+  clinics: IClinic[];
   modules: IModule[];
 }
 
-export const USER_ROLES = {
-  ADMIN: "ADMIN",
-  CLINIC_MANAGER: "CLINIC_MANAGER",
-  DOCTOR: "DOCTOR",
-  PATIENT: "PATIENT",
-} as const;
-
-/** Strips sensitive fields and normalises the API response into a safe, persisted shape. */
-export function sanitizeUser(user: IAuthUser): ISafeUser {
-  const clinic = user.clinics?.[0] ?? null;
+export function sanitizeUser(user: IAuthUser, activeClinicId?: string): ISafeUser {
+  const clinic =
+    (activeClinicId ? user.clinics?.find((c) => c.id === activeClinicId) : null) ??
+    user.clinics?.[0] ??
+    null;
+  const role = user.role as UserRole;
   return {
     id: user.id,
     username: user.email,
     firstName: user.first_name,
     lastName: user.last_name,
+    role,
     clinicId: clinic?.id ?? null,
-    clinicName: clinic?.name ?? "",
-    clinicImage: "",
-    isAdmin: user.role === USER_ROLES.ADMIN,
-    isDoctor: user.role === USER_ROLES.DOCTOR,
-    isPatient: user.role === USER_ROLES.PATIENT,
-    isClinicManager: user.role === USER_ROLES.CLINIC_MANAGER,
-    isResearchPatient: false,
+    clinicName: clinic?.clinic_name ?? "",
+    clinicImage: clinic?.clinic_image_url ?? null,
+    clinics: user.clinics ?? [],
     modules: user.modules ?? [],
   };
-}
-
-export interface IModule {
-  id: number;
-  name: string;
 }

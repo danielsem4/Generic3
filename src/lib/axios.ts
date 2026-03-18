@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { AxiosRequestConfig } from "axios";
 import { useAuthStore } from "@/store/useAuthStore";
 import { toast } from "sonner";
 import i18n from "@/i18n";
@@ -8,22 +9,59 @@ const api = axios.create({
   withXSRFToken: true,
 });
 
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: () => void;
+  reject: (err: unknown) => void;
+}> = [];
+
+function processQueue(error: unknown) {
+  failedQueue.forEach((p) => (error ? p.reject(error) : p.resolve()));
+  failedQueue = [];
+}
+
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     const status = error?.response?.status;
     const url = String(error?.config?.url ?? "");
+    const originalRequest: AxiosRequestConfig & { _retry?: boolean } =
+      error.config;
 
-    const isLoginRequest = url.includes("/api/v1/auth/sessions/");
+    const isAuthEndpoint =
+      url.includes("/api/v1/auth/sessions/") ||
+      url.includes("/api/v1/auth/tokens/refresh/");
 
-    if (status === 401 && !isLoginRequest) {
+    if (status !== 401 || isAuthEndpoint || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    if (isRefreshing) {
+      return new Promise((resolve, reject) => {
+        failedQueue.push({
+          resolve: () => resolve(api(originalRequest)),
+          reject,
+        });
+      });
+    }
+
+    isRefreshing = true;
+    originalRequest._retry = true;
+
+    try {
+      await api.post("/api/v1/auth/tokens/refresh/");
+      processQueue(null);
+      return api(originalRequest);
+    } catch (refreshError) {
+      processQueue(refreshError);
       useAuthStore.getState().logout();
       toast.error(i18n.t("common.sessionExpired"));
       window.location.href = "/";
+      return Promise.reject(refreshError);
+    } finally {
+      isRefreshing = false;
     }
-
-    return Promise.reject(error);
-  }
+  },
 );
 
 export default api;
