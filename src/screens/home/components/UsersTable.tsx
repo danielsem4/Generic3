@@ -27,7 +27,6 @@ interface IUsersTableProps {
 
 export function UsersTable({ users, title }: IUsersTableProps) {
   const { t } = useTranslation();
-  console.log({ users });
 
   const displayedUsers = users.slice(0, MAX_ROWS) || [];
 

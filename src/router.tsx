@@ -15,6 +15,7 @@ import { ROLE_HOME_PATH } from "@/common/types/Role";
 
 function HomeRedirect() {
   const role = useRole();
+  if (!role) return null;
   return <Navigate to={ROLE_HOME_PATH[role]} replace />;
 }
 

@@ -61,7 +61,6 @@ export function useLoginLogic() {
     setFormError(null);
     try {
       const response = await mutateAsync({ email, password });
-      console.log({ response });
 
       if ("requires_2fa" in response) {
         setPendingUserId(response.user_id);

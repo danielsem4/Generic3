@@ -8,7 +8,7 @@ import { AddDoctorDialog } from "./components/AddDoctorDialog";
 
 export default function Doctors() {
   const { t } = useTranslation();
-  const { filteredUsers, searchTerm, setSearchTerm, isLoading } = useDoctors();
+  const { filteredUsers, searchTerm, handleSearchChange, isLoading } = useDoctors();
 
   if (isLoading) return (
     <div className="p-10 text-center text-muted-foreground font-medium">
@@ -37,7 +37,7 @@ export default function Doctors() {
             placeholder={t("doctors.searchPlaceholder")}
             className="w-full pl-12 h-14 bg-card border-border shadow-sm text-lg focus:ring-primary"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
         </div>
 
