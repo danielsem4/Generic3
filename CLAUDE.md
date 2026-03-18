@@ -69,3 +69,21 @@ Medical clinic management dashboard — React 19 + TypeScript + Vite.
 - `IAuthUser` must be sanitized via `sanitizeUser()` before storage.
 - All API calls use `src/lib/axios.ts` (Cookie-based auth).
 - The 401 interceptor clears the store on session expiry.
+
+
+### 6. Internationalization (i18n)
+
+ - **All user-visible strings** must use `t()` from `react-i18next`. Never write raw English in JSX or component logic.
+ - **No fallback strings:** Do not use `t("key") || "English fallback"` — add the key to the locale files instead.
+ - **Schema error messages** must be i18n key strings (e.g. `"doctors.errFirstName"`), not raw English. The form field component calls `t(error.message)` to translate
+ them.
+ - **All 4 locale files** must be updated together: `src/i18n/locales/en.ts`, `ar.ts`, `he.ts`, `ru.ts`.
+
+  Section 8 — Shared Hook Patterns
+
+ ### 8. Shared Hook Patterns
+
+ - **User list screens** (any screen that fetches a list of users and filters by search): use `useFilteredUsers(queryKey, queryFn)` from
+ `src/hooks/common/useFilteredUsers.ts`. Do not duplicate the fetch + filter + search state logic.
+ - The hook returns `handleSearchChange` (typed `React.ChangeEvent<HTMLInputElement>` handler) — use it directly on `<Input onChange={handleSearchChange} />` instead of
+ wrapping in an inline arrow.

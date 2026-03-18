@@ -32,6 +32,7 @@ export function AddClinicDialog() {
     handleNext,
     handleBack,
     handleClose,
+    handleSuccessClose,
     onSubmit,
   } = useAddClinicDialog();
 
@@ -45,13 +46,16 @@ export function AddClinicDialog() {
 
       <DialogContent className="sm:max-w-125 bg-card border-border p-8">
         {isSuccess ? (
-          <ClinicSuccessView onClose={() => handleClose(false)} />
+          <ClinicSuccessView onClose={handleSuccessClose} />
         ) : (
           <>
             <DialogHeader>
               <DialogTitle className="text-2xl font-extrabold text-center text-foreground">
                 {t("clinicManagers.registerTitle")}
               </DialogTitle>
+              <p className="text-center text-sm font-medium text-muted-foreground mt-1">
+                {t(`clinicManagers.step${step}`)}
+              </p>
             </DialogHeader>
 
             {/* Progress bar */}
