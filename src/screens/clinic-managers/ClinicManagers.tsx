@@ -4,10 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PatientsTable } from "@/screens/patients/components/PatientsTable";
 import { useClinicManagers } from "./hooks/useClinicManagers";
+import { AddClinicDialog } from "./components/AddClinicDialog";
 
 export default function ClinicManagers() {
   const { t } = useTranslation();
-  const { filteredUsers, searchTerm, setSearchTerm, isLoading } = useClinicManagers();
+  const { filteredUsers, searchTerm, handleSearchChange, isLoading } = useClinicManagers();
 
   if (isLoading) return (
     <div className="p-10 text-center text-muted-foreground font-medium">
@@ -27,6 +28,7 @@ export default function ClinicManagers() {
               {t("clinicManagers.description")}
             </p>
           </div>
+          <AddClinicDialog />
         </div>
 
         <div className="relative w-full">
@@ -35,7 +37,7 @@ export default function ClinicManagers() {
             placeholder={t("clinicManagers.searchPlaceholder")}
             className="w-full pl-12 h-14 bg-card border-border shadow-sm text-lg focus:ring-primary"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
         </div>
 

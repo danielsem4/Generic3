@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Patients() {
   const { t } = useTranslation();
-  const { filteredUsers, searchTerm, setSearchTerm, isLoading } = usePatients();
+  const { filteredUsers, searchTerm, handleSearchChange, isLoading } = usePatients();
 
   if (isLoading)
     return (
@@ -27,8 +27,7 @@ export default function Patients() {
               {t("patients.title")}
             </h1>
             <p className="text-muted-foreground">
-              {t("patients.description") ||
-                "View and manage all patient records in the system"}
+              {t("patients.description")}
             </p>
           </div>
           <AddPatientsDialog />
@@ -37,10 +36,10 @@ export default function Patients() {
         <div className="relative w-full">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
-            placeholder="Search by name, email, ID or phone..."
+            placeholder={t("patients.searchPlaceholder")}
             className="w-full pl-12 h-14 bg-card border-border shadow-sm text-lg focus:ring-primary"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
         </div>
 

@@ -44,7 +44,6 @@ export const getPatients = async (): Promise<IUser[]> => {
 export const createPatient = async (
   payload: ICreatePatientPayload,
 ): Promise<IUser> => {
-  console.log({ payload });
   const response = await api.post<IUser>(`/api/v1/users/patients/`, payload);
   return response.data;
 };
