@@ -153,6 +153,27 @@ const ru = {
     },
   },
 },
+
+// Patient Details
+patient: {
+  editDetails: "Редактировать данные",
+  active: "Активен",
+  clinicPatient: "Пациент клиники",
+  createdDate: "Дата создания",
+  lastLogin: "Последний вход",
+  phone: "Телефон",
+  email: "Электронная почта",
+  customFunctions: "Пользовательские функции",
+  metrics: "Показатели",
+  modules: "Модули",
+  noData: "Нет доступных данных",
+  editDialogTitle: "Редактирование данных пациента",
+  firstName: "Имя",
+  lastName: "Фамилия",
+  saveChanges: "Сохранить изменения",
+  cancel: "Отмена",
+  enable: "Включить",
+},
 } as const;
 
 export default ru;

@@ -17,6 +17,7 @@ import {
 import { Eye } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { IUser } from "@/common/Users";
+import { Link } from "react-router-dom";
 
 const MAX_ROWS = 10;
 
@@ -64,12 +65,9 @@ export function UsersTable({ users }: IUsersTableProps) {
                   <TableCell>{user.phone_number ?? "—"}</TableCell>
                   <TableCell>{user.role}</TableCell>
                   <TableCell className="text-center">
-                    <button
-                      className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
-                      aria-label={t("home.viewPatient")}
-                    >
-                      <Eye size={16} />
-                    </button>
+                    <Link to={`/patients/${user.id}`}>
+                      <Eye />
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))

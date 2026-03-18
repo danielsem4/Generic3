@@ -154,6 +154,26 @@ modules: {
     },
   },
 },
+ // Patient Details
+  patient: {
+    editDetails: "Edit Details",
+    active: "Active",
+    clinicPatient: "Clinic Patient",
+    createdDate: "Created Date",
+    lastLogin: "Last Login",
+    phone: "Phone",
+    email: "Email",
+    customFunctions: "Custom Functions",
+    metrics: "Metrics",
+    modules: "Modules",
+    noData: "No data available",
+    editDialogTitle: "Edit Patient Details",
+    firstName: "First Name",
+    lastName: "Last Name",
+    saveChanges: "Save Changes",
+    cancel: "Cancel",
+    enable: "Enable",
+  },
 
 } as const;
 

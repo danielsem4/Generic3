@@ -153,6 +153,27 @@ patients: {
       },
     },
   },
+  // Patient Details
+  patient:{
+  editDetails: "עריכת פרטים",
+  active: "פעיל",
+  clinicPatient: "מטופל מרפאה",
+  createdDate: "תאריך יצירה",
+  lastLogin: "התחברות אחרונה",
+  phone: "טלפון",
+  email: "אימייל",
+  customFunctions: "פונקציות מותאמות",
+  metrics: "מדדים",
+  modules: "מודולים",
+  noData: "אין נתונים זמינים",
+  editDialogTitle: "עריכת פרטי מטופל",
+  firstName: "שם פרטי",
+  lastName: "שם משפחה",
+  saveChanges: "שמירת שינויים",
+  cancel: "ביטול",
+  enable: "הפעל",
+  },
+
 } as const;
 
 export default he;
