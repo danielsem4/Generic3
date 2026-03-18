@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createClinic, createClinicManager } from "@/api/clinicsApi";
+import { createClinic, createClinicManager, attachClinicManager } from "@/api/clinicsApi";
 import type { ClinicFormValues } from "../Schema/clinicSchema";
 
 export function useAddClinic() {
@@ -14,14 +14,21 @@ export function useAddClinic() {
         available_modules: data.availableModules,
         logo: data.clinicLogoFile,
       });
-      await createClinicManager({
-        first_name: data.managerFirstName,
-        last_name: data.managerLastName,
-        email: data.managerEmail,
-        phone_number: data.managerPhone,
-        role: "CLINIC_MANAGER",
-        clinic_id: clinic.id,
-      });
+      if (data.managerMode === "create") {
+        await createClinicManager({
+          first_name: data.managerFirstName,
+          last_name: data.managerLastName,
+          email: data.managerEmail,
+          phone_number: data.managerPhone,
+          role: "CLINIC_MANAGER",
+          clinic_id: clinic.id,
+        });
+      } else {
+        await attachClinicManager({
+          clinicId: clinic.id,
+          managerId: data.selectedManagerId,
+        });
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["clinics"] });

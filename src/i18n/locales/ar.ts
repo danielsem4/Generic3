@@ -19,6 +19,8 @@ const ar = {
     logoutConfirmDesc: "سيتم تسجيل خروجك وإعادة توجيهك إلى شاشة تسجيل الدخول.",
     cancel: "إلغاء",
     logoutConfirm: "نعم، تسجيل الخروج",
+    hello: "مرحباً، {{name}}",
+    clinic: "عيادة",
   },
 
   // Login
@@ -164,6 +166,10 @@ const ar = {
     errLastName: "اسم العائلة حقل مطلوب",
     errEmail: "البريد الإلكتروني غير صحيح",
     errPhone: "يجب إدخال 10 أرقام",
+    errSelectManager: "يرجى اختيار مدير عيادة",
+    createNew: "إنشاء جديد",
+    selectExisting: "اختيار موجود",
+    noManagers: "لم يتم العثور على مديري عيادات.",
   },
 
   // Doctors

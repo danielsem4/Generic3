@@ -46,6 +46,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
   const navigate = useNavigate();
   const logout = useAuthStore((s) => s.logout);
   const firstName = useAuthStore((s) => s.firstName);
+  const lastName = useAuthStore((s) => s.lastName);
   const role = useAuthStore((s) => s.role);
   const queryClient = useQueryClient();
   const { t } = useTranslation();
@@ -81,8 +82,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         {role !== "ADMIN" && <ClinicSwitcher />}
         {firstName && (
           <p className="text-sm text-muted-foreground px-2">
-            Hello,{" "}
-            <span className="font-semibold text-foreground">{firstName}</span>
+            {t("nav.hello", { name: [firstName, lastName].filter(Boolean).join(" ") })}
           </p>
         )}
       </div>

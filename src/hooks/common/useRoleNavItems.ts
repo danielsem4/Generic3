@@ -4,7 +4,6 @@ import {
   Settings,
   Building2,
   BarChart2,
-  UserCog,
   Stethoscope,
   LayoutDashboard,
 } from "lucide-react";
@@ -18,26 +17,26 @@ type NavFactory = (t: (key: string) => string) => MenuItem[];
 const NAV_ITEMS_BY_ROLE: Record<UserRole, NavFactory> = {
   ADMIN: (t) => [
     { title: t("nav.clinicManagers"), url: "/clinic-managers", icon: Users },
-    { title: t("nav.clinics"), icon: Building2 },
     { title: t("nav.modules"), url: "/modules", icon: Database },
-    { title: t("nav.manage"), icon: UserCog },
-    { title: t("nav.statistics"), icon: BarChart2 },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   CLINIC_MANAGER: (t) => [
     { title: t("nav.doctors"), url: "/doctors", icon: Stethoscope },
-    { title: t("nav.clinicModules"), url: "/modules", icon: Database },
-    { title: t("nav.statistics"), icon: BarChart2 },
     { title: t("nav.patients"), url: "/patients", icon: Users },
+    { title: t("nav.modules"), url: "/modules", icon: Database },
+    { title: t("nav.clinic"), icon: Building2 },
+    { title: t("nav.statistics"), icon: BarChart2 },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   DOCTOR: (t) => [
     { title: t("nav.patients"), url: "/patients", icon: Users },
     { title: t("nav.modules"), url: "/modules", icon: Database },
+    { title: t("nav.clinic"), icon: Building2 },
     { title: t("nav.statistics"), icon: BarChart2 },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   PATIENT: (t) => [
+    { title: t("nav.modules"), url: "/modules", icon: Database },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   RESEARCH_PATIENT: (t) => [

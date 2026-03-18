@@ -19,6 +19,8 @@ const he = {
     logoutConfirmDesc: "תנותק מהמערכת ותועבר למסך ההתחברות.",
     cancel: "ביטול",
     logoutConfirm: "כן, התנתק",
+    hello: "שלום, {{name}}",
+    clinic: "מרפאה",
   },
 
   // Login
@@ -164,6 +166,10 @@ patients: {
     errLastName: "שם משפחה הוא שדה חובה",
     errEmail: "כתובת אימייל לא תקינה",
     errPhone: "חובה להזין 10 ספרות",
+    errSelectManager: "אנא בחר מנהל מרפאה",
+    createNew: "צור חדש",
+    selectExisting: "בחר קיים",
+    noManagers: "לא נמצאו מנהלי מרפאות.",
   },
 
   // Doctors

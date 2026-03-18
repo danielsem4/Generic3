@@ -19,6 +19,8 @@ const en = {
     logoutConfirmDesc: "You will be signed out and redirected to the login screen.",
     cancel: "Cancel",
     logoutConfirm: "Yes, logout",
+    hello: "Hello, {{name}}",
+    clinic: "Clinic",
   },
 
   // Login
@@ -165,6 +167,10 @@ patients: {
     errLastName: "Last name is required",
     errEmail: "Invalid email address",
     errPhone: "Phone number must be exactly 10 digits",
+    errSelectManager: "Please select a clinic manager",
+    createNew: "Create New",
+    selectExisting: "Select Existing",
+    noManagers: "No clinic managers found.",
   },
 
   // Doctors

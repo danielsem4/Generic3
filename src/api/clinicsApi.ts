@@ -45,3 +45,17 @@ export const createClinicManager = async (
   );
   return response.data;
 };
+
+export interface IAttachClinicManagerPayload {
+  clinicId: string;
+  managerId: string;
+}
+
+// TODO: Replace placeholder URL with real endpoint when available
+export const attachClinicManager = async (
+  payload: IAttachClinicManagerPayload,
+): Promise<void> => {
+  await api.post(`/api/v1/clinics/${payload.clinicId}/assign-manager/`, {
+    manager_id: payload.managerId,
+  });
+};
