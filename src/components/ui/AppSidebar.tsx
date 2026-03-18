@@ -46,6 +46,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
   const navigate = useNavigate();
   const logout = useAuthStore((s) => s.logout);
   const firstName = useAuthStore((s) => s.firstName);
+  const role = useAuthStore((s) => s.role);
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -77,7 +78,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
       } ${open ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"}`}
     >
       <div className="flex flex-col gap-1 pb-2 border-b border-border/50">
-        <ClinicSwitcher />
+        {role !== "ADMIN" && <ClinicSwitcher />}
         {firstName && (
           <p className="text-sm text-muted-foreground px-2">
             Hello,{" "}
