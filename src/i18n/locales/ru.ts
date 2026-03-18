@@ -29,6 +29,8 @@ const ru = {
     password: "Пароль",
     placeholder: "m@example.com",
     forgotPassword: "Забыли пароль?",
+    rememberMe: "Запомнить меня",
+    welcomeBack: "С возвращением",
     submit: "Войти",
     submitting: "Вход...",
     errorMissing: "Пожалуйста, заполните все поля.",
