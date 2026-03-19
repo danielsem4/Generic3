@@ -1,34 +1,103 @@
 import { useState } from "react";
-import type { IMedication } from "@/common/types/Medication";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRole } from "@/hooks/common/useRole";
+import { useAuthStore } from "@/store/useAuthStore";
+import { removeMedicationFromClinic } from "@/api/medicationService";
+import type { IClinicMedication } from "@/common/types/Medication";
+import {
+  buildRoleConfig,
+  type SortOption,
+  type ViewMode,
+  type MedicationItem,
+} from "./medicationRoleConfig";
 
-const MOCK_MEDICATIONS: IMedication[] = [
-  { id: "1000000001", medName: "DUODOPA INTESTINAL GEL 2g/0.5g 28X100mL", medForm: "GEL", medUnitOfMeasurement: "MG" },
-  { id: "1000000002", medName: "PENICILLAMINE GSK 29/M TAB 250MG 56", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "1000000003", medName: "METHYLDOPA 250MG TAB", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "1000000004", medName: "ASPIRIN TAB 500MG 20", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "1000000005", medName: "ADVIL FORTE LIQUI-GELS CAP 400mg 20", medForm: "CAP", medUnitOfMeasurement: "MG" },
-  { id: "1000000006", medName: "AGRIPPAL S1 VAC 10X0.5mL", medForm: "VAC", medUnitOfMeasurement: "ML" },
-  { id: "1000000007", medName: "LEVODOPA - CARBIDOPA CD TAB 50mg/200mg", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "1000000008", medName: "CARBIDOPA / LEVODOPA TAB 25mg/250mg", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "1000000009", medName: "SINEMET ORAL SUS 5mg/ml 1.25mg/ml 100ml", medForm: "SUS", medUnitOfMeasurement: "ML" },
-];
+function getItemName(item: MedicationItem): string {
+  if ("medication" in item) return item.medication.medName;
+  return item.medName;
+}
+
+function getItemForm(item: MedicationItem): string {
+  if ("medication" in item) return item.medication.medForm;
+  if ("medForm" in item) return item.medForm;
+  return "";
+}
+
+const EMPTY_STATE = {
+  filteredMedications: [] as MedicationItem[],
+  totalCount: 0,
+  isLoading: false,
+  error: null as Error | null,
+  canAdd: false,
+  canDelete: false,
+  viewMode: "catalog" as ViewMode,
+  sortOptions: [] as SortOption[],
+  searchTerm: "",
+  sortOption: "az" as SortOption,
+  handleSearchChange: (_e: React.ChangeEvent<HTMLInputElement>) => {},
+  handleSortChange: (_v: SortOption) => {},
+  handleDelete: (_item: IClinicMedication) => {},
+};
 
 export function useMedications() {
+  const role = useRole();
+  const clinicId = useAuthStore((s) => s.clinicId);
+  const userId = useAuthStore((s) => s.userId);
+  const queryClient = useQueryClient();
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSorted, setIsSorted] = useState(false);
+  const [sortOption, setSortOption] = useState<SortOption>("az");
 
-  const toggleSort = () => setIsSorted((prev) => !prev);
+  const config = role ? buildRoleConfig(role) : null;
 
-  const filteredMedications = MOCK_MEDICATIONS.filter((med) =>
-    med.medName.toLowerCase().includes(searchTerm.toLowerCase())
-  ).sort((a, b) => (isSorted ? a.medName.localeCompare(b.medName) : 0));
+  const { data = [], isLoading, error } = useQuery({
+    queryKey: ["medications", role, clinicId ?? userId],
+    queryFn: config?.queryFn ?? (() => Promise.resolve([])),
+    enabled: !!role && (!!clinicId || !!userId),
+  });
+
+  if (!role || !config) return EMPTY_STATE;
+
+  const filtered = data.filter((item) =>
+    getItemName(item).toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortOption === "form") {
+      return getItemForm(a).localeCompare(getItemForm(b));
+    }
+    const nameA = getItemName(a);
+    const nameB = getItemName(b);
+    return sortOption === "az"
+      ? nameA.localeCompare(nameB)
+      : nameB.localeCompare(nameA);
+  });
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSortChange = (value: SortOption) => {
+    setSortOption(value);
+  };
+
+  const handleDelete = async (item: IClinicMedication) => {
+    await removeMedicationFromClinic(item.clinicId, item.medicationId);
+    queryClient.invalidateQueries({ queryKey: ["medications"] });
+  };
 
   return {
+    filteredMedications: sorted,
+    totalCount: data.length,
+    isLoading,
+    error: error as Error | null,
+    canAdd: config.canAdd,
+    canDelete: config.canDelete,
+    viewMode: config.viewMode,
+    sortOptions: config.sortOptions,
     searchTerm,
-    setSearchTerm,
-    isSorted,
-    toggleSort,
-    filteredMedications,
-    totalCount: MOCK_MEDICATIONS.length,
+    sortOption,
+    handleSearchChange,
+    handleSortChange,
+    handleDelete,
   };
 }
