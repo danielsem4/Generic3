@@ -5,7 +5,8 @@ import PatientSectionsCard from "./components/PatientCards";
 
 export default function PatientDetails() {
   const { t } = useTranslation();
-  const { patient, modules, metrics, functions, isLoading, error } = usePatientDetails();
+  const { patient, modules, metrics, functions, isLoading, error } =
+    usePatientDetails();
 
   if (isLoading) {
     return (

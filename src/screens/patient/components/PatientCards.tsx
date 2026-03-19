@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {Activity,Pill,BarChart3,Pencil,} from "lucide-react";
+import { Activity, Pill, BarChart3, Pencil } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import SectionItem from "./SectionItem";
-import type { IPatientSectionItem } from "@/common/types/patientDetails";
+import type {
+  IPatientSectionItem,
+  IModuleRouteMapper,
+} from "@/common/types/patientDetails";
 
 interface Props {
   readonly functions?: IPatientSectionItem[];
@@ -15,6 +19,7 @@ function Section({
   icon: Icon,
   iconClassName,
   items = [],
+  routeMapper,
   editLabel,
   enableLabel,
   emptyLabel,
@@ -23,6 +28,7 @@ function Section({
   readonly icon: React.ComponentType<{ className?: string }>;
   readonly iconClassName: string;
   readonly items?: IPatientSectionItem[];
+  readonly routeMapper: IModuleRouteMapper;
   readonly editLabel: string;
   readonly enableLabel: string;
   readonly emptyLabel: string;
@@ -34,7 +40,6 @@ function Section({
           <Icon className={`h-5 w-5 ${iconClassName}`} />
           <CardTitle className="text-base font-bold">{title}</CardTitle>
         </div>
-
         <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
           <Pencil className="h-3 w-3" />
           {editLabel}
@@ -48,13 +53,14 @@ function Section({
           </div>
         ) : (
           items.map((item) => (
-             <SectionItem
-                key={item.id}
-                item={item}
-                icon={Icon}
-                iconClassName={iconClassName}
-                enableLabel={enableLabel}
-              />
+            <SectionItem
+              key={item.id}
+              item={item}
+              icon={Icon}
+              iconClassName={iconClassName}
+              enableLabel={enableLabel}
+              onClick={routeMapper[item.label]}
+            />
           ))
         )}
       </CardContent>
@@ -67,17 +73,27 @@ export default function PatientSectionsCard({
   metrics = [],
   modules = [],
 }: Props) {
-
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const MODULE_ACTIONS: IModuleRouteMapper = {
+    Medications: () => navigate(`medications`),
+    Activities: () => navigate(`activities`),
+    Questionnaires: () => navigate(`questionnaires`),
+  };
+
+  const METRIC_ACTIONS: IModuleRouteMapper = {};
+
+  const FUNCTION_ACTIONS: IModuleRouteMapper = {};
 
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-
       <Section
         title={t("patient.modules")}
         icon={Pill}
         iconClassName="text-chart-1"
         items={modules}
+        routeMapper={MODULE_ACTIONS}
         editLabel={t("patient.editDetails")}
         enableLabel={t("patient.enable")}
         emptyLabel={t("patient.noData")}
@@ -88,6 +104,7 @@ export default function PatientSectionsCard({
         icon={Activity}
         iconClassName="text-chart-2"
         items={metrics}
+        routeMapper={METRIC_ACTIONS}
         editLabel={t("patient.editDetails")}
         enableLabel={t("patient.enable")}
         emptyLabel={t("patient.noData")}
@@ -98,11 +115,11 @@ export default function PatientSectionsCard({
         icon={BarChart3}
         iconClassName="text-chart-5"
         items={functions}
+        routeMapper={FUNCTION_ACTIONS}
         editLabel={t("patient.editDetails")}
         enableLabel={t("patient.enable")}
         emptyLabel={t("patient.noData")}
       />
-
     </div>
   );
 }

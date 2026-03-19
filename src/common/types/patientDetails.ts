@@ -39,3 +39,5 @@ export interface IPatientSectionItem {
   id: number;
   label: string;
 }
+
+export type IModuleRouteMapper = Record<string, () => void>;
