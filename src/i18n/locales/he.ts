@@ -232,6 +232,66 @@ patients: {
     },
   },
 
+  // Patient Medications
+   patientMeds: {
+    title: "התרופות שלי",
+    addMedication: "הוסף תרופה",
+    searchPlaceholder: "חיפוש תרופות...",
+    standardDosage: "מינון סטנדרטי",
+    intakeLogTitle: "יומן קבלת תרופות",
+    refreshData: "רענון נתונים",
+    regularDosage: "מינון רגיל",
+    activeStatus: "פעיל",
+    newPrescription: "מרשם חדש",
+    configureSchedule: "הגדרת לוח זמנים",
+    medicationLabel: "תרופה",
+    timelineLabel: "לוח זמנים",
+    dosageLabel: "מינון",
+    startDate: "תאריך התחלה",
+    endDate: "תאריך סיום",
+    amount: "כמות",
+    unit: "יחידה",
+    frequencyLabel: "תדירות",
+    frequencyOptions: {
+      once: "חד פעמי",
+      daily: "יומי",
+      weekly: "שבועי",
+      monthly: "חודשי"},
+    timesPerDay: "כמה פעמים ביום",
+    addSlot: "הוסף זמן",
+    finalize: "סיום מרשם",
+    cancel: "ביטול",
+    questions: {
+      whichDays: "באילו ימים בשבוע?",
+      whichWeeks: "באילו שבועות של החודש?"},
+    units: {
+       ml: "מ'ל",
+       mg: "מ'ג",
+       tabs: "טבליות"},
+    days: {
+    monday: "שני", tuesday: "שלישי", wednesday: "רביעי", 
+    thursday: "חמישי", friday: "שישי", saturday: "שבת", sunday: "ראשון"},
+    weeks: {
+    1: "שבוע 1", 2: "שבוע 2", 3: "שבוע 3", 4: "שבוע 4"},
+    deleteConfirm: {
+    title: "האם אתה בטוח?",
+    description: "פעולה זו לא ניתנת לביטול. זה ימחק לצמיתות את התרופה מרשומת המטופל.",
+    cancel: "ביטול",
+    confirm: "מחק תרופה"},
+    filters: {
+      dateFrom: "מתאריך:",
+      medication: "תרופה:",
+      allMeds: "כל התרופות"},
+    table: {
+      intakeDate: "תאריך נטילה",
+      intakeTime: "שעת נטילה",
+      medId: "מזהה תרופה",
+      medName: "שם תרופה",
+      form: "צורה",
+      dosage: "מינון"}
+  },
+  
+
   // Settings
   settings: {
     title: "הגדרות",

@@ -232,6 +232,64 @@ const ar = {
     },
   },
 
+  // patient medications
+  patientMeds: {
+    title: "أدوية المريض",  
+    addMedication: "إضافة دواء",
+    searchPlaceholder: "البحث عن دواء...",
+    standardDosage: "الجرعة القياسية",
+    intakeLogTitle: "سجل تناول الأدوية",
+    refreshData: "تحديث البيانات",  
+    regularDosage: "الجرعة العادية",
+    activeStatus: "نشط",
+    newPrescription: "وصفة جديدة",
+    configureSchedule: "تكوين الجدول",
+    medicationLabel: "الدواء",
+    timelineLabel: "الجدول",
+    dosageLabel: "الجرعة",
+    startDate: "تاريخ البدء",
+    endDate: "تاريخ الانتهاء",
+    amount: "الكمية",
+    unit: "الوحدة",
+    frequencyLabel: "التردد والجدول",
+    frequencyOptions: {
+    once: "مرة واحدة",
+    daily: "يومي",
+    weekly: "أسبوعي",
+    monthly: "شهري"},
+    timesPerDay: "عدد المرات في اليوم",
+    addSlot: "إضافة فراغ",
+    finalize: "إنهاء الوصفة",
+    cancel: "إلغاء",
+    questions: {
+      whichDays: "أي أيام من الأسبوع?",
+      whichWeeks: "أي أسابيع من الشهر?"},
+    units: {
+       ml: "ملي لتر",
+       mg: "ملي غرام",
+       tabs: "أقراص"},
+    days: {
+    monday: "الاثنين", tuesday: "الثلاثاء", wednesday: "الأربعاء", 
+    thursday: "الخميس", friday: "الجمعة", saturday: "السبت", sunday: "الأحد"},
+    weeks: {1: "الأسبوع الأول",2: "الأسبوع الثاني",3: "الأسبوع الثالث",4: "الأسبوع الرابع"},
+    deleteConfirm: {
+    title: "هل أنت متأكد من ذلك?",
+    description: "لا يمكن التراجع عن هذا الإجراء. سيتم حذف الدواء نهائياً من سجل المريض.",
+    cancel: "إلغاء",
+    confirm: "حذف الدواء"},
+    filters: {
+      dateFrom: "من تاريخ:",
+      medication: "الدواء:",
+      allMeds: "جميع الأدوية"},
+    table: {
+      intakeDate: "تاريخ التناول",
+      intakeTime: "وقت التناول",
+      medId: "معرف الدواء",
+      medName: "اسم الدواء",
+      form: "الشكل",
+      dosage: "الجرعة"}
+  },
+
   // Settings
   settings: {
     title: "الإعدادات",

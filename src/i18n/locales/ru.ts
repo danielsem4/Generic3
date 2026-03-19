@@ -233,6 +233,65 @@ const ru = {
     },
   },
 
+  // Patient Medications
+  patientMeds: {
+    title: "Мои лекарства",
+    searchPlaceholder: "Поиск по названию лекарства...",
+    addMedication: "Добавить лекарство",
+    standardDosage: "Стандартная дозировка: 1 таблетка",
+    intakeLogTitle: "Журнал приёма лекарств",
+    refreshData: "Обновить данные", 
+    regularDosage: "Обычная дозировка: 1 таблетка",
+    activeStatus: "Активен",
+    newPrescription: "Новый рецепт",
+    configureSchedule: "Настроить график приема лекарств и дозировку.",
+    medicationLabel: "Лекарство",
+    timelineLabel: "График",
+    dosageLabel: "Дозировка",
+    startDate: "Дата начала",
+    endDate: "Дата окончания",
+    amount: "Количество",
+    unit: "Единица измерения",
+    frequencyLabel: "Частота и график",
+    frequencyOptions: {
+      once: "Разово",
+      daily: "Ежедневно",
+      weekly: "Еженедельно",
+      monthly: "Ежемесячно"},
+    timesPerDay: "Количество раз в день",
+    addSlot: "Добавить интервал",
+    finalize: "Завершить рецепт",
+    cancel: "Отмена",
+    questions: {
+      whichDays: "В какие дни недели?",
+      whichWeeks: "В какие недели месяца?"},
+    units: {
+       ml: "мл",
+       mg: "мг",
+       tabs: "таблетки"},
+    deleteConfirm: {
+    title: "Вы уверены?",
+    description: "Это действие нельзя отменить. Лекарство будет окончательно удалено из записи пациента.",
+    cancel: "Отмена",
+    confirm: "Удалить лекарство"},
+    days: {
+    monday: "Понедельник", tuesday: "Вторник", wednesday: "Среда", 
+    thursday: "Четверг", friday: "Пятница", saturday: "Суббота", sunday: "Воскресенье"},
+    weeks: {
+    1: "1-я неделя", 2: "2-я неделя", 3: "3-я неделя", 4: "4-я неделя"},
+    filters: {
+      dateFrom: "С даты:",
+      medication: "Лекарство:",
+      allMeds: "Все лекарства"},
+    table: {
+      intakeDate: "Дата приема",
+      intakeTime: "Время приема",
+      medId: "ID лекарства",
+      medName: "Название",
+      form: "Форма",
+      dosage: "Дозировка"}
+  },
+
   // Settings
   settings: {
     title: "Настройки",

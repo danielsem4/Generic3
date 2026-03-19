@@ -7,8 +7,8 @@ import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
 import Settings from "@/screens/settings/Settings";
 import NotFound from "@/screens/not-found/NotFound";
 import Patients from "@/screens/patients/Patients";
-import PatientDetails from "@/screens/patient/PatientDetails";
 import Medications from "@/screens/medications/Medications";
+import PatientMedications from "./screens/patient-meds/PatientMedications";
 import ClinicManagers from "@/screens/clinic-managers/ClinicManagers";
 import Doctors from "@/screens/doctors/Doctors";
 import { useRole } from "@/hooks/common/useRole";
@@ -33,9 +33,9 @@ export const router = createBrowserRouter([
       { path: "modules", element: <Modules /> },
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
-      { path: "patients/:userId", element: <PatientDetails /> },
       { path: "medications", element: <Medications /> },
       { path: "modules/medications", element: <Medications /> },
+      { path: "patients/:patientId/medications", element: <PatientMedications /> },
     ],
   },
   {
