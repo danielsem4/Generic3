@@ -32,6 +32,11 @@ const PATIENT_PRESCRIPTIONS: IPatientPrescription[] = [
     medicationId: "4", medName: "LEVODOPA-CARBIDOPA TAB",
     startDate: "2025-02-01", endDate: "2025-08-01", dosage: "200mg", frequency: "WEEKLY",
   },
+  {
+    id: "rx3", patientId: "patient1", clinicId: "clinic1", doctorId: "doc1",
+    medicationId: "3", medName: "AGRIPPAL S1 VAC",
+    startDate: "2025-03-01", endDate: "2025-03-01", dosage: "0.5ml", frequency: "ONCE",
+  },
 ];
 
 // ─── API functions ────────────────────────────────────────────────────────────
@@ -52,6 +57,7 @@ export async function fetchPatientPrescriptions(
   return Promise.resolve(PATIENT_PRESCRIPTIONS);
 }
 
+// NOTE: form field is "medUnit"; maps to IMedication.medUnitOfMeasurement
 export async function addGlobalMedication(data: {
   medName: string;
   medForm: string;
