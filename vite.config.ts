@@ -1,7 +1,7 @@
-import path from "path"
-import tailwindcss from "@tailwindcss/vite"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import path from "path";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vitest/config";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,10 +11,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  test: {
+    environment: "jsdom",
+    globals: true,
+  },
   server: {
     proxy: {
       "/api": {
-        target: "https://genericweb.onrender.com",
+        target: "http://127.0.0.1:8000/",
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: "localhost",
@@ -25,7 +29,7 @@ export default defineConfig({
               proxyRes.headers["set-cookie"] = setCookie.map((cookie) =>
                 cookie
                   .replace(/;\s*Secure/gi, "")
-                  .replace(/;\s*SameSite=None/gi, "; SameSite=Lax")
+                  .replace(/;\s*SameSite=None/gi, "; SameSite=Lax"),
               );
             }
           });

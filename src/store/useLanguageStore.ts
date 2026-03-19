@@ -27,6 +27,7 @@ export const useLanguageStore = create<LanguageStore>()(
     }),
     {
       name: "app-language-store",
+      version: 1,
     },
   ),
 );
