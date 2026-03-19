@@ -22,7 +22,6 @@ interface ItemProps {
 }
 
 function getDisplayItem(item: MedicationItem): IMedication | IPatientPrescription {
-  if ("medication" in item) return item.medication;
   return item as IMedication | IPatientPrescription;
 }
 
@@ -31,9 +30,10 @@ function MedicationListItem({ item, viewMode, canDelete, onDelete, index }: Item
 
   let handleDelete: (() => void) | undefined;
   if (canDelete) {
-    if ("medication" in item) {
-      handleDelete = () => onDelete(item as IClinicMedication);
-    } else if (isCatalogItem(item)) {
+    const asClinic = item as IClinicMedication;
+    if (typeof asClinic.clinic === "string") {
+      handleDelete = () => onDelete(asClinic);
+    } else if (isCatalogItem(item as IMedication | IPatientPrescription)) {
       handleDelete = () => onDelete(item as IMedication);
     }
   }

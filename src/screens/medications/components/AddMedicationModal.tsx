@@ -1,18 +1,40 @@
 import { PlusCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useAddMedicationDialog } from "../hooks/useAddMedicationDialog";
 
-const MED_FORMS = ["TAB", "CAP", "GEL", "SUS", "VAC", "INJ", "CRE", "OIN", "DRO", "SPR"];
+const MED_FORMS = [
+  "TAB",
+  "CAP",
+  "GEL",
+  "SUS",
+  "VAC",
+  "INJ",
+  "CRE",
+  "OIN",
+  "DRO",
+  "SPR",
+];
 const MED_UNITS = ["MG", "ML", "MCG", "IU", "MEQ", "G"];
 
 export function AddMedicationModal() {
   const { t } = useTranslation();
-  const { open, form, isSubmitting, handleClose, onSubmit } = useAddMedicationDialog();
-  const { register, handleSubmit, formState: { errors } } = form;
+  const { open, form, isSubmitting, handleClose, onSubmit } =
+    useAddMedicationDialog();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -32,40 +54,55 @@ export function AddMedicationModal() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-1.5">
             <Label className="font-bold text-foreground">
-              {t("medications.medNameLabel")} <span className="text-destructive">*</span>
+              {t("medications.medNameLabel")}{" "}
+              <span className="text-destructive">*</span>
             </Label>
             <Input
-              {...register("medName")}
+              {...register("med_name")}
               placeholder={t("medications.medNamePlaceholder")}
-              className={errors.medName ? "border-destructive" : "border-border"}
+              className={
+                errors.med_name ? "border-destructive" : "border-border"
+              }
             />
-            {errors.medName && (
+            {errors.med_name && (
               <p className="text-[10px] text-destructive font-medium">
-                {t(errors.medName.message as string)}
+                {t(errors.med_name.message as string)}
               </p>
             )}
           </div>
 
           <div className="flex gap-4">
             <div className="space-y-1.5 flex-1">
-              <Label className="font-bold text-foreground">{t("medications.medFormLabel")}</Label>
+              <Label className="font-bold text-foreground">
+                {t("medications.medFormLabel")}
+              </Label>
               <select
-                {...register("medForm")}
+                {...register("med_form")}
                 className="w-full h-10 px-3 rounded-md border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">—</option>
-                {MED_FORMS.map((f) => <option key={f} value={f}>{f}</option>)}
+                {MED_FORMS.map((f) => (
+                  <option key={f} value={f}>
+                    {f}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="space-y-1.5 flex-1">
-              <Label className="font-bold text-foreground">{t("medications.medUnitLabel")}</Label>
+              <Label className="font-bold text-foreground">
+                {t("medications.medUnitLabel")}
+              </Label>
               <select
-                {...register("medUnit")}
+                {...register("med_unit")}
                 className="w-full h-10 px-3 rounded-md border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">—</option>
-                {MED_UNITS.map((u) => <option key={u} value={u}>{u}</option>)}
+                {MED_UNITS.map((u) => (
+                  <option key={u} value={u}>
+                    {u}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

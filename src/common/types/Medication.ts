@@ -1,15 +1,17 @@
 export interface IMedication {
   id: string;
-  medName: string;
-  medForm: string;
-  medUnitOfMeasurement: string;
+  med_name: string;
+  med_form: string;
+  med_unit: string;
 }
 
 export interface IClinicMedication {
   id: string;
-  clinicId: string;
-  medicationId: string;
-  medication: IMedication;
+  clinic: string;
+  medication: string;
+  med_name: string;
+  med_form: string;
+  med_unit: string;
 }
 
 export type PrescriptionFrequency = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
@@ -48,5 +50,5 @@ export interface IPatientMedicationLog {
 export function isCatalogItem(
   item: IMedication | IPatientPrescription,
 ): item is IMedication {
-  return "medForm" in item;
+  return typeof (item as IMedication).med_form === "string";
 }

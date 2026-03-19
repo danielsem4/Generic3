@@ -3,98 +3,63 @@ import type {
   IClinicMedication,
   IPatientPrescription,
 } from "@/common/types/Medication";
-
-// ─── Mock data ───────────────────────────────────────────────────────────────
-
-const GLOBAL_MEDICATIONS: IMedication[] = [
-  { id: "1", medName: "ASPIRIN TAB 500MG", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "2", medName: "ADVIL FORTE LIQUI-GELS CAP 400mg", medForm: "CAP", medUnitOfMeasurement: "MG" },
-  { id: "3", medName: "AGRIPPAL S1 VAC 10X0.5mL", medForm: "VAC", medUnitOfMeasurement: "ML" },
-  { id: "4", medName: "LEVODOPA-CARBIDOPA TAB 50mg/200mg", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "5", medName: "METHYLDOPA 250MG TAB", medForm: "TAB", medUnitOfMeasurement: "MG" },
-  { id: "6", medName: "SINEMET ORAL SUS 5mg/ml", medForm: "SUS", medUnitOfMeasurement: "ML" },
-];
-
-const CLINIC_MEDICATIONS: IClinicMedication[] = [
-  { id: "cm1", clinicId: "clinic1", medicationId: "1", medication: GLOBAL_MEDICATIONS[0] },
-  { id: "cm2", clinicId: "clinic1", medicationId: "3", medication: GLOBAL_MEDICATIONS[2] },
-  { id: "cm3", clinicId: "clinic1", medicationId: "4", medication: GLOBAL_MEDICATIONS[3] },
-];
-
-const PATIENT_PRESCRIPTIONS: IPatientPrescription[] = [
-  {
-    id: "rx1", patientId: "patient1", clinicId: "clinic1", doctorId: "doc1",
-    medicationId: "1", medName: "ASPIRIN TAB 500MG",
-    startDate: "2025-01-01", endDate: "2025-04-01", dosage: "500mg", frequency: "DAILY",
-  },
-  {
-    id: "rx2", patientId: "patient1", clinicId: "clinic1", doctorId: "doc1",
-    medicationId: "4", medName: "LEVODOPA-CARBIDOPA TAB",
-    startDate: "2025-02-01", endDate: "2025-08-01", dosage: "200mg", frequency: "WEEKLY",
-  },
-  {
-    id: "rx3", patientId: "patient1", clinicId: "clinic1", doctorId: "doc1",
-    medicationId: "3", medName: "AGRIPPAL S1 VAC",
-    startDate: "2025-03-01", endDate: "2025-03-01", dosage: "0.5ml", frequency: "ONCE",
-  },
-];
-
-// ─── API functions ────────────────────────────────────────────────────────────
+import api from "@/lib/axios";
 
 export async function fetchAllGlobalMedications(): Promise<IMedication[]> {
-  return Promise.resolve(GLOBAL_MEDICATIONS);
+  const response = await api.get<IMedication[]>("/api/v1/medications/");
+  console.log({ medications: response.data });
+
+  return response.data;
 }
 
 export async function fetchClinicMedications(
-  _clinicId: string,
+  clinicId: string,
 ): Promise<IClinicMedication[]> {
-  return Promise.resolve(CLINIC_MEDICATIONS);
+  const response = await api.get<IClinicMedication[]>(
+    `/api/v1/clinics/${clinicId}/medications/`,
+  );
+  return response.data;
 }
 
-export async function fetchPatientPrescriptions(
-  _patientId: string,
+export async function fetchPatientMedications(
+  clinicId: string,
+  patientId: string,
 ): Promise<IPatientPrescription[]> {
-  return Promise.resolve(PATIENT_PRESCRIPTIONS);
+  const response = await api.get<IPatientPrescription[]>(
+    `/api/v1/clinics/${clinicId}/patients/${patientId}/medications/`,
+  );
+  return response.data;
 }
 
-// NOTE: form field is "medUnit"; maps to IMedication.medUnitOfMeasurement
 export async function addGlobalMedication(data: {
-  medName: string;
-  medForm: string;
-  medUnit: string;
+  med_name: string;
+  med_form: string;
+  med_unit: string;
 }): Promise<IMedication> {
-  const newMed: IMedication = {
-    id: String(Date.now()),
-    medName: data.medName,
-    medForm: data.medForm,
-    medUnitOfMeasurement: data.medUnit,
-  };
-  return Promise.resolve(newMed);
+  const response = await api.post<IMedication>("/api/v1/medications/", data);
+  return response.data;
 }
 
 export async function addMedicationToClinic(
   clinicId: string,
   medicationId: string,
 ): Promise<IClinicMedication> {
-  const med = GLOBAL_MEDICATIONS.find((m) => m.id === medicationId);
-  if (!med) throw new Error("Medication not found");
-  return Promise.resolve({
-    id: String(Date.now()),
-    clinicId,
-    medicationId,
-    medication: med,
-  });
+  const response = await api.post<IClinicMedication>(
+    `/api/v1/clinics/${clinicId}/medications/`,
+    { medication_id: medicationId },
+  );
+  return response.data;
 }
 
 export async function removeMedicationFromClinic(
-  _clinicId: string,
-  _medicationId: string,
+  clinicId: string,
+  medicationId: string,
 ): Promise<void> {
-  return Promise.resolve();
+  await api.delete(`/api/v1/clinics/${clinicId}/medications/${medicationId}/`);
 }
 
 export async function removeGlobalMedication(
-  _medicationId: string,
+  medicationId: string,
 ): Promise<void> {
-  return Promise.resolve();
+  await api.delete(`/api/v1/medications/${medicationId}/`);
 }
