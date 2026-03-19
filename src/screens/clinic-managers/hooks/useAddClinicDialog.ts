@@ -5,7 +5,8 @@ import { toast } from "sonner";
 import {
   clinicSchema,
   STEP1_FIELDS,
-  STEP3_FIELDS,
+  STEP3_CREATE_FIELDS,
+  STEP3_EXISTING_FIELDS,
   type ClinicFormValues,
 } from "../Schema/clinicSchema";
 import { useAddClinic } from "./useAddClinic";
@@ -26,10 +27,12 @@ export function useAddClinicDialog() {
       clinicType: "STANDARD",
       clinicLogoFile: undefined,
       availableModules: [],
+      managerMode: "create",
       managerFirstName: "",
       managerLastName: "",
       managerEmail: "",
       managerPhone: "",
+      selectedManagerId: "",
     },
     mode: "onChange",
   });
@@ -55,7 +58,8 @@ export function useAddClinicDialog() {
   const handleSuccessClose = () => handleClose(false);
 
   const onSubmit = async (data: ClinicFormValues) => {
-    const valid = await form.trigger([...STEP3_FIELDS]);
+    const step3Fields = data.managerMode === "create" ? [...STEP3_CREATE_FIELDS] : [...STEP3_EXISTING_FIELDS];
+    const valid = await form.trigger(step3Fields);
     if (!valid) return;
     try {
       await addClinic(data);

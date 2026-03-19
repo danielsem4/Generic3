@@ -19,6 +19,8 @@ const ru = {
     logoutConfirmDesc: "Вы будете отключены и перенаправлены на страницу входа.",
     cancel: "Отмена",
     logoutConfirm: "Да, выйти",
+    hello: "Здравствуйте, {{name}}",
+    clinic: "Клиника",
   },
 
   // Login
@@ -165,6 +167,10 @@ const ru = {
     errLastName: "Фамилия обязательна",
     errEmail: "Неверный адрес email",
     errPhone: "Номер телефона должен содержать ровно 10 цифр",
+    errSelectManager: "Выберите менеджера клиники",
+    createNew: "Создать нового",
+    selectExisting: "Выбрать существующего",
+    noManagers: "Менеджеры клиник не найдены.",
   },
 
   // Doctors

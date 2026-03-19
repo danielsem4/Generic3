@@ -10,6 +10,7 @@ interface AuthStore {
   clinics: IClinic[];
   userId: string | null;
   firstName: string | null;
+  lastName: string | null;
   role: UserRole | null;
   setAuthUser: (user: ISafeUser) => void;
   logout: () => void;
@@ -24,6 +25,7 @@ export const useAuthStore = create<AuthStore>()(
       clinics: [],
       userId: null,
       firstName: null,
+      lastName: null,
       role: null,
       setAuthUser: (user: ISafeUser) =>
         set({
@@ -33,6 +35,7 @@ export const useAuthStore = create<AuthStore>()(
           clinics: user.clinics,
           userId: user.id,
           firstName: user.firstName,
+          lastName: user.lastName,
           role: user.role,
         }),
       logout: () =>
@@ -43,6 +46,7 @@ export const useAuthStore = create<AuthStore>()(
           clinics: [],
           userId: null,
           firstName: null,
+          lastName: null,
           role: null,
         }),
     }),

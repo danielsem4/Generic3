@@ -34,6 +34,7 @@ export const router = createBrowserRouter([
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
       { path: "medications", element: <Medications /> },
+      { path: "modules/medications", element: <Medications /> },
     ],
   },
   {
