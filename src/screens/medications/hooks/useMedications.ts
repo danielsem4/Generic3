@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRole } from "@/hooks/common/useRole";
 import { useAuthStore } from "@/store/useAuthStore";
-import { removeMedicationFromClinic } from "@/api/medicationService";
-import type { IClinicMedication } from "@/common/types/Medication";
+import { removeMedicationFromClinic, removeGlobalMedication } from "@/api/medicationService";
+import type { IMedication, IClinicMedication } from "@/common/types/Medication";
 import {
   buildRoleConfig,
   type SortOption,
@@ -35,7 +35,7 @@ const EMPTY_STATE = {
   sortOption: "az" as SortOption,
   handleSearchChange: (_e: React.ChangeEvent<HTMLInputElement>): void => {},
   handleSortChange: (_v: SortOption): void => {},
-  handleDelete: (_item: IClinicMedication): void => {},
+  handleDelete: (_item: IMedication | IClinicMedication): void => {},
 };
 
 export function useMedications() {
@@ -80,9 +80,13 @@ export function useMedications() {
     setSortOption(value);
   };
 
-  const handleDelete = async (item: IClinicMedication) => {
+  const handleDelete = async (item: IMedication | IClinicMedication) => {
     try {
-      await removeMedicationFromClinic(item.clinicId, item.medicationId);
+      if ("medication" in item) {
+        await removeMedicationFromClinic(item.clinicId, item.medicationId);
+      } else {
+        await removeGlobalMedication(item.id);
+      }
       queryClient.invalidateQueries({ queryKey: ["medications"] });
     } catch {
       // mutation failed — list remains unchanged until next successful query

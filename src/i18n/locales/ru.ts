@@ -222,6 +222,9 @@ const ru = {
     errMedName: "Название лекарства обязательно",
     errMedForm: "Форма обязательна",
     errMedUnit: "Единица обязательна",
+    deleteConfirmTitle: "Удалить лекарство?",
+    deleteConfirmDesc: "Это навсегда удалит лекарство. Это действие нельзя отменить.",
+    deleteConfirm: "Да, удалить",
     freq: {
       ONCE: "Однократно",
       DAILY: "Ежедневно",

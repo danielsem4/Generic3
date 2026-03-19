@@ -1,6 +1,17 @@
 import { Pill, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { isCatalogItem } from "@/common/types/Medication";
 import type { IMedication, IPatientPrescription, PrescriptionFrequency } from "@/common/types/Medication";
 import type { ViewMode } from "../hooks/medicationRoleConfig";
@@ -38,13 +49,26 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
               {item.medUnitOfMeasurement}
             </span>
             {canDelete && onDelete && (
-              <button
-                onClick={onDelete}
-                className="text-muted-foreground hover:text-destructive transition-colors ml-2"
-                type="button"
-              >
-                <Trash2 size={16} />
-              </button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="text-muted-foreground hover:text-destructive transition-colors ml-2"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>{t("medications.deleteConfirmTitle")}</AlertDialogTitle>
+                    <AlertDialogDescription>{t("medications.deleteConfirmDesc")}</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{t("nav.cancel")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={onDelete}>{t("medications.deleteConfirm")}</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             )}
           </div>
         </CardContent>

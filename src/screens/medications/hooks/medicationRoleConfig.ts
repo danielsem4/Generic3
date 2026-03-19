@@ -38,7 +38,7 @@ export function buildRoleConfig(role: UserRole): RoleConfig {
       queryFn: fetchAllGlobalMedications,
       viewMode: "catalog",
       canAdd: true,
-      canDelete: false,
+      canDelete: true,
       sortOptions: ["az", "za", "form"],
     },
     CLINIC_MANAGER: {

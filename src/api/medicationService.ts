@@ -92,3 +92,9 @@ export async function removeMedicationFromClinic(
 ): Promise<void> {
   return Promise.resolve();
 }
+
+export async function removeGlobalMedication(
+  _medicationId: string,
+): Promise<void> {
+  return Promise.resolve();
+}

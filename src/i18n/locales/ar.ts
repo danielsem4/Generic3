@@ -221,6 +221,9 @@ const ar = {
     errMedName: "اسم الدواء مطلوب",
     errMedForm: "النموذج مطلوب",
     errMedUnit: "الوحدة مطلوبة",
+    deleteConfirmTitle: "حذف الدواء؟",
+    deleteConfirmDesc: "سيؤدي هذا إلى إزالة الدواء نهائياً. لا يمكن التراجع عن هذا الإجراء.",
+    deleteConfirm: "نعم، احذف",
     freq: {
       ONCE: "مرة واحدة",
       DAILY: "يومياً",

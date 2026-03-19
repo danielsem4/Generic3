@@ -222,6 +222,9 @@ patients: {
     errMedName: "Medication name is required",
     errMedForm: "Form is required",
     errMedUnit: "Unit is required",
+    deleteConfirmTitle: "Delete Medication?",
+    deleteConfirmDesc: "This will permanently remove the medication. This action cannot be undone.",
+    deleteConfirm: "Yes, delete",
     freq: {
       ONCE: "Once",
       DAILY: "Daily",

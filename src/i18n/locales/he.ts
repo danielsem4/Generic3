@@ -221,6 +221,9 @@ patients: {
     errMedName: "שם התרופה הוא שדה חובה",
     errMedForm: "הטופס נדרש",
     errMedUnit: "היחידה נדרשת",
+    deleteConfirmTitle: "למחוק את התרופה?",
+    deleteConfirmDesc: "פעולה זו תסיר את התרופה לצמיתות. לא ניתן לבטל פעולה זו.",
+    deleteConfirm: "כן, מחק",
     freq: {
       ONCE: "פעם אחת",
       DAILY: "יומי",

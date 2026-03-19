@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { MedicationCard } from "./MedicationCard";
 import type { ViewMode, MedicationItem } from "../hooks/medicationRoleConfig";
 import type { IMedication, IClinicMedication, IPatientPrescription } from "@/common/types/Medication";
+import { isCatalogItem } from "@/common/types/Medication";
 
 interface ListProps {
   medications: MedicationItem[];
   viewMode: ViewMode;
   canDelete: boolean;
-  onDelete: (item: IClinicMedication) => void;
+  onDelete: (item: IMedication | IClinicMedication) => void;
   totalCount: number;
 }
 
@@ -16,7 +17,7 @@ interface ItemProps {
   item: MedicationItem;
   viewMode: ViewMode;
   canDelete: boolean;
-  onDelete: (item: IClinicMedication) => void;
+  onDelete: (item: IMedication | IClinicMedication) => void;
   index: number;
 }
 
@@ -27,11 +28,15 @@ function getDisplayItem(item: MedicationItem): IMedication | IPatientPrescriptio
 
 function MedicationListItem({ item, viewMode, canDelete, onDelete, index }: ItemProps) {
   const displayItem = getDisplayItem(item);
-  const isClinicItem = "medication" in item;
 
-  const handleDelete = isClinicItem && canDelete
-    ? () => onDelete(item as IClinicMedication)
-    : undefined;
+  let handleDelete: (() => void) | undefined;
+  if (canDelete) {
+    if ("medication" in item) {
+      handleDelete = () => onDelete(item as IClinicMedication);
+    } else if (isCatalogItem(item)) {
+      handleDelete = () => onDelete(item as IMedication);
+    }
+  }
 
   return (
     <MedicationCard
