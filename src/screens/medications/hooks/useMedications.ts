@@ -81,8 +81,12 @@ export function useMedications() {
   };
 
   const handleDelete = async (item: IClinicMedication) => {
-    await removeMedicationFromClinic(item.clinicId, item.medicationId);
-    queryClient.invalidateQueries({ queryKey: ["medications"] });
+    try {
+      await removeMedicationFromClinic(item.clinicId, item.medicationId);
+      queryClient.invalidateQueries({ queryKey: ["medications"] });
+    } catch {
+      // mutation failed — list remains unchanged until next successful query
+    }
   };
 
   return {
