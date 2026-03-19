@@ -23,7 +23,6 @@ export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   { path: "/verify", element: <VerifyCode /> },
   { path: "/clinic-selection", element: <ClinicSelection /> },
-
   {
     element: <ProtectedLayout />,
     children: [
