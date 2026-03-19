@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { getUsers, createUser } from "./usersApi";
+import { getUsers, createPatient } from "./usersApi";
 
 vi.mock("@/lib/axios", () => ({
   default: {
@@ -39,7 +39,7 @@ describe("getUsers", () => {
   });
 });
 
-describe("createUser", () => {
+describe("createPatient", () => {
   it("posts to correct endpoint and returns the created user", async () => {
     vi.mocked(api.post).mockResolvedValueOnce({ data: mockUser });
     const payload = {
@@ -49,9 +49,10 @@ describe("createUser", () => {
       phone_number: "1234567890",
       password: "Secret1!",
       role: "Patient",
+      clinic_id: 1,
     };
-    const result = await createUser(1, payload);
+    const result = await createPatient(payload);
     expect(result).toEqual(mockUser);
-    expect(api.post).toHaveBeenCalledWith("/api/v1/users/1/user/", payload);
+    expect(api.post).toHaveBeenCalledWith("/api/v1/users/patients/", payload);
   });
 });

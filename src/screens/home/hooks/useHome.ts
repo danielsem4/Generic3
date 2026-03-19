@@ -1,9 +1,12 @@
 import { useAuthStore } from "@/store/useAuthStore";
-import { useUsersQuery } from "@/hooks/queries/useUsersQuery";
+import { useRoleUsersQuery } from "@/hooks/queries/useRoleUsersQuery";
 import { useModulesQuery } from "@/hooks/queries/useModulesQuery";
+import { useRole } from "@/hooks/common/useRole";
 import type { IUser, IUserModule } from "@/common/Users";
+import type { UserRole } from "@/common/types/Role";
 
 interface IHomeData {
+  role: UserRole;
   users: IUser[];
   modules: IUserModule[];
   isLoading: boolean;
@@ -11,14 +14,16 @@ interface IHomeData {
 }
 
 export function useHome(): IHomeData {
-  const { clinicId, userId } = useAuthStore();
+  const { userId } = useAuthStore();
+  const role = useRole();
 
-  const isAuthenticated = !!clinicId && !!userId;
+  const isLoggedIn = !!userId;
 
-  const usersQuery = useUsersQuery(clinicId, userId);
-  const modulesQuery = useModulesQuery(isAuthenticated);
+  const usersQuery = useRoleUsersQuery(role, isLoggedIn);
+  const modulesQuery = useModulesQuery(isLoggedIn);
 
   return {
+    role,
     users: usersQuery.data ?? [],
     modules: modulesQuery.data ?? [],
     isLoading: usersQuery.isLoading || modulesQuery.isLoading,

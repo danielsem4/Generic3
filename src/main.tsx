@@ -11,12 +11,11 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 60 * 1000 } },
 });
 
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster />
     </QueryClientProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

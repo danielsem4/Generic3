@@ -17,22 +17,25 @@ import {
 import { Eye } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { IUser } from "@/common/Users";
+import { Link } from "react-router-dom";
 
 const MAX_ROWS = 10;
 
 interface IUsersTableProps {
   users: IUser[];
+  title?: string;
 }
 
-export function UsersTable({ users }: IUsersTableProps) {
+export function UsersTable({ users, title }: IUsersTableProps) {
   const { t } = useTranslation();
-  const displayedUsers = users.slice(0, MAX_ROWS);
+
+  const displayedUsers = users.slice(0, MAX_ROWS) || [];
 
   return (
     <Card className="w-full shadow-lg border-none overflow-hidden bg-card text-card-foreground">
       <CardHeader className="pb-4 border-b border-border">
         <CardDescription className="text-2xl font-bold text-foreground">
-          {t("home.latestUsers")}
+          {title ?? t("home.latestUsers")}
         </CardDescription>
       </CardHeader>
       <CardContent className="p-0">
@@ -64,12 +67,9 @@ export function UsersTable({ users }: IUsersTableProps) {
                   <TableCell>{user.phone_number ?? "—"}</TableCell>
                   <TableCell>{user.role}</TableCell>
                   <TableCell className="text-center">
-                    <button
-                      className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
-                      aria-label={t("home.viewPatient")}
-                    >
-                      <Eye size={16} />
-                    </button>
+                    <Link to={`/patients/${user.id}`}>
+                      <Eye />
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))

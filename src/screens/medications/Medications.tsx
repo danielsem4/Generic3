@@ -1,63 +1,74 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { Pill, Search, ArrowUpDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+import { useRole } from "@/hooks/common/useRole";
 import { useMedications } from "./hooks/useMedications";
+import { MedicationSearchSort } from "./components/MedicationSearchSort";
+import { MedicationList } from "./components/MedicationList";
+import { AddMedicationModal } from "./components/AddMedicationModal";
+import { AddToClinicModal } from "./components/AddToClinicModal";
 
 export default function Medications() {
   const { t } = useTranslation();
-  const { searchTerm, setSearchTerm, isSorted, toggleSort, filteredMedications, totalCount } = useMedications();
+  const role = useRole();
+  const {
+    filteredMedications,
+    totalCount,
+    isLoading,
+    error,
+    viewMode,
+    sortOptions,
+    searchTerm,
+    sortOption,
+    handleSearchChange,
+    handleSortChange,
+    handleDelete,
+  } = useMedications();
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value);
+  const canDelete = role === "ADMIN" || role === "CLINIC_MANAGER";
+
+  if (isLoading) {
+    return (
+      <div className="p-10 text-center text-muted-foreground font-medium">
+        {t("home.loading")}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-10 text-center text-destructive font-medium">
+        {t("home.error")}
+      </div>
+    );
+  }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6" dir="rtl">
-
-      <div className="flex gap-4">
-        <button
-          onClick={toggleSort}
-          className={`bg-card px-4 py-2 rounded-md border border-border flex items-center gap-2 text-sm shadow-sm transition-colors ${
-            isSorted ? "text-primary border-primary bg-accent" : "text-muted-foreground hover:bg-accent"
-          }`}
-        >
-          <ArrowUpDown size={16} />
-          {t("medications.sort")}
-        </button>
-
-        <div className="relative flex-1">
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-          <Input
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder={t("medications.searchPlaceholder")}
-            className="w-full pr-12 h-12 bg-card border-border shadow-sm focus:ring-primary focus-visible:ring-primary text-left ltr"
-          />
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 text-lg font-bold text-foreground">
-        <Pill className="text-primary rotate-45" size={24} />
-        <span>{t("medications.allMedications")} ({totalCount})</span>
-      </div>
-
-      <div className="space-y-2">
-        {filteredMedications.map((med, index) => (
-          <Card key={med.id || index} className="bg-card hover:shadow-md transition-shadow cursor-pointer border-border">
-            <CardContent className="p-4 flex justify-between items-center">
-              <Pill size={16} className="text-muted-foreground rotate-45" />
-              <span className="font-semibold text-right">
-                {med.medName} ({med.medForm})
-              </span>
-            </CardContent>
-          </Card>
-        ))}
-
-        {filteredMedications.length === 0 && (
-          <div className="text-center py-10 text-muted-foreground bg-muted/20 rounded-lg border border-dashed">
-            {t("medications.noData")}
+    <div className="min-h-screen bg-background p-8">
+      <div className="max-w-4xl mx-auto space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground tracking-tight">
+              {t("medications.title")}
+            </h1>
           </div>
-        )}
+          {role === "ADMIN" && <AddMedicationModal />}
+          {role === "CLINIC_MANAGER" && <AddToClinicModal />}
+        </div>
+
+        <MedicationSearchSort
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          sortOption={sortOption}
+          onSortChange={handleSortChange}
+          sortOptions={sortOptions}
+        />
+
+        <MedicationList
+          medications={filteredMedications}
+          viewMode={viewMode}
+          canDelete={canDelete}
+          onDelete={handleDelete}
+          totalCount={totalCount}
+        />
       </div>
     </div>
   );
