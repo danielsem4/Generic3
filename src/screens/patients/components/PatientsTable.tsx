@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import type { IUser } from "@/common/Users";
 import { useTranslation } from "react-i18next";
 import { Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PatientsTableProps {
   patients: IUser[];
@@ -9,6 +10,11 @@ interface PatientsTableProps {
 
 export const PatientsTable = ({ patients }: PatientsTableProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleViewPatient = (id: number | string) => {
+    navigate(`/patients/${id}`);
+  };
 
   return (
     <Table>
@@ -39,6 +45,7 @@ export const PatientsTable = ({ patients }: PatientsTableProps) => {
                 <button
                   className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label={t("home.viewPatient")}
+                  onClick={() => handleViewPatient(user.id ?? user.email)}
                 >
                   <Eye size={16} />
                 </button>
