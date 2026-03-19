@@ -219,6 +219,8 @@ const ar = {
     searchGlobal: "البحث في الكتالوج العالمي...",
     confirm: "تأكيد",
     errMedName: "اسم الدواء مطلوب",
+    errMedForm: "النموذج مطلوب",
+    errMedUnit: "الوحدة مطلوبة",
     freq: {
       ONCE: "مرة واحدة",
       DAILY: "يومياً",

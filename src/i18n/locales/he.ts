@@ -219,6 +219,8 @@ patients: {
     searchGlobal: "חיפוש בקטלוג הגלובלי...",
     confirm: "אישור",
     errMedName: "שם התרופה הוא שדה חובה",
+    errMedForm: "הטופס נדרש",
+    errMedUnit: "היחידה נדרשת",
     freq: {
       ONCE: "פעם אחת",
       DAILY: "יומי",

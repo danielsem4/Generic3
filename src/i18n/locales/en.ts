@@ -220,6 +220,8 @@ patients: {
     searchGlobal: "Search global catalog...",
     confirm: "Confirm",
     errMedName: "Medication name is required",
+    errMedForm: "Form is required",
+    errMedUnit: "Unit is required",
     freq: {
       ONCE: "Once",
       DAILY: "Daily",
