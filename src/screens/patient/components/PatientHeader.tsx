@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, Calendar,Building2 } from "lucide-react";
+import { Mail, Phone, Calendar, Building2 } from "lucide-react";
 import type { IPatientDetails } from "@/common/types/patientDetails";
 import PatientEditDialog from "./PatientEditDialog";
 
@@ -44,14 +44,16 @@ export default function PatientHeader({ patient }: Props) {
             <div className="text-xs text-muted-foreground">
               {t("patient.createdDate")}
             </div>
-            <div className="font-medium">{patient.security.joinedAt}</div>
+            <div className="font-medium">joinedAt</div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <Phone className="h-4 w-4 text-muted-foreground" />
           <div>
-            <div className="text-xs text-muted-foreground">{t("patient.phone")}</div>
+            <div className="text-xs text-muted-foreground">
+              {t("patient.phone")}
+            </div>
             <div className="font-medium">{patient.phone}</div>
           </div>
         </div>
@@ -59,7 +61,9 @@ export default function PatientHeader({ patient }: Props) {
         <div className="flex items-center gap-2">
           <Mail className="h-4 w-4 text-muted-foreground" />
           <div>
-            <div className="text-xs text-muted-foreground">{t("patient.email")}</div>
+            <div className="text-xs text-muted-foreground">
+              {t("patient.email")}
+            </div>
             <div className="font-medium">{patient.email}</div>
           </div>
         </div>

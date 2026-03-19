@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       { path: "modules", element: <Modules /> },
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
-      { path: "patients/:patientId", element: <PatientDetails /> },
+      { path: "patients/:userId", element: <PatientDetails /> },
       { path: "medications", element: <Medications /> },
       { path: "modules/medications", element: <Medications /> },
     ],

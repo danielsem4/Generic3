@@ -1,5 +1,6 @@
 import api from "@/lib/axios";
 import type { IUser, IPaginatedResponse } from "@/common/Users";
+import type { IPatientDetailsResponse } from "@/common/types/patientDetails";
 
 export interface ICreatePatientPayload {
   first_name: string;
@@ -60,5 +61,18 @@ export const createDoctor = async (
   payload: ICreateDoctorPayload,
 ): Promise<IUser> => {
   const response = await api.post<IUser>(`/api/v1/users/doctors/`, payload);
+  return response.data;
+};
+
+export const getPatientDetails = async (
+  userId: string,
+): Promise<IPatientDetailsResponse> => {
+  console.log({ requestedUserId: userId });
+
+  const response = await api.get<IPatientDetailsResponse>(
+    `/api/v1/users/patients/${userId}/`,
+  );
+  console.log({ patientDetails: response.data });
+
   return response.data;
 };

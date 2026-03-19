@@ -1,3 +1,8 @@
+export interface IModule {
+  id: number;
+  module_name: string;
+}
+
 export interface IPatientDetailsResponse {
   patient_id: string;
   first_name: string;
@@ -6,12 +11,12 @@ export interface IPatientDetailsResponse {
   phone: string;
   is_research: boolean;
   clinic_name: string;
-  active_modules: string[];
+  modules: IModule[];
   active_measurements: string[];
-  security: {
-    is_2fa_enabled: boolean;
-    joined_at: string;
-  };
+  // security: {
+  //   is_2fa_enabled: boolean;
+  //   joined_at: string;
+  // };
 }
 
 export interface IPatientDetails {
@@ -22,12 +27,12 @@ export interface IPatientDetails {
   phone: string;
   isResearch: boolean;
   clinicName: string;
-  activeModules: string[];
+  modules: string[];
   activeMeasurements: string[];
-  security: {
-    is2FAEnabled: boolean;
-    joinedAt: string;
-  };
+  // security: {
+  //   is2FAEnabled: boolean;
+  //   joinedAt: string;
+  // };
 }
 
 export interface IPatientSectionItem {
