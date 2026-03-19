@@ -284,6 +284,27 @@ const ar = {
     },
   },
 },
+// Patient Details
+patient: {
+  editDetails: "تعديل التفاصيل",
+  active: "نشط",
+  clinicPatient: "مريض العيادة",
+  createdDate: "تاريخ الإنشاء",
+  lastLogin: "آخر تسجيل دخول",
+  phone: "الهاتف",
+  email: "البريد الإلكتروني",
+  customFunctions: "وظائف مخصصة",
+  metrics: "المقاييس",
+  modules: "الوحدات",
+  noData: "لا توجد بيانات متاحة",
+  editDialogTitle: "تعديل تفاصيل المريض",
+  firstName: "الاسم الأول",
+  lastName: "اسم العائلة",
+  saveChanges: "حفظ التغييرات",
+  cancel: "إلغاء",
+  enable: "تفعيل",
+},
+
 } as const;
 
 export default ar;

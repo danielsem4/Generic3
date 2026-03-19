@@ -7,6 +7,7 @@ import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
 import Settings from "@/screens/settings/Settings";
 import NotFound from "@/screens/not-found/NotFound";
 import Patients from "@/screens/patients/Patients";
+import PatientDetails from "@/screens/patient/PatientDetails";
 import Medications from "@/screens/medications/Medications";
 import ClinicManagers from "@/screens/clinic-managers/ClinicManagers";
 import Doctors from "@/screens/doctors/Doctors";
@@ -23,7 +24,6 @@ export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   { path: "/verify", element: <VerifyCode /> },
   { path: "/clinic-selection", element: <ClinicSelection /> },
-
   {
     element: <ProtectedLayout />,
     children: [
@@ -33,6 +33,7 @@ export const router = createBrowserRouter([
       { path: "modules", element: <Modules /> },
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
+      { path: "patients/:patientId", element: <PatientDetails /> },
       { path: "medications", element: <Medications /> },
       { path: "modules/medications", element: <Medications /> },
     ],
