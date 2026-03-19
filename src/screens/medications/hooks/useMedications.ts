@@ -2,8 +2,15 @@ import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRole } from "@/hooks/common/useRole";
 import { useAuthStore } from "@/store/useAuthStore";
-import { removeMedicationFromClinic, removeGlobalMedication } from "@/api/medicationService";
-import type { IMedication, IClinicMedication } from "@/common/types/Medication";
+import {
+  removeMedicationFromClinic,
+  removeGlobalMedication,
+} from "@/api/medicationService";
+import type {
+  IMedication,
+  IClinicMedication,
+  IPatientPrescription,
+} from "@/common/types/Medication";
 import {
   buildRoleConfig,
   type SortOption,
@@ -12,13 +19,12 @@ import {
 } from "./medicationRoleConfig";
 
 function getItemName(item: MedicationItem): string {
-  if ("medication" in item) return item.medication.medName;
-  return item.medName;
+  if (typeof (item as IMedication).med_name === "string") return (item as IMedication).med_name;
+  return (item as IPatientPrescription).medName ?? "";
 }
 
 function getItemForm(item: MedicationItem): string {
-  if ("medication" in item) return item.medication.medForm;
-  if ("medForm" in item) return item.medForm;
+  if (typeof (item as IMedication).med_form === "string") return (item as IMedication).med_form;
   return "";
 }
 
@@ -27,8 +33,6 @@ const EMPTY_STATE = {
   totalCount: 0,
   isLoading: false,
   error: null as Error | null,
-  canAdd: false,
-  canDelete: false,
   viewMode: "catalog" as ViewMode,
   sortOptions: [] as SortOption[],
   searchTerm: "",
@@ -49,7 +53,11 @@ export function useMedications() {
 
   const config = role ? buildRoleConfig(role) : null;
 
-  const { data = [], isLoading, error } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["medications", role, clinicId ?? userId],
     queryFn: config?.queryFn ?? (() => Promise.resolve([])),
     enabled: !!role && (!!clinicId || !!userId),
@@ -82,8 +90,9 @@ export function useMedications() {
 
   const handleDelete = async (item: IMedication | IClinicMedication) => {
     try {
-      if ("medication" in item) {
-        await removeMedicationFromClinic(item.clinicId, item.medicationId);
+      const asClinic = item as IClinicMedication;
+      if (typeof asClinic.clinic === "string") {
+        await removeMedicationFromClinic(asClinic.clinic, asClinic.medication);
       } else {
         await removeGlobalMedication(item.id);
       }
@@ -98,8 +107,6 @@ export function useMedications() {
     totalCount: data.length,
     isLoading,
     error: error as Error | null,
-    canAdd: config.canAdd,
-    canDelete: config.canDelete,
     viewMode: config.viewMode,
     sortOptions: config.sortOptions,
     searchTerm,

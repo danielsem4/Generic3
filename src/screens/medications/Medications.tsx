@@ -14,8 +14,6 @@ export default function Medications() {
     totalCount,
     isLoading,
     error,
-    canAdd,
-    canDelete,
     viewMode,
     sortOptions,
     searchTerm,
@@ -24,6 +22,8 @@ export default function Medications() {
     handleSortChange,
     handleDelete,
   } = useMedications();
+
+  const canDelete = role === "ADMIN" || role === "CLINIC_MANAGER";
 
   if (isLoading) {
     return (
@@ -50,8 +50,8 @@ export default function Medications() {
               {t("medications.title")}
             </h1>
           </div>
-          {canAdd && role === "ADMIN" && <AddMedicationModal />}
-          {canAdd && role === "CLINIC_MANAGER" && <AddToClinicModal />}
+          {role === "ADMIN" && <AddMedicationModal />}
+          {role === "CLINIC_MANAGER" && <AddToClinicModal />}
         </div>
 
         <MedicationSearchSort
