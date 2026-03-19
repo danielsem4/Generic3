@@ -30,4 +30,19 @@ describe("isCatalogItem", () => {
   it("returns false for IPatientPrescription", () => {
     expect(isCatalogItem(prescriptionItem)).toBe(false);
   });
+
+  it("returns false for IClinicMedication cast to the union (structural check)", () => {
+    const clinicMedAsUnion = {
+      id: "cm1",
+      clinicId: "c1",
+      medicationId: "1",
+      medication: catalogItem,
+      medName: "Aspirin",
+      startDate: "2025-01-01",
+      endDate: "2025-04-01",
+      dosage: "500mg",
+      frequency: "DAILY" as const,
+    } as unknown as import("./Medication").IMedication | import("./Medication").IPatientPrescription;
+    expect(isCatalogItem(clinicMedAsUnion)).toBe(false);
+  });
 });
