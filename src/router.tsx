@@ -13,6 +13,7 @@ import ClinicManagers from "@/screens/clinic-managers/ClinicManagers";
 import Doctors from "@/screens/doctors/Doctors";
 import { useRole } from "@/hooks/common/useRole";
 import { ROLE_HOME_PATH } from "@/common/types/Role";
+import PatientDetails from "./screens/patient/PatientDetails";
 
 function HomeRedirect() {
   const role = useRole();
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },
       { path: "medications", element: <Medications /> },
+      { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
       { path: "patients/:patientId/medications", element: <PatientMedications /> },
     ],
