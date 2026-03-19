@@ -41,7 +41,7 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
               <button
                 onClick={onDelete}
                 className="text-muted-foreground hover:text-destructive transition-colors ml-2"
-                aria-label="Remove medication"
+                type="button"
               >
                 <Trash2 size={16} />
               </button>

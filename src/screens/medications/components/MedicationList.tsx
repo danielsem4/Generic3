@@ -4,7 +4,7 @@ import { MedicationCard } from "./MedicationCard";
 import type { ViewMode, MedicationItem } from "../hooks/medicationRoleConfig";
 import type { IMedication, IClinicMedication, IPatientPrescription } from "@/common/types/Medication";
 
-interface Props {
+interface ListProps {
   medications: MedicationItem[];
   viewMode: ViewMode;
   canDelete: boolean;
@@ -12,12 +12,39 @@ interface Props {
   totalCount: number;
 }
 
+interface ItemProps {
+  item: MedicationItem;
+  viewMode: ViewMode;
+  canDelete: boolean;
+  onDelete: (item: IClinicMedication) => void;
+  index: number;
+}
+
 function getDisplayItem(item: MedicationItem): IMedication | IPatientPrescription {
   if ("medication" in item) return item.medication;
   return item as IMedication | IPatientPrescription;
 }
 
-export function MedicationList({ medications, viewMode, canDelete, onDelete, totalCount }: Props) {
+function MedicationListItem({ item, viewMode, canDelete, onDelete, index }: ItemProps) {
+  const displayItem = getDisplayItem(item);
+  const isClinicItem = "medication" in item;
+
+  const handleDelete = isClinicItem && canDelete
+    ? () => onDelete(item as IClinicMedication)
+    : undefined;
+
+  return (
+    <MedicationCard
+      key={displayItem.id || index}
+      item={displayItem}
+      viewMode={viewMode}
+      canDelete={canDelete}
+      onDelete={handleDelete}
+    />
+  );
+}
+
+export function MedicationList({ medications, viewMode, canDelete, onDelete, totalCount }: ListProps) {
   const { t } = useTranslation();
 
   return (
@@ -28,23 +55,16 @@ export function MedicationList({ medications, viewMode, canDelete, onDelete, tot
       </div>
 
       <div className="space-y-2">
-        {medications.map((item, index) => {
-          const displayItem = getDisplayItem(item);
-          const handleDelete =
-            canDelete && "medication" in item
-              ? () => onDelete(item as IClinicMedication)
-              : undefined;
-
-          return (
-            <MedicationCard
-              key={displayItem.id || index}
-              item={displayItem}
-              viewMode={viewMode}
-              canDelete={canDelete}
-              onDelete={handleDelete}
-            />
-          );
-        })}
+        {medications.map((item, index) => (
+          <MedicationListItem
+            key={getDisplayItem(item).id || index}
+            item={item}
+            viewMode={viewMode}
+            canDelete={canDelete}
+            onDelete={onDelete}
+            index={index}
+          />
+        ))}
 
         {medications.length === 0 && (
           <div className="text-center py-10 text-muted-foreground bg-muted/20 rounded-lg border border-dashed border-border">
