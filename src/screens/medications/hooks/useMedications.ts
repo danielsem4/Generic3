@@ -33,9 +33,9 @@ const EMPTY_STATE = {
   sortOptions: [] as SortOption[],
   searchTerm: "",
   sortOption: "az" as SortOption,
-  handleSearchChange: (_e: React.ChangeEvent<HTMLInputElement>) => {},
-  handleSortChange: (_v: SortOption) => {},
-  handleDelete: (_item: IClinicMedication) => {},
+  handleSearchChange: (): void => {},
+  handleSortChange: (): void => {},
+  handleDelete: (): void => {},
 };
 
 export function useMedications() {

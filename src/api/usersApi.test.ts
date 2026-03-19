@@ -53,6 +53,6 @@ describe("createPatient", () => {
     };
     const result = await createPatient(payload);
     expect(result).toEqual(mockUser);
-    expect(api.post).toHaveBeenCalledWith("/api/v1/users/1/user/", payload);
+    expect(api.post).toHaveBeenCalledWith("/api/v1/users/patients/", payload);
   });
 });
