@@ -13,7 +13,11 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { isCatalogItem } from "@/common/types/Medication";
-import type { IMedication, IPatientPrescription, PrescriptionFrequency } from "@/common/types/Medication";
+import type {
+  IMedication,
+  IPatientPrescription,
+  PrescriptionFrequency,
+} from "@/common/types/Medication";
 import type { ViewMode } from "../hooks/medicationRoleConfig";
 
 interface Props {
@@ -39,14 +43,16 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
         <CardContent className="p-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 flex-1 min-w-0">
             <Pill size={18} className="text-primary rotate-45 shrink-0" />
-            <span className="font-semibold text-foreground truncate">{item.medName}</span>
+            <span className="font-semibold text-foreground truncate">
+              {item.med_name}
+            </span>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <span className="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-xs font-medium px-2 py-0.5 rounded">
-              {item.medForm}
+              {item.med_form}
             </span>
             <span className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 text-xs font-medium px-2 py-0.5 rounded">
-              {item.medUnitOfMeasurement}
+              {item.med_unit}
             </span>
             {canDelete && onDelete && (
               <AlertDialog>
@@ -60,12 +66,18 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>{t("medications.deleteConfirmTitle")}</AlertDialogTitle>
-                    <AlertDialogDescription>{t("medications.deleteConfirmDesc")}</AlertDialogDescription>
+                    <AlertDialogTitle>
+                      {t("medications.deleteConfirmTitle")}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      {t("medications.deleteConfirmDesc")}
+                    </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>{t("nav.cancel")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={onDelete}>{t("medications.deleteConfirm")}</AlertDialogAction>
+                    <AlertDialogAction onClick={onDelete}>
+                      {t("medications.deleteConfirm")}
+                    </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
@@ -83,18 +95,25 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
         <CardContent className="p-4 space-y-2">
           <div className="flex items-center gap-3">
             <Pill size={18} className="text-primary rotate-45 shrink-0" />
-            <span className="font-semibold text-foreground">{item.medName}</span>
+            <span className="font-semibold text-foreground">
+              {item.medName}
+            </span>
           </div>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <span>
-              {t("medications.dosage")}: <span className="text-foreground font-medium">{item.dosage}</span>
+              {t("medications.dosage")}:{" "}
+              <span className="text-foreground font-medium">{item.dosage}</span>
             </span>
             <span>
-              {t("medications.frequency")}: <span className="text-foreground font-medium">{t(FREQ_KEYS[item.frequency])}</span>
+              {t("medications.frequency")}:{" "}
+              <span className="text-foreground font-medium">
+                {t(FREQ_KEYS[item.frequency])}
+              </span>
             </span>
           </div>
           <div className="text-xs text-muted-foreground">
-            {t("medications.startDate")}: {item.startDate} → {t("medications.endDate")}: {item.endDate}
+            {t("medications.startDate")}: {item.startDate} →{" "}
+            {t("medications.endDate")}: {item.endDate}
           </div>
         </CardContent>
       </Card>

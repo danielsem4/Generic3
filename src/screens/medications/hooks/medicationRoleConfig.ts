@@ -7,20 +7,21 @@ import type {
 import {
   fetchAllGlobalMedications,
   fetchClinicMedications,
-  fetchPatientPrescriptions,
+  fetchPatientMedications,
 } from "@/api/medicationService";
 import { useAuthStore } from "@/store/useAuthStore";
 
 export type SortOption = "az" | "za" | "form";
 export type ViewMode = "catalog" | "prescription";
 
-export type MedicationItem = IMedication | IClinicMedication | IPatientPrescription;
+export type MedicationItem =
+  | IMedication
+  | IClinicMedication
+  | IPatientPrescription;
 
 export interface RoleConfig {
   queryFn: () => Promise<MedicationItem[]>;
   viewMode: ViewMode;
-  canAdd: boolean;
-  canDelete: boolean;
   sortOptions: SortOption[];
 }
 
@@ -33,40 +34,32 @@ export function buildRoleConfig(role: UserRole): RoleConfig {
   const clinicId = useAuthStore.getState().clinicId ?? "";
   const userId = useAuthStore.getState().userId ?? "";
 
+  console.log({ clinicId, userId });
+
   const configs: Record<UserRole, RoleConfig> = {
     ADMIN: {
       queryFn: fetchAllGlobalMedications,
       viewMode: "catalog",
-      canAdd: true,
-      canDelete: true,
       sortOptions: ["az", "za", "form"],
     },
     CLINIC_MANAGER: {
       queryFn: () => fetchClinicMedications(clinicId),
       viewMode: "catalog",
-      canAdd: true,
-      canDelete: true,
       sortOptions: ["az", "za", "form"],
     },
     DOCTOR: {
       queryFn: () => fetchClinicMedications(clinicId),
       viewMode: "catalog",
-      canAdd: false,
-      canDelete: false,
       sortOptions: ["az", "za", "form"],
     },
     PATIENT: {
-      queryFn: () => fetchPatientPrescriptions(userId),
+      queryFn: () => fetchPatientMedications(clinicId, userId),
       viewMode: "prescription",
-      canAdd: false,
-      canDelete: false,
       sortOptions: ["az", "za"],
     },
     RESEARCH_PATIENT: {
       queryFn: () => fetchClinicMedications(clinicId),
       viewMode: "catalog",
-      canAdd: false,
-      canDelete: false,
       sortOptions: ["az", "za", "form"],
     },
   };

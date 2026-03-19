@@ -5,7 +5,7 @@ import {
   fetchAllGlobalMedications,
   addMedicationToClinic,
 } from "@/api/medicationService";
-import type { IMedication } from "@/common/types/Medication";
+import type { IMedication, IClinicMedication } from "@/common/types/Medication";
 
 export function useAddToClinicDialog() {
   const [open, setOpen] = useState(false);
@@ -22,8 +22,11 @@ export function useAddToClinicDialog() {
     enabled: open,
   });
 
+  const clinicMeds = queryClient.getQueryData<IClinicMedication[]>(["medications", "CLINIC_MANAGER", clinicId]) ?? [];
+  const clinicMedIds = new Set(clinicMeds.map((m) => m.medication));
+
   const filteredGlobal = globalMeds.filter((m: IMedication) =>
-    m.medName.toLowerCase().includes(localSearch.toLowerCase()),
+    m.med_name.toLowerCase().includes(localSearch.toLowerCase()),
   );
 
   const toggleSelect = (id: string) => {
@@ -50,8 +53,9 @@ export function useAddToClinicDialog() {
   const onConfirm = async () => {
     setIsSubmitting(true);
     try {
+      const newSelections = [...selected].filter((id) => !clinicMedIds.has(id));
       await Promise.all(
-        [...selected].map((medId) => addMedicationToClinic(clinicId, medId)),
+        newSelections.map((medId) => addMedicationToClinic(clinicId, medId)),
       );
       queryClient.invalidateQueries({ queryKey: ["medications"] });
       handleClose(false);
@@ -67,6 +71,7 @@ export function useAddToClinicDialog() {
     handleLocalSearchChange,
     filteredGlobal,
     selected,
+    clinicMedIds,
     toggleSelect,
     isSubmitting,
     isLoading,

@@ -16,6 +16,7 @@ interface MedicationSelectItemProps {
   medName: string;
   medForm: string;
   checked: boolean;
+  disabled: boolean;
   onToggle: (id: string) => void;
 }
 
@@ -24,6 +25,7 @@ function MedicationSelectItem({
   medName,
   medForm,
   checked,
+  disabled,
   onToggle,
 }: MedicationSelectItemProps) {
   const handleChange = () => {
@@ -31,11 +33,12 @@ function MedicationSelectItem({
   };
 
   return (
-    <label className="flex items-center gap-3 p-2 rounded hover:bg-accent cursor-pointer">
+    <label className={`flex items-center gap-3 p-2 rounded ${disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-accent cursor-pointer"}`}>
       <input
         type="checkbox"
         checked={checked}
         onChange={handleChange}
+        disabled={disabled}
         className="accent-primary"
       />
       <span className="text-sm text-foreground">{medName}</span>
@@ -53,6 +56,7 @@ export function AddToClinicModal() {
     handleLocalSearchChange,
     filteredGlobal,
     selected,
+    clinicMedIds,
     toggleSelect,
     isSubmitting,
     isLoading,
@@ -101,9 +105,10 @@ export function AddToClinicModal() {
             <MedicationSelectItem
               key={med.id}
               id={med.id}
-              medName={med.medName}
-              medForm={med.medForm}
-              checked={selected.has(med.id)}
+              medName={med.med_name}
+              medForm={med.med_form}
+              checked={selected.has(med.id) || clinicMedIds.has(med.id)}
+              disabled={clinicMedIds.has(med.id)}
               onToggle={toggleSelect}
             />
           ))}
@@ -123,7 +128,8 @@ export function AddToClinicModal() {
             disabled={selected.size === 0 || isSubmitting}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
           >
-            {t("medications.confirm")} {selected.size > 0 && `(${selected.size})`}
+            {t("medications.confirm")}{" "}
+            {selected.size > 0 && `(${selected.size})`}
           </Button>
         </div>
       </DialogContent>
