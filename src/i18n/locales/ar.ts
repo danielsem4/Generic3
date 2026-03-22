@@ -300,6 +300,12 @@ const ar = {
   // Settings
   settings: {
     title: "الإعدادات",
+    appearance: "المظهر",
+    themes: {
+      light: "فاتح",
+      dark: "داكن",
+      system: "النظام",
+    },
     language: "اللغة",
     languageDesc: "اختر لغتك المفضلة. سيتم تحديث الواجهة فوراً.",
   },

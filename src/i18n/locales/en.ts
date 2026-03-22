@@ -302,6 +302,12 @@ patients: {
   // Settings
   settings: {
     title: "Settings",
+    appearance: "Appearance",
+    themes: {
+      light: "Light",
+      dark: "Dark",
+      system: "System",
+    },
     language: "Language",
     languageDesc: "Select your preferred language. The interface will update immediately.",
   },
