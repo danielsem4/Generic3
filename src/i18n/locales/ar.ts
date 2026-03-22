@@ -260,6 +260,10 @@ const ar = {
     timesPerDay: "عدد المرات في اليوم",
     addSlot: "إضافة فراغ",
     finalize: "إنهاء الوصفة",
+    editPrescription: "تعديل الوصفة",
+    saveChanges: "حفظ التغييرات",
+    addSuccess: "تمت إضافة الوصفة بنجاح.",
+    addError: "فشل إضافة الوصفة. يرجى المحاولة مرة أخرى.",
     cancel: "إلغاء",
     questions: {
       whichDays: "أي أيام من الأسبوع?",
@@ -277,8 +281,10 @@ const ar = {
     description: "لا يمكن التراجع عن هذا الإجراء. سيتم حذف الدواء نهائياً من سجل المريض.",
     cancel: "إلغاء",
     confirm: "حذف الدواء"},
+    resetFilters: "إعادة تعيين الفلاتر",
     filters: {
       dateFrom: "من تاريخ:",
+      dateTo: "إلى تاريخ:",
       medication: "الدواء:",
       allMeds: "جميع الأدوية"},
     table: {
@@ -287,7 +293,8 @@ const ar = {
       medId: "معرف الدواء",
       medName: "اسم الدواء",
       form: "الشكل",
-      dosage: "الجرعة"}
+      dosage: "الجرعة",
+      status: "الحالة"}
   },
 
   // Settings

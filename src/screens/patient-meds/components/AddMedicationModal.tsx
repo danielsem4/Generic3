@@ -9,14 +9,15 @@ import { MedicationForm } from "./MedicationForm";
 interface IAddMedicationModalProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  userId: string;
 }
 
-export function AddMedicationModal({ isOpen, setIsOpen }: IAddMedicationModalProps) {
+export function AddMedicationModal({ isOpen, setIsOpen, userId }: IAddMedicationModalProps) {
   const { t, i18n } = useTranslation();
-  const hookData = usePatientMedications("123");
+  const hookData = usePatientMedications(userId);
 
   const handleFinalizeAction = () => {
-    hookData.handleFinalize();
+    hookData.handleFinalize(() => setIsOpen(false));
   };
 
   return (
@@ -45,9 +46,9 @@ export function AddMedicationModal({ isOpen, setIsOpen }: IAddMedicationModalPro
             <MedicationForm hookData={hookData} />
 
             <div className="flex justify-center gap-5 pt-8 border-t mt-4 pb-12 bg-background">
-              <Button 
+              <Button
                 onClick={handleFinalizeAction}
-                disabled={!hookData.selectedMed} 
+                disabled={!hookData.selectedMed || hookData.isAddPending}
                 className="min-w-[320px] h-16 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center gap-3"
               >
                 <CheckCircle2 size={24} /> {t("patientMeds.finalize")}

@@ -18,15 +18,24 @@ export type PrescriptionFrequency = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
 
 export interface IPatientPrescription {
   id: string;
-  patientId: string;
-  clinicId: string;
-  doctorId: string;
-  medicationId: string;
-  medName: string;
-  startDate: string;
-  endDate: string;
+  patient: string;
+  clinic: string;
+  doctor: string;
+  medication: string;
+
+  med_name: string;
+  med_form: string;
+  med_unit: string;
+
+  start_date: string;
+  end_date: string;
+
   dosage: string;
   frequency: PrescriptionFrequency;
+  frequency_data: {
+    time_slots?: string[]; // for DAILY frequency
+    times_per_day?: number; // for DAILY frequency
+  };
 }
 
 // Pre-defined for future log-history feature — not rendered in this release

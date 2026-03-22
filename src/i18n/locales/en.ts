@@ -261,6 +261,10 @@ patients: {
     timesPerDay: "Times Per Day",
     addSlot: "Add Slot",
     finalize: "Finalize Prescription",
+    editPrescription: "Edit Prescription",
+    saveChanges: "Save Changes",
+    addSuccess: "Prescription added successfully.",
+    addError: "Failed to add prescription. Please try again.",
     cancel: "Cancel",
     questions: {
       whichDays: "Which Days of the Week?",
@@ -279,8 +283,10 @@ patients: {
     description: "This action cannot be undone. This will permanently delete the medication from the patient's record.",
     cancel: "Cancel",
     confirm: "Delete Medication"},
+    resetFilters: "Reset Filters",
     filters: {
       dateFrom: "Date From:",
+      dateTo: "Date To:",
       medication: "Medication:",
       allMeds: "All Medications"},
     table: {
@@ -289,7 +295,8 @@ patients: {
       medId: "Med ID",
       medName: "Med Name",
       form: "Form",
-      dosage: "Dosage"}
+      dosage: "Dosage",
+      status: "Status"}
   },
   
   // Settings

@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
       { path: "medications", element: <Medications /> },
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
-      { path: "patients/:patientId/medications", element: <PatientMedications /> },
+      { path: "patients/:userId/medications", element: <PatientMedications /> },
     ],
   },
   {
