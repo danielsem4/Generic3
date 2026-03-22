@@ -302,6 +302,12 @@ const ru = {
   // Settings
   settings: {
     title: "Настройки",
+    appearance: "Оформление",
+    themes: {
+      light: "Светлая",
+      dark: "Тёмная",
+      system: "Системная",
+    },
     language: "Язык",
     languageDesc: "Выберите предпочтительный язык. Интерфейс обновится сразу.",
   },

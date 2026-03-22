@@ -302,6 +302,12 @@ patients: {
   // Settings
   settings: {
     title: "הגדרות",
+    appearance: "מראה",
+    themes: {
+      light: "בהיר",
+      dark: "כהה",
+      system: "מערכת",
+    },
     language: "שפה",
     languageDesc: "בחר את השפה המועדפת עליך. הממשק יתעדכן מיד.",
   },
