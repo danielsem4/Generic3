@@ -261,6 +261,10 @@ const ru = {
     timesPerDay: "Количество раз в день",
     addSlot: "Добавить интервал",
     finalize: "Завершить рецепт",
+    editPrescription: "Редактировать рецепт",
+    saveChanges: "Сохранить изменения",
+    addSuccess: "Рецепт успешно добавлен.",
+    addError: "Не удалось добавить рецепт. Пожалуйста, попробуйте снова.",
     cancel: "Отмена",
     questions: {
       whichDays: "В какие дни недели?",
@@ -279,8 +283,10 @@ const ru = {
     thursday: "Четверг", friday: "Пятница", saturday: "Суббота", sunday: "Воскресенье"},
     weeks: {
     1: "1-я неделя", 2: "2-я неделя", 3: "3-я неделя", 4: "4-я неделя"},
+    resetFilters: "Сбросить фильтры",
     filters: {
       dateFrom: "С даты:",
+      dateTo: "По дату:",
       medication: "Лекарство:",
       allMeds: "Все лекарства"},
     table: {
@@ -289,7 +295,8 @@ const ru = {
       medId: "ID лекарства",
       medName: "Название",
       form: "Форма",
-      dosage: "Дозировка"}
+      dosage: "Дозировка",
+      status: "Статус"}
   },
 
   // Settings

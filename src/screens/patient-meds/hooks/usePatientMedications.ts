@@ -1,115 +1,159 @@
 import { useState } from "react";
-import type { IPatientMedicine, IIntakeLog } from "../schema/patientMedicationsSchema";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
+import {
+  fetchPatientMedications,
+  fetchClinicMedications,
+  addPatientMedication,
+  deletePatientMedication,
+} from "@/api/medicationService";
+import { useAuthStore } from "@/store/useAuthStore";
+import type { PrescriptionFrequency } from "@/common/types/Medication";
+import type { ISelectedMed } from "../schema/patientMedicationsSchema";
 
-  const INITIAL_INTAKE_LOGS: IIntakeLog[] = [
-    { 
-      intakeDate: "2026-03-11", 
-      intakeTime: "09:00", 
-      medName: "METHYLDOPA 250MG TAB", 
-      dosage: "250mg", 
-      medicineId: "1999021347", 
-      medForm: "TAB" 
-    }
-  ];
-  
-const getInitialPrescriptions = (patientId: string): IPatientMedicine[] => [
-    {
-      medicine: "1999021347",
-      patient: patientId, 
-      clinic: "Gan Yavne Clinic",
-      doctor: "Dr. Cohen",
-      frequency: "daily",
-      frequency_data: ["09:02"],
-      start_date: "2026-03-11",
-      end_date: "2100-12-31",
-      dosage: "250mg",
-      medName: "METHYLDOPA 250MG TAB",
-      medForm: "TAB"
-    }
-  ];
+export function usePatientMedications(userId: string) {
+  const { t } = useTranslation();
+  const clinicId = useAuthStore((state) => state.clinicId);
+  const doctorId = useAuthStore((state) => state.userId);
+  const queryClient = useQueryClient();
 
-  
-export function usePatientMedications(patientId: string) {
+  const { data: serverPrescriptions = [] } = useQuery({
+    queryKey: ["patient-medications", clinicId, userId],
+    queryFn: () => fetchPatientMedications(clinicId!, userId),
+    enabled: !!clinicId && !!userId,
+  });
+
+  const { data: clinicMedications = [] } = useQuery({
+    queryKey: ["clinic-medications", clinicId],
+    queryFn: () => fetchClinicMedications(clinicId!),
+    enabled: !!clinicId,
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [intakeLogs] = useState<IIntakeLog[]>(INITIAL_INTAKE_LOGS);
-  const [prescriptions, setPrescriptions] = useState<IPatientMedicine[]>(getInitialPrescriptions(patientId));
 
-  const [selectedMed, setSelectedMed] = useState<{id: string, medName: string, medForm: string} | null>(null);
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedMed, setSelectedMed] = useState<ISelectedMed | null>(null);
+  const [startDate, setStartDate] = useState(
+    new Date().toISOString().split("T")[0],
+  );
   const [endDate, setEndDate] = useState("2100-12-31");
   const [dosageAmount, setDosageAmount] = useState("1");
   const [dosageUnit, setDosageUnit] = useState("ml");
-  const [frequency, setFrequency] = useState<'once' | 'daily' | 'weekly' | 'monthly'>('daily');
+  const [frequency, setFrequency] = useState<
+    "once" | "daily" | "weekly" | "monthly"
+  >("daily");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedWeeks, setSelectedWeeks] = useState<string[]>([]);
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
 
-
- const filteredPrescriptions = prescriptions.filter(p => 
-    p.patient === patientId && 
-    p.medName?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPrescriptions = serverPrescriptions.filter((p) =>
+    p.med_name?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  const handleDelete = (medId: string) => {
-    setPrescriptions(prev => prev.filter(p => p.medicine !== medId));
-  };
+  const { mutate: handleDelete } = useMutation({
+    mutationFn: (id: string) => deletePatientMedication(clinicId!, userId, id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["patient-medications", clinicId, userId],
+      });
+    },
+  });
 
-  const handleFinalize = () => {
+  const { mutate: submitAdd, isPending: isAddPending } = useMutation({
+    mutationFn: () => {
+      const freq = frequency.toUpperCase() as PrescriptionFrequency;
+      const frequency_data =
+        freq === "WEEKLY"
+          ? { time_slots: timeSlots, days_of_week: selectedDays }
+          : freq === "MONTHLY"
+            ? { weeks_of_month: selectedWeeks, days_of_week: selectedDays }
+            : { time_slots: timeSlots, times_per_day: timeSlots.length };
+      console.log({
+        sendingData: {
+          medication: selectedMed!.id,
+          start_date: startDate,
+          end_date: endDate,
+          dosage: `${dosageAmount} ${dosageUnit}`,
+          frequency: freq,
+          frequency_data,
+        },
+      });
+
+      return addPatientMedication(clinicId!, userId, {
+        medication_id: selectedMed!.id,
+        doctor_user_id: doctorId!,
+        start_date: startDate,
+        end_date: endDate,
+        dosage: `${dosageAmount} ${dosageUnit}`,
+        frequency: freq,
+        frequency_data,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["patient-medications", clinicId, userId],
+      });
+      setSelectedMed(null);
+      setFrequency("daily");
+      setTimeSlots([]);
+      setSelectedDays([]);
+      setSelectedWeeks([]);
+      toast.success(t("patientMeds.addSuccess"));
+    },
+    onError: () => {
+      toast.error(t("patientMeds.addError"));
+    },
+  });
+
+  const handleFinalize = (closeModal: () => void) => {
     if (!selectedMed) return;
-    const newMed: IPatientMedicine = {
-      medicine: selectedMed.id,
-      patient: patientId,
-      clinic: "Clinic_1",
-      doctor: "Doc_1",
-      frequency,
-      frequency_data: frequency === 'monthly' ? [...selectedWeeks, ...selectedDays] : timeSlots,      
-      start_date: startDate,
-      end_date: endDate,
-      dosage: `${dosageAmount} ${dosageUnit}`,
-      medName: selectedMed.medName
-    };
-    setPrescriptions([...prescriptions, newMed]);
-    setIsAddModalOpen(false);
-    setSelectedMed(null);
-    setFrequency('daily');
+    submitAdd(undefined, { onSuccess: closeModal });
   };
 
- const toggleDay = (day: string) => {
-    setSelectedDays(prev => 
-      prev.includes(day) ? prev.filter(i => i !== day) : [...prev, day]
+  const toggleDay = (day: string) => {
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((i) => i !== day) : [...prev, day],
     );
   };
 
   const toggleWeek = (week: string) => {
-    setSelectedWeeks([week]); 
+    setSelectedWeeks([week]);
   };
 
   const addTimeSlot = () => {
-    setTimeSlots(prev => [...prev, "12:00"]);
+    setTimeSlots((prev) => [...prev, "12:00"]);
   };
 
   const removeTimeSlot = (index: number) => {
-    setTimeSlots(prev => prev.filter((_, i) => i !== index));
+    setTimeSlots((prev) => prev.filter((_, i) => i !== index));
   };
-
 
   return {
     // states
-    frequency, setFrequency,
-    selectedDays, 
+    clinicMedications,
+    frequency,
+    setFrequency,
+    selectedDays,
     selectedWeeks,
     timeSlots,
-    searchTerm, setSearchTerm, 
-    filteredPrescriptions, 
-    intakeLogs,
-    isAddModalOpen, setIsAddModalOpen,
-    selectedMed, setSelectedMed,
-    startDate, setStartDate, 
-    endDate, setEndDate,
-    dosageAmount, setDosageAmount, 
-    dosageUnit, setDosageUnit,
-    
+    searchTerm,
+    setSearchTerm,
+    filteredPrescriptions,
+    isAddModalOpen,
+    setIsAddModalOpen,
+    isAddPending,
+    selectedMed,
+    setSelectedMed,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    dosageAmount,
+    setDosageAmount,
+    dosageUnit,
+    setDosageUnit,
+
     // functions
     toggleDay,
     toggleWeek,
@@ -119,5 +163,3 @@ export function usePatientMedications(patientId: string) {
     handleDelete,
   };
 }
-
-

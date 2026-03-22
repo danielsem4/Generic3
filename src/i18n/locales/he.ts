@@ -260,6 +260,10 @@ patients: {
     timesPerDay: "כמה פעמים ביום",
     addSlot: "הוסף זמן",
     finalize: "סיום מרשם",
+    editPrescription: "עריכת מרשם",
+    saveChanges: "שמור שינויים",
+    addSuccess: "המרשם נוסף בהצלחה.",
+    addError: "הוספת המרשם נכשלה. אנא נסה שנית.",
     cancel: "ביטול",
     questions: {
       whichDays: "באילו ימים בשבוע?",
@@ -278,8 +282,10 @@ patients: {
     description: "פעולה זו לא ניתנת לביטול. זה ימחק לצמיתות את התרופה מרשומת המטופל.",
     cancel: "ביטול",
     confirm: "מחק תרופה"},
+    resetFilters: "אפס סינון",
     filters: {
       dateFrom: "מתאריך:",
+      dateTo: "עד תאריך:",
       medication: "תרופה:",
       allMeds: "כל התרופות"},
     table: {
@@ -288,7 +294,8 @@ patients: {
       medId: "מזהה תרופה",
       medName: "שם תרופה",
       form: "צורה",
-      dosage: "מינון"}
+      dosage: "מינון",
+      status: "סטטוס"}
   },
   
 
