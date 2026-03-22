@@ -1,34 +1,37 @@
 import type { ElementType } from "react";
-import {
-  GraduationCap,
-  ClipboardList,
-  Pill,
-  Radio,
-  Activity,
-} from "lucide-react";
+import { useModulesQuery } from "@/hooks/queries/useModulesQuery";
+import { useAuthStore } from "@/store/useAuthStore";
+import { getModuleConfig } from "../moduleConfig";
+import type { ModuleAccent } from "../moduleConfig";
 
 export type ModuleItem = {
-  key: "exams" | "questionnaires" | "medications" | "sensors" | "activities";
+  key: string;
   icon: ElementType;
-  accent: "green" | "purple" | "blue" | "pink" | "orange";
+  accent: ModuleAccent;
   href: string;
-  gridClassName?: string;
 };
 
 interface UseModulesResult {
   items: ModuleItem[];
+  isLoading: boolean;
+  error: Error | null;
 }
 
-
-
 export function useModules(): UseModulesResult {
-  const items: ModuleItem[] = [
-    { key: "exams", icon: GraduationCap, accent: "green", href: "/modules/exams" },
-    { key: "questionnaires", icon: ClipboardList, accent: "purple", href: "/modules/questionnaires" },
-    { key: "medications", icon: Pill, accent: "blue", href: "/modules/medications" },
-    { key: "sensors", icon: Radio, accent: "pink", href: "/modules/sensors", gridClassName: "lg:col-start-2" },
-    { key: "activities", icon: Activity, accent: "orange", href: "/modules/activities", gridClassName: "lg:col-start-3" },
-  ];
+  const clinicId = useAuthStore((s) => s.clinicId);
+  const { data: modules, isLoading, error } = useModulesQuery(clinicId);
 
-  return { items };
+  const items: ModuleItem[] = (modules ?? []).map((module) => {
+    const normalizedName = module.module_name.toLowerCase();
+    const config = getModuleConfig(normalizedName);
+
+    return {
+      key: normalizedName,
+      icon: config.icon,
+      accent: config.accent,
+      href: `/modules/${normalizedName.replace(/\s+/g, "-")}`,
+    };
+  });
+
+  return { items, isLoading, error: error as Error | null };
 }

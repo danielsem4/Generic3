@@ -323,25 +323,77 @@ patients: {
 modules: {
   title: "My Modules",
   cards: {
-    exams: {
-      title: "Exams",
-      description: "Competency assessment, knowledge tests, and clinical simulations.",
+    dashboard: {
+      title: "Dashboard",
+      description: "Overview of key metrics, alerts, and patient summaries.",
+    },
+    "document share": {
+      title: "Document Share",
+      description: "Share and manage clinical documents and patient files.",
     },
     questionnaires: {
-      title: "Questionnaires",
-      description: "Satisfaction surveys, periodic assessments, and medical questionnaires.",
+      title: "Measurements",
+      description: "Track and record patient vital signs and clinical measurements.",
+    },
+    chat: {
+      title: "Chat",
+      description: "Secure messaging between clinicians and patients.",
     },
     medications: {
       title: "Medications",
       description: "Prescription management, dose monitoring, and allergy alerts.",
     },
-    sensors: {
-      title: "Sensors",
-      description: "Real-time monitoring of medical devices and patient vital signs.",
-    },
     activities: {
       title: "Activities",
       description: "Shift scheduling, workshops, and staff training.",
+    },
+    memory: {
+      title: "Memory",
+      description: "Cognitive memory exercises and assessment tools.",
+    },
+    cdt: {
+      title: "CDT",
+      description: "Clock Drawing Test for cognitive screening.",
+    },
+    orientation: {
+      title: "Orientation",
+      description: "Orientation assessments and spatial awareness tests.",
+    },
+    hitber: {
+      title: "HitBer",
+      description: "HitBer cognitive and motor function evaluation.",
+    },
+    tenstreatment: {
+      title: "TENS Treatment",
+      description: "Transcutaneous electrical nerve stimulation therapy management.",
+    },
+    parkinson: {
+      title: "Parkinson",
+      description: "Parkinson's disease monitoring and management tools.",
+    },
+    "parkinson report": {
+      title: "Parkinson Report",
+      description: "Detailed reports and analytics for Parkinson's patients.",
+    },
+    "parkinson sensors": {
+      title: "Parkinson Sensors",
+      description: "Sensor data collection for Parkinson's motor assessment.",
+    },
+    statistics: {
+      title: "Statistics",
+      description: "Data analytics, charts, and clinical performance metrics.",
+    },
+    settings: {
+      title: "Settings",
+      description: "Module configuration and preference management.",
+    },
+    "market test": {
+      title: "Market Test",
+      description: "Market testing tools and evaluation frameworks.",
+    },
+    pass: {
+      title: "Pass",
+      description: "Patient access and security pass management.",
     },
   },
 },

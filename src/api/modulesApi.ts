@@ -1,7 +1,11 @@
 import api from "@/lib/axios";
-import type { IUserModule } from "@/common/Users";
+import type { IModule } from "@/common/types/patientDetails";
 
-export const getModules = async (): Promise<IUserModule[]> => {
-  const response = await api.get<IUserModule[]>("/api/v1/modules");
+export const getClinicModules = async (
+  clinicId: string,
+): Promise<IModule[]> => {
+  const response = await api.get<IModule[]>(
+    `/api/v1/clinics/${clinicId}/modules/`,
+  );
   return response.data;
 };

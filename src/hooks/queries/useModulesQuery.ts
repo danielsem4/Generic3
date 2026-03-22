@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getModules } from "@/api/modulesApi";
+import { getClinicModules } from "@/api/modulesApi";
 
-export const useModulesQuery = (enabled: boolean = true) => {
+export const useModulesQuery = (clinicId: string | null) => {
   return useQuery({
-    queryKey: ["modules"],
-    queryFn: getModules,
-    enabled,
+    queryKey: ["clinic-modules", clinicId],
+    queryFn: () => getClinicModules(clinicId!),
+    enabled: !!clinicId,
   });
 };

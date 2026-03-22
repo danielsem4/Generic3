@@ -322,25 +322,77 @@ patients: {
   modules: {
     title: "המודולות שלי",
     cards: {
-      exams: {
-        title: "מבחנים",
-        description: ".בדיקת כשירות, מבחני ידע, וסימולציות קלינית",
+      dashboard: {
+        title: "לוח בקרה",
+        description: "סקירת מדדים מרכזיים, התראות וסיכומי מטופלים.",
+      },
+      "document share": {
+        title: "שיתוף מסמכים",
+        description: "שיתוף וניהול מסמכים קליניים וקבצי מטופלים.",
       },
       questionnaires: {
-        title: "שאלונים",
-        description: ".סקרי שביעות רצון, הערכות תקופתיות ושאלונים רפואיים",
+        title: "מדידות",
+        description: "מעקב ורישום סימנים חיוניים ומדידות קליניות.",
+      },
+      chat: {
+        title: "צ'אט",
+        description: "הודעות מאובטחות בין רופאים ומטופלים.",
       },
       medications: {
         title: "תרופות",
-        description: ".ניהול מרשמים, מעקב מינונים, והתראות על רגישויות",
-      },
-      sensors: {
-        title: "חיישנים",
-        description: ".ניטור בזמן אמת של מכשור רפואי ומדדי מטופלים",
+        description: "ניהול מרשמים, מעקב מינונים, והתראות על רגישויות.",
       },
       activities: {
         title: "פעילויות",
-        description: ".תזמון תורנויות, סדנאות והדרכות צוות",
+        description: "תזמון תורנויות, סדנאות והדרכות צוות.",
+      },
+      memory: {
+        title: "זיכרון",
+        description: "תרגילי זיכרון קוגניטיביים וכלי הערכה.",
+      },
+      cdt: {
+        title: "CDT",
+        description: "מבחן ציור שעון לסינון קוגניטיבי.",
+      },
+      orientation: {
+        title: "התמצאות",
+        description: "הערכות התמצאות ומבחני מודעות מרחבית.",
+      },
+      hitber: {
+        title: "HitBer",
+        description: "הערכת תפקוד קוגניטיבי ומוטורי HitBer.",
+      },
+      tenstreatment: {
+        title: "טיפול TENS",
+        description: "ניהול טיפול בגירוי חשמלי עצבי דרך העור.",
+      },
+      parkinson: {
+        title: "פרקינסון",
+        description: "כלי ניטור וניהול מחלת פרקינסון.",
+      },
+      "parkinson report": {
+        title: "דוח פרקינסון",
+        description: "דוחות וניתוחים מפורטים למטופלי פרקינסון.",
+      },
+      "parkinson sensors": {
+        title: "חיישני פרקינסון",
+        description: "איסוף נתוני חיישנים להערכת תנועה בפרקינסון.",
+      },
+      statistics: {
+        title: "סטטיסטיקה",
+        description: "ניתוח נתונים, גרפים ומדדי ביצוע קליניים.",
+      },
+      settings: {
+        title: "הגדרות",
+        description: "הגדרת מודולים וניהול העדפות.",
+      },
+      "market test": {
+        title: "מבחן שוק",
+        description: "כלי בדיקות שוק ומסגרות הערכה.",
+      },
+      pass: {
+        title: "כרטיס כניסה",
+        description: "ניהול גישת מטופלים ותעודות אבטחה.",
       },
     },
   },
