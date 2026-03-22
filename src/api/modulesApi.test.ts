@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { getModules } from "./modulesApi";
+import { getClinicModules } from "./modulesApi";
 
 vi.mock("@/lib/axios", () => ({
   default: {
@@ -10,25 +10,25 @@ vi.mock("@/lib/axios", () => ({
 import api from "@/lib/axios";
 
 const mockModules = [
-  { id: 1, name: "Exams", description: "Exam module", active: true },
-  { id: 2, name: "Medications", description: "Medications module", active: false },
+  { id: 1, module_name: "Medications" },
+  { id: 2, module_name: "Activities" },
 ];
 
 beforeEach(() => {
   vi.clearAllMocks();
 });
 
-describe("getModules", () => {
-  it("fetches and returns modules array", async () => {
+describe("getClinicModules", () => {
+  it("fetches and returns modules array for a clinic", async () => {
     vi.mocked(api.get).mockResolvedValueOnce({ data: mockModules });
-    const result = await getModules();
+    const result = await getClinicModules("clinic-123");
     expect(result).toEqual(mockModules);
-    expect(api.get).toHaveBeenCalledWith("/api/v1/modules");
+    expect(api.get).toHaveBeenCalledWith("/api/v1/users/clinic-123/modules/");
   });
 
   it("returns empty array when server returns empty array", async () => {
     vi.mocked(api.get).mockResolvedValueOnce({ data: [] });
-    const result = await getModules();
+    const result = await getClinicModules("clinic-123");
     expect(result).toEqual([]);
   });
 });

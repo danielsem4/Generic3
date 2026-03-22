@@ -25,7 +25,6 @@ export function ModuleCard({
         "hover:-translate-y-1",
         "p-6",
         s.border,
-        item.gridClassName ?? "",
       ].join(" ")}
     >
       <div className="flex items-start justify-between">

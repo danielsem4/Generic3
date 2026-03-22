@@ -13,12 +13,13 @@ import { StatCard } from "./components/StatCard";
 import { UsersTable } from "./components/UsersTable";
 import type { UserRole } from "@/common/types/Role";
 import type { LucideIcon } from "lucide-react";
-import type { IUser, IUserModule } from "@/common/Users";
+import type { IUser } from "@/common/Users";
+import type { IModule } from "@/common/types/patientDetails";
 
 interface StatCardConfig {
   icon: LucideIcon;
   labelKey: string;
-  getValue: (users: IUser[], modules: IUserModule[]) => number;
+  getValue: (users: IUser[], modules: IModule[]) => number;
 }
 
 type RoleDashboardConfig = {
