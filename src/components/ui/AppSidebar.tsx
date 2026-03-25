@@ -6,6 +6,7 @@ import {
   Settings,
   LogOut,
   Pill,
+  Building2,
 } from "lucide-react";
 import { toast } from "sonner";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -57,6 +58,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
     { title: t("nav.modules"), url: "/modules", icon: Database },
     { title: t("nav.medications"), url: "/medications", icon: Pill },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
+    { title: t("nav.clinic"), url: "/clinic", icon: Building2 }, 
   ];
 
   const items = menuItems ?? defaultMenuItems;

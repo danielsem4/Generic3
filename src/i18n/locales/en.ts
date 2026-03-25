@@ -299,6 +299,23 @@ patients: {
       status: "Status"}
   },
   
+  // Clinic
+  clinic: {
+    Title: "Clinic Overview",
+    systemModules: "System Modules",
+    noData: "No clinic data available",
+    managerTitle: "Clinic Manager",
+    primaryAdmin: "Primary Administrator",
+    editClinic: "Edit Clinic Details",
+    saveSuccess: "Clinic details updated successfully",
+    researchFacility: "Research Facility",
+    locationLabel: "Clinic Location",
+    defaultName: "Advanced Health Center",
+    portalLabel: "Clinic Portal",
+    establishedLabel: "Established On",
+    readOnlyView: "Read-only view of the primary clinic configuration.",
+  },
+
   // Settings
   settings: {
     title: "Settings",
@@ -330,6 +347,9 @@ patients: {
   common: {
     toggleSidebar: "Toggle sidebar",
     sessionExpired: "Session expired. Please log in again.",
+    edit: "Edit",
+    editClinic: "Edit Clinic",
+    na: "N/A"
   },
 
   // Modules

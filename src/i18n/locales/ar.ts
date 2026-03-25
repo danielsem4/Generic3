@@ -297,6 +297,23 @@ const ar = {
       status: "الحالة"}
   },
 
+  // Clinic 
+  clinic: {
+    Title: "نظرة عامة على العيادة",
+    systemModules: "وحدات النظام",
+    noData: "لا توجد بيانات عيادة متاحة",
+    managerTitle: "مدير العيادة",
+    primaryAdmin: "المسؤول الرئيسي",
+    editClinic: "تعديل تفاصيل العيادة",
+    saveSuccess: "تم تحديث تفاصيل العيادة بنجاح",
+    researchFacility: "مرفق أبحاث",
+    locationLabel: "موقع العيادة",
+    defaultName: "اسم العيادة",
+    portalLabel: "بوابة العيادة",
+    establishedLabel: "تأسست في",
+    readOnlyView: "عرض للقراءة فقط لتكوين العيادة الأساسي.",
+  },
+
   // Settings
   settings: {
     title: "الإعدادات",
@@ -328,6 +345,9 @@ const ar = {
   common: {
     toggleSidebar: "تبديل الشريط الجانبي",
     sessionExpired: "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
+    edit: "تعديل",
+    editClinic: "تعديل العيادة",
+    na: "غير متاح"
   },
   // Modules
   modules: {

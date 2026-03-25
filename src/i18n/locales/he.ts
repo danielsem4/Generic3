@@ -297,7 +297,21 @@ patients: {
       dosage: "מינון",
       status: "סטטוס"}
   },
-  
+
+  // Clinic
+  clinic: {
+  Title: "סקירת מרפאה",
+  systemModules: "מודולים במערכת",
+  noData: "אין נתוני מרפאה זמינים",
+  managerTitle: "מנהל מרפאה",
+  primaryAdmin: "אדמיניסטרטור ראשי",
+  researchFacility: "מתקן מחקר",
+  locationLabel: "מיקום הקליניקה",
+  defaultName: "שם קליניקה",
+  portalLabel: "פורטל הקליניקה",
+  establishedLabel: "נוסד בתאריך",
+  readOnlyView: ".תצוגת קריאה בלבד של תצורת הקליניקה הראשית",
+},
 
   // Settings
   settings: {
@@ -330,6 +344,9 @@ patients: {
   common: {
     toggleSidebar: "החלף סרגל צד",
     sessionExpired: "פג תוקף ההפעלה. אנא התחבר שוב.",
+    edit: "עריכה",
+    editClinic: "עריכת קליניקה",
+    na: "לא זמין"
   },
   // Modules
   modules: {

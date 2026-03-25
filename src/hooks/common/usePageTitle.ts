@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const PATH_TO_TITLE_KEY: Record<string, string> = {
   "/clinic-managers": "nav.clinicManagers",
+  "/clinic": "nav.clinic",
   "/doctors": "nav.doctors",
   "/patients": "nav.patients",
   "/modules": "nav.modules",

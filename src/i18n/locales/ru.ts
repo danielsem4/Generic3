@@ -299,6 +299,23 @@ const ru = {
       status: "Статус"}
   },
 
+  // Clinic
+  clinic: {
+    Title: "Обзор клиники",
+    systemModules: "Модули системы",
+    noData: "Данные о клинике отсутствуют",
+    managerTitle: "Менеджер клиники",
+    primaryAdmin: "Главный администратор",
+    editClinic: "Редактировать данные клиники",
+    saveSuccess: "Данные клиники успешно обновлены",
+    researchFacility: "Исследовательский центр",
+    locationLabel: "Расположение клиники",
+    defaultName: "Название клиники",
+    portalLabel: "Портал клиники",
+    establishedLabel: "Дата основания",
+    readOnlyView: "Просмотр основной конфигурации клиники только для чтения.",
+  },
+
   // Settings
   settings: {
     title: "Настройки",
@@ -330,6 +347,9 @@ const ru = {
   common: {
     toggleSidebar: "Переключить боковую панель",
     sessionExpired: "Сеанс истёк. Пожалуйста, войдите снова.",
+    edit: "Редактировать",
+    editClinic: "Редактировать клинику",
+    na: "Н/Д"
   },
   // Modules
   modules: {
