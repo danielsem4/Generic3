@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import { useModules } from "./hooks/useModules";
 import { ModuleCard } from "./components/ModuleCard";
+import { AdminModulesView } from "./components/AdminModulesView";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function Modules() {
   const { t } = useTranslation();
+  const role = useAuthStore((s) => s.role);
+
+  if (role === "ADMIN") return <AdminModulesView />;
   const { items, isLoading, error } = useModules();
 
   if (isLoading) {

@@ -14,3 +14,22 @@ export const getAllModules = async (): Promise<IModule[]> => {
   const response = await api.get<IModule[]>("/api/v1/modules/");
   return response.data;
 };
+
+interface IModulePayload {
+  module_name: string;
+  description?: string;
+}
+
+export const createModule = async (payload: IModulePayload): Promise<IModule> => {
+  const response = await api.post<IModule>("/api/v1/modules/", payload);
+  return response.data;
+};
+
+export const updateModule = async (id: number, payload: IModulePayload): Promise<IModule> => {
+  const response = await api.patch<IModule>(`/api/v1/modules/${id}/`, payload);
+  return response.data;
+};
+
+export const deleteModule = async (id: number): Promise<void> => {
+  await api.delete(`/api/v1/modules/${id}/`);
+};

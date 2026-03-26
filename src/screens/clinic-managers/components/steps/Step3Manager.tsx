@@ -89,6 +89,7 @@ export function Step3Manager({ form }: Props) {
           </div>
           <FormField id="managerEmail" type="email" register={register} error={errors.managerEmail} />
           <FormField id="managerPhone" type="tel" register={register} error={errors.managerPhone} />
+          <FormField id="managerPassword" type="password" register={register} error={errors.managerPassword} />
         </>
       )}
 

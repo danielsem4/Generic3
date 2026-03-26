@@ -28,6 +28,27 @@ export const getClinicManagers = async (): Promise<IUser[]> => {
   return response.data.results;
 };
 
+export interface IUpdateClinicManagerPayload {
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+}
+
+export const updateClinicManager = async (
+  id: string,
+  data: IUpdateClinicManagerPayload,
+): Promise<IUser> => {
+  const response = await api.patch<IUser>(
+    `/api/v1/users/clinic-managers/${id}/`,
+    data,
+  );
+  return response.data;
+};
+
+export const deleteClinicManager = async (id: string): Promise<void> => {
+  await api.delete(`/api/v1/users/clinic-managers/${id}/`);
+};
+
 export const getDoctors = async (): Promise<IUser[]> => {
   const response = await api.get<IPaginatedResponse<IUser>>(
     "/api/v1/users/doctors/",

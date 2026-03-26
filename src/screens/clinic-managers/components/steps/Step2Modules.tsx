@@ -71,12 +71,13 @@ export function Step2Modules({ form }: Props) {
         {!isLoading &&
           !isError &&
           filtered.map((module) => {
-            const isSelected = selected.includes(module.module_name);
+            const moduleId = String(module.id);
+            const isSelected = selected.includes(moduleId);
             return (
               <button
                 key={module.id}
                 type="button"
-                onClick={() => handleToggle(module.module_name)}
+                onClick={() => handleToggle(moduleId)}
                 className={cn(
                   "w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-left transition-colors",
                   isSelected
