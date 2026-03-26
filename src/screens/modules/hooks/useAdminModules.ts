@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { useAllModulesQuery } from "@/hooks/queries/useAllModulesQuery";
 import { createModule, updateModule, deleteModule } from "@/api/modulesApi";
 import type { IModule } from "@/common/types/patientDetails";
@@ -16,11 +17,13 @@ const moduleSchema = z.object({
 export type ModuleFormValues = z.infer<typeof moduleSchema>;
 
 export function useAdminModules() {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { data: modules = [], isLoading, error } = useAllModulesQuery();
   const [moduleToEdit, setModuleToEdit] = useState<IModule | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState<IModule | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const form = useForm<ModuleFormValues>({
     resolver: zodResolver(moduleSchema),
@@ -35,6 +38,12 @@ export function useAdminModules() {
     onSuccess: invalidate,
   });
   const deleteMutation = useMutation({ mutationFn: deleteModule, onSuccess: invalidate });
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value);
+
+  const filteredModules = modules.filter((m) =>
+    m.module_name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   const openCreate = () => {
     setModuleToEdit(null);
@@ -65,7 +74,7 @@ export function useAdminModules() {
       }
       closeForm();
     } catch {
-      toast.error("modules.saveError");
+      toast.error(t("modules.saveError"));
     }
   });
 
@@ -75,7 +84,7 @@ export function useAdminModules() {
       await deleteMutation.mutateAsync(moduleToDelete.id);
       closeDelete();
     } catch {
-      toast.error("modules.deleteError");
+      toast.error(t("modules.deleteError"));
     }
   };
 
@@ -84,6 +93,7 @@ export function useAdminModules() {
 
   return {
     modules,
+    filteredModules,
     isLoading,
     error,
     form,
@@ -92,6 +102,8 @@ export function useAdminModules() {
     moduleToDelete,
     isSubmitting,
     isDeleting,
+    searchTerm,
+    handleSearchChange,
     openCreate,
     openEdit,
     closeForm,

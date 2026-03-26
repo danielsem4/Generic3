@@ -11,32 +11,32 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useAdminModules } from "../hooks/useAdminModules";
-import { ModuleFormDialog } from "./ModuleFormDialog";
+import { useClinicManagerModules } from "../hooks/useClinicManagerModules";
 import { ModulesTable } from "./ModulesTable";
+import { AddClinicModuleDialog } from "./AddClinicModuleDialog";
 
-export function AdminModulesView() {
+export function ClinicManagerModulesView() {
   const { t } = useTranslation();
   const {
     filteredModules,
+    allModules,
     isLoading,
     error,
-    form,
-    isFormOpen,
-    moduleToEdit,
+    isAddDialogOpen,
     moduleToDelete,
-    isSubmitting,
+    selectedIds,
+    isSaving,
     isDeleting,
     searchTerm,
     handleSearchChange,
-    openCreate,
-    openEdit,
-    closeForm,
+    openAddDialog,
+    closeAddDialog,
+    toggleModuleId,
+    handleSave,
     openDelete,
     closeDelete,
-    handleSubmit,
     handleDelete,
-  } = useAdminModules();
+  } = useClinicManagerModules();
 
   if (isLoading) {
     return (
@@ -58,11 +58,11 @@ export function AdminModulesView() {
     <div className="mx-auto max-w-6xl px-6 py-10">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold">{t("modules.adminTitle")}</h1>
+          <h1 className="text-xl font-semibold">{t("modules.clinicManagerTitle")}</h1>
           <div className="mt-2 h-1 w-10 rounded-full bg-primary" />
         </div>
         <Button
-          onClick={openCreate}
+          onClick={openAddDialog}
           className="bg-primary hover:bg-primary/90 text-primary-foreground flex gap-2 h-11 px-6 font-bold shadow-sm"
         >
           <PlusCircle size={20} />
@@ -72,20 +72,20 @@ export function AdminModulesView() {
 
       <ModulesTable
         modules={filteredModules}
-        role="ADMIN"
+        role="CLINIC_MANAGER"
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
-        onEdit={openEdit}
         onDelete={openDelete}
       />
 
-      <ModuleFormDialog
-        isOpen={isFormOpen}
-        moduleToEdit={moduleToEdit}
-        form={form}
-        isSubmitting={isSubmitting}
-        onClose={closeForm}
-        onSubmit={handleSubmit}
+      <AddClinicModuleDialog
+        isOpen={isAddDialogOpen}
+        allModules={allModules}
+        selectedIds={selectedIds}
+        isSaving={isSaving}
+        onClose={closeAddDialog}
+        onToggle={toggleModuleId}
+        onSave={handleSave}
       />
 
       <AlertDialog
@@ -94,9 +94,9 @@ export function AdminModulesView() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t("modules.deleteTitle")}</AlertDialogTitle>
+            <AlertDialogTitle>{t("modules.removeClinicModuleTitle")}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t("modules.deleteDescription", { name: moduleToDelete?.module_name })}
+              {t("modules.removeClinicModuleDescription", { name: moduleToDelete?.module_name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -109,7 +109,7 @@ export function AdminModulesView() {
               {isDeleting ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
-                t("modules.deleteTitle")
+                t("modules.removeClinicModuleTitle")
               )}
             </AlertDialogAction>
           </AlertDialogFooter>

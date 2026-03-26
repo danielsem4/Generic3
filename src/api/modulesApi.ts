@@ -33,3 +33,17 @@ export const updateModule = async (id: number, payload: IModulePayload): Promise
 export const deleteModule = async (id: number): Promise<void> => {
   await api.delete(`/api/v1/modules/${id}/`);
 };
+
+export const addClinicModule = async (
+  clinicId: string,
+  moduleId: number,
+): Promise<void> => {
+  await api.post(`/api/v1/clinics/${clinicId}/modules/`, { module_id: moduleId });
+};
+
+export const removeClinicModule = async (
+  clinicId: string,
+  moduleId: number,
+): Promise<void> => {
+  await api.delete(`/api/v1/clinics/${clinicId}/modules/${moduleId}/`);
+};
