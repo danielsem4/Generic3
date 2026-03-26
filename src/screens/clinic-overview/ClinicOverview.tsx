@@ -5,10 +5,14 @@ import { useClinicOverview } from "./hooks/useClinicOverview";
 import { ClinicInfoCard } from "./components/ClinicInfoCard";
 import { ManagerCard } from "./components/ManagerCard";
 import { ModuleGrid } from "./components/ModuleGrid";
+import { ClinicEditCard } from "./components/ClinicEditCard";
+
 
 export default function ClinicOverview() {
   const { t } = useTranslation();
   const { clinic, manager, isLoading, isManager } = useClinicOverview();
+    const [isEditing, setIsEditing] = React.useState(false);
+
 
   if (isLoading) {
     return (
@@ -34,16 +38,30 @@ export default function ClinicOverview() {
             </h1>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground font-medium ps-[52px]">
+        <p className="text-sm text-muted-foreground font-medium ps-13">
           {t("clinic.readOnlyView")}
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <ClinicInfoCard clinic={clinic} isManager={isManager} />
-        <ManagerCard manager={manager} />
-      </div>
+        {isEditing ? (
+          <ClinicEditCard
+            clinic={clinic}
+            onCancel={() => setIsEditing(false)}
+            onSave={() => setIsEditing(false)}
+          />
+        ) : (
+          <ClinicInfoCard
+            clinic={clinic}
+            isManager={isManager}
+            onEdit={isManager ? () => setIsEditing(true) : undefined}
+    />
+  )}
 
+  <ManagerCard manager={manager} />
+
+</div>
+ 
       <ModuleGrid 
         modules={clinic.available_modules} 
         title={t("clinic.systemModules")} 
