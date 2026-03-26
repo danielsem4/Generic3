@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://generic3.hitheal.org.il/",
+        target: "http://127.0.0.1:8000/",
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: "localhost",

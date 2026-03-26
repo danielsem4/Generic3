@@ -146,6 +146,7 @@ patients: {
     typeRESEARCH: "מחקר",
     modulesSearchPlaceholder: "חיפוש מודולים...",
     modulesSelected: "{{count}} מודולים נבחרו",
+    modulesLoadError: "טעינת המודולים נכשלה. אנא נסה שוב.",
     managerFirstNameLabel: "שם פרטי",
     managerLastNameLabel: "שם משפחה",
     managerEmailLabel: "אימייל",

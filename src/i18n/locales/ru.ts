@@ -147,6 +147,7 @@ const ru = {
     typeRESEARCH: "Исследовательская",
     modulesSearchPlaceholder: "Поиск модулей...",
     modulesSelected: "Выбрано модулей: {{count}}",
+    modulesLoadError: "Не удалось загрузить модули. Пожалуйста, попробуйте снова.",
     managerFirstNameLabel: "Имя",
     managerLastNameLabel: "Фамилия",
     managerEmailLabel: "Email",

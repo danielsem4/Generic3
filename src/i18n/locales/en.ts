@@ -147,6 +147,7 @@ patients: {
     typeRESEARCH: "Research",
     modulesSearchPlaceholder: "Search modules...",
     modulesSelected: "{{count}} modules selected",
+    modulesLoadError: "Failed to load modules. Please try again.",
     managerFirstNameLabel: "First Name",
     managerLastNameLabel: "Last Name",
     managerEmailLabel: "Email",

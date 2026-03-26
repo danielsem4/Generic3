@@ -146,6 +146,7 @@ const ar = {
     typeRESEARCH: "بحثية",
     modulesSearchPlaceholder: "البحث عن وحدات...",
     modulesSelected: "{{count}} وحدات مختارة",
+    modulesLoadError: "فشل تحميل الوحدات. يرجى المحاولة مرة أخرى.",
     managerFirstNameLabel: "الاسم الأول",
     managerLastNameLabel: "اسم العائلة",
     managerEmailLabel: "البريد الإلكتروني",

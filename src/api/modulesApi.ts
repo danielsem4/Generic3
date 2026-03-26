@@ -9,3 +9,8 @@ export const getClinicModules = async (
   );
   return response.data;
 };
+
+export const getAllModules = async (): Promise<IModule[]> => {
+  const response = await api.get<IModule[]>("/api/v1/modules/");
+  return response.data;
+};
