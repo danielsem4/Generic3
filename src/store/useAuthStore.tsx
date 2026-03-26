@@ -11,6 +11,8 @@ interface AuthStore {
   userId: string | null;
   firstName: string | null;
   lastName: string | null;
+  email: string | null;
+  phoneNumber: string | null;
   role: UserRole | null;
   setAuthUser: (user: ISafeUser) => void;
   logout: () => void;
@@ -26,6 +28,8 @@ export const useAuthStore = create<AuthStore>()(
       userId: null,
       firstName: null,
       lastName: null,
+      email: null,
+      phoneNumber: null,
       role: null,
       setAuthUser: (user: ISafeUser) =>
         set({
@@ -47,6 +51,8 @@ export const useAuthStore = create<AuthStore>()(
           userId: null,
           firstName: null,
           lastName: null,
+          email: null,
+          phoneNumber: null,
           role: null,
         }),
     }),
