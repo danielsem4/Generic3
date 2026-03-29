@@ -17,7 +17,7 @@ export const getAllModules = async (): Promise<IModule[]> => {
 
 interface IModulePayload {
   module_name: string;
-  description?: string;
+  module_description?: string;
 }
 
 export const createModule = async (payload: IModulePayload): Promise<IModule> => {
@@ -39,6 +39,15 @@ export const addClinicModule = async (
   moduleId: number,
 ): Promise<void> => {
   await api.post(`/api/v1/clinics/${clinicId}/modules/`, { module_id: moduleId });
+};
+
+export const getAvailableClinicModules = async (
+  clinicId: string,
+): Promise<IModule[]> => {
+  const response = await api.get<IModule[]>(
+    `/api/v1/clinics/${clinicId}/modules/available/`,
+  );
+  return response.data;
 };
 
 export const removeClinicModule = async (

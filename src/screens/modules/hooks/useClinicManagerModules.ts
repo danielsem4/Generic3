@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useModulesQuery } from "@/hooks/queries/useModulesQuery";
-import { useAllModulesQuery } from "@/hooks/queries/useAllModulesQuery";
+import { useAvailableModulesQuery } from "@/hooks/queries/useAvailableModulesQuery";
 import { addClinicModule, removeClinicModule } from "@/api/modulesApi";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IModule } from "@/common/types/patientDetails";
@@ -14,7 +14,7 @@ export function useClinicManagerModules() {
   const queryClient = useQueryClient();
 
   const { data: clinicModules = [], isLoading, error } = useModulesQuery(clinicId);
-  const { data: allModules = [] } = useAllModulesQuery();
+  const { data: availableModules = [] } = useAvailableModulesQuery(clinicId);
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState<IModule | null>(null);
@@ -22,7 +22,10 @@ export function useClinicManagerModules() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const invalidate = () =>
-    queryClient.invalidateQueries({ queryKey: ["clinic-modules", clinicId] });
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: ["clinic-modules", clinicId] }),
+      queryClient.invalidateQueries({ queryKey: ["available-modules", clinicId] }),
+    ]);
 
   const addMutation = useMutation({
     mutationFn: (moduleId: number) => addClinicModule(clinicId!, moduleId),
@@ -39,7 +42,7 @@ export function useClinicManagerModules() {
   );
 
   const openAddDialog = () => {
-    setSelectedIds(new Set(clinicModules.map((m) => m.id)));
+    setSelectedIds(new Set());
     setIsAddDialogOpen(true);
   };
 
@@ -58,15 +61,11 @@ export function useClinicManagerModules() {
   };
 
   const handleSave = async () => {
-    if (!clinicId) return;
-    const originalIds = new Set(clinicModules.map((m) => m.id));
-    const toAdd = [...selectedIds].filter((id) => !originalIds.has(id));
-    const toRemove = [...originalIds].filter((id) => !selectedIds.has(id));
+    if (!clinicId || selectedIds.size === 0) return;
     try {
-      await Promise.all([
-        ...toAdd.map((id) => addMutation.mutateAsync(id)),
-        ...toRemove.map((id) => removeMutation.mutateAsync(id)),
-      ]);
+      await Promise.all(
+        [...selectedIds].map((id) => addMutation.mutateAsync(id)),
+      );
       await invalidate();
       closeAddDialog();
     } catch {
@@ -94,7 +93,7 @@ export function useClinicManagerModules() {
   return {
     clinicModules,
     filteredModules,
-    allModules,
+    availableModules,
     isLoading,
     error: error as Error | null,
     isAddDialogOpen,

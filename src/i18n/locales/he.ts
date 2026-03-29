@@ -332,6 +332,10 @@ patients: {
   isResearchLabel: "מרפאת מחקר",
   managerLabel: "מנהל מרפאה",
   saveError: "עדכון המרפאה נכשל. אנא נסה שוב.",
+  deleteTitle: "מחיקת מרפאה",
+  deleteDescription: "מחיקת מרפאה זו תסיר לצמיתות את כל הנתונים הקשורים, כולל רופאים, מטופלים, מודולים וכל הרשומות המשויכות. לא ניתן לבטל פעולה זו.",
+  deleteSuccess: "המרפאה נמחקה בהצלחה",
+  deleteError: "מחיקת המרפאה נכשלה. אנא נסה שוב.",
 },
 
   // Settings
@@ -392,6 +396,7 @@ patients: {
     clinicManagerTitle: "מודולי הקליניקה",
     addClinicModuleTitle: "הוספת מודולים לקליניקה",
     saveModules: "שמור",
+    viewModule: "צפייה במודול",
     removeFromClinic: "הסר מהקליניקה",
     removeClinicModuleTitle: "הסרת מודול",
     removeClinicModuleDescription: "להסיר את '{{name}}' מהקליניקה? המטופלים יאבדו גישה.",

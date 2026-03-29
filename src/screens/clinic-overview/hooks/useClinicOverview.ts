@@ -17,12 +17,14 @@ export const useClinicOverview = () => {
   });
 
   const isManager = role === "ADMIN" || role === "CLINIC_MANAGER";
+  const isAdmin = role === "ADMIN";
 
   return {
     clinic,
     isLoading,
     error,
     isManager,
+    isAdmin,
     effectiveClinicId,
   };
 };

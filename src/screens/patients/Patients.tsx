@@ -6,9 +6,11 @@ import { Search } from "lucide-react";
 import { usePatients } from "./hooks/usePatients";
 import { PatientsTable } from "./components/PatientsTable";
 import { useTranslation } from "react-i18next";
+import { useRole } from "@/hooks/common/useRole";
 
 export default function Patients() {
   const { t } = useTranslation();
+  const role = useRole();
   const { filteredUsers, searchTerm, handleSearchChange, isLoading } = usePatients();
 
   if (isLoading)
@@ -30,7 +32,7 @@ export default function Patients() {
               {t("patients.description")}
             </p>
           </div>
-          <AddPatientsDialog />
+          {role !== "CLINIC_MANAGER" && <AddPatientsDialog />}
         </div>
 
         <div className="relative w-full">

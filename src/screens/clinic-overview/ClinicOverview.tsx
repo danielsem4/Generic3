@@ -2,14 +2,25 @@ import { useTranslation } from "react-i18next";
 import { Building2, Loader2 } from "lucide-react";
 import { useClinicOverview } from "./hooks/useClinicOverview";
 import { useEditClinic } from "./hooks/useEditClinic";
+import { useDeleteClinic } from "./hooks/useDeleteClinic";
 import { ClinicInfoCard } from "./components/ClinicInfoCard";
 import { ManagerCard } from "./components/ManagerCard";
 import { ModuleGrid } from "./components/ModuleGrid";
 import { EditClinicDialog } from "./components/EditClinicDialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function ClinicOverview() {
   const { t } = useTranslation();
-  const { clinic, isLoading, isManager, effectiveClinicId } = useClinicOverview();
+  const { clinic, isLoading, isManager, isAdmin, effectiveClinicId } = useClinicOverview();
   const {
     form,
     isEditOpen,
@@ -19,6 +30,13 @@ export default function ClinicOverview() {
     closeEdit,
     handleSubmit,
   } = useEditClinic(effectiveClinicId);
+  const {
+    isDeleteOpen,
+    isDeleting,
+    openDelete,
+    closeDelete,
+    handleDelete,
+  } = useDeleteClinic(effectiveClinicId);
 
   if (isLoading) {
     return (
@@ -55,7 +73,9 @@ export default function ClinicOverview() {
         <ClinicInfoCard
           clinic={clinic}
           isManager={isManager}
+          isAdmin={isAdmin}
           onEdit={() => openEdit(clinic)}
+          onDelete={openDelete}
         />
         <ManagerCard manager={clinic.clinic_manager} />
       </div>
@@ -70,6 +90,33 @@ export default function ClinicOverview() {
         onClose={closeEdit}
         onSubmit={handleSubmit}
       />
+
+      <AlertDialog open={isDeleteOpen} onOpenChange={(open) => { if (!open) closeDelete(); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("clinic.deleteTitle")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("clinic.deleteDescription")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={closeDelete}>
+              {t("nav.cancel")}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeleting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                t("clinic.deleteTitle")
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

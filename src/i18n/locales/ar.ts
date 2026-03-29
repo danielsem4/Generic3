@@ -333,6 +333,10 @@ const ar = {
     isResearchLabel: "عيادة بحثية",
     managerLabel: "مدير العيادة",
     saveError: "فشل تحديث العيادة. يرجى المحاولة مرة أخرى.",
+    deleteTitle: "حذف العيادة",
+    deleteDescription: "سيؤدي حذف هذه العيادة إلى إزالة جميع البيانات المرتبطة بها نهائيًا، بما في ذلك الأطباء والمرضى والوحدات وجميع السجلات المرتبطة. لا يمكن التراجع عن هذا الإجراء.",
+    deleteSuccess: "تم حذف العيادة بنجاح",
+    deleteError: "فشل حذف العيادة. يرجى المحاولة مرة أخرى.",
   },
 
   // Settings
@@ -393,6 +397,7 @@ const ar = {
   clinicManagerTitle: "وحدات العيادة",
   addClinicModuleTitle: "إضافة وحدات إلى العيادة",
   saveModules: "حفظ",
+  viewModule: "عرض الوحدة",
   removeFromClinic: "إزالة من العيادة",
   removeClinicModuleTitle: "إزالة الوحدة",
   removeClinicModuleDescription: "إزالة '{{name}}' من هذه العيادة؟ سيفقد المرضى الوصول.",

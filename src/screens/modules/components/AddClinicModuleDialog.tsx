@@ -15,7 +15,7 @@ import type { IModule } from "@/common/types/patientDetails";
 
 interface Props {
   isOpen: boolean;
-  allModules: IModule[];
+  availableModules: IModule[];
   selectedIds: Set<number>;
   isSaving: boolean;
   onClose: () => void;
@@ -25,7 +25,7 @@ interface Props {
 
 export function AddClinicModuleDialog({
   isOpen,
-  allModules,
+  availableModules,
   selectedIds,
   isSaving,
   onClose,
@@ -35,7 +35,7 @@ export function AddClinicModuleDialog({
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
 
-  const filtered = allModules.filter((m) =>
+  const filtered = availableModules.filter((m) =>
     m.module_name.toLowerCase().includes(search.toLowerCase()),
   );
 
@@ -88,9 +88,9 @@ export function AddClinicModuleDialog({
                     {isSelected && <Check className="w-2.5 h-2.5 text-primary-foreground" />}
                   </span>
                   <span className="flex-1 truncate">{module.module_name}</span>
-                  {module.description && (
+                  {module.module_description && (
                     <span className="text-xs text-muted-foreground truncate max-w-[140px]">
-                      {module.description}
+                      {module.module_description}
                     </span>
                   )}
                 </button>

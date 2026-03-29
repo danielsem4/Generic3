@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { PlusCircle, Loader2 } from "lucide-react";
+import type { IModule } from "@/common/types/patientDetails";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -17,9 +19,10 @@ import { AddClinicModuleDialog } from "./AddClinicModuleDialog";
 
 export function ClinicManagerModulesView() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     filteredModules,
-    allModules,
+    availableModules,
     isLoading,
     error,
     isAddDialogOpen,
@@ -37,6 +40,11 @@ export function ClinicManagerModulesView() {
     closeDelete,
     handleDelete,
   } = useClinicManagerModules();
+
+  const handleView = (module: IModule) => {
+    const slug = module.module_name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/modules/${slug}`);
+  };
 
   if (isLoading) {
     return (
@@ -76,11 +84,12 @@ export function ClinicManagerModulesView() {
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         onDelete={openDelete}
+        onView={handleView}
       />
 
       <AddClinicModuleDialog
         isOpen={isAddDialogOpen}
-        allModules={allModules}
+        availableModules={availableModules}
         selectedIds={selectedIds}
         isSaving={isSaving}
         onClose={closeAddDialog}

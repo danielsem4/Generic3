@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { useModules } from "../hooks/useModules";
 import { ModulesTable } from "./ModulesTable";
@@ -6,7 +7,13 @@ import type { IModule } from "@/common/types/patientDetails";
 
 export function ReadOnlyModulesView() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { filteredItems, isLoading, error, searchTerm, handleSearchChange } = useModules();
+
+  const handleView = (module: IModule) => {
+    const slug = module.module_name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/modules/${slug}`);
+  };
 
   if (isLoading) {
     return (
@@ -27,7 +34,7 @@ export function ReadOnlyModulesView() {
   const modules: IModule[] = filteredItems.map((item) => ({
     id: item.id,
     module_name: item.module_name,
-    description: item.description,
+    module_description: item.module_description,
   }));
 
   return (
@@ -42,6 +49,7 @@ export function ReadOnlyModulesView() {
         role={null}
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
+        onView={handleView}
       />
     </div>
   );

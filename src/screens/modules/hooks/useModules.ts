@@ -9,7 +9,7 @@ export type ModuleItem = {
   id: number;
   key: string;
   module_name: string;
-  description?: string;
+  module_description?: string;
   icon: ElementType;
   accent: ModuleAccent;
   href: string;
@@ -39,7 +39,7 @@ export function useModules(): UseModulesResult {
       id: module.id,
       key: normalizedName,
       module_name: module.module_name,
-      description: module.description,
+      module_description: module.module_description,
       icon: config.icon,
       accent: config.accent,
       href: `/modules/${normalizedName.replace(/\s+/g, "-")}`,

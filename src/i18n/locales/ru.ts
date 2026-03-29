@@ -335,6 +335,10 @@ const ru = {
     isResearchLabel: "Исследовательская клиника",
     managerLabel: "Менеджер клиники",
     saveError: "Не удалось обновить клинику. Попробуйте снова.",
+    deleteTitle: "Удалить клинику",
+    deleteDescription: "Удаление этой клиники навсегда удалит все связанные данные, включая врачей, пациентов, модули и все связанные записи. Это действие нельзя отменить.",
+    deleteSuccess: "Клиника успешно удалена",
+    deleteError: "Не удалось удалить клинику. Попробуйте снова.",
   },
 
   // Settings
@@ -395,6 +399,7 @@ const ru = {
   clinicManagerTitle: "Модули клиники",
   addClinicModuleTitle: "Добавить модули в клинику",
   saveModules: "Сохранить",
+  viewModule: "Просмотр модуля",
   removeFromClinic: "Удалить из клиники",
   removeClinicModuleTitle: "Удалить модуль",
   removeClinicModuleDescription: "Удалить '{{name}}' из этой клиники? Пациенты потеряют доступ.",
