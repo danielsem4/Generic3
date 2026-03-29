@@ -1,14 +1,46 @@
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { PatientsTable } from "@/screens/patients/components/PatientsTable";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useClinicManagers } from "./hooks/useClinicManagers";
+import { useClinicManagerActions } from "./hooks/useClinicManagerActions";
 import { AddClinicDialog } from "./components/AddClinicDialog";
+import { ClinicManagersTable } from "./components/ClinicManagersTable";
+import { EditClinicManagerDialog } from "./components/EditClinicManagerDialog";
+import { ClinicSelectDialog } from "./components/ClinicSelectDialog";
 
 export default function ClinicManagers() {
   const { t } = useTranslation();
   const { filteredUsers, searchTerm, handleSearchChange, isLoading } = useClinicManagers();
+  const {
+    form,
+    isFormOpen,
+    managerToEdit,
+    managerToDelete,
+    managerForClinicSelect,
+    isClinicSelectOpen,
+    isSubmitting,
+    isDeleting,
+    openEdit,
+    closeForm,
+    openDelete,
+    closeDelete,
+    handleView,
+    handleClinicSelect,
+    closeClinicSelect,
+    handleSubmit,
+    handleDelete,
+  } = useClinicManagerActions();
 
   if (isLoading) return (
     <div className="p-10 text-center text-muted-foreground font-medium">
@@ -48,10 +80,60 @@ export default function ClinicManagers() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-            <PatientsTable patients={filteredUsers} />
+            <ClinicManagersTable
+              managers={filteredUsers}
+              onView={handleView}
+              onEdit={openEdit}
+              onDelete={openDelete}
+            />
           </CardContent>
         </Card>
       </div>
+
+      <EditClinicManagerDialog
+        isOpen={isFormOpen}
+        managerToEdit={managerToEdit}
+        form={form}
+        isSubmitting={isSubmitting}
+        onClose={closeForm}
+        onSubmit={handleSubmit}
+      />
+
+      <AlertDialog open={!!managerToDelete} onOpenChange={(open) => { if (!open) closeDelete(); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("clinicManagers.deleteTitle")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("clinicManagers.deleteDescription", {
+                name: `${managerToDelete?.first_name} ${managerToDelete?.last_name}`,
+              })}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={closeDelete}>
+              {t("clinicManagers.cancel")}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeleting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                t("clinicManagers.deleteTitle")
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <ClinicSelectDialog
+        isOpen={isClinicSelectOpen}
+        manager={managerForClinicSelect}
+        onSelect={handleClinicSelect}
+        onClose={closeClinicSelect}
+      />
     </div>
   );
 }

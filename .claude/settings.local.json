@@ -30,7 +30,10 @@
       "Bash(node:*)",
       "Bash(npx eslint:*)",
       "Bash(git commit:*)",
-      "Bash(grep -E \"\\\\.ts$\")"
+      "Bash(grep -E \"\\\\.ts$\")",
+      "Bash(find /c/Users/semda/Desktop/generic3/src/screens/settings -type f \\\\\\(-name *.tsx -o -name *.ts \\\\\\))",
+      "Bash(xargs grep:*)",
+      "Bash(ls -la \"c:\\\\Users\\\\semda\\\\Desktop\\\\generic3\\\\src\\\\screens\\\\clinic-overview\"\" 2>/dev/null || echo \"Directory does not exist \")"
     ]
   }
 }

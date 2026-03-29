@@ -1,61 +1,52 @@
 import api from "@/lib/axios";
 import type { IClinicOption } from "@/api/authApi";
-import type { IUser } from "@/common/Users";
+import type { IClinic } from "@/common/types/clinic";
 
-export interface ICreateClinicPayload {
-  name: string;
-  clinic_url: string;
-  clinic_type: "STANDARD" | "RESEARCH";
-  available_modules: string[];
-  logo?: File;
-}
-
-export interface ICreateClinicManagerPayload {
+interface INewManagerPayload {
   first_name: string;
   last_name: string;
   email: string;
+  password: string;
   phone_number: string;
-  role: "CLINIC_MANAGER";
-  clinic_id: string | number;
+}
+
+interface IExistingManagerPayload {
+  user_id: string;
+}
+
+export interface ICreateClinicPayload {
+  clinic_name: string;
+  clinic_url: string;
+  clinic_image_url?: string;
+  is_research_clinic: boolean;
+  modules: string[];
+  clinic_manager: INewManagerPayload | IExistingManagerPayload;
 }
 
 export const createClinic = async (
   payload: ICreateClinicPayload,
 ): Promise<IClinicOption> => {
-  const formData = new FormData();
-  formData.append("name", payload.name);
-  formData.append("clinic_url", payload.clinic_url);
-  formData.append("clinic_type", payload.clinic_type);
-  payload.available_modules.forEach((m) =>
-    formData.append("available_modules", m),
-  );
-  if (payload.logo) {
-    formData.append("logo", payload.logo);
-  }
-  const response = await api.post<IClinicOption>("/api/v1/clinics/", formData);
+  const response = await api.post<IClinicOption>("/api/v1/clinics/", payload);
   return response.data;
 };
 
-export const createClinicManager = async (
-  payload: ICreateClinicManagerPayload,
-): Promise<IUser> => {
-  const response = await api.post<IUser>(
-    "/api/v1/users/clinic-managers/",
-    payload,
-  );
+export const getClinicDetails = async (clinicId: string): Promise<IClinic> => {
+  const response = await api.get<IClinic>(`/api/v1/clinics/${clinicId}/`);
   return response.data;
 };
 
-export interface IAttachClinicManagerPayload {
-  clinicId: string;
-  managerId: string;
+export interface IUpdateClinicPayload {
+  clinic_name?: string;
+  clinic_url?: string;
+  clinic_image_url?: string;
+  is_research_clinic?: boolean;
+  clinic_manager_id?: string;
 }
 
-// TODO: Replace placeholder URL with real endpoint when available
-export const attachClinicManager = async (
-  payload: IAttachClinicManagerPayload,
-): Promise<void> => {
-  await api.post(`/api/v1/clinics/${payload.clinicId}/assign-manager/`, {
-    manager_id: payload.managerId,
-  });
+export const updateClinic = async (
+  clinicId: string,
+  data: IUpdateClinicPayload,
+): Promise<IClinic> => {
+  const response = await api.patch<IClinic>(`/api/v1/clinics/${clinicId}/`, data);
+  return response.data;
 };

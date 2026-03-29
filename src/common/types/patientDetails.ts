@@ -1,6 +1,7 @@
 export interface IModule {
   id: number;
   module_name: string;
+  description?: string;
 }
 
 export interface IPatientDetailsResponse {

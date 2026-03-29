@@ -1,36 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
-import api from "@/lib/axios";
+import { getClinicDetails } from "@/api/clinicsApi";
 
 export const useClinicOverview = () => {
-const { role, clinicId, userId } = useAuthStore();
+  const { role, clinicId: authClinicId } = useAuthStore();
+  const location = useLocation();
 
-  const clinicQuery = useQuery({
-    queryKey: ["clinic-details", clinicId],
-    queryFn: async () => {
-      const response = await api.get(`/api/v1/clinics/${clinicId}/`);
-      return response.data;
-    },
-    enabled: !!clinicId,
-  });
+  const effectiveClinicId: string | null =
+    (location.state as { clinicId?: string } | null)?.clinicId ?? authClinicId;
 
-  const userQuery = useQuery({
-    queryKey: ["user-profile", userId],
-    queryFn: async () => {
-      const response = await api.get(`/api/v1/users/${userId}/`);
-      return response.data;
-    },
-    enabled: !!userId,
+  const { data: clinic, isLoading, error } = useQuery({
+    queryKey: ["clinic-details", effectiveClinicId],
+    queryFn: () => getClinicDetails(effectiveClinicId!),
+    enabled: !!effectiveClinicId,
   });
 
   const isManager = role === "ADMIN" || role === "CLINIC_MANAGER";
 
   return {
-    clinic: clinicQuery.data,
-    manager: clinicQuery.data?.manager || userQuery.data,
-    isLoading: clinicQuery.isLoading || userQuery.isLoading,
-    error: clinicQuery.error,
+    clinic,
+    isLoading,
+    error,
     isManager,
-    clinicId
+    effectiveClinicId,
   };
 };
