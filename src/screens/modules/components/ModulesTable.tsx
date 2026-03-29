@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Search, Pencil, Trash2 } from "lucide-react";
+import { Search, Pencil, Trash2, Eye } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,14 +22,15 @@ interface Props {
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onEdit?: (module: IModule) => void;
   onDelete?: (module: IModule) => void;
+  onView?: (module: IModule) => void;
 }
 
 const hasActions = (role: UserRole | null) =>
   role === "ADMIN" || role === "CLINIC_MANAGER";
 
-export function ModulesTable({ modules, role, searchTerm, onSearchChange, onEdit, onDelete }: Props) {
+export function ModulesTable({ modules, role, searchTerm, onSearchChange, onEdit, onDelete, onView }: Props) {
   const { t } = useTranslation();
-  const showActions = hasActions(role);
+  const showActions = hasActions(role) || !!onView;
   const colSpan = showActions ? 4 : 3;
 
   return (
@@ -86,11 +87,21 @@ export function ModulesTable({ modules, role, searchTerm, onSearchChange, onEdit
                       {module.module_name}
                     </TableCell>
                     <TableCell className="py-3 px-2 text-sm text-muted-foreground hidden md:table-cell max-w-xs truncate">
-                      {module.description ?? "—"}
+                      {module.module_description ?? "—"}
                     </TableCell>
                     {showActions && (
                       <TableCell className="py-3 px-4 text-right w-24">
                         <div className="inline-flex items-center gap-1 justify-end">
+                          {onView && (
+                            <button
+                              type="button"
+                              onClick={() => onView(module)}
+                              aria-label={t("modules.viewModule")}
+                              className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition"
+                            >
+                              <Eye size={15} />
+                            </button>
+                          )}
                           {role === "ADMIN" && onEdit && (
                             <button
                               type="button"

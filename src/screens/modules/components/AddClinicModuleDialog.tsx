@@ -88,9 +88,9 @@ export function AddClinicModuleDialog({
                     {isSelected && <Check className="w-2.5 h-2.5 text-primary-foreground" />}
                   </span>
                   <span className="flex-1 truncate">{module.module_name}</span>
-                  {module.description && (
+                  {module.module_description && (
                     <span className="text-xs text-muted-foreground truncate max-w-[140px]">
-                      {module.description}
+                      {module.module_description}
                     </span>
                   )}
                 </button>

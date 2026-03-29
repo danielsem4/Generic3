@@ -70,7 +70,7 @@ export function ModuleFormDialog({
               {t("modules.descriptionLabel")}
             </label>
             <textarea
-              {...register("description")}
+              {...register("module_description")}
               placeholder={t("modules.descriptionPlaceholder")}
               rows={3}
               className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary resize-none"

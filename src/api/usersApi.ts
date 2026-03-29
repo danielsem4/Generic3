@@ -39,14 +39,14 @@ export const updateClinicManager = async (
   data: IUpdateClinicManagerPayload,
 ): Promise<IUser> => {
   const response = await api.patch<IUser>(
-    `/api/v1/users/clinic-managers/${id}/`,
+    `/api/v1/users/${id}/`,
     data,
   );
   return response.data;
 };
 
 export const deleteClinicManager = async (id: string): Promise<void> => {
-  await api.delete(`/api/v1/users/clinic-managers/${id}/`);
+  await api.delete(`/api/v1/users/${id}/`);
 };
 
 export const getDoctors = async (): Promise<IUser[]> => {

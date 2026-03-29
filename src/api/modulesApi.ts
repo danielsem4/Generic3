@@ -17,7 +17,7 @@ export const getAllModules = async (): Promise<IModule[]> => {
 
 interface IModulePayload {
   module_name: string;
-  description?: string;
+  module_description?: string;
 }
 
 export const createModule = async (payload: IModulePayload): Promise<IModule> => {

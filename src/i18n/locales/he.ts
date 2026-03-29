@@ -392,6 +392,7 @@ patients: {
     clinicManagerTitle: "מודולי הקליניקה",
     addClinicModuleTitle: "הוספת מודולים לקליניקה",
     saveModules: "שמור",
+    viewModule: "צפייה במודול",
     removeFromClinic: "הסר מהקליניקה",
     removeClinicModuleTitle: "הסרת מודול",
     removeClinicModuleDescription: "להסיר את '{{name}}' מהקליניקה? המטופלים יאבדו גישה.",

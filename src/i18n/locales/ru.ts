@@ -395,6 +395,7 @@ const ru = {
   clinicManagerTitle: "Модули клиники",
   addClinicModuleTitle: "Добавить модули в клинику",
   saveModules: "Сохранить",
+  viewModule: "Просмотр модуля",
   removeFromClinic: "Удалить из клиники",
   removeClinicModuleTitle: "Удалить модуль",
   removeClinicModuleDescription: "Удалить '{{name}}' из этой клиники? Пациенты потеряют доступ.",

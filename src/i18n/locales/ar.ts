@@ -393,6 +393,7 @@ const ar = {
   clinicManagerTitle: "وحدات العيادة",
   addClinicModuleTitle: "إضافة وحدات إلى العيادة",
   saveModules: "حفظ",
+  viewModule: "عرض الوحدة",
   removeFromClinic: "إزالة من العيادة",
   removeClinicModuleTitle: "إزالة الوحدة",
   removeClinicModuleDescription: "إزالة '{{name}}' من هذه العيادة؟ سيفقد المرضى الوصول.",

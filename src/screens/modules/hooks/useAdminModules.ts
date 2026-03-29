@@ -11,7 +11,7 @@ import type { IModule } from "@/common/types/patientDetails";
 
 const moduleSchema = z.object({
   module_name: z.string().min(1, "modules.errModuleName"),
-  description: z.string().optional(),
+  module_description: z.string().optional(),
 });
 
 export type ModuleFormValues = z.infer<typeof moduleSchema>;
@@ -27,7 +27,7 @@ export function useAdminModules() {
 
   const form = useForm<ModuleFormValues>({
     resolver: zodResolver(moduleSchema),
-    defaultValues: { module_name: "", description: "" },
+    defaultValues: { module_name: "", module_description: "" },
   });
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["modules"] });
@@ -47,13 +47,13 @@ export function useAdminModules() {
 
   const openCreate = () => {
     setModuleToEdit(null);
-    form.reset({ module_name: "", description: "" });
+    form.reset({ module_name: "", module_description: "" });
     setIsFormOpen(true);
   };
 
   const openEdit = (module: IModule) => {
     setModuleToEdit(module);
-    form.reset({ module_name: module.module_name, description: module.description ?? "" });
+    form.reset({ module_name: module.module_name, module_description: module.module_description ?? "" });
     setIsFormOpen(true);
   };
 

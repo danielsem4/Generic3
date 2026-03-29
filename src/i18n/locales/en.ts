@@ -396,6 +396,7 @@ modules: {
   clinicManagerTitle: "Clinic Modules",
   addClinicModuleTitle: "Add Modules to Clinic",
   saveModules: "Save",
+  viewModule: "View module",
   removeFromClinic: "Remove from clinic",
   removeClinicModuleTitle: "Remove Module",
   removeClinicModuleDescription: "Remove '{{name}}' from this clinic? Patients will lose access.",
