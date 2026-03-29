@@ -35,7 +35,8 @@
       "Bash(xargs grep:*)",
       "Bash(ls -la \"c:\\\\Users\\\\semda\\\\Desktop\\\\generic3\\\\src\\\\screens\\\\clinic-overview\"\" 2>/dev/null || echo \"Directory does not exist \")",
       "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(find /Users/klutz/Desktop/Generic3 -name ProtectedRoute* -o -name ProtectedLayout*)"
     ]
   }
 }
