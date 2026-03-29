@@ -22,7 +22,7 @@ export function ClinicManagerModulesView() {
   const navigate = useNavigate();
   const {
     filteredModules,
-    allModules,
+    availableModules,
     isLoading,
     error,
     isAddDialogOpen,
@@ -89,7 +89,7 @@ export function ClinicManagerModulesView() {
 
       <AddClinicModuleDialog
         isOpen={isAddDialogOpen}
-        allModules={allModules}
+        availableModules={availableModules}
         selectedIds={selectedIds}
         isSaving={isSaving}
         onClose={closeAddDialog}
