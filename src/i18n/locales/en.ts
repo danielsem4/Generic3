@@ -335,6 +335,10 @@ patients: {
     isResearchLabel: "Research Clinic",
     managerLabel: "Clinic Manager",
     saveError: "Failed to update clinic. Please try again.",
+    deleteTitle: "Delete Clinic",
+    deleteDescription: "Deleting this clinic will permanently remove all related data, including doctors, patients, modules, and all associated records. This action cannot be undone.",
+    deleteSuccess: "Clinic deleted successfully",
+    deleteError: "Failed to delete clinic. Please try again.",
   },
 
   // Settings

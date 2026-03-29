@@ -50,3 +50,7 @@ export const updateClinic = async (
   const response = await api.patch<IClinic>(`/api/v1/clinics/${clinicId}/`, data);
   return response.data;
 };
+
+export const deleteClinic = async (clinicId: string): Promise<void> => {
+  await api.delete(`/api/v1/clinics/${clinicId}/`);
+};

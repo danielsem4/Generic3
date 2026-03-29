@@ -1,14 +1,16 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Edit3, Globe } from "lucide-react";
+import { Edit3, Globe, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { IClinic } from "@/common/types/clinic";
 
 interface ClinicInfoCardProps {
   clinic: IClinic;
   isManager: boolean;
+  isAdmin?: boolean;
   onEdit: () => void;
+  onDelete?: () => void;
 }
 
 interface InfoItemProps {
@@ -40,7 +42,7 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value, isLink }) => (
   </div>
 );
 
-export const ClinicInfoCard: React.FC<ClinicInfoCardProps> = ({ clinic, isManager, onEdit }) => {
+export const ClinicInfoCard: React.FC<ClinicInfoCardProps> = ({ clinic, isManager, isAdmin, onEdit, onDelete }) => {
   const { t } = useTranslation();
 
   return (
@@ -65,7 +67,7 @@ export const ClinicInfoCard: React.FC<ClinicInfoCardProps> = ({ clinic, isManage
       <div className="p-8 md:p-12 flex-1 flex flex-col justify-between relative">
 
         {isManager && (
-          <div className="absolute top-6 right-6 z-10">
+          <div className="absolute top-6 right-6 z-10 flex gap-2">
             <Button
               variant="outline"
               size="sm"
@@ -74,6 +76,16 @@ export const ClinicInfoCard: React.FC<ClinicInfoCardProps> = ({ clinic, isManage
             >
               <Edit3 size={14} /> {t("common.editClinic")}
             </Button>
+            {isAdmin && onDelete && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onDelete}
+                className="rounded-lg font-bold text-xs gap-2 border-destructive text-destructive hover:bg-destructive/10 transition-colors shadow-sm bg-background/50 backdrop-blur-sm"
+              >
+                <Trash2 size={14} /> {t("clinic.deleteTitle")}
+              </Button>
+            )}
           </div>
         )}
 
