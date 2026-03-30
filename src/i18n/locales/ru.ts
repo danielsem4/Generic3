@@ -352,6 +352,28 @@ const ru = {
     },
     language: "Язык",
     languageDesc: "Выберите предпочтительный язык. Интерфейс обновится сразу.",
+    profile: {
+      title: "Профиль",
+      phone: "Телефон",
+      role: "Роль",
+      accountStatus: "Статус аккаунта",
+      twoFA: "Двухфакторная аутентификация",
+      memberSince: "Участник с",
+      currentClinic: "Текущая клиника",
+      associatedClinics: "Связанные клиники",
+      active: "Активен",
+      inactive: "Неактивен",
+      enabled: "Включена",
+      disabled: "Отключена",
+      clinicCount: "{{count}} клиник(а)",
+      roles: {
+        ADMIN: "Администратор",
+        CLINIC_MANAGER: "Менеджер клиники",
+        DOCTOR: "Врач",
+        PATIENT: "Пациент",
+        RESEARCH_PATIENT: "Исследовательский пациент",
+      },
+    },
   },
 
   // Not Found / 404

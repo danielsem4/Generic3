@@ -350,6 +350,28 @@ const ar = {
     },
     language: "اللغة",
     languageDesc: "اختر لغتك المفضلة. سيتم تحديث الواجهة فوراً.",
+    profile: {
+      title: "الملف الشخصي",
+      phone: "الهاتف",
+      role: "الدور",
+      accountStatus: "حالة الحساب",
+      twoFA: "المصادقة الثنائية",
+      memberSince: "عضو منذ",
+      currentClinic: "العيادة الحالية",
+      associatedClinics: "العيادات المرتبطة",
+      active: "نشط",
+      inactive: "غير نشط",
+      enabled: "مفعّل",
+      disabled: "معطّل",
+      clinicCount: "{{count}} عيادة/عيادات",
+      roles: {
+        ADMIN: "مسؤول",
+        CLINIC_MANAGER: "مدير العيادة",
+        DOCTOR: "طبيب",
+        PATIENT: "مريض",
+        RESEARCH_PATIENT: "مريض بحثي",
+      },
+    },
   },
 
   // Not Found / 404

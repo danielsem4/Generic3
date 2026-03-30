@@ -352,6 +352,28 @@ patients: {
     },
     language: "Language",
     languageDesc: "Select your preferred language. The interface will update immediately.",
+    profile: {
+      title: "Profile",
+      phone: "Phone",
+      role: "Role",
+      accountStatus: "Account Status",
+      twoFA: "Two-Factor Auth",
+      memberSince: "Member Since",
+      currentClinic: "Current Clinic",
+      associatedClinics: "Associated Clinics",
+      active: "Active",
+      inactive: "Inactive",
+      enabled: "Enabled",
+      disabled: "Disabled",
+      clinicCount: "{{count}} clinic(s)",
+      roles: {
+        ADMIN: "Admin",
+        CLINIC_MANAGER: "Clinic Manager",
+        DOCTOR: "Doctor",
+        PATIENT: "Patient",
+        RESEARCH_PATIENT: "Research Patient",
+      },
+    },
   },
 
   // Not Found / 404

@@ -349,6 +349,28 @@ patients: {
     },
     language: "שפה",
     languageDesc: "בחר את השפה המועדפת עליך. הממשק יתעדכן מיד.",
+    profile: {
+      title: "פרופיל",
+      phone: "טלפון",
+      role: "תפקיד",
+      accountStatus: "סטטוס חשבון",
+      twoFA: "אימות דו-שלבי",
+      memberSince: "חבר מאז",
+      currentClinic: "מרפאה נוכחית",
+      associatedClinics: "מרפאות משויכות",
+      active: "פעיל",
+      inactive: "לא פעיל",
+      enabled: "מופעל",
+      disabled: "מושבת",
+      clinicCount: "{{count}} מרפאות",
+      roles: {
+        ADMIN: "מנהל מערכת",
+        CLINIC_MANAGER: "מנהל מרפאה",
+        DOCTOR: "רופא",
+        PATIENT: "מטופל",
+        RESEARCH_PATIENT: "מטופל מחקר",
+      },
+    },
   },
 
   // Not Found / 404

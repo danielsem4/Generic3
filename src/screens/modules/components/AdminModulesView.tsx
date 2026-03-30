@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PlusCircle, Loader2 } from "lucide-react";
+import type { IModule } from "@/common/types";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -16,6 +18,7 @@ import { ModuleFormDialog } from "./ModuleFormDialog";
 import { ModulesTable } from "./ModulesTable";
 
 export function AdminModulesView() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const {
     filteredModules,
@@ -37,6 +40,11 @@ export function AdminModulesView() {
     handleSubmit,
     handleDelete,
   } = useAdminModules();
+
+  const handleView = (module: IModule) => {
+    const slug = module.module_name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/modules/${slug}`);
+  };
 
   if (isLoading) {
     return (
@@ -75,6 +83,7 @@ export function AdminModulesView() {
         role="ADMIN"
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
+        onView={handleView}
         onEdit={openEdit}
         onDelete={openDelete}
       />

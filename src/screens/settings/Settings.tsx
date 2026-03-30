@@ -3,6 +3,9 @@ import { Check } from "lucide-react";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { type Theme, useThemeStore } from "@/store/useThemeStore";
 import { cn } from "@/lib/utils";
+import { ProfileCard } from "./components/ProfileCard";
+import { ProfileCardSkeleton } from "./components/ProfileCardSkeleton";
+import { useProfileData } from "./hooks/useProfileData";
 
 const languages = [
   { code: "en", label: "English" },
@@ -17,13 +20,25 @@ export default function Settings() {
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguageStore();
   const { theme, setTheme } = useThemeStore();
+  const { profile, isLoading } = useProfileData();
 
   return (
     <div className="p-8">
-      <div className="w-full max-w-2xl">
+      <div className="w-full">
         <h1 className="text-2xl font-bold mb-6">{t("settings.title")}</h1>
 
         <div className="space-y-8">
+          <section>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-4 border-b border-border pb-2">
+              {t("settings.profile.title")}
+            </h2>
+            {isLoading || !profile ? (
+              <ProfileCardSkeleton />
+            ) : (
+              <ProfileCard {...profile} />
+            )}
+          </section>
+
           <section>
             <h2 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-4 border-b border-border pb-2">
               {t("settings.appearance")}
