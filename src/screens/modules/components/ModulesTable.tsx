@@ -52,12 +52,12 @@ export function ModulesTable({ modules, role, searchTerm, onSearchChange, onEdit
           <TableHeader>
             <TableRow className="bg-muted/50 hover:bg-muted/50 border-b border-border">
               <TableHead className="w-12" />
-              <TableHead className="font-bold text-foreground">{t("modules.columnName")}</TableHead>
-              <TableHead className="font-bold text-foreground hidden md:table-cell">
+              <TableHead className="font-bold text-foreground text-center">{t("modules.columnName")}</TableHead>
+              <TableHead className="font-bold text-foreground text-center hidden md:table-cell">
                 {t("modules.columnDescription")}
               </TableHead>
               {showActions && (
-                <TableHead className="font-bold text-foreground text-right w-24">
+                <TableHead className="font-bold text-foreground text-center w-24">
                   {t("modules.columnActions")}
                 </TableHead>
               )}
@@ -83,15 +83,15 @@ export function ModulesTable({ modules, role, searchTerm, onSearchChange, onEdit
                         <Icon className={`h-4 w-4 ${s.iconText}`} />
                       </div>
                     </TableCell>
-                    <TableCell className="py-3 px-2 font-semibold text-foreground min-w-[120px]">
+                    <TableCell className="py-3 px-2 font-semibold text-foreground text-center min-w-[120px]">
                       {module.module_name}
                     </TableCell>
-                    <TableCell className="py-3 px-2 text-sm text-muted-foreground hidden md:table-cell max-w-xs truncate">
+                    <TableCell className="py-3 px-2 text-sm text-muted-foreground text-center hidden md:table-cell max-w-xs truncate">
                       {module.module_description ?? "—"}
                     </TableCell>
                     {showActions && (
-                      <TableCell className="py-3 px-4 text-right w-24">
-                        <div className="inline-flex items-center gap-1 justify-end">
+                      <TableCell className="py-3 px-4 text-center w-24">
+                        <div className="inline-flex items-center gap-1 justify-center">
                           {onView && (
                             <button
                               type="button"
