@@ -520,6 +520,22 @@ patients: {
   enable: "הפעל",
   },
 
+  // Statistics
+  statistics: {
+    title: "סטטיסטיקה",
+    description: "מדדי ביצועי מרפאה וניתוח מודולים",
+    loading: "טוען סטטיסטיקה...",
+    error: "שגיאה בטעינת סטטיסטיקה",
+    totalDoctors: "סה\"כ רופאים",
+    totalPatients: "סה\"כ מטופלים",
+    researchPatients: "מטופלי מחקר",
+    nonResearchPatients: "מטופלים רגילים",
+    modules: "מודולים",
+    moduleStats: "סטטיסטיקה",
+    label: "תווית",
+    value: "ערך",
+  },
+
 } as const;
 
 export default he;

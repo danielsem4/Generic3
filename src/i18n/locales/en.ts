@@ -524,6 +524,22 @@ modules: {
     enable: "Enable",
   },
 
+  // Statistics
+  statistics: {
+    title: "Statistics",
+    description: "Clinic performance metrics and module analytics",
+    loading: "Loading statistics...",
+    error: "Error loading statistics",
+    totalDoctors: "Total Doctors",
+    totalPatients: "Total Patients",
+    researchPatients: "Research Patients",
+    nonResearchPatients: "Non-Research Patients",
+    modules: "Modules",
+    moduleStats: "Statistics",
+    label: "Label",
+    value: "Value",
+  },
+
 } as const;
 
 export default en;

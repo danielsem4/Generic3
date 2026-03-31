@@ -521,6 +521,22 @@ patient: {
   enable: "تفعيل",
 },
 
+  // Statistics
+  statistics: {
+    title: "الإحصائيات",
+    description: "مقاييس أداء العيادة وتحليلات الوحدات",
+    loading: "جارٍ تحميل الإحصائيات...",
+    error: "خطأ في تحميل الإحصائيات",
+    totalDoctors: "إجمالي الأطباء",
+    totalPatients: "إجمالي المرضى",
+    researchPatients: "مرضى البحث",
+    nonResearchPatients: "المرضى غير البحثيين",
+    modules: "الوحدات",
+    moduleStats: "الإحصائيات",
+    label: "التسمية",
+    value: "القيمة",
+  },
+
 } as const;
 
 export default ar;
