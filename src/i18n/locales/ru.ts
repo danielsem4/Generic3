@@ -523,6 +523,22 @@ patient: {
   cancel: "Отмена",
   enable: "Включить",
 },
+  // Statistics
+  statistics: {
+    title: "Статистика",
+    description: "Показатели эффективности клиники и аналитика модулей",
+    loading: "Загрузка статистики...",
+    error: "Ошибка загрузки статистики",
+    totalDoctors: "Всего врачей",
+    totalPatients: "Всего пациентов",
+    researchPatients: "Исследовательские пациенты",
+    nonResearchPatients: "Обычные пациенты",
+    modules: "Модули",
+    moduleStats: "Статистика",
+    label: "Метка",
+    value: "Значение",
+  },
+
 } as const;
 
 export default ru;

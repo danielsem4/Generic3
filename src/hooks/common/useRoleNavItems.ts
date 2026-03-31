@@ -25,14 +25,14 @@ const NAV_ITEMS_BY_ROLE: Record<UserRole, NavFactory> = {
     { title: t("nav.patients"), url: "/patients", icon: Users },
     { title: t("nav.modules"), url: "/modules", icon: Database },
     { title: t("nav.clinic"), url: "/clinic", icon: Building2 },
-    { title: t("nav.statistics"), icon: BarChart2 },
+    { title: t("nav.statistics"), url: "/statistics", icon: BarChart2 },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   DOCTOR: (t) => [
     { title: t("nav.patients"), url: "/patients", icon: Users },
     { title: t("nav.modules"), url: "/modules", icon: Database },
     { title: t("nav.clinic"), url: "/clinic", icon: Building2 },
-    { title: t("nav.statistics"), icon: BarChart2 },
+    { title: t("nav.statistics"), url: "/statistics", icon: BarChart2 },
     { title: t("nav.settings"), url: "/settings", icon: Settings },
   ],
   PATIENT: (t) => [
