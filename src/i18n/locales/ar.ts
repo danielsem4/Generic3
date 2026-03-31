@@ -339,6 +339,18 @@ const ar = {
     deleteError: "فشل حذف العيادة. يرجى المحاولة مرة أخرى.",
   },
 
+  // Activities 
+ activities: {
+  title: "الأنشطة",
+  addBtn: "إضافة نشاط جديد",
+  searchPlaceholder: "البحث عن نشاط...",
+  allActivities: "جميع الأنشطة",
+  noActivities: "لم يتم العثور على أنشطة في هذه العيادة",
+  deleteWarning: "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف النشاط نهائيًا من العيادة.",
+  count_one: "نشاط واحد",
+  count_other: "{{count}} أنشطة"
+},
+
   // Settings
   settings: {
     title: "الإعدادات",
@@ -394,7 +406,11 @@ const ar = {
     sessionExpired: "انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.",
     edit: "تعديل",
     editClinic: "تعديل العيادة",
-    na: "غير متاح"
+    na: "غير متاح",
+    cancel: "إلغاء",
+    delete: "حذف",
+    areYouSure: "هل أنت متأكد؟",
+    noDescription: "لا يوجد وصف متاح لهذا النشاط"
   },
   // Modules
   modules: {

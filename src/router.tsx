@@ -16,11 +16,12 @@ import { ROLE_HOME_PATH } from "@/common/types/Role";
 import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
 import Statistics from "./screens/statistics/Statistics";
+import Activities from "@/screens/activities/ActivitiesPage";
 
 function HomeRedirect() {
   const role = useRole();
   if (!role) return null;
-  return <Navigate to={ROLE_HOME_PATH[role]} replace />;
+  return <Navigate to={ROLE_HOME_PATH[role]} replace />;  
 }
 
 export const router = createBrowserRouter([
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
       { path: "medications", element: <Medications /> },
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
+      { path: "modules/activities", element: <Activities /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "statistics", element: <Statistics /> },

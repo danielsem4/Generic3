@@ -338,6 +338,18 @@ patients: {
   deleteError: "מחיקת המרפאה נכשלה. אנא נסה שוב.",
 },
 
+ // Activities 
+activities: {
+  title: "פעילויות",
+  addBtn: "הוספת פעילות חדשה",
+  searchPlaceholder: "חיפוש פעילות...",
+  allActivities: "כל הפעילויות",
+  noActivities: "לא נמצאו פעילויות במרפאה זו",
+  count_one: "פעילות אחת",
+  count_other: "{{count}} פעילויות",
+  deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו."
+},
+
   // Settings
   settings: {
     title: "הגדרות",
@@ -393,11 +405,16 @@ patients: {
     sessionExpired: "פג תוקף ההפעלה. אנא התחבר שוב.",
     edit: "עריכה",
     editClinic: "עריכת קליניקה",
-    na: "לא זמין"
+    na: "לא זמין",
+    cancel: "ביטול",
+    delete: "מחיקה",
+    areYouSure: "האם את בטוחה?",
+    noDescription: "אין תיאור זמין לפעילות זו"
   },
+  
   // Modules
   modules: {
-    title: "המודולות שלי",
+    title: "המודולים שלי",
     adminTitle: "מודולים",
     addModule: "הוסף מודול",
     editModule: "ערוך מודול",

@@ -341,6 +341,20 @@ const ru = {
     deleteError: "Не удалось удалить клинику. Попробуйте снова.",
   },
 
+  // Activities
+activities: {
+  title: "Занятия",
+  addBtn: "Добавить новое занятие",
+  searchPlaceholder: "Поиск занятия...",
+  allActivities: "Все занятия",
+  noActivities: "Занятий в этой клинике не найдено",
+  count_one: "{{count}} занятие",
+  count_few: "{{count}} занятия",
+  count_many: "{{count}} занятий",
+  count_other: "{{count}} занятий",
+  deleteWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из клиники.",
+},
+
   // Settings
   settings: {
     title: "Настройки",
@@ -396,7 +410,11 @@ const ru = {
     sessionExpired: "Сеанс истёк. Пожалуйста, войдите снова.",
     edit: "Редактировать",
     editClinic: "Редактировать клинику",
-    na: "Н/Д"
+    na: "Н/Д",
+    cancel: "Отмена",
+    delete: "Удалить",
+    areYouSure: "Вы уверены?",
+    noDescription: "Описание этого занятия отсутствует"
   },
   // Modules
   modules: {
