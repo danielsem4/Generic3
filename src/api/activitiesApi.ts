@@ -15,3 +15,15 @@ export const getActivityById = async (activityId: string): Promise<IGlobalActivi
   const response = await api.get(`/api/v1/activities/${activityId}/`);
   return response.data;
 };
+
+export const createActivity = async (data: {
+  activity_name: string;
+  activity_description: string;
+}): Promise<IGlobalActivity> => {
+  const response = await api.post("/api/v1/activities/", data);
+  return response.data;
+};
+
+export const deleteActivity = async (activityId: string): Promise<void> => {
+  await api.delete(`/api/v1/activities/${activityId}/`);
+};

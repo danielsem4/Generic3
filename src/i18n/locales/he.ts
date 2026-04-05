@@ -347,7 +347,17 @@ activities: {
   noActivities: "לא נמצאו פעילויות במרפאה זו",
   count_one: "פעילות אחת",
   count_other: "{{count}} פעילויות",
-  deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו."
+  deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו.",
+  addDialogTitle: "הוספת פעילות חדשה",
+  activityNameLabel: "שם הפעילות",
+  activityNamePlaceholder: "למשל: יוגה בוקר",
+  activityDescriptionLabel: "תיאור",
+  activityDescriptionPlaceholder: "תיאור קצר של הפעילות...",
+  errActivityName: "שם הפעילות הוא שדה חובה",
+  errActivityDescription: "תיאור הפעילות הוא שדה חובה",
+  deleteGlobalWarning: "פעולה זו לא ניתנת לביטול. הפעילות תימחק לצמיתות מהמערכת.",
+  addError: "הוספת הפעילות נכשלה. אנא נסה שנית.",
+  deleteError: "מחיקת הפעילות נכשלה. אנא נסה שנית.",
 },
 
   // Settings

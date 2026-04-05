@@ -353,6 +353,16 @@ activities: {
   count_many: "{{count}} занятий",
   count_other: "{{count}} занятий",
   deleteWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из клиники.",
+  addDialogTitle: "Добавить новое занятие",
+  activityNameLabel: "Название занятия",
+  activityNamePlaceholder: "Например: Утренняя йога",
+  activityDescriptionLabel: "Описание",
+  activityDescriptionPlaceholder: "Краткое описание занятия...",
+  errActivityName: "Название занятия обязательно",
+  errActivityDescription: "Описание занятия обязательно",
+  deleteGlobalWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из системы.",
+  addError: "Не удалось добавить занятие. Попробуйте ещё раз.",
+  deleteError: "Не удалось удалить занятие. Попробуйте ещё раз.",
 },
 
   // Settings

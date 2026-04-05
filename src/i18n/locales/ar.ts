@@ -348,7 +348,17 @@ const ar = {
   noActivities: "لم يتم العثور على أنشطة في هذه العيادة",
   deleteWarning: "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف النشاط نهائيًا من العيادة.",
   count_one: "نشاط واحد",
-  count_other: "{{count}} أنشطة"
+  count_other: "{{count}} أنشطة",
+  addDialogTitle: "إضافة نشاط جديد",
+  activityNameLabel: "اسم النشاط",
+  activityNamePlaceholder: "مثال: يوغا صباحية",
+  activityDescriptionLabel: "الوصف",
+  activityDescriptionPlaceholder: "وصف مختصر للنشاط...",
+  errActivityName: "اسم النشاط مطلوب",
+  errActivityDescription: "وصف النشاط مطلوب",
+  deleteGlobalWarning: "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف النشاط نهائيًا من النظام.",
+  addError: "فشل إضافة النشاط. يرجى المحاولة مرة أخرى.",
+  deleteError: "فشل حذف النشاط. يرجى المحاولة مرة أخرى.",
 },
 
   // Settings
