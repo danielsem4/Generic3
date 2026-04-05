@@ -341,6 +341,18 @@ patients: {
     deleteError: "Failed to delete clinic. Please try again.",
   },
 
+   // Activities 
+ activities: {
+  title: "Activities",
+  addBtn: "Add New Activity",
+  searchPlaceholder: "Search activity...",
+  allActivities: "All Activities",
+  deleteWarning: "This action cannot be undone. This will permanently delete the activity from the clinic.",
+  noActivities: "No activities found in this clinic",
+  count_one: "One activity",
+  count_other: "{{count}} activities"
+},
+
   // Settings
   settings: {
     title: "Settings",
@@ -396,7 +408,11 @@ patients: {
     sessionExpired: "Session expired. Please log in again.",
     edit: "Edit",
     editClinic: "Edit Clinic",
-    na: "N/A"
+    na: "N/A",
+    cancel: "Cancel",
+    delete: "Delete",
+    areYouSure: "Are you sure?",
+    noDescription: "No description available for this activity"
   },
 
   // Modules
