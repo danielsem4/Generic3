@@ -1,18 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { PlusCircle, Loader2 } from "lucide-react";
-import type { IModule } from "@/common/types";
+import type { IModule } from "@/common/types/patientDetails";
 import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { useAdminModules } from "../hooks/useAdminModules";
 import { ModuleFormDialog } from "./ModuleFormDialog";
 import { ModulesTable } from "./ModulesTable";
@@ -97,33 +88,17 @@ export function AdminModulesView() {
         onSubmit={handleSubmit}
       />
 
-      <AlertDialog
+      <ConfirmDialog
         open={!!moduleToDelete}
         onOpenChange={(open) => { if (!open) closeDelete(); }}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t("modules.deleteTitle")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("modules.deleteDescription", { name: moduleToDelete?.module_name })}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={closeDelete}>{t("modules.cancel")}</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              disabled={isDeleting}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              {isDeleting ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                t("modules.deleteTitle")
-              )}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+        title={t("modules.deleteTitle")}
+        description={t("modules.deleteDescription", { name: moduleToDelete?.module_name })}
+        confirmLabel={t("modules.deleteTitle")}
+        cancelLabel={t("modules.cancel")}
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+        variant="destructive"
+      />
     </div>
   );
 }

@@ -51,13 +51,13 @@ export interface IPatientMedicationLog {
 }
 
 /**
- * Type guard: returns true when item is IMedication (catalog view).
- * Use "medForm" in item to detect IMedication vs IPatientPrescription.
+ * Type guard: returns true when item is IPatientPrescription (prescription view).
+ * Check for presence of "dosage" — only IPatientPrescription has it.
  * Note: IClinicMedication is NOT part of this union — callers upstream
  * unwrap IClinicMedication.medication (IMedication) before calling this guard.
  */
-export function isCatalogItem(
+export function isPrescription(
   item: IMedication | IPatientPrescription,
-): item is IMedication {
-  return typeof (item as IMedication).med_form === "string";
+): item is IPatientPrescription {
+  return "dosage" in item;
 }

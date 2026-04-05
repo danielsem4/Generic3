@@ -1,17 +1,8 @@
-import { Search, Loader2 } from "lucide-react";
+import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { useClinicManagers } from "./hooks/useClinicManagers";
 import { useClinicManagerActions } from "./hooks/useClinicManagerActions";
 import { AddClinicDialog } from "./components/AddClinicDialog";
@@ -99,34 +90,19 @@ export default function ClinicManagers() {
         onSubmit={handleSubmit}
       />
 
-      <AlertDialog open={!!managerToDelete} onOpenChange={(open) => { if (!open) closeDelete(); }}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t("clinicManagers.deleteTitle")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("clinicManagers.deleteDescription", {
-                name: `${managerToDelete?.first_name} ${managerToDelete?.last_name}`,
-              })}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={closeDelete}>
-              {t("clinicManagers.cancel")}
-            </AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              disabled={isDeleting}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              {isDeleting ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                t("clinicManagers.deleteTitle")
-              )}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <ConfirmDialog
+        open={!!managerToDelete}
+        onOpenChange={(open) => { if (!open) closeDelete(); }}
+        title={t("clinicManagers.deleteTitle")}
+        description={t("clinicManagers.deleteDescription", {
+          name: `${managerToDelete?.first_name} ${managerToDelete?.last_name}`,
+        })}
+        confirmLabel={t("clinicManagers.deleteTitle")}
+        cancelLabel={t("clinicManagers.cancel")}
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+        variant="destructive"
+      />
 
       <ClinicSelectDialog
         isOpen={isClinicSelectOpen}

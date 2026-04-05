@@ -1,34 +1,43 @@
 import React from "react";
 import { Activity, Trash2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next"; 
-import type { IClinicActivity } from "@/api/activitiesapi";
+import { useTranslation } from "react-i18next";
+import type { IClinicActivity } from "@/common/types/activities";
 
 interface Props {
   activity: IClinicActivity;
   isManager: boolean;
   index: number;
-  onViewDetails?: (id: string) => void; 
-  onDelete?: (id: string) => void;     
+  onViewDetails?: (id: string) => void;
+  onDelete?: (id: string) => void;
 }
 
-export const ActivityItem: React.FC<Props> = ({ 
-  activity, 
-  isManager, 
-  index, 
-  onViewDetails, 
-  onDelete 
+export const ActivityItem: React.FC<Props> = ({
+  activity,
+  isManager,
+  index,
+  onViewDetails,
+  onDelete,
 }) => {
   const { t } = useTranslation();
   const colorVar = `var(--chart-${(index % 5) + 1})`;
 
+  const handleClick = () => {
+    onViewDetails?.(activity.id);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete?.(activity.id);
+  };
+
   return (
-    <div 
-      onClick={() => onViewDetails?.(activity.id)} 
+    <div
+      onClick={handleClick}
       className="flex items-center justify-between p-4 bg-card border border-border/50 rounded-2xl mb-3 hover:shadow-md cursor-pointer group transition-all duration-300"
     >
       <div className="flex items-center gap-4">
-        <div 
+        <div
           className="p-3 rounded-xl transition-colors"
           style={{ backgroundColor: `color-mix(in oklch, ${colorVar}, transparent 10%)` }}
         >
@@ -47,26 +56,20 @@ export const ActivityItem: React.FC<Props> = ({
 
       <div className="flex items-center gap-2">
         {isManager && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="text-destructive hover:bg-destructive/10 rounded-full z-10"
-            onClick={(e) => {
-              e.stopPropagation(); 
-              onDelete?.(activity.id);
-            }}
+            onClick={handleDelete}
           >
             <Trash2 size={18} />
           </Button>
         )}
-        
-        <div 
-          className="p-1 cursor-pointer"
-          onClick={() => onViewDetails?.(activity.id)}
-        >
-          <ChevronRight 
-            size={18} 
-            className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all" 
+
+        <div className="p-1">
+          <ChevronRight
+            size={18}
+            className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all"
           />
         </div>
       </div>

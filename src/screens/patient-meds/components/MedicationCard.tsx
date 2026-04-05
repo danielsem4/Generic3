@@ -1,18 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Trash2, Pencil, Bell, CheckCircle2, Pill } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import type { IPatientPrescription } from "@/common/types/Medication";
 
 interface MedicationCardProps {
@@ -29,9 +19,15 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
   canManage,
 }) => {
   const { t } = useTranslation();
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
+  const handleDeleteClick = () => {
+    setDeleteOpen(true);
+  };
 
   const handleDeleteConfirm = () => {
     onDelete(prescription.id);
+    setDeleteOpen(false);
   };
 
   const handleEdit = () => {
@@ -44,34 +40,12 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
         <div className="flex items-center gap-3">
           {canManage && (
             <div className="flex items-center gap-1 px-2 bg-muted/30 rounded-full border border-border h-8">
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <button className="p-0.5 text-muted-foreground hover:text-destructive cursor-pointer">
-                    <Trash2 size={15} />
-                  </button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      {t("patientMeds.deleteConfirm.title")}
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      {t("patientMeds.deleteConfirm.description")}
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>
-                      {t("patientMeds.deleteConfirm.cancel")}
-                    </AlertDialogCancel>
-                    <AlertDialogAction
-                      className="bg-destructive"
-                      onClick={handleDeleteConfirm}
-                    >
-                      {t("patientMeds.deleteConfirm.confirm")}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <button
+                className="p-0.5 text-muted-foreground hover:text-destructive cursor-pointer"
+                onClick={handleDeleteClick}
+              >
+                <Trash2 size={15} />
+              </button>
               <button onClick={handleEdit} className="p-0.5 text-muted-foreground hover:text-primary border-x border-border px-2 cursor-pointer">
                 <Pencil size={15} />
               </button>
@@ -97,6 +71,17 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
           </div>
         </div>
       </CardContent>
+
+      <ConfirmDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        title={t("patientMeds.deleteConfirm.title")}
+        description={t("patientMeds.deleteConfirm.description")}
+        confirmLabel={t("patientMeds.deleteConfirm.confirm")}
+        cancelLabel={t("patientMeds.deleteConfirm.cancel")}
+        onConfirm={handleDeleteConfirm}
+        variant="destructive"
+      />
     </Card>
   );
 };
