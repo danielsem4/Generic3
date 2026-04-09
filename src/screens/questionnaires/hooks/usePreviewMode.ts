@@ -5,9 +5,15 @@ import {
 import type { DeviceSize } from "@/common/types/questionnaire";
 
 const DEVICE_WIDTHS: Record<DeviceSize, number> = {
-  mobile: 375,
-  tablet: 768,
+  mobile: 393,
+  tablet: 744,
   desktop: 1024,
+};
+
+const DEVICE_HEIGHTS: Record<DeviceSize, number | undefined> = {
+  mobile: 852,
+  tablet: 1133,
+  desktop: undefined,
 };
 
 export function usePreviewMode() {
@@ -29,11 +35,13 @@ export function usePreviewMode() {
   }
 
   const deviceWidth = DEVICE_WIDTHS[previewDevice];
+  const deviceHeight = DEVICE_HEIGHTS[previewDevice];
 
   return {
     isPreviewMode,
     previewDevice,
     deviceWidth,
+    deviceHeight,
     components,
     screens,
     togglePreview,

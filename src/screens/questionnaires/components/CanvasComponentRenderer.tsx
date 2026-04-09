@@ -3,6 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { X, GripVertical } from "lucide-react";
 import type { IQComponent } from "@/common/types/questionnaire";
 import { RowContainerRenderer } from "./RowContainerRenderer";
+import { InteractiveComponentPreview } from "./InteractiveComponentPreview";
 
 interface CanvasComponentRendererProps {
   component: IQComponent;
@@ -73,7 +74,7 @@ export function CanvasComponentRenderer({
       className={`group relative rounded-lg border bg-card p-3 transition-all ${
         isDragging ? "opacity-40" : ""
       } ${isSelected && !isPreview ? "ring-2 ring-primary border-primary" : "hover:border-muted-foreground/30"} ${
-        isPreview ? "pointer-events-none" : "cursor-pointer"
+        isPreview ? "" : "cursor-pointer"
       }`}
     >
       {!isPreview && (
@@ -97,7 +98,11 @@ export function CanvasComponentRenderer({
       )}
 
       <div className={!isPreview ? "pl-5" : ""}>
-        <ComponentPreview component={component} />
+        {isPreview ? (
+          <InteractiveComponentPreview component={component} />
+        ) : (
+          <ComponentPreview component={component} />
+        )}
       </div>
     </div>
   );

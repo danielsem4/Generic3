@@ -59,7 +59,7 @@ export function RowContainerRenderer({
         isSelected && !isPreview
           ? "ring-2 ring-primary border-primary"
           : "border-border hover:border-muted-foreground/30"
-      } ${isPreview ? "pointer-events-none border-transparent" : "cursor-pointer"}`}
+      } ${isPreview ? "border-transparent" : "cursor-pointer"}`}
     >
       {!isPreview && (
         <div className="mb-2 flex items-center gap-1 text-xs text-muted-foreground">

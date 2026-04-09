@@ -11,6 +11,7 @@ interface PreviewOverlayProps {
   screens: IQScreen[];
   device: DeviceSize;
   deviceWidth: number;
+  deviceHeight?: number;
   onDeviceChange: (device: DeviceSize) => void;
   onExit: () => void;
 }
@@ -21,6 +22,7 @@ export function PreviewOverlay({
   screens,
   device,
   deviceWidth,
+  deviceHeight,
   onDeviceChange,
   onExit,
 }: PreviewOverlayProps) {
@@ -59,7 +61,7 @@ export function PreviewOverlay({
       </div>
 
       <div className="flex-1 overflow-y-auto flex items-start justify-center p-8 bg-muted/30">
-        <DeviceFrame width={deviceWidth}>
+        <DeviceFrame width={deviceWidth} height={deviceHeight}>
           <div className="space-y-2 p-4">
             {components.map((component) => (
               <CanvasComponentRenderer

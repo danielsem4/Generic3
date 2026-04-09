@@ -24,8 +24,14 @@ export default function QuestionnaireBuilder() {
   const { sensors, activeItem, handleDragStart, handleDragEnd } =
     useBuilderDnd();
 
-  const { previewDevice, deviceWidth, screens, togglePreview, setDevice } =
-    usePreviewMode();
+  const {
+    previewDevice,
+    deviceWidth,
+    deviceHeight,
+    screens,
+    togglePreview,
+    setDevice,
+  } = usePreviewMode();
 
   if (isPreviewMode) {
     return (
@@ -33,6 +39,7 @@ export default function QuestionnaireBuilder() {
         screens={screens}
         device={previewDevice}
         deviceWidth={deviceWidth}
+        deviceHeight={deviceHeight}
         onDeviceChange={setDevice}
         onExit={togglePreview}
       />
