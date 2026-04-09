@@ -54,7 +54,7 @@ const DEFAULT_CONFIG: ModuleConfig = {
 const MODULE_CONFIG: Record<string, ModuleConfig> = {
   dashboard: { icon: LayoutDashboard, accent: "emerald" },
   "document share": { icon: FileText, accent: "violet" },
-  "Questionnaires": { icon: Ruler, accent: "sky" },
+  questionnaires: { icon: Ruler, accent: "sky" },
   chat: { icon: MessageCircle, accent: "amber" },
   medications: { icon: Pill, accent: "blue" },
   activities: { icon: Dumbbell, accent: "orange" },

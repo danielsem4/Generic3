@@ -17,6 +17,8 @@ import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
 import Statistics from "./screens/statistics/Statistics";
 import Activities from "@/screens/activities/ActivitiesPage";
+import QuestionnairesPage from "@/screens/questionnaires/QuestionnairesPage";
+import QuestionnaireBuilder from "@/screens/questionnaires/QuestionnaireBuilder";
 
 function HomeRedirect() {
   const role = useRole();
@@ -41,6 +43,9 @@ export const router = createBrowserRouter([
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
       { path: "modules/activities", element: <Activities /> },
+      { path: "modules/questionnaires", element: <QuestionnairesPage /> },
+      { path: "modules/questionnaires/builder", element: <QuestionnaireBuilder /> },
+      { path: "modules/questionnaires/builder/:id", element: <QuestionnaireBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "statistics", element: <Statistics /> },
