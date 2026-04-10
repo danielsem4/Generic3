@@ -79,7 +79,7 @@ export default function PatientSectionsCard({
   const MODULE_ACTIONS: IModuleRouteMapper = {
     Medications: () => navigate(`medications`),
     Activities: () => navigate(`activities`),
-    Questionnaires: () => navigate(`questionnaires`),
+    Measurements: () => navigate(`measurements`),
   };
 
   const METRIC_ACTIONS: IModuleRouteMapper = {};

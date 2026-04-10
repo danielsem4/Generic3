@@ -453,7 +453,7 @@ modules: {
       title: "Document Share",
       description: "Share and manage clinical documents and patient files.",
     },
-    questionnaires: {
+    measurements: {
       title: "Measurements",
       description: "Track and record patient vital signs and clinical measurements.",
     },
@@ -556,11 +556,11 @@ modules: {
     value: "Value",
   },
 
-  questionnaires: {
-    title: "Questionnaires",
+  measurements: {
+    title: "Measurements",
     createNew: "Create New",
-    searchPlaceholder: "Search questionnaires...",
-    noData: "No questionnaires yet. Create your first one!",
+    searchPlaceholder: "Search measurements...",
+    noData: "No measurements yet. Create your first one!",
     componentCount: "components",
     screenCount: "screens",
     lastModified: "Last modified",
@@ -569,11 +569,11 @@ modules: {
     delete: "Delete",
     duplicate: "Duplicate",
     preview: "Preview",
-    deleteTitle: "Delete Questionnaire",
+    deleteTitle: "Delete Measurement",
     deleteDescription: "Are you sure you want to delete \"{{name}}\"? This cannot be undone.",
-    createTitle: "Create Questionnaire",
+    createTitle: "Create Measurement",
     nameLabel: "Name",
-    namePlaceholder: "Enter questionnaire name...",
+    namePlaceholder: "Enter measurement name...",
     descriptionLabel: "Description",
     descriptionPlaceholder: "Optional description...",
     create: "Create",

@@ -450,7 +450,7 @@ activities: {
         title: "שיתוף מסמכים",
         description: "שיתוף וניהול מסמכים קליניים וקבצי מטופלים.",
       },
-      questionnaires: {
+      measurements: {
         title: "מדידות",
         description: "מעקב ורישום סימנים חיוניים ומדידות קליניות.",
       },
@@ -553,11 +553,11 @@ activities: {
     value: "ערך",
   },
 
-  questionnaires: {
-    title: "שאלונים",
+  measurements: {
+    title: "מדידות",
     createNew: "צור חדש",
-    searchPlaceholder: "חיפוש שאלונים...",
-    noData: "אין שאלונים עדיין. צור את הראשון!",
+    searchPlaceholder: "חיפוש מדידות...",
+    noData: "אין מדידות עדיין. צור את הראשונה!",
     componentCount: "רכיבים",
     screenCount: "מסכים",
     lastModified: "שונה לאחרונה",
@@ -566,11 +566,11 @@ activities: {
     delete: "מחיקה",
     duplicate: "שכפול",
     preview: "תצוגה מקדימה",
-    deleteTitle: "מחיקת שאלון",
+    deleteTitle: "מחיקת מדידה",
     deleteDescription: "האם אתה בטוח שברצונך למחוק את \"{{name}}\"? לא ניתן לבטל פעולה זו.",
-    createTitle: "יצירת שאלון",
+    createTitle: "יצירת מדידה",
     nameLabel: "שם",
-    namePlaceholder: "הזן שם שאלון...",
+    namePlaceholder: "הזן שם מדידה...",
     descriptionLabel: "תיאור",
     descriptionPlaceholder: "תיאור אופציונלי...",
     create: "צור",

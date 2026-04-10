@@ -458,7 +458,7 @@ activities: {
       title: "Измерения",
       description: "Отслеживание и запись жизненных показателей и клинических измерений.",
     },
-    questionnaires: {
+    chat: {
       title: "Чат",
       description: "Защищённый обмен сообщениями между врачами и пациентами.",
     },
@@ -557,11 +557,11 @@ patient: {
     value: "Значение",
   },
 
-  questionnaires: {
-    title: "Опросники",
+  measurements: {
+    title: "Измерения",
     createNew: "Создать новый",
-    searchPlaceholder: "Поиск опросников...",
-    noData: "Опросников пока нет. Создайте первый!",
+    searchPlaceholder: "Поиск измерений...",
+    noData: "Измерений пока нет. Создайте первое!",
     componentCount: "компоненты",
     screenCount: "экраны",
     lastModified: "Последнее изменение",
@@ -570,11 +570,11 @@ patient: {
     delete: "Удалить",
     duplicate: "Дублировать",
     preview: "Предпросмотр",
-    deleteTitle: "Удалить опросник",
+    deleteTitle: "Удалить измерение",
     deleteDescription: "Вы уверены, что хотите удалить \"{{name}}\"? Это действие нельзя отменить.",
-    createTitle: "Создать опросник",
+    createTitle: "Создать измерение",
     nameLabel: "Название",
-    namePlaceholder: "Введите название опросника...",
+    namePlaceholder: "Введите название измерения...",
     descriptionLabel: "Описание",
     descriptionPlaceholder: "Необязательное описание...",
     create: "Создать",

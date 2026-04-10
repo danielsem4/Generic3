@@ -450,7 +450,7 @@ const ar = {
       title: "مشاركة المستندات",
       description: "مشاركة وإدارة المستندات السريرية وملفات المرضى.",
     },
-    questionnaires: {
+    measurements: {
       title: "القياسات",
       description: "تتبع وتسجيل العلامات الحيوية والقياسات السريرية.",
     },
@@ -553,11 +553,11 @@ patient: {
     value: "القيمة",
   },
 
-  questionnaires: {
-    title: "الاستبيانات",
+  measurements: {
+    title: "القياسات",
     createNew: "إنشاء جديد",
-    searchPlaceholder: "البحث في الاستبيانات...",
-    noData: "لا توجد استبيانات بعد. أنشئ أول استبيان!",
+    searchPlaceholder: "البحث في القياسات...",
+    noData: "لا توجد قياسات بعد. أنشئ أول قياس!",
     componentCount: "مكونات",
     screenCount: "شاشات",
     lastModified: "آخر تعديل",
@@ -566,11 +566,11 @@ patient: {
     delete: "حذف",
     duplicate: "نسخ",
     preview: "معاينة",
-    deleteTitle: "حذف الاستبيان",
+    deleteTitle: "حذف القياس",
     deleteDescription: "هل أنت متأكد من حذف \"{{name}}\"؟ لا يمكن التراجع عن هذا.",
-    createTitle: "إنشاء استبيان",
+    createTitle: "إنشاء قياس",
     nameLabel: "الاسم",
-    namePlaceholder: "أدخل اسم الاستبيان...",
+    namePlaceholder: "أدخل اسم القياس...",
     descriptionLabel: "الوصف",
     descriptionPlaceholder: "وصف اختياري...",
     create: "إنشاء",

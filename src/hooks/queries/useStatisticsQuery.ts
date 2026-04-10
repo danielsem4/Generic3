@@ -24,7 +24,7 @@ function getMockStatistics(): Promise<IClinicStatisticsResponse> {
       },
       {
         module_id: 2,
-        module_name: "Questionnaires",
+        module_name: "Measurements",
         chart_type: "line",
         data_points: [
           { label: "Jan", value: 45 },
