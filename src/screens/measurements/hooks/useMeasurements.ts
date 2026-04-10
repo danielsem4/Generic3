@@ -3,7 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IMeasurement } from "@/common/types/measurement";
-import { createDefaultScreen } from "@/common/types/measurement";
+import { MeasurementType, createDefaultScreen } from "@/common/types/measurement";
+
+export interface IMeasurementGroup {
+  type: MeasurementType;
+  measurements: IMeasurement[];
+}
+
+const TYPE_ORDER: MeasurementType[] = [
+  MeasurementType.QUESTIONNARIES,
+  MeasurementType.COGNITIVE_TESTS,
+  MeasurementType.MODULE_QUESTIONARIE,
+];
 import type { CreateMeasurementFormData } from "../Schema/measurementSchema";
 
 export function useMeasurements() {
@@ -33,6 +44,13 @@ export function useMeasurements() {
       q.description.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  const groupedMeasurements: IMeasurementGroup[] = TYPE_ORDER
+    .map((type) => ({
+      type,
+      measurements: filteredMeasurements.filter((m) => m.type === type),
+    }))
+    .filter((group) => group.measurements.length > 0);
+
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);
   }
@@ -43,6 +61,7 @@ export function useMeasurements() {
       id: crypto.randomUUID(),
       name: data.name,
       description: data.description ?? "",
+      type: data.type,
       screens: [createDefaultScreen()],
       createdAt: now,
       updatedAt: now,
@@ -72,7 +91,7 @@ export function useMeasurements() {
   }
 
   return {
-    measurements: filteredMeasurements,
+    groupedMeasurements,
     searchTerm,
     handleSearchChange,
     isCreateOpen,

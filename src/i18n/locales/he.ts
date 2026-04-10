@@ -576,6 +576,13 @@ activities: {
     create: "צור",
     cancel: "ביטול",
     errName: "השם חייב להכיל לפחות 2 תווים",
+    typeLabel: "סוג",
+    errType: "יש לבחור סוג מדידה",
+    types: {
+      questionnaries: "שאלונים",
+      cognitiveTests: "מבחנים קוגניטיביים",
+      moduleQuestionnaire: "שאלון מודול",
+    },
     builder: {
       title: "בונה מסכים",
       clearCanvas: "נקה לוח",

@@ -11,10 +11,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { MeasurementType } from "@/common/types/measurement";
 import {
   createMeasurementSchema,
   type CreateMeasurementFormData,
 } from "../Schema/measurementSchema";
+import { cn } from "@/lib/utils";
+
+const MEASUREMENT_TYPES = [
+  { value: MeasurementType.QUESTIONNARIES, labelKey: "measurements.types.questionnaries" },
+  { value: MeasurementType.COGNITIVE_TESTS, labelKey: "measurements.types.cognitiveTests" },
+  { value: MeasurementType.MODULE_QUESTIONARIE, labelKey: "measurements.types.moduleQuestionnaire" },
+] as const;
 
 interface CreateMeasurementDialogProps {
   open: boolean;
@@ -33,11 +41,15 @@ export function CreateMeasurementDialog({
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateMeasurementFormData>({
     resolver: zodResolver(createMeasurementSchema),
     defaultValues: { name: "", description: "" },
   });
+
+  const selectedType = watch("type");
 
   function onSubmit(data: CreateMeasurementFormData) {
     onCreate(data);
@@ -47,6 +59,10 @@ export function CreateMeasurementDialog({
   function handleClose(isOpen: boolean) {
     if (!isOpen) reset();
     onOpenChange(isOpen);
+  }
+
+  function handleTypeSelect(type: MeasurementType) {
+    setValue("type", type, { shouldValidate: true });
   }
 
   return (
@@ -67,6 +83,32 @@ export function CreateMeasurementDialog({
             {errors.name && (
               <p className="text-sm text-destructive">
                 {t(errors.name.message!)}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label>{t("measurements.typeLabel")}</Label>
+            <div className="grid grid-cols-3 gap-2">
+              {MEASUREMENT_TYPES.map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => handleTypeSelect(item.value)}
+                  className={cn(
+                    "rounded-md border px-3 py-2 text-center text-sm font-medium transition-colors",
+                    selectedType === item.value
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-muted bg-background text-muted-foreground hover:border-primary/50"
+                  )}
+                >
+                  {t(item.labelKey)}
+                </button>
+              ))}
+            </div>
+            {errors.type && (
+              <p className="text-sm text-destructive">
+                {t(errors.type.message!)}
               </p>
             )}
           </div>

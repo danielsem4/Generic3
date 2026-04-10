@@ -167,10 +167,17 @@ export function createDefaultScreen(title?: string): IQScreen {
   };
 }
 
+export enum MeasurementType {
+  QUESTIONNARIES = "QUESTIONNARIES",
+  COGNITIVE_TESTS = "COGNITIVE_TESTS",
+  MODULE_QUESTIONARIE = "MODULE_QUESTIONARIE",
+}
+
 export interface IMeasurement {
   id: string;
   name: string;
   description: string;
+  type: MeasurementType;
   screens: IQScreen[];
   createdAt: string;
   updatedAt: string;

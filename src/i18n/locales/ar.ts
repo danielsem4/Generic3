@@ -576,6 +576,13 @@ patient: {
     create: "إنشاء",
     cancel: "إلغاء",
     errName: "يجب أن يكون الاسم حرفين على الأقل",
+    typeLabel: "النوع",
+    errType: "يرجى اختيار نوع القياس",
+    types: {
+      questionnaries: "استبيانات",
+      cognitiveTests: "اختبارات معرفية",
+      moduleQuestionnaire: "استبيان الوحدة",
+    },
     builder: {
       title: "منشئ الشاشات",
       clearCanvas: "مسح اللوحة",

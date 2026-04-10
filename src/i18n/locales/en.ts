@@ -579,6 +579,13 @@ modules: {
     create: "Create",
     cancel: "Cancel",
     errName: "Name must be at least 2 characters",
+    typeLabel: "Type",
+    errType: "Please select a measurement type",
+    types: {
+      questionnaries: "Questionnaires",
+      cognitiveTests: "Cognitive Tests",
+      moduleQuestionnaire: "Module Questionnaire",
+    },
     builder: {
       title: "Screen Builder",
       clearCanvas: "Clear Canvas",

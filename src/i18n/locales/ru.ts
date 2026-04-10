@@ -580,6 +580,13 @@ patient: {
     create: "Создать",
     cancel: "Отмена",
     errName: "Название должно содержать минимум 2 символа",
+    typeLabel: "Тип",
+    errType: "Выберите тип измерения",
+    types: {
+      questionnaries: "Опросники",
+      cognitiveTests: "Когнитивные тесты",
+      moduleQuestionnaire: "Опросник модуля",
+    },
     builder: {
       title: "Конструктор экранов",
       clearCanvas: "Очистить холст",

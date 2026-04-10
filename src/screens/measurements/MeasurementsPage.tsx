@@ -10,7 +10,7 @@ import { DeleteMeasurementDialog } from "./components/DeleteMeasurementDialog";
 export default function MeasurementsPage() {
   const { t } = useTranslation();
   const {
-    measurements,
+    groupedMeasurements,
     searchTerm,
     handleSearchChange,
     isCreateOpen,
@@ -59,7 +59,7 @@ export default function MeasurementsPage() {
       </div>
 
       <MeasurementList
-        measurements={measurements}
+        groups={groupedMeasurements}
         onEdit={handleEdit}
         onDelete={setDeleteTarget}
         onDuplicate={handleDuplicate}
