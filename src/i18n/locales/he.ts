@@ -347,7 +347,10 @@ activities: {
   noActivities: "לא נמצאו פעילויות במרפאה זו",
   count_one: "פעילות אחת",
   count_other: "{{count}} פעילויות",
-  deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו."
+  deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו.",
+  detailsTitle: "פרטי הפעילות",
+  descriptionLabel: "תיאור הפעילות",
+  addDialogTitle: "הוספת פעילות למרפאה"
 },
 
   // Settings
@@ -409,7 +412,11 @@ activities: {
     cancel: "ביטול",
     delete: "מחיקה",
     areYouSure: "האם את בטוחה?",
-    noDescription: "אין תיאור זמין לפעילות זו"
+    noDescription: "אין תיאור זמין לפעילות זו",
+    confirm: "אישור",
+    close: "סגירה",
+    loading: "טוען...",
+    fetchingDetails: "מושך נתונים מהשרת..."
   },
   
   // Modules

@@ -350,7 +350,10 @@ patients: {
   deleteWarning: "This action cannot be undone. This will permanently delete the activity from the clinic.",
   noActivities: "No activities found in this clinic",
   count_one: "One activity",
-  count_other: "{{count}} activities"
+  count_other: "{{count}} activities",
+  detailsTitle: "Activity Details",
+  descriptionLabel: "Activity Description",
+  addDialogTitle: "Add Activity to Clinic"
 },
 
   // Settings
@@ -412,7 +415,11 @@ patients: {
     cancel: "Cancel",
     delete: "Delete",
     areYouSure: "Are you sure?",
-    noDescription: "No description available for this activity"
+    noDescription: "No description available for this activity",
+    confirm: "Confirm",
+    close: "Close",
+    loading: "Loading...",
+    fetchingDetails: "Fetching details from server..."
   },
 
   // Modules

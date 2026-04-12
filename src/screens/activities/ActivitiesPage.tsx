@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Plus, Search, Dumbbell, Loader2 } from "lucide-react";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { 
@@ -15,24 +16,41 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useClinicActivities } from "./hooks/useClinicActivities";
 import { ActivityItem } from "./components/ActivityItem";
+import { ActivityDetailsDialog } from "./components/ActivityDetailsDialog";
+import { AddActivityToClinicDialog } from "./components/AddActivityToClinic";
+import { removeActivityFromClinic } from "@/api/activitiesApi";
+import { useAuthStore } from "@/store/useAuthStore";
 
+  
 export default function ActivitiesPage() {
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [activityToDelete, setActivityToDelete] = useState<string | null>(null);
+
+  const { clinicId } = useAuthStore();
+  const queryClient = useQueryClient();
+  
+  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   
   const { activities, isLoading, isManager } = useClinicActivities();
+
+  const deleteMutation = useMutation({
+    mutationFn: (activityId: string) => removeActivityFromClinic(clinicId!, activityId),
+    onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["clinic-activities", clinicId] });
+    setActivityToDelete(null); 
+    console.log("Activity removed from clinic successfully");
+  },
+  onError: (error) => {
+    console.error("Failed to remove activity from clinic:", error);
+  },
+  });
 
   const filtered = activities.filter((act) =>
     act.activity_name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleDeleteConfirm = () => {
-    if (activityToDelete) {
-      console.log("Deleting activity:", activityToDelete);
-      setActivityToDelete(null);
-    }
-  };
 
   if (isLoading) {
     return (
@@ -41,7 +59,7 @@ export default function ActivitiesPage() {
       </div>
     );
   }
-
+console.log("Current selected ID:", selectedActivityId);
   return (
     <div className="p-8 max-w-5xl mx-auto space-y-8 text-left" dir="ltr">
             <div className="flex justify-between items-center gap-4">
@@ -57,7 +75,10 @@ export default function ActivitiesPage() {
         </div>
 
         {isManager && (
-          <Button className="rounded-full gap-2 px-6 shadow-lg font-bold hover:opacity-90 transition-all">
+          <Button 
+            onClick={() => setIsAddDialogOpen(true)}
+            className="rounded-full gap-2 px-6 shadow-lg font-bold hover:opacity-90 transition-all"
+          >
             <Plus size={18} strokeWidth={3} />
             {t("activities.addBtn") || "Add New Activity"}
           </Button>
@@ -83,19 +104,28 @@ export default function ActivitiesPage() {
         
         {filtered.map((activity, index) => (
           <ActivityItem 
-            key={activity.id} 
-            activity={activity} 
-            isManager={isManager} 
-            index={index}
-            onDelete={(id) => setActivityToDelete(id)} 
-            onViewDetails={(id) => console.log("Open details for:", id)} 
-          />
+          key={activity.id}
+          activity={activity}
+          index={index}
+          isManager={isManager}
+          onViewDetails={() => setSelectedActivityId(activity.activity)} 
+onDelete={() => setActivityToDelete(activity.activity)}           />
         ))}
       </div>
 
+      <AddActivityToClinicDialog 
+        isOpen={isAddDialogOpen} 
+        onClose={() => setIsAddDialogOpen(false)} 
+      />
+
+      <ActivityDetailsDialog 
+        activityId={selectedActivityId} 
+        onClose={() => setSelectedActivityId(null)} 
+      />
+
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={!!activityToDelete} onOpenChange={() => setActivityToDelete(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent className="rounded-3xl">
           <AlertDialogHeader>
             <AlertDialogTitle>{t("common.areYouSure") || "Are you sure?"}</AlertDialogTitle>
             <AlertDialogDescription>
@@ -104,11 +134,16 @@ export default function ActivitiesPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel className="rounded-xl">{t("common.cancel") || "Cancel"}</AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={handleDeleteConfirm}
-              className="bg-destructive text-destructive-foreground hover:opacity-90 rounded-xl px-6 font-bold transition-all"            >
-              {t("common.delete") || "Delete"}
-            </AlertDialogAction>
+            <AlertDialogAction
+           onClick={() => {
+           if (activityToDelete) {
+           deleteMutation.mutate(activityToDelete);
+          }
+           }}
+          className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+           >
+           {deleteMutation.isPending ? "Deleting..." : t("common.delete")}
+          </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

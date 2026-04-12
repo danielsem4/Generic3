@@ -2,7 +2,7 @@ import React from "react";
 import { Activity, Trash2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next"; 
-import type { IClinicActivity } from "@/api/activitiesapi";
+import type { IClinicActivity } from "@/api/activitiesApi";
 
 interface Props {
   activity: IClinicActivity;

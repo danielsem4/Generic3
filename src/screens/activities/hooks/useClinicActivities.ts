@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getClinicActivities, type IClinicActivity } from "@/api/activitiesapi";
+import { getClinicActivities, type IClinicActivity } from "@/api/activitiesApi";
 
 export const useClinicActivities = () => {
   const { clinicId, role } = useAuthStore();
