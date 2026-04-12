@@ -1,75 +1,43 @@
 import React from "react";
-import { Activity, Trash2, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next"; 
-import type { IClinicActivity } from "@/api/activitiesApi";
+import { Dumbbell, Trash2 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import type { IGlobalActivity } from "@/common/types/activities";
 
 interface Props {
-  activity: IClinicActivity;
+  activity: IGlobalActivity;
   isManager: boolean;
-  index: number;
-  onViewDetails?: (id: string) => void; 
-  onDelete?: (id: string) => void;     
+  onDelete?: (id: string) => void;
 }
 
-export const ActivityItem: React.FC<Props> = ({ 
-  activity, 
-  isManager, 
-  index, 
-  onViewDetails, 
-  onDelete 
+export const ActivityItem: React.FC<Props> = ({
+  activity,
+  isManager,
+  onDelete,
 }) => {
-  const { t } = useTranslation();
-  const colorVar = `var(--chart-${(index % 5) + 1})`;
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete?.(activity.id);
+  };
 
   return (
-    <div 
-      onClick={() => onViewDetails?.(activity.id)} 
-      className="flex items-center justify-between p-4 bg-card border border-border/50 rounded-2xl mb-3 hover:shadow-md cursor-pointer group transition-all duration-300"
-    >
-      <div className="flex items-center gap-4">
-        <div 
-          className="p-3 rounded-xl transition-colors"
-          style={{ backgroundColor: `color-mix(in oklch, ${colorVar}, transparent 10%)` }}
-        >
-          <Activity size={22} strokeWidth={2.5} style={{ color: colorVar }} />
-        </div>
-
-        <div className="text-left">
-          <h3 className="font-bold text-foreground text-lg leading-tight">
+    <Card className="bg-card hover:shadow-md transition-shadow border-border">
+      <CardContent className="p-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <Dumbbell size={18} className="text-primary shrink-0" />
+          <span className="font-semibold text-foreground truncate">
             {activity.activity_name}
-          </h3>
-          <p className="text-sm text-muted-foreground font-medium">
-            {activity.activity_description || t("common.noDescription")}
-          </p>
+          </span>
         </div>
-      </div>
-
-      <div className="flex items-center gap-2">
-        {isManager && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="text-destructive hover:bg-destructive/10 rounded-full z-10"
-            onClick={(e) => {
-              e.stopPropagation(); 
-              onDelete?.(activity.id);
-            }}
+        {isManager && onDelete && (
+          <button
+            type="button"
+            className="text-muted-foreground hover:text-destructive transition-colors ml-2"
+            onClick={handleDelete}
           >
-            <Trash2 size={18} />
-          </Button>
+            <Trash2 size={16} />
+          </button>
         )}
-        
-        <div 
-          className="p-1 cursor-pointer"
-          onClick={() => onViewDetails?.(activity.id)}
-        >
-          <ChevronRight 
-            size={18} 
-            className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 transition-all" 
-          />
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };

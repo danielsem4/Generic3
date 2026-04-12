@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isCatalogItem } from "./Medication";
+import { isPrescription } from "./Medication";
 import type { IMedication, IPatientPrescription } from "./Medication";
 
 const catalogItem: IMedication = {
@@ -22,16 +22,16 @@ const prescriptionItem: IPatientPrescription = {
   frequency: "DAILY",
 };
 
-describe("isCatalogItem", () => {
-  it("returns true for IMedication", () => {
-    expect(isCatalogItem(catalogItem)).toBe(true);
+describe("isPrescription", () => {
+  it("returns false for IMedication", () => {
+    expect(isPrescription(catalogItem)).toBe(false);
   });
 
-  it("returns false for IPatientPrescription", () => {
-    expect(isCatalogItem(prescriptionItem)).toBe(false);
+  it("returns true for IPatientPrescription", () => {
+    expect(isPrescription(prescriptionItem)).toBe(true);
   });
 
-  it("returns false for IClinicMedication cast to the union (structural check)", () => {
+  it("returns true for IClinicMedication cast to the union (structural check)", () => {
     const clinicMedAsUnion = {
       id: "cm1",
       clinicId: "c1",
@@ -43,6 +43,6 @@ describe("isCatalogItem", () => {
       dosage: "500mg",
       frequency: "DAILY" as const,
     } as unknown as import("./Medication").IMedication | import("./Medication").IPatientPrescription;
-    expect(isCatalogItem(clinicMedAsUnion)).toBe(false);
+    expect(isPrescription(clinicMedAsUnion)).toBe(true);
   });
 });

@@ -1,17 +1,10 @@
 import api from "@/lib/axios";
+import type { IClinicActivity, IGlobalActivity } from "@/common/types/activities";
 
 // --- Interfaces ---
-
-export interface IGlobalActivity {
-  id: string;
-  activity_name: string;
-  activity_description: string;
-}
-
-export interface IClinicActivity extends IGlobalActivity {
-  clinic: string;
-  activity: string; 
-  is_active: boolean;
+export interface IAssignActivityData {
+  activity_id: string;
+  doctor_user_id: string;
 }
 
 // --- API Functions ---
@@ -31,13 +24,6 @@ export const removeActivityFromClinic = async (clinicId: string, activityId: str
   return response.data;
 };
 
-
-
-export interface IAssignActivityData {
-  activity_id: string;
-  doctor_user_id: string;
-}
-
 export const assignActivityToPatient = async (
   clinicId: string, 
   userId: string, 
@@ -50,7 +36,6 @@ export const assignActivityToPatient = async (
   return response.data;
 };
 
-
 export const getClinicActivities = async (clinicId: string): Promise<IClinicActivity[]> => {
   const response = await api.get(`/api/v1/clinics/${clinicId}/activities/`);
   return response.data;
@@ -59,4 +44,16 @@ export const getClinicActivities = async (clinicId: string): Promise<IClinicActi
 export const getActivityById = async (activityId: string): Promise<IGlobalActivity> => {
   const response = await api.get(`/api/v1/activities/${activityId}/`);
   return response.data;
+};
+
+export const createActivity = async (data: {
+  activity_name: string;
+  activity_description: string;
+}): Promise<IGlobalActivity> => {
+  const response = await api.post("/api/v1/activities/", data);
+  return response.data;
+};
+
+export const deleteActivity = async (activityId: string): Promise<void> => {
+  await api.delete(`/api/v1/activities/${activityId}/`);
 };

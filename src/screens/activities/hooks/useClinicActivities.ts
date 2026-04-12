@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getClinicActivities, type IClinicActivity } from "@/api/activitiesApi";
+import type { IClinicActivity } from "@/common/types/activities";
+import { getClinicActivities } from "@/api/activitiesApi";
 
 export const useClinicActivities = () => {
   const { clinicId, role } = useAuthStore();
@@ -10,7 +11,7 @@ export const useClinicActivities = () => {
     queryFn: () => getClinicActivities(clinicId || ""),
     enabled: !!clinicId,
     select: (data) => {
-      return [...data].sort((a, b) => 
+      return [...data].sort((a, b) =>
         a.activity_name.localeCompare(b.activity_name)
       );
     },

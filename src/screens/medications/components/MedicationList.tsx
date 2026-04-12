@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { MedicationCard } from "./MedicationCard";
 import type { ViewMode, MedicationItem } from "../hooks/medicationRoleConfig";
 import type { IMedication, IClinicMedication, IPatientPrescription } from "@/common/types/Medication";
-import { isCatalogItem } from "@/common/types/Medication";
+import { isPrescription } from "@/common/types/Medication";
 
 interface ListProps {
   medications: MedicationItem[];
@@ -33,7 +33,7 @@ function MedicationListItem({ item, viewMode, canDelete, onDelete, index }: Item
     const asClinic = item as IClinicMedication;
     if (typeof asClinic.clinic === "string") {
       handleDelete = () => onDelete(asClinic);
-    } else if (isCatalogItem(item as IMedication | IPatientPrescription)) {
+    } else if (!isPrescription(item as IMedication | IPatientPrescription)) {
       handleDelete = () => onDelete(item as IMedication);
     }
   }

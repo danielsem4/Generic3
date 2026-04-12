@@ -351,7 +351,16 @@ const ar = {
   count_other: "{{count}} أنشطة",
   detailsTitle: "تفاصيل النشاط",
   descriptionLabel: "وصف النشاط",
-  addDialogTitle: "إضافة نشاط للعيادة"
+  addDialogTitle: "إضافة نشاط للعيادة",
+  activityNameLabel: "اسم النشاط",
+  activityNamePlaceholder: "مثال: يوغا صباحية",
+  activityDescriptionLabel: "الوصف",
+  activityDescriptionPlaceholder: "وصف مختصر للنشاط...",
+  errActivityName: "اسم النشاط مطلوب",
+  errActivityDescription: "وصف النشاط مطلوب",
+  deleteGlobalWarning: "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف النشاط نهائيًا من النظام.",
+  addError: "فشل إضافة النشاط. يرجى المحاولة مرة أخرى.",
+  deleteError: "فشل حذف النشاط. يرجى المحاولة مرة أخرى.",
 },
 
   // Settings
