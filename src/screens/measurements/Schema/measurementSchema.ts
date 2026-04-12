@@ -6,7 +6,7 @@ export const createMeasurementSchema = z.object({
   type: z.nativeEnum(MeasurementType, {
     errorMap: () => ({ message: "measurements.errType" }),
   }),
-  description: z.string().optional(),
+  isPublic: z.boolean().default(false),
 });
 
 export type CreateMeasurementFormData = z.infer<

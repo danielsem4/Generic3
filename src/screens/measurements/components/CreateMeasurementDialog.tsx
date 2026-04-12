@@ -16,24 +16,27 @@ import {
   createMeasurementSchema,
   type CreateMeasurementFormData,
 } from "../Schema/measurementSchema";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
 const MEASUREMENT_TYPES = [
-  { value: MeasurementType.QUESTIONNARIES, labelKey: "measurements.types.questionnaries" },
+  { value: MeasurementType.QUESTIONNAIRES, labelKey: "measurements.types.questionnaries" },
   { value: MeasurementType.COGNITIVE_TESTS, labelKey: "measurements.types.cognitiveTests" },
-  { value: MeasurementType.MODULE_QUESTIONARIE, labelKey: "measurements.types.moduleQuestionnaire" },
+  { value: MeasurementType.MODULE_QUESTIONNAIRE, labelKey: "measurements.types.moduleQuestionnaire" },
 ] as const;
 
 interface CreateMeasurementDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onCreate: (data: CreateMeasurementFormData) => void;
+  onCreate: (data: CreateMeasurementFormData) => Promise<void>;
+  isSubmitting?: boolean;
 }
 
 export function CreateMeasurementDialog({
   open,
   onOpenChange,
   onCreate,
+  isSubmitting,
 }: CreateMeasurementDialogProps) {
   const { t } = useTranslation();
 
@@ -46,14 +49,23 @@ export function CreateMeasurementDialog({
     formState: { errors },
   } = useForm<CreateMeasurementFormData>({
     resolver: zodResolver(createMeasurementSchema),
-    defaultValues: { name: "", description: "" },
+    defaultValues: { name: "", isPublic: false },
   });
 
   const selectedType = watch("type");
+  const isPublic = watch("isPublic");
 
-  function onSubmit(data: CreateMeasurementFormData) {
-    onCreate(data);
-    reset();
+  function handleIsPublicChange(checked: boolean) {
+    setValue("isPublic", checked);
+  }
+
+  async function onSubmit(data: CreateMeasurementFormData) {
+    try {
+      await onCreate(data);
+      reset();
+    } catch {
+      // error handled by caller
+    }
   }
 
   function handleClose(isOpen: boolean) {
@@ -113,14 +125,11 @@ export function CreateMeasurementDialog({
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="q-desc">
-              {t("measurements.descriptionLabel")}
-            </Label>
-            <Input
-              id="q-desc"
-              placeholder={t("measurements.descriptionPlaceholder")}
-              {...register("description")}
+          <div className="flex items-center justify-between">
+            <Label htmlFor="q-public">{t("measurements.isPublic")}</Label>
+            <Switch
+              checked={isPublic}
+              onCheckedChange={handleIsPublicChange}
             />
           </div>
 
@@ -132,7 +141,9 @@ export function CreateMeasurementDialog({
             >
               {t("measurements.cancel")}
             </Button>
-            <Button type="submit">{t("measurements.create")}</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {t("measurements.create")}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
