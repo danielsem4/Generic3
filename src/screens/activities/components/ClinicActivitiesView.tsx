@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { useActivitiesPage } from "../hooks/useActivitiesPage";
 import { ActivityItem } from "./ActivityItem";
+import { AddActivityToClinicDialog } from "./AddActivityToClinic";
 
 export function ClinicActivitiesView() {
   const { t } = useTranslation();
   const {
+    activities,
     filtered,
     isLoading,
     error,
@@ -19,7 +21,12 @@ export function ClinicActivitiesView() {
     openDelete,
     closeDelete,
     handleDeleteConfirm,
+    isAddOpen,
+    openAdd,
+    closeAdd,
   } = useActivitiesPage();
+
+  const clinicActivityIds = activities.map((a) => a.activity);
 
   if (isLoading) {
     return (
@@ -45,7 +52,7 @@ export function ClinicActivitiesView() {
             {t("activities.title")}
           </h1>
           {isManager && (
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground flex gap-2 h-11 px-6 font-bold shadow-sm">
+            <Button onClick={openAdd} className="bg-primary hover:bg-primary/90 text-primary-foreground flex gap-2 h-11 px-6 font-bold shadow-sm">
               <PlusCircle size={18} />
               {t("activities.addBtn")}
             </Button>
@@ -96,6 +103,8 @@ export function ClinicActivitiesView() {
           onConfirm={handleDeleteConfirm}
           variant="destructive"
         />
+
+        <AddActivityToClinicDialog isOpen={isAddOpen} onClose={closeAdd} clinicActivityIds={clinicActivityIds} />
       </div>
     </div>
   );

@@ -41,7 +41,14 @@
       "Bash(grep -E \"\\\\.tsx$\")",
       "Bash(find /Users/klutz/Desktop/Generic3/src -type f -name *statistics* -o -name *stats*)",
       "Bash(find /Users/klutz/Desktop/Generic3 -type f \\\\\\(-name *activity* -o -name *activities* \\\\\\))",
-      "Bash(grep -r activities /Users/klutz/Desktop/Generic3/src/i18n/locales/*.ts)"
+      "Bash(grep -r activities /Users/klutz/Desktop/Generic3/src/i18n/locales/*.ts)",
+      "Bash(find:*)",
+      "Bash(/tmp/ba58d2f_files.txt:*)",
+      "Read(//tmp/**)",
+      "Bash(for lang:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/klutz/Desktop/Generic3/src/i18n/locales/**)",
+      "Bash(done)"
     ]
   }
 }

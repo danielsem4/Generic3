@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Search, Loader2, Check } from "lucide-react";
@@ -11,9 +11,10 @@ import { useAuthStore } from "@/store/useAuthStore";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  clinicActivityIds: string[];
 }
 
-export const AddActivityToClinicDialog = ({ isOpen, onClose }: Props) => {
+export const AddActivityToClinicDialog = ({ isOpen, onClose, clinicActivityIds }: Props) => {
   const { t } = useTranslation();
   const { clinicId } = useAuthStore();
   const queryClient = useQueryClient();
@@ -36,7 +37,6 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose }: Props) => {
       queryClient.invalidateQueries({ queryKey: ["clinic-activities", clinicId] });
       onClose();
       setSelectedId(null);
-      console.log("Activity added successfully and dialog closed!");
       },
       onError: (error) => {
       console.error("Failed to add activity:", error);
@@ -44,7 +44,10 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose }: Props) => {
   });
 
 
-  const filtered = allActivities.filter((act) =>
+  const connectedIds = new Set(clinicActivityIds);
+  const available = allActivities.filter((act) => !connectedIds.has(act.id));
+
+  const filtered = available.filter((act) =>
     act.activity_name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -54,7 +57,7 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose }: Props) => {
         <DialogHeader className="p-6 pb-0">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-black tracking-tight text-center w-full">
-              {t("activities.addBtn") || "Add Activity to Clinic"}
+              {t("activities.addBtn")}
             </DialogTitle>
           </div>
           
@@ -106,7 +109,7 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose }: Props) => {
             disabled={!selectedId || addMutation.isPending}
             onClick={() => selectedId && addMutation.mutate(selectedId)}
           >
-            {addMutation.isPending ? <Loader2 className="animate-spin" /> : t("common.confirm") || "Confirm"}
+            {addMutation.isPending ? <Loader2 className="animate-spin" /> : t("common.confirm")}
           </Button>
         </div>
       </DialogContent>

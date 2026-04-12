@@ -1,8 +1,8 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Loader2, Info, Activity as ActivityIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { getActivityById } from "@/api/activitiesApi";
 
 interface Props {
@@ -37,7 +37,7 @@ export const ActivityDetailsDialog = ({ activityId, onClose }: Props) => {
             <div className="flex flex-col items-center justify-center py-10 gap-3">
               <Loader2 className="animate-spin text-primary" size={32} />
               <p className="text-sm text-muted-foreground font-medium italic">
-                {t("common.fetchingDetails") || "Fetching details..."}
+                {t("common.fetchingDetails")}
               </p>
             </div>
           ) : (
@@ -45,7 +45,7 @@ export const ActivityDetailsDialog = ({ activityId, onClose }: Props) => {
               <div className="flex items-center gap-2 mb-3 text-muted-foreground">
                 <Info size={14} />
                 <h4 className="text-[10px] font-bold uppercase tracking-[0.15em]">
-                  {t("activities.descriptionLabel") || "Activity Description"}
+                  {t("activities.descriptionLabel")}
                 </h4>
               </div>
               <p className="text-foreground text-lg leading-relaxed font-medium">
@@ -60,12 +60,10 @@ export const ActivityDetailsDialog = ({ activityId, onClose }: Props) => {
             onClick={onClose}
             className="rounded-xl px-8 font-bold"
           >
-            {t("common.close") || "Close"}
+            {t("common.close")}
           </Button>
         </div>
       </DialogContent>
     </Dialog>
   );
 };
-
-import { Button } from "@/components/ui/button";
