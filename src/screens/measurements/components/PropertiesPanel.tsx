@@ -34,7 +34,7 @@ export function PropertiesPanel() {
           <PropertyField
             key={field.key}
             field={field}
-            value={(selectedComponent as Record<string, unknown>)[field.key]}
+            value={(selectedComponent as unknown as Record<string, unknown>)[field.key]}
             onChange={handlePropertyChange}
           />
         ))}

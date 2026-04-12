@@ -23,6 +23,8 @@ import type {
   IQComponent,
 } from "@/common/types/measurement";
 
+type DistributiveOmit<T, K extends keyof any> = T extends unknown ? Omit<T, K> : never;
+
 export type PropertyFieldType =
   | "text"
   | "number"
@@ -41,7 +43,7 @@ export interface ComponentRegistryEntry {
   labelKey: string;
   icon: ElementType;
   category: QComponentCategory;
-  defaultProps: Omit<IQComponent, "id">;
+  defaultProps: DistributiveOmit<IQComponent, "id">;
   propertyFields: PropertyFieldConfig[];
 }
 

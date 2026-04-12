@@ -7,6 +7,8 @@ import type { IMeasurement } from "@/common/types/measurement";
 import { MeasurementType } from "@/common/types/measurement";
 import type { CreateMeasurementFormData } from "../Schema/measurementSchema";
 import { useCreateMeasurement } from "./useCreateMeasurement";
+import { useDeleteMeasurement } from "./useDeleteMeasurement";
+import { useUpdateMeasurement } from "./useUpdateMeasurement";
 import { useMeasurementsQuery } from "./useMeasurementsQuery";
 
 export interface IMeasurementGroup {
@@ -29,10 +31,14 @@ export function useMeasurements() {
     useMeasurementsQuery(clinicId);
 
   const { createMeasurement, isSubmitting } = useCreateMeasurement();
+  const { deleteMeasurement, isDeleting } = useDeleteMeasurement();
+  const { updateMeasurement, isUpdating } = useUpdateMeasurement();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isAddExistingOpen, setIsAddExistingOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<IMeasurement | null>(null);
+  const [editTarget, setEditTarget] = useState<IMeasurement | null>(null);
 
   const filteredMeasurements = measurements.filter((q) =>
     q.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -56,13 +62,19 @@ export function useMeasurements() {
       toast.success(t("measurements.createSuccess"));
     } catch {
       toast.error(t("measurements.createError"));
-      throw new Error("create failed");
     }
   }
 
-  function handleDelete() {
+  async function handleDelete() {
     if (!deleteTarget) return;
-    setDeleteTarget(null);
+    try {
+      await deleteMeasurement(deleteTarget.id);
+      toast.success(t("measurements.deleteSuccess"));
+    } catch {
+      toast.error(t("measurements.deleteError"));
+    } finally {
+      setDeleteTarget(null);
+    }
   }
 
   function handleDuplicate(id: string) {
@@ -73,19 +85,62 @@ export function useMeasurements() {
     navigate(`/modules/measurements/builder/${id}`);
   }
 
+  function handleEditMetadata(measurement: IMeasurement) {
+    setEditTarget(measurement);
+  }
+
+  function handleAdoptSuccess() {
+    toast.success(t("measurements.adoptSuccess"));
+    setIsAddExistingOpen(false);
+  }
+
+  async function handleUpdate(data: {
+    name: string;
+    type: string;
+    isPublic: boolean;
+    isActive: boolean;
+  }) {
+    if (!editTarget) return;
+    try {
+      await updateMeasurement({
+        measurementId: editTarget.id,
+        data: {
+          measurement_name: data.name,
+          type: data.type,
+          is_public: data.isPublic,
+          is_active: data.isActive,
+        },
+      });
+      toast.success(t("measurements.updateSuccess"));
+      setEditTarget(null);
+    } catch {
+      toast.error(t("measurements.updateError"));
+    }
+  }
+
   return {
+    measurements,
     groupedMeasurements,
     searchTerm,
     handleSearchChange,
     isCreateOpen,
     setIsCreateOpen,
+    isAddExistingOpen,
+    setIsAddExistingOpen,
+    handleAdoptSuccess,
     deleteTarget,
     setDeleteTarget,
+    editTarget,
+    setEditTarget,
     handleCreate,
     handleDelete,
     handleDuplicate,
     handleEdit,
+    handleEditMetadata,
+    handleUpdate,
     isSubmitting,
+    isDeleting,
+    isUpdating,
     isLoading,
   };
 }

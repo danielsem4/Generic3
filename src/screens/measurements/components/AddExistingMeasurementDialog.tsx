@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -8,38 +8,65 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { MeasurementType } from "@/common/types/measurement";
 import type { IMeasurement } from "@/common/types/measurement";
 import { useAddExistingMeasurement } from "../hooks/useAddExistingMeasurement";
+
+const TYPE_LABEL_KEYS: Record<MeasurementType, string> = {
+  [MeasurementType.QUESTIONNAIRES]: "measurements.types.questionnaries",
+  [MeasurementType.COGNITIVE_TESTS]: "measurements.types.cognitiveTests",
+  [MeasurementType.MODULE_QUESTIONNAIRE]: "measurements.types.moduleQuestionnaire",
+};
 
 interface AddExistingMeasurementDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onAdd: (measurement: IMeasurement) => void;
+  clinicMeasurements: IMeasurement[];
+  onAdoptSuccess: () => void;
 }
 
 export function AddExistingMeasurementDialog({
   open,
   onOpenChange,
-  onAdd,
+  clinicMeasurements,
+  onAdoptSuccess,
 }: AddExistingMeasurementDialogProps) {
   const { t } = useTranslation();
   const {
     searchTerm,
     handleSearchChange,
     filteredMeasurements,
-    selectedId,
-    handleSelect,
-    handleAdd,
+    selectedIds,
+    handleToggle,
+    handleSelectAll,
+    handleDeselectAll,
+    allSelected,
+    handleAdopt,
     handleClose,
-  } = useAddExistingMeasurement();
+    isLoadingPublic,
+    isAdopting,
+  } = useAddExistingMeasurement(clinicMeasurements);
 
   function handleOpenChange(isOpen: boolean) {
-    handleClose(isOpen);
+    if (!isOpen) handleClose();
     onOpenChange(isOpen);
   }
 
-  function handleConfirm() {
-    handleAdd(onAdd);
+  async function handleConfirm() {
+    const success = await handleAdopt();
+    if (success) {
+      handleClose();
+      onAdoptSuccess();
+    }
+  }
+
+  function handleToggleAll() {
+    if (allSelected) {
+      handleDeselectAll();
+    } else {
+      handleSelectAll();
+    }
   }
 
   return (
@@ -62,37 +89,65 @@ export function AddExistingMeasurementDialog({
           />
         </div>
 
-        <div className="max-h-64 overflow-y-auto space-y-1 border border-border rounded-md p-2">
-          {filteredMeasurements.length === 0 && (
+        <div className="max-h-64 overflow-y-auto border border-border rounded-md">
+          {isLoadingPublic ? (
+            <div className="flex justify-center py-8">
+              <Loader2 className="animate-spin text-primary" size={24} />
+            </div>
+          ) : filteredMeasurements.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
               {t("measurements.noExistingData")}
             </p>
+          ) : (
+            <>
+              <label className="flex items-center gap-3 p-2 border-b border-border cursor-pointer hover:bg-accent">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={handleToggleAll}
+                  className="accent-primary"
+                />
+                <span className="text-sm font-medium text-foreground">
+                  {allSelected
+                    ? t("measurements.deselectAll")
+                    : t("measurements.selectAll")}
+                </span>
+              </label>
+              {filteredMeasurements.map((m) => (
+                <label
+                  key={m.id}
+                  className={`flex items-center gap-3 p-2 cursor-pointer hover:bg-accent ${
+                    selectedIds.has(m.id) ? "bg-accent" : ""
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(m.id)}
+                    onChange={() => handleToggle(m.id)}
+                    className="accent-primary"
+                  />
+                  <span className="text-sm text-foreground">{m.name}</span>
+                  <Badge variant="outline" className="ml-auto text-xs">
+                    {t(TYPE_LABEL_KEYS[m.type])}
+                  </Badge>
+                </label>
+              ))}
+            </>
           )}
-          {filteredMeasurements.map((m) => (
-            <label
-              key={m.id}
-              className={`flex items-center gap-3 p-2 rounded cursor-pointer hover:bg-accent ${
-                selectedId === m.id ? "bg-accent" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="existing-measurement"
-                checked={selectedId === m.id}
-                onChange={() => handleSelect(m.id)}
-                className="accent-primary"
-              />
-              <span className="text-sm text-foreground">{m.name}</span>
-            </label>
-          ))}
         </div>
 
         <div className="flex justify-end gap-2">
           <Button variant="outline" onClick={() => handleOpenChange(false)}>
             {t("measurements.cancel")}
           </Button>
-          <Button onClick={handleConfirm} disabled={!selectedId}>
-            {t("measurements.add")}
+          <Button
+            onClick={handleConfirm}
+            disabled={selectedIds.size === 0 || isAdopting}
+          >
+            {isAdopting ? (
+              <Loader2 className="animate-spin mr-2" size={16} />
+            ) : null}
+            {t("measurements.addCount", { count: selectedIds.size })}
           </Button>
         </div>
       </DialogContent>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Ruler, Plus, Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,24 +6,34 @@ import { useMeasurements } from "./hooks/useMeasurements";
 import { MeasurementList } from "./components/MeasurementList";
 import { CreateMeasurementDialog } from "./components/CreateMeasurementDialog";
 import { DeleteMeasurementDialog } from "./components/DeleteMeasurementDialog";
+import { EditMeasurementDialog } from "./components/EditMeasurementDialog";
 import { AddExistingMeasurementDialog } from "./components/AddExistingMeasurementDialog";
 
 export default function MeasurementsPage() {
   const { t } = useTranslation();
-  const [isAddExistingOpen, setIsAddExistingOpen] = useState(false);
   const {
+    measurements,
     groupedMeasurements,
     searchTerm,
     handleSearchChange,
     isCreateOpen,
     setIsCreateOpen,
+    isAddExistingOpen,
+    setIsAddExistingOpen,
+    handleAdoptSuccess,
     deleteTarget,
     setDeleteTarget,
+    editTarget,
+    setEditTarget,
     handleCreate,
     handleDelete,
     handleDuplicate,
     handleEdit,
+    handleEditMetadata,
+    handleUpdate,
     isSubmitting,
+    isDeleting,
+    isUpdating,
     isLoading,
   } = useMeasurements();
 
@@ -80,6 +89,7 @@ export default function MeasurementsPage() {
         <MeasurementList
           groups={groupedMeasurements}
           onEdit={handleEdit}
+          onEditMetadata={handleEditMetadata}
           onDelete={setDeleteTarget}
           onDuplicate={handleDuplicate}
         />
@@ -96,12 +106,21 @@ export default function MeasurementsPage() {
         measurement={deleteTarget}
         onOpenChange={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
+        isDeleting={isDeleting}
+      />
+
+      <EditMeasurementDialog
+        measurement={editTarget}
+        onOpenChange={() => setEditTarget(null)}
+        onConfirm={handleUpdate}
+        isUpdating={isUpdating}
       />
 
       <AddExistingMeasurementDialog
         open={isAddExistingOpen}
         onOpenChange={setIsAddExistingOpen}
-        onAdd={() => {}}
+        clinicMeasurements={measurements}
+        onAdoptSuccess={handleAdoptSuccess}
       />
     </div>
   );

@@ -167,11 +167,12 @@ export function createDefaultScreen(title?: string): IQScreen {
   };
 }
 
-export enum MeasurementType {
-  QUESTIONNAIRES = "QUESTIONNAIRES",
-  COGNITIVE_TESTS = "COGNITIVE_TESTS",
-  MODULE_QUESTIONNAIRE = "MODULE_QUESTIONNAIRE",
-}
+export const MeasurementType = {
+  QUESTIONNAIRES: "QUESTIONNAIRES",
+  COGNITIVE_TESTS: "COGNITIVE_TESTS",
+  MODULE_QUESTIONNAIRE: "MODULE_QUESTIONNAIRE",
+} as const;
+export type MeasurementType = (typeof MeasurementType)[keyof typeof MeasurementType];
 
 export interface IMeasurement {
   id: string;

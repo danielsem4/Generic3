@@ -54,7 +54,7 @@ function HeadingPreview({
 }: {
   component: Extract<IQComponent, { type: "heading" }>;
 }) {
-  const Tag = `h${component.level}` as keyof JSX.IntrinsicElements;
+  const Tag = `h${component.level}` as `h${1 | 2 | 3 | 4}`;
   const sizes = {
     1: "text-2xl",
     2: "text-xl",

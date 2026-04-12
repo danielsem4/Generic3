@@ -15,12 +15,14 @@ interface DeleteMeasurementDialogProps {
   measurement: IMeasurement | null;
   onOpenChange: () => void;
   onConfirm: () => void;
+  isDeleting?: boolean;
 }
 
 export function DeleteMeasurementDialog({
   measurement,
   onOpenChange,
   onConfirm,
+  isDeleting,
 }: DeleteMeasurementDialogProps) {
   const { t } = useTranslation();
 
@@ -41,6 +43,7 @@ export function DeleteMeasurementDialog({
           <AlertDialogCancel>{t("measurements.cancel")}</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
+            disabled={isDeleting}
             className="bg-destructive text-destructive-foreground hover:opacity-90"
           >
             {t("measurements.delete")}

@@ -1,4 +1,5 @@
 import { useDroppable } from "@dnd-kit/core";
+import type { DraggableAttributes, DraggableSyntheticListeners } from "@dnd-kit/core";
 import {
   SortableContext,
   horizontalListSortingStrategy,
@@ -10,8 +11,8 @@ import { CanvasComponentRenderer } from "./CanvasComponentRenderer";
 interface SortableProps {
   ref: (node: HTMLElement | null) => void;
   style: React.CSSProperties;
-  attributes: Record<string, unknown>;
-  listeners: Record<string, unknown> | undefined;
+  attributes: DraggableAttributes;
+  listeners: DraggableSyntheticListeners;
 }
 
 interface RowContainerRendererProps {

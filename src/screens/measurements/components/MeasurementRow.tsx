@@ -10,6 +10,7 @@ import type { IMeasurement } from "@/common/types/measurement";
 interface MeasurementRowProps {
   measurement: IMeasurement;
   onEdit: (id: string) => void;
+  onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
 }
@@ -17,6 +18,7 @@ interface MeasurementRowProps {
 export function MeasurementRow({
   measurement,
   onEdit,
+  onEditMetadata,
   onDelete,
   onDuplicate,
 }: MeasurementRowProps) {
@@ -29,7 +31,7 @@ export function MeasurementRow({
 
   function handleEdit(e: React.MouseEvent) {
     e.stopPropagation();
-    onEdit(id);
+    onEditMetadata(measurement);
   }
 
   function handleDuplicate(e: React.MouseEvent) {

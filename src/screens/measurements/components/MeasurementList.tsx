@@ -7,6 +7,7 @@ import { MeasurementTypeColumn } from "./MeasurementTypeColumn";
 interface MeasurementListProps {
   groups: IMeasurementGroup[];
   onEdit: (id: string) => void;
+  onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
 }
@@ -14,6 +15,7 @@ interface MeasurementListProps {
 export function MeasurementList({
   groups,
   onEdit,
+  onEditMetadata,
   onDelete,
   onDuplicate,
 }: MeasurementListProps) {
@@ -36,6 +38,7 @@ export function MeasurementList({
           type={group.type}
           measurements={group.measurements}
           onEdit={onEdit}
+          onEditMetadata={onEditMetadata}
           onDelete={onDelete}
           onDuplicate={onDuplicate}
         />

@@ -111,7 +111,7 @@ export function CanvasComponentRenderer({
 function ComponentPreview({ component }: { component: IQComponent }) {
   switch (component.type) {
     case "heading": {
-      const Tag = `h${component.level}` as keyof JSX.IntrinsicElements;
+      const Tag = `h${component.level}` as `h${1 | 2 | 3 | 4}`;
       const sizes = { 1: "text-2xl", 2: "text-xl", 3: "text-lg", 4: "text-base" };
       return <Tag className={`font-bold ${sizes[component.level]}`}>{component.text}</Tag>;
     }

@@ -8,12 +8,20 @@ export interface ICreateMeasurementPayload {
   is_public: boolean;
 }
 
+export interface IUpdateMeasurementPayload {
+  measurement_name?: string;
+  type?: string;
+  is_public?: boolean;
+  is_active?: boolean;
+}
+
 interface IMeasurementRaw {
   id: string;
   clinic: string;
   measurement: string;
   measurement_name: string;
   measurement_type: string;
+  type?: string;
   is_public: boolean;
   is_active: boolean;
 }
@@ -23,6 +31,18 @@ function mapRawToMeasurement(raw: IMeasurementRaw): IMeasurement {
     id: raw.measurement,
     name: raw.measurement_name,
     type: raw.measurement_type as MeasurementType,
+    isPublic: raw.is_public,
+    isActive: raw.is_active,
+    clinicId: raw.clinic,
+    screens: [],
+  };
+}
+
+function mapRawPublicMeasurement(raw: IMeasurementRaw): IMeasurement {
+  return {
+    id: raw.id,
+    name: raw.measurement_name,
+    type: (raw.measurement_type ?? raw.type) as MeasurementType,
     isPublic: raw.is_public,
     isActive: raw.is_active,
     clinicId: raw.clinic,
@@ -49,3 +69,44 @@ export const createMeasurement = async (
   );
   return response.data;
 };
+
+export async function deleteMeasurement(
+  clinicId: string,
+  measurementId: string,
+): Promise<void> {
+  await api.delete(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/`,
+  );
+}
+
+export async function updateMeasurement(
+  clinicId: string,
+  measurementId: string,
+  data: IUpdateMeasurementPayload,
+): Promise<IMeasurementRaw> {
+  const response = await api.patch<IMeasurementRaw>(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/`,
+    data,
+  );
+  return response.data;
+}
+
+export async function fetchPublicMeasurements(): Promise<IMeasurement[]> {
+  const response = await api.get<IMeasurementRaw[]>(
+    `/api/v1/measurements/?is_public=true`,
+  );
+  return response.data.map(mapRawPublicMeasurement);
+}
+
+export async function adoptMeasurement(
+  clinicId: string,
+  measurementId: string,
+  measurementName: string,
+  measurementType: string,
+): Promise<void> {
+  await api.post(`/api/v1/clinics/${clinicId}/measurements/`, {
+    measurement: measurementId,
+    measurement_name: measurementName,
+    type: measurementType,
+  });
+}

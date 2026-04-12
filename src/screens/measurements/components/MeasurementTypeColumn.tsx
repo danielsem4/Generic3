@@ -15,6 +15,7 @@ interface MeasurementTypeColumnProps {
   type: MeasurementType;
   measurements: IMeasurement[];
   onEdit: (id: string) => void;
+  onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
 }
@@ -23,6 +24,7 @@ export function MeasurementTypeColumn({
   type,
   measurements,
   onEdit,
+  onEditMetadata,
   onDelete,
   onDuplicate,
 }: MeasurementTypeColumnProps) {
@@ -48,6 +50,7 @@ export function MeasurementTypeColumn({
                 key={m.id}
                 measurement={m}
                 onEdit={onEdit}
+                onEditMetadata={onEditMetadata}
                 onDelete={onDelete}
                 onDuplicate={onDuplicate}
               />
