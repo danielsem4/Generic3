@@ -353,6 +353,18 @@ activities: {
   count_many: "{{count}} занятий",
   count_other: "{{count}} занятий",
   deleteWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из клиники.",
+  detailsTitle: "Детали мероприятия",
+  descriptionLabel: "Описание мероприятия",
+  addDialogTitle: "Добавить мероприятие в клинику",
+  activityNameLabel: "Название занятия",
+  activityNamePlaceholder: "Например: Утренняя йога",
+  activityDescriptionLabel: "Описание",
+  activityDescriptionPlaceholder: "Краткое описание занятия...",
+  errActivityName: "Название занятия обязательно",
+  errActivityDescription: "Описание занятия обязательно",
+  deleteGlobalWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из системы.",
+  addError: "Не удалось добавить занятие. Попробуйте ещё раз.",
+  deleteError: "Не удалось удалить занятие. Попробуйте ещё раз.",
 },
 
   // Settings
@@ -414,8 +426,13 @@ activities: {
     cancel: "Отмена",
     delete: "Удалить",
     areYouSure: "Вы уверены?",
-    noDescription: "Описание этого занятия отсутствует"
+    noDescription: "Описание этого занятия отсутствует",
+    confirm: "Подтвердить",
+    close: "Закрыть",
+    loading: "Загрузка...",
+    fetchingDetails: "Получение данных с сервера..."
   },
+
   // Modules
   modules: {
   title: "Мои модули",

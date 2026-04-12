@@ -350,7 +350,19 @@ patients: {
   deleteWarning: "This action cannot be undone. This will permanently delete the activity from the clinic.",
   noActivities: "No activities found in this clinic",
   count_one: "One activity",
-  count_other: "{{count}} activities"
+  count_other: "{{count}} activities",
+  detailsTitle: "Activity Details",
+  descriptionLabel: "Activity Description",
+  addDialogTitle: "Add Activity to Clinic",
+  activityNameLabel: "Activity Name",
+  activityNamePlaceholder: "e.g. Morning Yoga",
+  activityDescriptionLabel: "Description",
+  activityDescriptionPlaceholder: "Brief description of the activity...",
+  errActivityName: "Activity name is required",
+  errActivityDescription: "Activity description is required",
+  deleteGlobalWarning: "This action cannot be undone. This will permanently delete the activity from the system.",
+  addError: "Failed to add activity. Please try again.",
+  deleteError: "Failed to delete activity. Please try again.",
 },
 
   // Settings
@@ -412,7 +424,11 @@ patients: {
     cancel: "Cancel",
     delete: "Delete",
     areYouSure: "Are you sure?",
-    noDescription: "No description available for this activity"
+    noDescription: "No description available for this activity",
+    confirm: "Confirm",
+    close: "Close",
+    loading: "Loading...",
+    fetchingDetails: "Fetching details from server..."
   },
 
   // Modules
