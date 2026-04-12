@@ -248,70 +248,86 @@ const ru = {
   },
 
   // Patient Medications
-  patientMeds: {
-    title: "Мои лекарства",
-    searchPlaceholder: "Поиск по названию лекарства...",
-    addMedication: "Добавить лекарство",
-    standardDosage: "Стандартная дозировка: 1 таблетка",
-    intakeLogTitle: "Журнал приёма лекарств",
-    refreshData: "Обновить данные", 
-    regularDosage: "Обычная дозировка: 1 таблетка",
-    activeStatus: "Активен",
-    newPrescription: "Новый рецепт",
-    configureSchedule: "Настроить график приема лекарств и дозировку.",
-    medicationLabel: "Лекарство",
-    timelineLabel: "График",
-    dosageLabel: "Дозировка",
-    startDate: "Дата начала",
-    endDate: "Дата окончания",
-    amount: "Количество",
-    unit: "Единица измерения",
-    frequencyLabel: "Частота и график",
-    frequencyOptions: {
-      once: "Разово",
-      daily: "Ежедневно",
-      weekly: "Еженедельно",
-      monthly: "Ежемесячно"},
-    timesPerDay: "Количество раз в день",
-    addSlot: "Добавить интервал",
-    finalize: "Завершить рецепт",
-    editPrescription: "Редактировать рецепт",
-    saveChanges: "Сохранить изменения",
-    addSuccess: "Рецепт успешно добавлен.",
-    addError: "Не удалось добавить рецепт. Пожалуйста, попробуйте снова.",
-    cancel: "Отмена",
-    questions: {
-      whichDays: "В какие дни недели?",
-      whichWeeks: "В какие недели месяца?"},
-    units: {
-       ml: "мл",
-       mg: "мг",
-       tabs: "таблетки"},
-    deleteConfirm: {
-    title: "Вы уверены?",
-    description: "Это действие нельзя отменить. Лекарство будет окончательно удалено из записи пациента.",
-    cancel: "Отмена",
-    confirm: "Удалить лекарство"},
-    days: {
-    monday: "Понедельник", tuesday: "Вторник", wednesday: "Среда", 
-    thursday: "Четверг", friday: "Пятница", saturday: "Суббота", sunday: "Воскресенье"},
-    weeks: {
-    1: "1-я неделя", 2: "2-я неделя", 3: "3-я неделя", 4: "4-я неделя"},
-    resetFilters: "Сбросить фильтры",
-    filters: {
-      dateFrom: "С даты:",
-      dateTo: "По дату:",
-      medication: "Лекарство:",
-      allMeds: "Все лекарства"},
-    table: {
-      intakeDate: "Дата приема",
-      intakeTime: "Время приема",
-      medId: "ID лекарства",
-      medName: "Название",
-      form: "Форма",
-      dosage: "Дозировка",
-      status: "Статус"}
+  ppatientMeds: {
+  title: "Мои лекарства",
+  addMedication: "Добавить лекарство",
+  searchPlaceholder: "Поиск лекарств...",
+  standardDosage: "Стандартная дозировка",
+  intakeLogTitle: "Журнал приема лекарств",
+  refreshData: "Обновить данные",
+  regularDosage: "Регулярная дозировка",
+  activeStatus: "Активно",
+  newPrescription: "Новый рецепт",
+  configureSchedule: "Настройка расписания и дозировки лекарства.",
+  medicationLabel: "Лекарство",
+  timelineLabel: "Период",
+  dosageLabel: "Дозировка",
+  startDate: "Дата начала",
+  endDate: "Дата окончания",
+  amount: "Количество",
+  unit: "Единица",
+  frequencyLabel: "Частота и расписание",
+  frequencyOptions: {
+    once: "Один раз",
+    daily: "Ежедневно",
+    weekly: "Еженедельно",
+    monthly: "Ежемесячно"
   },
+  timesPerDay: "Раз в день",
+  addSlot: "Добавить время",
+  finalize: "Назначить рецепт",
+  editPrescription: "Редактировать рецепт",
+  saveChanges: "Сохранить изменения",
+  addSuccess: "Рецепт успешно добавлен.",
+  addError: "Не удалось добавить рецепт. Попробуйте снова.",
+  cancel: "Отмена",
+  questions: {
+    whichDays: "В какие дни недели?",
+    whichWeeks: "В какие недели месяца?"
+  },
+  units: {
+    ml: "мл",
+    mg: "мг",
+    tabs: "Таблетки"
+  },
+  days: {
+    monday: "Понедельник",
+    tuesday: "Вторник",
+    wednesday: "Среда",
+    thursday: "Четверг",
+    friday: "Пятница",
+    saturday: "Суббота",
+    sunday: "Воскресенье"
+  },
+  weeks: {
+    1: "1-я неделя",
+    2: "2-я неделя",
+    3: "3-я неделя",
+    4: "4-я неделя"
+  },
+  deleteConfirm: {
+    title: "Вы уверены, что хотите удалить это лекарство?",
+    description: "Это действие навсегда удалит лекарство из записи пациента.",
+    cancel: "Отмена",
+    confirm: "Удалить"
+  },
+  resetFilters: "Сбросить фильтры",
+  filters: {
+    dateFrom: "С даты:",
+    dateTo: "По дату:",
+    medication: "Лекарство:",
+    allMeds: "Все лекарства"
+  },
+  table: {
+    intakeDate: "Дата приема",
+    intakeTime: "Время приема",
+    medId: "ID лекарства",
+    medName: "Название лекарства",
+    form: "Форма",
+    dosage: "Дозировка",
+    status: "Статус"
+  }
+},
 
   // Clinic
   clinic: {
@@ -363,6 +379,77 @@ activities: {
   deleteGlobalWarning: "Это действие нельзя отменить. Занятие будет окончательно удалено из системы.",
   addError: "Не удалось добавить занятие. Попробуйте ещё раз.",
   deleteError: "Не удалось удалить занятие. Попробуйте ещё раз.",
+},
+  
+// Patient Activities
+  patientActivities: {
+  title: "Мои активности",
+  searchPlaceholder: "Поиск активностей...",
+  addActivity: {
+    title: "Добавить активность",
+    newActivity: "Новая активность",
+    timelineLabel: "Период",
+    startDate: "Дата начала",
+    endDate: "Дата окончания",
+    frequencyLabel: "Частота и расписание",
+    frequencyOptions: {
+      once: "Один раз",
+      daily: "Ежедневно",
+      weekly: "Еженедельно",
+      monthly: "Ежемесячно",
+    },
+    daysOfWeek: "В какие дни недели?",
+    dayOfMonth: "В какой день месяца?",
+    addTime: "Добавить время",
+    days: {
+      MON: "Понедельник",
+      TUE: "Вторник",
+      WED: "Среда",
+      THU: "Четверг",
+      FRI: "Пятница",
+      SAT: "Суббота",
+      SUN: "Воскресенье"
+    },
+    finalize: "Назначить активность",
+    cancel: "Отмена",
+    addSuccess: "Активность успешно добавлена.",
+    addError: "Не удалось добавить активность. Попробуйте снова.",
+  },
+  activityLabel: "Активность",
+  editActivity: {
+    title: "Редактировать активность",
+    activityLabel: "Активность",
+    timelineLabel: "Период",
+    startDate: "Дата начала",
+    endDate: "Дата окончания",
+    frequencyLabel: "Частота и расписание",
+    editError: "Не удалось обновить активность. Попробуйте снова.",
+    editSuccess: "Активность успешно обновлена.",
+    saveChanges: "Сохранить изменения",
+    cancel: "Отмена"
+  },
+  deleteConfirm: {
+    title: "Вы уверены, что хотите удалить эту активность?",
+    description: "Это действие навсегда удалит активность из записи пациента.",
+    cancel: "Отмена",
+    confirm: "Удалить"
+  },
+  logTitle: "Журнал активностей",
+  refreshData: "Обновить данные",
+  resetFilters: "Сбросить фильтры",
+  defaultSubtitle: "Общая активность",
+  table: {
+    date: "Дата",
+    time: "Время",
+    activityName: "Название активности",
+  },
+  filters: {
+    allActivities: "Все активности",
+    dateFrom: "С даты:",
+    activity: "Активность:"
+  },
+  deleteError: "Не удалось удалить активность. Попробуйте снова.",
+  deleteSuccess: "Активность успешно удалена.",
 },
 
   // Settings

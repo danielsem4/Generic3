@@ -247,70 +247,86 @@ patients: {
   },
 
   // Patient Medications
-   patientMeds: {
-    title: "התרופות שלי",
-    addMedication: "הוסף תרופה",
-    searchPlaceholder: "חיפוש תרופות...",
-    standardDosage: "מינון סטנדרטי",
-    intakeLogTitle: "יומן קבלת תרופות",
-    refreshData: "רענון נתונים",
-    regularDosage: "מינון רגיל",
-    activeStatus: "פעיל",
-    newPrescription: "מרשם חדש",
-    configureSchedule: "הגדרת לוח זמנים",
-    medicationLabel: "תרופה",
-    timelineLabel: "לוח זמנים",
-    dosageLabel: "מינון",
-    startDate: "תאריך התחלה",
-    endDate: "תאריך סיום",
-    amount: "כמות",
-    unit: "יחידה",
-    frequencyLabel: "תדירות",
-    frequencyOptions: {
-      once: "חד פעמי",
-      daily: "יומי",
-      weekly: "שבועי",
-      monthly: "חודשי"},
-    timesPerDay: "כמה פעמים ביום",
-    addSlot: "הוסף זמן",
-    finalize: "סיום מרשם",
-    editPrescription: "עריכת מרשם",
-    saveChanges: "שמור שינויים",
-    addSuccess: "המרשם נוסף בהצלחה.",
-    addError: "הוספת המרשם נכשלה. אנא נסה שנית.",
-    cancel: "ביטול",
-    questions: {
-      whichDays: "באילו ימים בשבוע?",
-      whichWeeks: "באילו שבועות של החודש?"},
-    units: {
-       ml: "מ'ל",
-       mg: "מ'ג",
-       tabs: "טבליות"},
-    days: {
-    monday: "שני", tuesday: "שלישי", wednesday: "רביעי", 
-    thursday: "חמישי", friday: "שישי", saturday: "שבת", sunday: "ראשון"},
-    weeks: {
-    1: "שבוע 1", 2: "שבוע 2", 3: "שבוע 3", 4: "שבוע 4"},
-    deleteConfirm: {
-    title: "האם אתה בטוח?",
-    description: "פעולה זו לא ניתנת לביטול. זה ימחק לצמיתות את התרופה מרשומת המטופל.",
-    cancel: "ביטול",
-    confirm: "מחק תרופה"},
-    resetFilters: "אפס סינון",
-    filters: {
-      dateFrom: "מתאריך:",
-      dateTo: "עד תאריך:",
-      medication: "תרופה:",
-      allMeds: "כל התרופות"},
-    table: {
-      intakeDate: "תאריך נטילה",
-      intakeTime: "שעת נטילה",
-      medId: "מזהה תרופה",
-      medName: "שם תרופה",
-      form: "צורה",
-      dosage: "מינון",
-      status: "סטטוס"}
+patientMeds: {
+  title: "התרופות שלי",
+  addMedication: "הוספת תרופה",
+  searchPlaceholder: "חיפוש תרופות...",
+  standardDosage: "מינון סטנדרטי",
+  intakeLogTitle: "יומן נטילת תרופות",
+  refreshData: "רענון נתונים",
+  regularDosage: "מינון קבוע",
+  activeStatus: "פעיל",
+  newPrescription: "מרשם חדש",
+  configureSchedule: "הגדרת לוח זמנים ומינון לתרופה.",
+  medicationLabel: "תרופה",
+  timelineLabel: "טווח זמן",
+  dosageLabel: "מינון",
+  startDate: "תאריך התחלה",
+  endDate: "תאריך סיום",
+  amount: "כמות",
+  unit: "יחידה",
+  frequencyLabel: "תדירות ולוח זמנים",
+  frequencyOptions: {
+    once: "פעם אחת",
+    daily: "יומי",
+    weekly: "שבועי",
+    monthly: "חודשי"
   },
+  timesPerDay: "מספר פעמים ביום",
+  addSlot: "הוספת שעה",
+  finalize: "שיוך מרשם",
+  editPrescription: "עריכת מרשם",
+  saveChanges: "שמירת שינויים",
+  addSuccess: "המרשם נוסף בהצלחה.",
+  addError: "הוספת המרשם נכשלה. נסה שוב.",
+  cancel: "ביטול",
+  questions: {
+    whichDays: "אילו ימים בשבוע?",
+    whichWeeks: "אילו שבועות בחודש?"
+  },
+  units: {
+    ml: "מ\"ל",
+    mg: "מ\"ג",
+    tabs: "טבליות"
+  },
+  days: {
+    monday: "שני",
+    tuesday: "שלישי",
+    wednesday: "רביעי",
+    thursday: "חמישי",
+    friday: "שישי",
+    saturday: "שבת",
+    sunday: "ראשון"
+  },
+  weeks: {
+    1: "שבוע ראשון",
+    2: "שבוע שני",
+    3: "שבוע שלישי",
+    4: "שבוע רביעי"
+  },
+  deleteConfirm: {
+    title: "האם אתה בטוח שברצונך למחוק תרופה זו?",
+    description: "הפעולה תסיר את התרופה לצמיתות מרשומת המטופל.",
+    cancel: "ביטול",
+    confirm: "מחיקה"
+  },
+  resetFilters: "איפוס סינון",
+  filters: {
+    dateFrom: "מתאריך:",
+    dateTo: "עד תאריך:",
+    medication: "תרופה:",
+    allMeds: "כל התרופות"
+  },
+  table: {
+    intakeDate: "תאריך נטילה",
+    intakeTime: "שעת נטילה",
+    medId: "מזהה תרופה",
+    medName: "שם התרופה",
+    form: "צורת מתן",
+    dosage: "מינון",
+    status: "סטטוס"
+  }
+},
 
   // Clinic
   clinic: {
@@ -358,6 +374,77 @@ activities: {
   deleteGlobalWarning: "פעולה זו לא ניתנת לביטול. הפעילות תימחק לצמיתות מהמערכת.",
   addError: "הוספת הפעילות נכשלה. אנא נסה שנית.",
   deleteError: "מחיקת הפעילות נכשלה. אנא נסה שנית.",
+},
+
+// Patient Activities
+patientActivities: {
+  title: "הפעילויות שלי",
+  searchPlaceholder: "חיפוש פעילויות...",
+  addActivity: {
+    title: "הוספת פעילות",
+    newActivity: "פעילות חדשה",
+    timelineLabel: "טווח זמן",
+    startDate: "תאריך התחלה",
+    endDate: "תאריך סיום",
+    frequencyLabel: "תדירות ולוח זמנים",
+    frequencyOptions: {
+      once: "פעם אחת",
+      daily: "יומי",
+      weekly: "שבועי",
+      monthly: "חודשי",
+    },
+    daysOfWeek: "אילו ימים בשבוע?",
+    dayOfMonth: "איזה יום בחודש?",
+    addTime: "הוספת שעה",
+    days: {
+      MON: "שני",
+      TUE: "שלישי",
+      WED: "רביעי",
+      THU: "חמישי",
+      FRI: "שישי",
+      SAT: "שבת",
+      SUN: "ראשון"
+    },
+    finalize: "שיוך פעילות",
+    cancel: "ביטול",
+    addSuccess: "הפעילות נוספה בהצלחה.",
+    addError: "הוספת הפעילות נכשלה. נסה שוב.",
+  },
+  activityLabel: "פעילות",
+  editActivity: {
+    title: "עריכת פעילות",
+    activityLabel: "פעילות",
+    timelineLabel: "טווח זמן",
+    startDate: "תאריך התחלה",
+    endDate: "תאריך סיום",
+    frequencyLabel: "תדירות ולוח זמנים",
+    editError: "עדכון הפעילות נכשל. נסה שוב.",
+    editSuccess: "הפעילות עודכנה בהצלחה.",
+    saveChanges: "שמירת שינויים",
+    cancel: "ביטול"
+  },
+  deleteConfirm: {
+    title: "האם אתה בטוח שברצונך למחוק פעילות זו?",
+    description: "הפעולה תסיר את הפעילות לצמיתות מרשומת המטופל.",
+    cancel: "ביטול",
+    confirm: "מחיקה"
+  },
+  logTitle: "יומן פעילויות",
+  refreshData: "רענון נתונים",
+  resetFilters: "איפוס סינון",
+  defaultSubtitle: "פעילות כללית",
+  table: {
+    date: "תאריך",
+    time: "שעה",
+    activityName: "שם הפעילות",
+  },
+  filters: {
+    allActivities: "כל הפעילויות",
+    dateFrom: "מתאריך:",
+    activity: "פעילות:"
+  },
+  deleteError: "מחיקת הפעילות נכשלה. נסה שוב.",
+  deleteSuccess: "הפעילות נמחקה בהצלחה.",
 },
 
   // Settings
