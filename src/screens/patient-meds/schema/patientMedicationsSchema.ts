@@ -53,6 +53,7 @@ export interface IMedicationHookData {
   timeSlots: string[];
   addTimeSlot: () => void;
   removeTimeSlot: (index: number) => void;
+  updateTimeSlot: (index: number, value: string) => void;
   selectedMed: ISelectedMed | null;
   setSelectedMed: (med: ISelectedMed | null) => void;
   handleFinalize: (closeModal: () => void) => void;

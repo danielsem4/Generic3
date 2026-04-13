@@ -1,3 +1,4 @@
+
 const en = {
   // Navigation & Sidebar
   nav: {
@@ -273,8 +274,8 @@ patients: {
       weekly: "Weekly",
       monthly: "Monthly"},
     timesPerDay: "Times Per Day",
-    addSlot: "Add Slot",
-    finalize: "Finalize Prescription",
+    addSlot: "Add Time",
+    finalize: "Assign Prescription",
     editPrescription: "Edit Prescription",
     saveChanges: "Save Changes",
     addSuccess: "Prescription added successfully.",
@@ -293,10 +294,10 @@ patients: {
     weeks: {
     1: "1st Week", 2: "2nd Week", 3: "3rd Week", 4: "4th Week"},
     deleteConfirm: {
-    title: "Are you absolutely sure?",
-    description: "This action cannot be undone. This will permanently delete the medication from the patient's record.",
+    title: "Are you sure you want to delete this medication?",
+    description: "This will permanently remove the medication from the patient's record.",
     cancel: "Cancel",
-    confirm: "Delete Medication"},
+    confirm: "Delete"},
     resetFilters: "Reset Filters",
     filters: {
       dateFrom: "Date From:",
@@ -364,6 +365,78 @@ patients: {
   addError: "Failed to add activity. Please try again.",
   deleteError: "Failed to delete activity. Please try again.",
 },
+
+  // patient activities
+  patientActivities: {
+    title: "My Activities",
+    searchPlaceholder: "Search activities...",
+    addActivity: {
+      title: "Add Activity",
+      newActivity: "New Activity",
+      timelineLabel: "Timeline",
+      startDate: "Start Date",
+      endDate: "End Date",
+       frequencyLabel: "Frequency & Schedule",
+      frequencyOptions: {
+        once: "Once",
+        daily: "Daily",
+        weekly: "Weekly",
+        monthly: "Monthly",
+      },
+      daysOfWeek:"Which Days of the Week?",
+      dayOfMonth:"Which Day of the Month?",
+      addTime: "Add Time",
+
+      days: {
+        MON: "Monday",
+        TUE: "Tuesday",
+        WED: "Wednesday",
+        THU: "Thursday",
+        FRI: "Friday",
+        SAT: "Saturday",
+        SUN: "Sunday"
+      },
+      finalize: "Assign Activity",
+      cancel: "Cancel",
+      addSuccess: "Activity added successfully.",
+      addError: "Failed to add activity. Please try again.",
+    },
+    activityLabel: "Activity",
+    editActivity: {
+      title: "Edit Activity",
+      activityLabel: "Activity",
+      timelineLabel: "Timeline",
+      startDate: "Start Date",
+      endDate: "End Date",
+      frequencyLabel: "Frequency & Schedule",
+      editError: "Failed to update activity. Please try again.",
+      editSuccess: "Activity updated successfully.",
+      saveChanges: "Save Changes",
+      cancel: "Cancel"
+    },
+    deleteConfirm: {
+      title: "Are you sure you want to delete this activity?",
+      description: "This will permanently remove the activity from the patient's record.",
+      cancel: "Cancel",
+      confirm: "Delete"
+    },
+      logTitle: "Activity Log",
+      refreshData: "Refresh Data",
+      resetFilters: "Reset Filters",
+      defaultSubtitle: "General Activity",
+      table: {
+        date: "Date",
+        time: "Time",
+        activityName: "Activity Name",
+      },
+      filters: {
+      allActivities: "All Activities",
+      dateFrom: "Date From:",
+      activity: "Activity:"
+    },
+    deleteError: "Failed to delete activity. Please try again.",
+    deleteSuccess: "Activity deleted successfully.",
+  },
 
   // Settings
   settings: {
