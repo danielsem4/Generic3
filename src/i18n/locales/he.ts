@@ -364,7 +364,9 @@ activities: {
   count_one: "פעילות אחת",
   count_other: "{{count}} פעילויות",
   deleteWarning: "פעולה זו תסיר את הפעילות מהמרפאה לצמיתות. לא ניתן לבטל פעולה זו.",
-  addDialogTitle: "הוספת פעילות חדשה",
+  detailsTitle: "פרטי הפעילות",
+  descriptionLabel: "תיאור הפעילות",
+  addDialogTitle: "הוספת פעילות למרפאה",
   activityNameLabel: "שם הפעילות",
   activityNamePlaceholder: "למשל: יוגה בוקר",
   activityDescriptionLabel: "תיאור",
@@ -506,7 +508,11 @@ patientActivities: {
     cancel: "ביטול",
     delete: "מחיקה",
     areYouSure: "האם את בטוחה?",
-    noDescription: "אין תיאור זמין לפעילות זו"
+    noDescription: "אין תיאור זמין לפעילות זו",
+    confirm: "אישור",
+    close: "סגירה",
+    loading: "טוען...",
+    fetchingDetails: "מושך נתונים מהשרת..."
   },
   
   // Modules

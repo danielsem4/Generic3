@@ -366,7 +366,9 @@ const ar = {
   deleteWarning: "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف النشاط نهائيًا من العيادة.",
   count_one: "نشاط واحد",
   count_other: "{{count}} أنشطة",
-  addDialogTitle: "إضافة نشاط جديد",
+  detailsTitle: "تفاصيل النشاط",
+  descriptionLabel: "وصف النشاط",
+  addDialogTitle: "إضافة نشاط للعيادة",
   activityNameLabel: "اسم النشاط",
   activityNamePlaceholder: "مثال: يوغا صباحية",
   activityDescriptionLabel: "الوصف",
@@ -509,8 +511,13 @@ const ar = {
     cancel: "إلغاء",
     delete: "حذف",
     areYouSure: "هل أنت متأكد؟",
-    noDescription: "لا يوجد وصف متاح لهذا النشاط"
+    noDescription: "لا يوجد وصف متاح لهذا النشاط",
+    confirm: "تأكيد",
+    close: "إغلاق",
+    loading: "جاري التحميل...",
+    fetchingDetails: "جاري جلب البيانات من الخادم..."
   },
+
   // Modules
   modules: {
   title: "وحداتي",
