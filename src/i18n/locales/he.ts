@@ -613,6 +613,8 @@ activities: {
     deselectAll: "בטל בחירת הכל",
     addCount: "הוסף ({{count}})",
     adoptPartialError: "חלק מהמדידות לא נוספו בהצלחה",
+    showAdopted: "הצג כבר אומצו",
+    alreadyAdded: "כבר נוסף",
     emptyColumn: "אין מדידות בקטגוריה זו",
     types: {
       questionnaries: "שאלונים",

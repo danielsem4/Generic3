@@ -9,6 +9,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import { MeasurementType } from "@/common/types/measurement";
 import type { IMeasurement } from "@/common/types/measurement";
 import { useAddExistingMeasurement } from "../hooks/useAddExistingMeasurement";
@@ -46,6 +48,9 @@ export function AddExistingMeasurementDialog({
     handleClose,
     isLoadingPublic,
     isAdopting,
+    showAdopted,
+    handleToggleShowAdopted,
+    clinicIds,
   } = useAddExistingMeasurement(clinicMeasurements);
 
   function handleOpenChange(isOpen: boolean) {
@@ -89,6 +94,17 @@ export function AddExistingMeasurementDialog({
           />
         </div>
 
+        <div className="flex items-center gap-2">
+          <Switch
+            id="show-adopted"
+            checked={showAdopted}
+            onCheckedChange={handleToggleShowAdopted}
+          />
+          <Label htmlFor="show-adopted" className="text-sm cursor-pointer">
+            {t("measurements.showAdopted")}
+          </Label>
+        </div>
+
         <div className="max-h-64 overflow-y-auto border border-border rounded-md">
           {isLoadingPublic ? (
             <div className="flex justify-center py-8">
@@ -127,6 +143,11 @@ export function AddExistingMeasurementDialog({
                     className="accent-primary"
                   />
                   <span className="text-sm text-foreground">{m.name}</span>
+                  {clinicIds.has(m.id) && (
+                    <Badge variant="secondary" className="text-xs">
+                      {t("measurements.alreadyAdded")}
+                    </Badge>
+                  )}
                   <Badge variant="outline" className="ml-auto text-xs">
                     {t(TYPE_LABEL_KEYS[m.type])}
                   </Badge>

@@ -618,6 +618,8 @@ patient: {
     deselectAll: "Снять выбор",
     addCount: "Добавить ({{count}})",
     adoptPartialError: "Некоторые измерения не удалось добавить",
+    showAdopted: "Показать уже добавленные",
+    alreadyAdded: "Уже добавлено",
     emptyColumn: "Нет измерений в этой категории",
     types: {
       questionnaries: "Опросники",

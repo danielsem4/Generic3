@@ -614,6 +614,8 @@ patient: {
     deselectAll: "إلغاء تحديد الكل",
     addCount: "إضافة ({{count}})",
     adoptPartialError: "فشل إضافة بعض القياسات",
+    showAdopted: "عرض المعتمدة مسبقاً",
+    alreadyAdded: "مضاف مسبقاً",
     emptyColumn: "لا توجد قياسات في هذه الفئة",
     types: {
       questionnaries: "استبيانات",

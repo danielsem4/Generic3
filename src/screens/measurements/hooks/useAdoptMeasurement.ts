@@ -4,8 +4,6 @@ import { adoptMeasurement } from "@/api/measurementsApi";
 
 interface AdoptParams {
   measurementId: string;
-  measurementName: string;
-  measurementType: string;
 }
 
 export function useAdoptMeasurement() {
@@ -13,8 +11,8 @@ export function useAdoptMeasurement() {
   const clinicId = useAuthStore((s) => s.clinicId);
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: ({ measurementId, measurementName, measurementType }: AdoptParams) =>
-      adoptMeasurement(clinicId!, measurementId, measurementName, measurementType),
+    mutationFn: ({ measurementId }: AdoptParams) =>
+      adoptMeasurement(clinicId!, measurementId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["measurements"] });
       queryClient.invalidateQueries({ queryKey: ["publicMeasurements"] });

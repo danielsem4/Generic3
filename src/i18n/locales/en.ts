@@ -616,6 +616,8 @@ modules: {
     deselectAll: "Deselect All",
     addCount: "Add ({{count}})",
     adoptPartialError: "Some measurements failed to add",
+    showAdopted: "Show already adopted",
+    alreadyAdded: "Already added",
     emptyColumn: "No measurements in this category",
     types: {
       questionnaries: "Questionnaires",

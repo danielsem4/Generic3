@@ -101,12 +101,8 @@ export async function fetchPublicMeasurements(): Promise<IMeasurement[]> {
 export async function adoptMeasurement(
   clinicId: string,
   measurementId: string,
-  measurementName: string,
-  measurementType: string,
 ): Promise<void> {
   await api.post(`/api/v1/clinics/${clinicId}/measurements/`, {
     measurement: measurementId,
-    measurement_name: measurementName,
-    type: measurementType,
   });
 }

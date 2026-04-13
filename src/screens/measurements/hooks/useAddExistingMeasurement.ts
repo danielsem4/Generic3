@@ -11,6 +11,7 @@ export function useAddExistingMeasurement(
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [showAdopted, setShowAdopted] = useState(false);
 
   const { data: publicMeasurements = [], isLoading: isLoadingPublic } =
     usePublicMeasurementsQuery();
@@ -18,9 +19,9 @@ export function useAddExistingMeasurement(
 
   const clinicIds = new Set(clinicMeasurements.map((m) => m.id));
 
-  const availableMeasurements = publicMeasurements.filter(
-    (m) => !clinicIds.has(m.id),
-  );
+  const availableMeasurements = showAdopted
+    ? publicMeasurements
+    : publicMeasurements.filter((m) => !clinicIds.has(m.id));
 
   const filteredMeasurements = availableMeasurements.filter((m) =>
     m.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -60,8 +61,6 @@ export function useAddExistingMeasurement(
       try {
         await adoptMeasurement({
           measurementId: m.id,
-          measurementName: m.name,
-          measurementType: m.type,
         });
       } catch {
         errors.push(m.id);
@@ -81,9 +80,14 @@ export function useAddExistingMeasurement(
     return true;
   }
 
+  function handleToggleShowAdopted() {
+    setShowAdopted((prev) => !prev);
+  }
+
   function handleClose() {
     setSearchTerm("");
     setSelectedIds(new Set());
+    setShowAdopted(false);
   }
 
   const allSelected =
@@ -103,5 +107,8 @@ export function useAddExistingMeasurement(
     handleClose,
     isLoadingPublic,
     isAdopting,
+    showAdopted,
+    handleToggleShowAdopted,
+    clinicIds,
   };
 }
