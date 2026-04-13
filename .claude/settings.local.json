@@ -48,7 +48,9 @@
       "Bash(for lang:*)",
       "Bash(do echo:*)",
       "Read(//Users/klutz/Desktop/Generic3/src/i18n/locales/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(xargs ls:*)",
+      "Bash(npm ls:*)"
     ]
   }
 }

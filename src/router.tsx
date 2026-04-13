@@ -17,12 +17,14 @@ import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
 import Statistics from "./screens/statistics/Statistics";
 import Activities from "@/screens/activities/ActivitiesPage";
+import MeasurementsPage from "@/screens/measurements/MeasurementsPage";
+import MeasurementBuilder from "@/screens/measurements/MeasurementBuilder";
 import PatientActivities from "./screens/patient-activities/PatientActivities";
 
 function HomeRedirect() {
   const role = useRole();
   if (!role) return null;
-  return <Navigate to={ROLE_HOME_PATH[role]} replace />;  
+  return <Navigate to={ROLE_HOME_PATH[role]} replace />;
 }
 
 export const router = createBrowserRouter([
@@ -42,6 +44,9 @@ export const router = createBrowserRouter([
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
       { path: "modules/activities", element: <Activities /> },
+      { path: "modules/measurements", element: <MeasurementsPage /> },
+      { path: "modules/measurements/builder", element: <MeasurementBuilder /> },
+      { path: "modules/measurements/builder/:id", element: <MeasurementBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "patients/:userId/activities", element: <PatientActivities /> },
       { path: "clinic", element: <ClinicOverview /> },
