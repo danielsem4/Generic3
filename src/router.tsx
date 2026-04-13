@@ -19,6 +19,7 @@ import Statistics from "./screens/statistics/Statistics";
 import Activities from "@/screens/activities/ActivitiesPage";
 import MeasurementsPage from "@/screens/measurements/MeasurementsPage";
 import MeasurementBuilder from "@/screens/measurements/MeasurementBuilder";
+import PatientActivities from "./screens/patient-activities/PatientActivities";
 
 function HomeRedirect() {
   const role = useRole();
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       { path: "modules/measurements/builder", element: <MeasurementBuilder /> },
       { path: "modules/measurements/builder/:id", element: <MeasurementBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
+      { path: "patients/:userId/activities", element: <PatientActivities /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "statistics", element: <Statistics /> },
     ],

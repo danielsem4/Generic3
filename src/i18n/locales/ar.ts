@@ -248,68 +248,85 @@ const ar = {
 
   // patient medications
   patientMeds: {
-    title: "أدوية المريض",  
-    addMedication: "إضافة دواء",
-    searchPlaceholder: "البحث عن دواء...",
-    standardDosage: "الجرعة القياسية",
-    intakeLogTitle: "سجل تناول الأدوية",
-    refreshData: "تحديث البيانات",  
-    regularDosage: "الجرعة العادية",
-    activeStatus: "نشط",
-    newPrescription: "وصفة جديدة",
-    configureSchedule: "تكوين الجدول",
-    medicationLabel: "الدواء",
-    timelineLabel: "الجدول",
-    dosageLabel: "الجرعة",
-    startDate: "تاريخ البدء",
-    endDate: "تاريخ الانتهاء",
-    amount: "الكمية",
-    unit: "الوحدة",
-    frequencyLabel: "التردد والجدول",
-    frequencyOptions: {
+  title: "أدويتي",
+  addMedication: "إضافة دواء",
+  searchPlaceholder: "البحث عن الأدوية...",
+  standardDosage: "الجرعة القياسية",
+  intakeLogTitle: "سجل تناول الأدوية",
+  refreshData: "تحديث البيانات",
+  regularDosage: "الجرعة المنتظمة",
+  activeStatus: "نشط",
+  newPrescription: "وصفة جديدة",
+  configureSchedule: "تحديد جدول وجرعة الدواء.",
+  medicationLabel: "الدواء",
+  timelineLabel: "الفترة الزمنية",
+  dosageLabel: "الجرعة",
+  startDate: "تاريخ البدء",
+  endDate: "تاريخ الانتهاء",
+  amount: "الكمية",
+  unit: "الوحدة",
+  frequencyLabel: "التكرار والجدول الزمني",
+  frequencyOptions: {
     once: "مرة واحدة",
     daily: "يومي",
     weekly: "أسبوعي",
-    monthly: "شهري"},
-    timesPerDay: "عدد المرات في اليوم",
-    addSlot: "إضافة فراغ",
-    finalize: "إنهاء الوصفة",
-    editPrescription: "تعديل الوصفة",
-    saveChanges: "حفظ التغييرات",
-    addSuccess: "تمت إضافة الوصفة بنجاح.",
-    addError: "فشل إضافة الوصفة. يرجى المحاولة مرة أخرى.",
-    cancel: "إلغاء",
-    questions: {
-      whichDays: "أي أيام من الأسبوع?",
-      whichWeeks: "أي أسابيع من الشهر?"},
-    units: {
-       ml: "ملي لتر",
-       mg: "ملي غرام",
-       tabs: "أقراص"},
-    days: {
-    monday: "الاثنين", tuesday: "الثلاثاء", wednesday: "الأربعاء", 
-    thursday: "الخميس", friday: "الجمعة", saturday: "السبت", sunday: "الأحد"},
-    weeks: {1: "الأسبوع الأول",2: "الأسبوع الثاني",3: "الأسبوع الثالث",4: "الأسبوع الرابع"},
-    deleteConfirm: {
-    title: "هل أنت متأكد من ذلك?",
-    description: "لا يمكن التراجع عن هذا الإجراء. سيتم حذف الدواء نهائياً من سجل المريض.",
-    cancel: "إلغاء",
-    confirm: "حذف الدواء"},
-    resetFilters: "إعادة تعيين الفلاتر",
-    filters: {
-      dateFrom: "من تاريخ:",
-      dateTo: "إلى تاريخ:",
-      medication: "الدواء:",
-      allMeds: "جميع الأدوية"},
-    table: {
-      intakeDate: "تاريخ التناول",
-      intakeTime: "وقت التناول",
-      medId: "معرف الدواء",
-      medName: "اسم الدواء",
-      form: "الشكل",
-      dosage: "الجرعة",
-      status: "الحالة"}
+    monthly: "شهري"
   },
+  timesPerDay: "عدد المرات يومياً",
+  addSlot: "إضافة وقت",
+  finalize: "تعيين الوصفة",
+  editPrescription: "تعديل الوصفة",
+  saveChanges: "حفظ التغييرات",
+  addSuccess: "تمت إضافة الوصفة بنجاح.",
+  addError: "فشل في إضافة الوصفة. حاول مرة أخرى.",
+  cancel: "إلغاء",
+  questions: {
+    whichDays: "في أي أيام من الأسبوع؟",
+    whichWeeks: "في أي أسابيع من الشهر؟"
+  },
+  units: {
+    ml: "مل",
+    mg: "ملغ",
+    tabs: "أقراص"
+  },
+  days: {
+    monday: "الاثنين",
+    tuesday: "الثلاثاء",
+    wednesday: "الأربعاء",
+    thursday: "الخميس",
+    friday: "الجمعة",
+    saturday: "السبت",
+    sunday: "الأحد"
+  },
+  weeks: {
+    1: "الأسبوع الأول",
+    2: "الأسبوع الثاني",
+    3: "الأسبوع الثالث",
+    4: "الأسبوع الرابع"
+  },
+  deleteConfirm: {
+    title: "هل أنت متأكد أنك تريد حذف هذا الدواء؟",
+    description: "سيؤدي هذا إلى إزالة الدواء نهائيًا من سجل المريض.",
+    cancel: "إلغاء",
+    confirm: "حذف"
+  },
+  resetFilters: "إعادة تعيين الفلاتر",
+  filters: {
+    dateFrom: "من تاريخ:",
+    dateTo: "إلى تاريخ:",
+    medication: "الدواء:",
+    allMeds: "جميع الأدوية"
+  },
+  table: {
+    intakeDate: "تاريخ التناول",
+    intakeTime: "وقت التناول",
+    medId: "معرّف الدواء",
+    medName: "اسم الدواء",
+    form: "الشكل",
+    dosage: "الجرعة",
+    status: "الحالة"
+  }
+},
 
   // Clinic 
   clinic: {
@@ -363,6 +380,77 @@ const ar = {
   deleteError: "فشل حذف النشاط. يرجى المحاولة مرة أخرى.",
 },
 
+  //patient activities
+  patientActivities: {
+  title: "أنشطتي",
+  searchPlaceholder: "البحث عن أنشطة...",
+  addActivity: {
+    title: "إضافة نشاط",
+    newActivity: "نشاط جديد",
+    timelineLabel: "الفترة الزمنية",
+    startDate: "تاريخ البدء",
+    endDate: "تاريخ الانتهاء",
+    frequencyLabel: "التكرار والجدول الزمني",
+    frequencyOptions: {
+      once: "مرة واحدة",
+      daily: "يومي",
+      weekly: "أسبوعي",
+      monthly: "شهري",
+    },
+    daysOfWeek: "في أي أيام من الأسبوع؟",
+    dayOfMonth: "في أي يوم من الشهر؟",
+    addTime: "إضافة وقت",
+    days: {
+      MON: "الاثنين",
+      TUE: "الثلاثاء",
+      WED: "الأربعاء",
+      THU: "الخميس",
+      FRI: "الجمعة",
+      SAT: "السبت",
+      SUN: "الأحد"
+    },
+    finalize: "تعيين النشاط",
+    cancel: "إلغاء",
+    addSuccess: "تمت إضافة النشاط بنجاح.",
+    addError: "فشل في إضافة النشاط. حاول مرة أخرى.",
+  },
+  activityLabel: "النشاط",
+  editActivity: {
+    title: "تعديل النشاط",
+    activityLabel: "النشاط",
+    timelineLabel: "الفترة الزمنية",
+    startDate: "تاريخ البدء",
+    endDate: "تاريخ الانتهاء",
+    frequencyLabel: "التكرار والجدول الزمني",
+    editError: "فشل في تحديث النشاط. حاول مرة أخرى.",
+    editSuccess: "تم تحديث النشاط بنجاح.",
+    saveChanges: "حفظ التغييرات",
+    cancel: "إلغاء"
+  },
+  deleteConfirm: {
+    title: "هل أنت متأكد أنك تريد حذف هذا النشاط؟",
+    description: "سيؤدي هذا إلى إزالة النشاط نهائيًا من سجل المريض.",
+    cancel: "إلغاء",
+    confirm: "حذف"
+  },
+  logTitle: "سجل الأنشطة",
+  refreshData: "تحديث البيانات",
+  resetFilters: "إعادة تعيين الفلاتر",
+  defaultSubtitle: "نشاط عام",
+  table: {
+    date: "التاريخ",
+    time: "الوقت",
+    activityName: "اسم النشاط",
+  },
+  filters: {
+    allActivities: "جميع الأنشطة",
+    dateFrom: "من تاريخ:",
+    activity: "النشاط:"
+  },
+  deleteError: "فشل في حذف النشاط. حاول مرة أخرى.",
+  deleteSuccess: "تم حذف النشاط بنجاح.",
+},
+
   // Settings
   settings: {
     title: "الإعدادات",
@@ -397,6 +485,7 @@ const ar = {
       },
     },
   },
+
 
   // Not Found / 404
   notFound: {

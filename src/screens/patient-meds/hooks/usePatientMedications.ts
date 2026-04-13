@@ -129,6 +129,12 @@ export function usePatientMedications(userId: string) {
     setTimeSlots((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const updateTimeSlot = (index: number, value: string) => {
+  setTimeSlots((prev) =>
+    prev.map((slot, i) => (i === index ? value : slot)),
+  );
+};
+
   return {
     // states
     clinicMedications,
@@ -153,6 +159,7 @@ export function usePatientMedications(userId: string) {
     setDosageAmount,
     dosageUnit,
     setDosageUnit,
+    updateTimeSlot,
 
     // functions
     toggleDay,

@@ -1,9 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Clock, Trash2 } from "lucide-react";
+import { Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import type { IMedicationHookData } from "../schema/patientMedicationsSchema";
+import { TimeSlotsManager } from "@/common/components/TimeSlotsManager";
+
 
 export const FrequencyManager = ({ hookData }: { hookData: IMedicationHookData }) => {
   const { t } = useTranslation();
@@ -53,17 +54,13 @@ export const FrequencyManager = ({ hookData }: { hookData: IMedicationHookData }
       )}
 
       {/* Time Slots */}
-      <div className="flex justify-between items-center pt-5 border-t">
-        <Button variant="ghost" size="sm" onClick={hookData.addTimeSlot} className="text-primary font-bold">+ {t("patientMeds.addSlot")}</Button>
-      </div>
-      <div className="grid grid-cols-3 gap-4">
-        {hookData.timeSlots.map((time, i) => (
-          <div key={i} className="flex items-center gap-3 bg-secondary p-3 rounded-2xl border">
-            <input type="time" value={time} className="bg-transparent outline-none flex-1 text-sm font-medium" readOnly />
-            <Trash2 size={16} className="text-muted-foreground cursor-pointer hover:text-destructive" onClick={() => hookData.removeTimeSlot(i)} />
-          </div>
-        ))}
-      </div>
+      <TimeSlotsManager
+  timeSlots={hookData.timeSlots}
+  addTimeSlot={hookData.addTimeSlot}
+  removeTimeSlot={hookData.removeTimeSlot}
+  updateTimeSlot={hookData.updateTimeSlot}
+  addButtonLabel="patientMeds.addSlot"
+/>
     </Card>
   );
 };
