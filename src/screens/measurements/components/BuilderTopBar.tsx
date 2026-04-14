@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 interface BuilderTopBarProps {
   measurementName?: string;
   isDirty: boolean;
+  isSaving: boolean;
   onSave: () => void;
   onBack: () => void;
   onClear: () => void;
@@ -14,6 +15,7 @@ interface BuilderTopBarProps {
 export function BuilderTopBar({
   measurementName,
   isDirty,
+  isSaving,
   onSave,
   onBack,
   onClear,
@@ -51,9 +53,9 @@ export function BuilderTopBar({
           <Eye size={14} />
           {t("measurements.builder.previewMode")}
         </Button>
-        <Button size="sm" onClick={onSave} className="gap-1">
+        <Button size="sm" onClick={onSave} disabled={isSaving} className="gap-1">
           <Save size={14} />
-          {t("measurements.builder.save")}
+          {isSaving ? t("common.loading") : t("measurements.builder.save")}
         </Button>
       </div>
     </div>

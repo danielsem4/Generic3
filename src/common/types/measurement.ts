@@ -1,3 +1,12 @@
+export type CorrectAnswerType = "NONE" | "STATIC" | "DYNAMIC";
+
+export const DYNAMIC_ANSWER_KEYS = [
+  "TODAY_DATE",
+  "CURRENT_YEAR",
+  "CURRENT_MONTH",
+  "CURRENT_DAY_OF_WEEK",
+] as const;
+
 export type QComponentType =
   | "heading"
   | "paragraph"
@@ -67,6 +76,7 @@ export interface IQTextInput extends IQBase {
   type: "textInput";
   placeholder: string;
   required: boolean;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -78,6 +88,7 @@ export interface IQNumberInput extends IQBase {
   min: number;
   max: number;
   step: number;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -87,6 +98,7 @@ export interface IQDropdown extends IQBase {
   placeholder: string;
   required: boolean;
   options: IQOptionItem[];
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -96,6 +108,7 @@ export interface IQMultiSelect extends IQBase {
   placeholder: string;
   required: boolean;
   options: IQOptionItem[];
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -105,6 +118,7 @@ export interface IQRadioGroup extends IQBase {
   required: boolean;
   options: IQOptionItem[];
   layout: "vertical" | "horizontal";
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -113,6 +127,7 @@ export interface IQDatePicker extends IQBase {
   type: "datePicker";
   placeholder: string;
   required: boolean;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -121,6 +136,7 @@ export interface IQTimePicker extends IQBase {
   type: "timePicker";
   placeholder: string;
   required: boolean;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -131,6 +147,7 @@ export interface IQScale extends IQBase {
   max: number;
   step: number;
   required: boolean;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }
@@ -138,6 +155,7 @@ export interface IQScale extends IQBase {
 export interface IQToggleSwitch extends IQBase {
   type: "toggleSwitch";
   defaultValue: boolean;
+  correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
 }

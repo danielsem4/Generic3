@@ -1,6 +1,7 @@
 import api from "@/lib/axios";
 import type { IMeasurement } from "@/common/types/measurement";
 import { type MeasurementType } from "@/common/types/measurement";
+import type { BackendStructurePayload } from "@/screens/measurements/lib/transformStructure";
 
 export interface ICreateMeasurementPayload {
   measurement_name: string;
@@ -105,4 +106,15 @@ export async function adoptMeasurement(
   await api.post(`/api/v1/clinics/${clinicId}/measurements/`, {
     measurement: measurementId,
   });
+}
+
+export async function saveMeasurementStructure(
+  clinicId: string,
+  measurementId: string,
+  payload: BackendStructurePayload,
+): Promise<void> {
+  await api.post(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/structure/`,
+    payload,
+  );
 }
