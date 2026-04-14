@@ -10,6 +10,7 @@ interface MeasurementListProps {
   onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
+  readOnly?: boolean;
 }
 
 export function MeasurementList({
@@ -18,6 +19,7 @@ export function MeasurementList({
   onEditMetadata,
   onDelete,
   onDuplicate,
+  readOnly,
 }: MeasurementListProps) {
   const { t } = useTranslation();
 
@@ -41,6 +43,7 @@ export function MeasurementList({
           onEditMetadata={onEditMetadata}
           onDelete={onDelete}
           onDuplicate={onDuplicate}
+          readOnly={readOnly}
         />
       ))}
     </div>

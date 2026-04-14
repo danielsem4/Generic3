@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Ruler, Plus, Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRole } from "@/hooks/common/useRole";
 import { useMeasurements } from "./hooks/useMeasurements";
 import { MeasurementList } from "./components/MeasurementList";
 import { CreateMeasurementDialog } from "./components/CreateMeasurementDialog";
@@ -11,6 +12,8 @@ import { AddExistingMeasurementDialog } from "./components/AddExistingMeasuremen
 
 export default function MeasurementsPage() {
   const { t } = useTranslation();
+  const role = useRole();
+  const isReadOnly = role === "DOCTOR";
   const {
     measurements,
     groupedMeasurements,
@@ -49,23 +52,25 @@ export default function MeasurementsPage() {
           </h1>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            onClick={() => setIsAddExistingOpen(true)}
-            className="rounded-full gap-2 px-6 font-bold"
-          >
-            <Plus size={18} strokeWidth={3} />
-            {t("measurements.addExisting")}
-          </Button>
-          <Button
-            onClick={() => setIsCreateOpen(true)}
-            className="rounded-full gap-2 px-6 shadow-lg font-bold hover:opacity-90 transition-all"
-          >
-            <Plus size={18} strokeWidth={3} />
-            {t("measurements.createNew")}
-          </Button>
-        </div>
+        {!isReadOnly && (
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setIsAddExistingOpen(true)}
+              className="rounded-full gap-2 px-6 font-bold"
+            >
+              <Plus size={18} strokeWidth={3} />
+              {t("measurements.addExisting")}
+            </Button>
+            <Button
+              onClick={() => setIsCreateOpen(true)}
+              className="rounded-full gap-2 px-6 shadow-lg font-bold hover:opacity-90 transition-all"
+            >
+              <Plus size={18} strokeWidth={3} />
+              {t("measurements.createNew")}
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className="relative group">
@@ -92,36 +97,41 @@ export default function MeasurementsPage() {
           onEditMetadata={handleEditMetadata}
           onDelete={setDeleteTarget}
           onDuplicate={handleDuplicate}
+          readOnly={isReadOnly}
         />
       )}
 
-      <CreateMeasurementDialog
-        open={isCreateOpen}
-        onOpenChange={setIsCreateOpen}
-        onCreate={handleCreate}
-        isSubmitting={isSubmitting}
-      />
+      {!isReadOnly && (
+        <>
+          <CreateMeasurementDialog
+            open={isCreateOpen}
+            onOpenChange={setIsCreateOpen}
+            onCreate={handleCreate}
+            isSubmitting={isSubmitting}
+          />
 
-      <DeleteMeasurementDialog
-        measurement={deleteTarget}
-        onOpenChange={() => setDeleteTarget(null)}
-        onConfirm={handleDelete}
-        isDeleting={isDeleting}
-      />
+          <DeleteMeasurementDialog
+            measurement={deleteTarget}
+            onOpenChange={() => setDeleteTarget(null)}
+            onConfirm={handleDelete}
+            isDeleting={isDeleting}
+          />
 
-      <EditMeasurementDialog
-        measurement={editTarget}
-        onOpenChange={() => setEditTarget(null)}
-        onConfirm={handleUpdate}
-        isUpdating={isUpdating}
-      />
+          <EditMeasurementDialog
+            measurement={editTarget}
+            onOpenChange={() => setEditTarget(null)}
+            onConfirm={handleUpdate}
+            isUpdating={isUpdating}
+          />
 
-      <AddExistingMeasurementDialog
-        open={isAddExistingOpen}
-        onOpenChange={setIsAddExistingOpen}
-        clinicMeasurements={measurements}
-        onAdoptSuccess={handleAdoptSuccess}
-      />
+          <AddExistingMeasurementDialog
+            open={isAddExistingOpen}
+            onOpenChange={setIsAddExistingOpen}
+            clinicMeasurements={measurements}
+            onAdoptSuccess={handleAdoptSuccess}
+          />
+        </>
+      )}
     </div>
   );
 }

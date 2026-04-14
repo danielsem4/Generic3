@@ -775,6 +775,8 @@ patientActivities: {
       size: "גודל",
       layout: "פריסה",
       defaultValue: "ערך ברירת מחדל",
+      correctAnswer: "תשובה נכונה",
+      grade: "ציון",
     },
     device: {
       mobile: "נייד",

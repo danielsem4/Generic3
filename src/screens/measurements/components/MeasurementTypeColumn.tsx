@@ -18,6 +18,7 @@ interface MeasurementTypeColumnProps {
   onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
+  readOnly?: boolean;
 }
 
 export function MeasurementTypeColumn({
@@ -27,6 +28,7 @@ export function MeasurementTypeColumn({
   onEditMetadata,
   onDelete,
   onDuplicate,
+  readOnly,
 }: MeasurementTypeColumnProps) {
   const { t } = useTranslation();
 
@@ -53,6 +55,7 @@ export function MeasurementTypeColumn({
                 onEditMetadata={onEditMetadata}
                 onDelete={onDelete}
                 onDuplicate={onDuplicate}
+                readOnly={readOnly}
               />
             ))}
           </div>

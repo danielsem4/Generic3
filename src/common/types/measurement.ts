@@ -67,6 +67,8 @@ export interface IQTextInput extends IQBase {
   type: "textInput";
   placeholder: string;
   required: boolean;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQNumberInput extends IQBase {
@@ -76,6 +78,8 @@ export interface IQNumberInput extends IQBase {
   min: number;
   max: number;
   step: number;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQDropdown extends IQBase {
@@ -83,6 +87,8 @@ export interface IQDropdown extends IQBase {
   placeholder: string;
   required: boolean;
   options: IQOptionItem[];
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQMultiSelect extends IQBase {
@@ -90,6 +96,8 @@ export interface IQMultiSelect extends IQBase {
   placeholder: string;
   required: boolean;
   options: IQOptionItem[];
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQRadioGroup extends IQBase {
@@ -97,18 +105,24 @@ export interface IQRadioGroup extends IQBase {
   required: boolean;
   options: IQOptionItem[];
   layout: "vertical" | "horizontal";
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQDatePicker extends IQBase {
   type: "datePicker";
   placeholder: string;
   required: boolean;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQTimePicker extends IQBase {
   type: "timePicker";
   placeholder: string;
   required: boolean;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQScale extends IQBase {
@@ -117,11 +131,15 @@ export interface IQScale extends IQBase {
   max: number;
   step: number;
   required: boolean;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQToggleSwitch extends IQBase {
   type: "toggleSwitch";
   defaultValue: boolean;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export interface IQButton extends IQBase {

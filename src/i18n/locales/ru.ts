@@ -780,6 +780,8 @@ patient: {
       size: "Размер",
       layout: "Расположение",
       defaultValue: "Значение по умолчанию",
+      correctAnswer: "Правильный ответ",
+      grade: "Оценка",
     },
     device: {
       mobile: "Мобильный",

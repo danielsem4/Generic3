@@ -764,6 +764,8 @@ modules: {
       size: "Size",
       layout: "Layout",
       defaultValue: "Default Value",
+      correctAnswer: "Correct Answer",
+      grade: "Grade",
     },
     device: {
       mobile: "Mobile",

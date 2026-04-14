@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import type { IMeasurement } from "@/common/types/measurement";
 
 interface MeasurementRowProps {
@@ -13,6 +14,7 @@ interface MeasurementRowProps {
   onEditMetadata: (m: IMeasurement) => void;
   onDelete: (q: IMeasurement) => void;
   onDuplicate: (id: string) => void;
+  readOnly?: boolean;
 }
 
 export function MeasurementRow({
@@ -21,6 +23,7 @@ export function MeasurementRow({
   onEditMetadata,
   onDelete,
   onDuplicate,
+  readOnly,
 }: MeasurementRowProps) {
   const { t } = useTranslation();
   const { id, name, isPublic, isActive } = measurement;
@@ -46,8 +49,8 @@ export function MeasurementRow({
 
   return (
     <Card
-      className="bg-card hover:shadow-md transition-shadow border-border cursor-pointer"
-      onClick={handleCardClick}
+      className={cn("bg-card hover:shadow-md transition-shadow border-border", !readOnly && "cursor-pointer")}
+      onClick={readOnly ? undefined : handleCardClick}
     >
       <CardContent className="flex items-center justify-between gap-2 p-3">
         <div className="flex items-center gap-2 min-w-0">
@@ -64,37 +67,39 @@ export function MeasurementRow({
           )}
         </div>
 
-        <div className="flex items-center gap-1">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleEdit}>
-                <Pencil size={14} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("measurements.edit")}</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleDuplicate}>
-                <Copy size={14} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("measurements.duplicate")}</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-7 w-7 text-destructive hover:text-destructive"
-                onClick={handleDelete}
-              >
-                <Trash2 size={14} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("measurements.delete")}</TooltipContent>
-          </Tooltip>
-        </div>
+        {!readOnly && (
+          <div className="flex items-center gap-1">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleEdit}>
+                  <Pencil size={14} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{t("measurements.edit")}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleDuplicate}>
+                  <Copy size={14} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{t("measurements.duplicate")}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 text-destructive hover:text-destructive"
+                  onClick={handleDelete}
+                >
+                  <Trash2 size={14} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{t("measurements.delete")}</TooltipContent>
+            </Tooltip>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

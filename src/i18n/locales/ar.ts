@@ -778,6 +778,8 @@ patient: {
       size: "الحجم",
       layout: "التخطيط",
       defaultValue: "القيمة الافتراضية",
+      correctAnswer: "الإجابة الصحيحة",
+      grade: "الدرجة",
     },
     device: {
       mobile: "جوال",
