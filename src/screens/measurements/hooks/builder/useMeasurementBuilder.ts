@@ -24,10 +24,6 @@ export function useMeasurementBuilder() {
     isLoading: isLoadingStructureQuery,
   } = useMeasurementStructureQuery(id);
 
-  const addMeasurement = useMeasurementBuilderStore((s) => s.addMeasurement);
-  const loadMeasurement = useMeasurementBuilderStore(
-    (s) => s.loadMeasurement,
-  );
   const hydrateScreens = useMeasurementBuilderStore((s) => s.hydrateScreens);
   const saveCurrentMeasurement = useMeasurementBuilderStore(
     (s) => s.saveCurrentMeasurement,

@@ -59,6 +59,7 @@ export function EditMeasurementDialog({
     resolver: zodResolver(editMeasurementSchema),
   });
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const selectedType = watch("type");
   const isPublic = watch("isPublic");
   const isActive = watch("isActive");

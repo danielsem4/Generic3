@@ -23,7 +23,7 @@ import type {
   IQComponent,
 } from "@/common/types/measurement";
 
-type DistributiveOmit<T, K extends keyof any> = T extends unknown ? Omit<T, K> : never;
+type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
 
 export type PropertyFieldType =
   | "text"

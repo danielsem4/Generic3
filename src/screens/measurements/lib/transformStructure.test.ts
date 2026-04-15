@@ -8,7 +8,7 @@ describe("transformScreensToPayload", () => {
     expect(result).toEqual({ screens: [] });
   });
 
-  it("skips non-input components", () => {
+  it("maps display components to their backend types", () => {
     const screens: IQScreen[] = [
       {
         id: "s1",
@@ -20,7 +20,9 @@ describe("transformScreensToPayload", () => {
       },
     ];
     const result = transformScreensToPayload(screens);
-    expect(result.screens[0].fields).toEqual([]);
+    expect(result.screens[0].elements).toHaveLength(2);
+    expect(result.screens[0].elements[0].element_type).toBe("HEADER");
+    expect(result.screens[0].elements[1].element_type).toBe("PARAGRAPH");
   });
 
   it("maps a textInput with NONE answer type", () => {
@@ -43,15 +45,14 @@ describe("transformScreensToPayload", () => {
       },
     ];
     const result = transformScreensToPayload(screens);
-    const field = result.screens[0].fields[0];
-    expect(field.field_type).toBe("INPUT_TEXT");
-    expect(field.label).toBe("Name");
-    expect(field.required).toBe(true);
-    expect(field.row_number).toBe(1);
-    expect(field.order_in_row).toBe(1);
-    expect(field.correct_answer_type).toBe("NONE");
-    expect(field.correct_answer).toBeUndefined();
-    expect(field.points).toBeUndefined();
+    const element = result.screens[0].elements[0];
+    expect(element.element_type).toBe("INPUT_TEXT");
+    expect(element.label).toBe("Name");
+    expect(element.is_required).toBe(true);
+    expect(element.row_number).toBe(1);
+    expect(element.order_in_row).toBe(1);
+    expect(element.correct_answer_type).toBe("NONE");
+    expect(element.correct_answers).toBeUndefined();
   });
 
   it("maps a dropdown with STATIC answer type", () => {
@@ -67,23 +68,23 @@ describe("transformScreensToPayload", () => {
             placeholder: "Pick",
             required: false,
             options: [
-              { label: "Red", value: "red" },
+              { label: "Red", value: "red", isCorrect: true, score: 5 },
               { label: "Blue", value: "blue" },
             ],
             correctAnswerType: "STATIC",
-            correctAnswer: "red",
+            correctAnswer: "Red",
             grade: 5,
           },
         ],
       },
     ];
     const result = transformScreensToPayload(screens);
-    const field = result.screens[0].fields[0];
-    expect(field.field_type).toBe("INPUT_SELECT");
-    expect(field.config).toEqual({ options: ["red", "blue"] });
-    expect(field.correct_answer_type).toBe("STATIC");
-    expect(field.correct_answer).toBe("red");
-    expect(field.points).toBe(5);
+    const element = result.screens[0].elements[0];
+    expect(element.element_type).toBe("INPUT_SELECT");
+    expect(element.config).toEqual({ options: ["Red", "Blue"] });
+    expect(element.correct_answer_type).toBe("STATIC");
+    expect(element.correct_answers?.[0].answer).toBe("Red");
+    expect(element.correct_answers?.[0].points).toBe(5);
   });
 
   it("maps a numberInput with config", () => {
@@ -109,11 +110,11 @@ describe("transformScreensToPayload", () => {
       },
     ];
     const result = transformScreensToPayload(screens);
-    const field = result.screens[0].fields[0];
-    expect(field.field_type).toBe("INPUT_NUMBER");
-    expect(field.config).toEqual({ min: 0, max: 120, step: 1 });
-    expect(field.correct_answer).toBe("CURRENT_YEAR");
-    expect(field.points).toBe(10);
+    const element = result.screens[0].elements[0];
+    expect(element.element_type).toBe("INPUT_NUMBER");
+    expect(element.config).toEqual({ min: 0, max: 120, step: 1 });
+    expect(element.correct_answers?.[0].answer).toBe("CURRENT_YEAR");
+    expect(element.correct_answers?.[0].points).toBe(10);
   });
 
   it("flattens rowContainer children with same row_number", () => {
@@ -166,17 +167,17 @@ describe("transformScreensToPayload", () => {
       },
     ];
     const result = transformScreensToPayload(screens);
-    const fields = result.screens[0].fields;
-    expect(fields).toHaveLength(3);
-    expect(fields[0].row_number).toBe(1);
-    expect(fields[0].order_in_row).toBe(1);
-    expect(fields[1].row_number).toBe(2);
-    expect(fields[1].order_in_row).toBe(1);
-    expect(fields[2].row_number).toBe(2);
-    expect(fields[2].order_in_row).toBe(2);
+    const elements = result.screens[0].elements;
+    expect(elements).toHaveLength(3);
+    expect(elements[0].row_number).toBe(1);
+    expect(elements[0].order_in_row).toBe(1);
+    expect(elements[1].row_number).toBe(2);
+    expect(elements[1].order_in_row).toBe(1);
+    expect(elements[2].row_number).toBe(2);
+    expect(elements[2].order_in_row).toBe(2);
   });
 
-  it("maps all backend field types correctly", () => {
+  it("maps all backend element types correctly", () => {
     const typeMap: Record<string, string> = {
       textInput: "INPUT_TEXT",
       numberInput: "INPUT_NUMBER",
@@ -224,18 +225,17 @@ describe("transformScreensToPayload", () => {
         { id: "s1", title: "S1", components: [component] },
       ] as IQScreen[];
       const result = transformScreensToPayload(screens);
-      expect(result.screens[0].fields[0].field_type).toBe(backend);
+      expect(result.screens[0].elements[0].element_type).toBe(backend);
     }
   });
 
-  it("sets screen order starting from 1", () => {
+  it("preserves screen titles in order", () => {
     const screens: IQScreen[] = [
       { id: "s1", title: "First", components: [] },
       { id: "s2", title: "Second", components: [] },
       { id: "s3", title: "Third", components: [] },
     ];
     const result = transformScreensToPayload(screens);
-    expect(result.screens.map((s) => s.order)).toEqual([1, 2, 3]);
     expect(result.screens.map((s) => s.title)).toEqual([
       "First",
       "Second",
@@ -262,9 +262,9 @@ describe("transformScreensToPayload", () => {
       },
     ];
     const result = transformScreensToPayload(screens);
-    expect(result.screens[0].fields[0].config).toEqual({
-      true_label: "true",
-      false_label: "false",
+    expect(result.screens[0].elements[0].config).toEqual({
+      true_label: "Yes",
+      false_label: "No",
       default_value: true,
     });
   });

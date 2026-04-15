@@ -52,6 +52,7 @@ export function CreateMeasurementDialog({
     defaultValues: { name: "", isPublic: false },
   });
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const selectedType = watch("type");
   const isPublic = watch("isPublic");
 
