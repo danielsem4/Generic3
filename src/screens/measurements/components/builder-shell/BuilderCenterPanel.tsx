@@ -1,7 +1,7 @@
-import { CanvasDropZone } from "./CanvasDropZone";
-import { ScreenTabBar } from "./ScreenTabBar";
-import { useScreenManager } from "../hooks/useScreenManager";
-import { useScreenScore } from "../hooks/useScreenScore";
+import { CanvasDropZone } from "../canvas/CanvasDropZone";
+import { ScreenTabBar } from "../screen-tabs/ScreenTabBar";
+import { useScreenManager } from "../../hooks/screens/useScreenManager";
+import { useScreenScore } from "../../hooks/screens/useScreenScore";
 
 export function BuilderCenterPanel() {
   const {

@@ -15,7 +15,7 @@ import { MeasurementType } from "@/common/types/measurement";
 import {
   createMeasurementSchema,
   type CreateMeasurementFormData,
-} from "../Schema/measurementSchema";
+} from "../../schema/measurementSchema";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 

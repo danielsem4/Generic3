@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import type { PropertyFieldConfig } from "../lib/componentRegistry";
+import type { PropertyFieldConfig } from "../../lib/componentRegistry";
 import type { IQOptionItem, CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 import { OptionsListEditor } from "./OptionsListEditor";
 

@@ -5,11 +5,11 @@ import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IMeasurement } from "@/common/types/measurement";
 import { MeasurementType } from "@/common/types/measurement";
-import type { CreateMeasurementFormData } from "../Schema/measurementSchema";
-import { useCreateMeasurement } from "./useCreateMeasurement";
-import { useDeleteMeasurement } from "./useDeleteMeasurement";
-import { useUpdateMeasurement } from "./useUpdateMeasurement";
-import { useMeasurementsQuery } from "./useMeasurementsQuery";
+import type { CreateMeasurementFormData } from "../../schema/measurementSchema";
+import { useCreateMeasurement } from "../queries/useCreateMeasurement";
+import { useDeleteMeasurement } from "../queries/useDeleteMeasurement";
+import { useUpdateMeasurement } from "../queries/useUpdateMeasurement";
+import { useMeasurementsQuery } from "../queries/useMeasurementsQuery";
 
 export interface IMeasurementGroup {
   type: MeasurementType;

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { FileText } from "lucide-react";
 import type { IMeasurement } from "@/common/types/measurement";
-import type { IMeasurementGroup } from "../hooks/useMeasurements";
+import type { IMeasurementGroup } from "../../hooks/list-page/useMeasurements";
 import { MeasurementTypeColumn } from "./MeasurementTypeColumn";
 
 interface MeasurementListProps {

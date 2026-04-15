@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { IQScreen, DeviceSize } from "@/common/types/measurement";
 import { DeviceFrameSelector } from "./DeviceFrameSelector";
 import { DeviceFrame } from "./DeviceFrame";
-import { CanvasComponentRenderer } from "./CanvasComponentRenderer";
+import { CanvasComponentRenderer } from "../canvas/CanvasComponentRenderer";
 
 interface PreviewOverlayProps {
   screens: IQScreen[];

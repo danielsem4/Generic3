@@ -1,5 +1,5 @@
-import { useToolboxItems } from "../hooks/useToolboxItems";
-import { ToolboxSection } from "./ToolboxSection";
+import { useToolboxItems } from "../../hooks/toolbox/useToolboxItems";
+import { ToolboxSection } from "../toolbox/ToolboxSection";
 
 export function BuilderLeftPanel() {
   const categories = useToolboxItems();

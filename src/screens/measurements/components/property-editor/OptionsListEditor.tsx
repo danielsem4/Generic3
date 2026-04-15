@@ -3,7 +3,7 @@ import { Plus, Trash2, Circle, CheckCircle2, Square, CheckSquare2 } from "lucide
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { IQOptionItem, QComponentType, CorrectAnswerType } from "@/common/types/measurement";
-import { useOptionScoring } from "../hooks/useOptionScoring";
+import { useOptionScoring } from "../../hooks/toolbox/useOptionScoring";
 
 interface OptionsListEditorProps {
   options: IQOptionItem[];

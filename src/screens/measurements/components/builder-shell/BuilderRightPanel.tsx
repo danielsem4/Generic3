@@ -1,4 +1,4 @@
-import { PropertiesPanel } from "./PropertiesPanel";
+import { PropertiesPanel } from "../property-editor/PropertiesPanel";
 
 export function BuilderRightPanel() {
   return (

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
 import { saveMeasurementStructure } from "@/api/measurementsApi";
-import type { BackendStructurePayload } from "../lib/transformStructure";
+import type { BackendStructurePayload } from "../../lib/transformStructure";
 
 export function useSaveMeasurementStructure() {
   const queryClient = useQueryClient();
@@ -15,8 +15,11 @@ export function useSaveMeasurementStructure() {
       measurementId: string;
       payload: BackendStructurePayload;
     }) => saveMeasurementStructure(clinicId!, measurementId, payload),
-    onSuccess: () => {
+    onSuccess: (_data, { measurementId }) => {
       queryClient.invalidateQueries({ queryKey: ["measurements"] });
+      queryClient.invalidateQueries({
+        queryKey: ["measurement-structure", measurementId],
+      });
     },
   });
 

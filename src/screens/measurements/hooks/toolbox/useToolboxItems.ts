@@ -3,7 +3,7 @@ import type {
   QComponentType,
   QComponentCategory,
 } from "@/common/types/measurement";
-import { componentRegistry } from "../lib/componentRegistry";
+import { componentRegistry } from "../../lib/componentRegistry";
 
 interface ToolboxItem {
   type: QComponentType;

@@ -2,9 +2,9 @@ import {
   useMeasurementBuilderStore,
   selectActiveScreenComponents,
 } from "@/store/useMeasurementBuilderStore";
-import { findComponentById } from "../lib/treeUtils";
-import { componentRegistry } from "../lib/componentRegistry";
-import type { PropertyFieldConfig } from "../lib/componentRegistry";
+import { findComponentById } from "../../lib/treeUtils";
+import { componentRegistry } from "../../lib/componentRegistry";
+import type { PropertyFieldConfig } from "../../lib/componentRegistry";
 import type { IQComponent, IQOptionItem } from "@/common/types/measurement";
 import { DYNAMIC_ANSWER_KEYS, isOptionBasedComponent } from "@/common/types/measurement";
 

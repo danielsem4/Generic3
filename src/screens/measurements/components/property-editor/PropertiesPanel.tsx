@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Settings2 } from "lucide-react";
-import { usePropertyEditor } from "../hooks/usePropertyEditor";
+import { usePropertyEditor } from "../../hooks/canvas/usePropertyEditor";
 import { PropertyField } from "./PropertyField";
-import { ComponentTypeBadge } from "./ComponentTypeBadge";
+import { ComponentTypeBadge } from "../shared/ComponentTypeBadge";
 import type { CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 
 export function PropertiesPanel() {

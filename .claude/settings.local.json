@@ -51,7 +51,10 @@
       "Bash(done)",
       "Bash(xargs ls:*)",
       "Bash(npm ls:*)",
-      "Bash(grep -r \"saveSuccess\\\\|createSuccess\\\\|updateSuccess\" /Users/klutz/Desktop/Generic3/src/screens --include=*.tsx --include=*.ts -l)"
+      "Bash(grep -r \"saveSuccess\\\\|createSuccess\\\\|updateSuccess\" /Users/klutz/Desktop/Generic3/src/screens --include=*.tsx --include=*.ts -l)",
+      "Bash(grep -h \"^import.*from.*\\\\./\\\\|^import.*from \"\"\\\\./\" /Users/klutz/Desktop/Generic3/src/screens/measurements/components/*.tsx)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(echo \"tsc exit: $?\")"
     ]
   }
 }

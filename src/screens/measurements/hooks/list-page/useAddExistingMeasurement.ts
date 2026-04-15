@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import type { IMeasurement } from "@/common/types/measurement";
-import { usePublicMeasurementsQuery } from "./usePublicMeasurementsQuery";
-import { useAdoptMeasurement } from "./useAdoptMeasurement";
+import { usePublicMeasurementsQuery } from "../queries/usePublicMeasurementsQuery";
+import { useAdoptMeasurement } from "../queries/useAdoptMeasurement";
 
 export function useAddExistingMeasurement(
   clinicMeasurements: IMeasurement[],

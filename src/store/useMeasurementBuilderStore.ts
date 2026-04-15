@@ -28,6 +28,7 @@ interface MeasurementBuilderStore {
   deleteMeasurement: (id: string) => void;
   duplicateMeasurement: (id: string) => void;
   loadMeasurement: (id: string) => void;
+  hydrateScreens: (screens: IQScreen[]) => void;
 
   addScreen: () => void;
   removeScreen: (index: number) => void;
@@ -121,6 +122,15 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         isDirty: false,
       });
     },
+
+    hydrateScreens: (screens) =>
+      set({
+        screens: screens.length ? screens : [createDefaultScreen()],
+        activeScreenIndex: 0,
+        selectedComponentId: null,
+        isPreviewMode: false,
+        isDirty: false,
+      }),
 
     addScreen: () =>
       set((state) => {

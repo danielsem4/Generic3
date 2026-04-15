@@ -12,7 +12,7 @@ import {
   useMeasurementBuilderStore,
   selectActiveScreenComponents,
 } from "@/store/useMeasurementBuilderStore";
-import { createComponentFromType } from "../lib/componentRegistry";
+import { createComponentFromType } from "../../lib/componentRegistry";
 
 interface ActiveDragItem {
   source: "toolbox" | "canvas";

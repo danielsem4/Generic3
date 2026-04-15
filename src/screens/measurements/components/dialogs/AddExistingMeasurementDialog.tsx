@@ -13,7 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { MeasurementType } from "@/common/types/measurement";
 import type { IMeasurement } from "@/common/types/measurement";
-import { useAddExistingMeasurement } from "../hooks/useAddExistingMeasurement";
+import { useAddExistingMeasurement } from "../../hooks/list-page/useAddExistingMeasurement";
 
 const TYPE_LABEL_KEYS: Record<MeasurementType, string> = {
   [MeasurementType.QUESTIONNAIRES]: "measurements.types.questionnaries",

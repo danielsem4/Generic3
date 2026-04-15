@@ -3,7 +3,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useCanvasActions } from "../hooks/useCanvasActions";
+import { useCanvasActions } from "../../hooks/canvas/useCanvasActions";
 import { CanvasComponentRenderer } from "./CanvasComponentRenderer";
 import { CanvasEmptyState } from "./CanvasEmptyState";
 

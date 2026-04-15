@@ -4,7 +4,7 @@ import {
   createMeasurement,
   type ICreateMeasurementPayload,
 } from "@/api/measurementsApi";
-import type { CreateMeasurementFormData } from "../Schema/measurementSchema";
+import type { CreateMeasurementFormData } from "../../schema/measurementSchema";
 
 export function useCreateMeasurement() {
   const queryClient = useQueryClient();

@@ -4,9 +4,13 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
-import { useMeasurementsQuery } from "./useMeasurementsQuery";
-import { useSaveMeasurementStructure } from "./useSaveMeasurementStructure";
-import { transformScreensToPayload } from "../lib/transformStructure";
+import { useMeasurementsQuery } from "../queries/useMeasurementsQuery";
+import { useMeasurementStructureQuery } from "../queries/useMeasurementStructureQuery";
+import { useSaveMeasurementStructure } from "../queries/useSaveMeasurementStructure";
+import {
+  transformPayloadToScreens,
+  transformScreensToPayload,
+} from "../../lib/transformStructure";
 
 export function useMeasurementBuilder() {
   const { id } = useParams<{ id: string }>();
@@ -15,11 +19,16 @@ export function useMeasurementBuilder() {
   const clinicId = useAuthStore((s) => s.clinicId);
 
   const { data: fetchedMeasurements } = useMeasurementsQuery(clinicId);
+  const {
+    data: structureData,
+    isLoading: isLoadingStructureQuery,
+  } = useMeasurementStructureQuery(id);
 
   const addMeasurement = useMeasurementBuilderStore((s) => s.addMeasurement);
   const loadMeasurement = useMeasurementBuilderStore(
     (s) => s.loadMeasurement,
   );
+  const hydrateScreens = useMeasurementBuilderStore((s) => s.hydrateScreens);
   const saveCurrentMeasurement = useMeasurementBuilderStore(
     (s) => s.saveCurrentMeasurement,
   );
@@ -54,6 +63,19 @@ export function useMeasurementBuilder() {
     store.loadMeasurement(id);
   }, [id, fetchedMeasurements]);
 
+  useEffect(() => {
+    if (!id || !structureData) return;
+
+    const store = useMeasurementBuilderStore.getState();
+    if (store.activeMeasurementId !== id) return;
+    if (store.isDirty) return;
+
+    const serverScreens = transformPayloadToScreens(structureData);
+    hydrateScreens(serverScreens);
+  }, [id, structureData, hydrateScreens]);
+
+  const isLoadingStructure = !!id && isLoadingStructureQuery;
+
   async function handleSave() {
     if (!activeMeasurementId) return;
 
@@ -85,6 +107,7 @@ export function useMeasurementBuilder() {
     isPreviewMode,
     isDirty,
     isSaving,
+    isLoadingStructure,
     handleSave,
     handleBack,
     handleClearCanvas,

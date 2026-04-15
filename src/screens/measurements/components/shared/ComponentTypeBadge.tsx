@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
 import type { QComponentType } from "@/common/types/measurement";
-import { componentRegistry } from "../lib/componentRegistry";
+import { componentRegistry } from "../../lib/componentRegistry";
 
 interface ComponentTypeBadgeProps {
   type: QComponentType;
