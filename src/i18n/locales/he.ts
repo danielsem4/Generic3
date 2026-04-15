@@ -734,6 +734,7 @@ patientActivities: {
         previous: "הקודם",
         screenOf: "מסך {{current}} מתוך {{total}}",
       },
+      totalScore: "ניקוד כולל",
     },
     categories: {
       textDisplay: "טקסט ותצוגה",
@@ -780,6 +781,12 @@ patientActivities: {
       correctAnswerType: "סוג תשובה",
       correctAnswer: "תשובה נכונה",
       grade: "ציון",
+      optionScore: "ניקוד",
+      totalScore: "ניקוד כולל",
+      minLabel: "תווית מינימום",
+      maxLabel: "תווית מקסימום",
+      trueLabel: "תווית אמת",
+      falseLabel: "תווית שקר",
     },
     device: {
       mobile: "נייד",

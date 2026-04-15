@@ -28,7 +28,7 @@ export function EditMedicationModal({ prescription, isOpen, setIsOpen, patientId
 
   useEffect(() => {
     if (prescription) initForm(prescription);
-  }, [prescription?.id]);
+  }, [prescription, initForm]);
 
   const handleSave = () => {
     if (!prescription) return;

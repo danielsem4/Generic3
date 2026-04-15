@@ -41,7 +41,7 @@ export function EditActivityModal({
 
   useEffect(() => {
     if (activity) initForm(activity);
-  }, [activity]);
+  }, [activity, initForm]);
 
   const handleSave = () => {
     if (!activity) return;

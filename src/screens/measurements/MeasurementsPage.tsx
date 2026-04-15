@@ -3,12 +3,12 @@ import { Ruler, Plus, Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRole } from "@/hooks/common/useRole";
-import { useMeasurements } from "./hooks/useMeasurements";
-import { MeasurementList } from "./components/MeasurementList";
-import { CreateMeasurementDialog } from "./components/CreateMeasurementDialog";
-import { DeleteMeasurementDialog } from "./components/DeleteMeasurementDialog";
-import { EditMeasurementDialog } from "./components/EditMeasurementDialog";
-import { AddExistingMeasurementDialog } from "./components/AddExistingMeasurementDialog";
+import { useMeasurements } from "./hooks/list-page/useMeasurements";
+import { MeasurementList } from "./components/list-view/MeasurementList";
+import { CreateMeasurementDialog } from "./components/dialogs/CreateMeasurementDialog";
+import { DeleteMeasurementDialog } from "./components/dialogs/DeleteMeasurementDialog";
+import { EditMeasurementDialog } from "./components/dialogs/EditMeasurementDialog";
+import { AddExistingMeasurementDialog } from "./components/dialogs/AddExistingMeasurementDialog";
 
 export default function MeasurementsPage() {
   const { t } = useTranslation();

@@ -1,21 +1,24 @@
 import { DndContext, DragOverlay } from "@dnd-kit/core";
-import { useMeasurementBuilder } from "./hooks/useMeasurementBuilder";
-import { useBuilderDnd } from "./hooks/useBuilderDnd";
-import { usePreviewMode } from "./hooks/usePreviewMode";
-import { BuilderTopBar } from "./components/BuilderTopBar";
-import { BuilderLeftPanel } from "./components/BuilderLeftPanel";
-import { BuilderCenterPanel } from "./components/BuilderCenterPanel";
-import { BuilderRightPanel } from "./components/BuilderRightPanel";
-import { PreviewOverlay } from "./components/PreviewOverlay";
-import { ToolboxItem } from "./components/ToolboxItem";
+import { useTranslation } from "react-i18next";
+import { useMeasurementBuilder } from "./hooks/builder/useMeasurementBuilder";
+import { useBuilderDnd } from "./hooks/builder/useBuilderDnd";
+import { usePreviewMode } from "./hooks/builder/usePreviewMode";
+import { BuilderTopBar } from "./components/builder-shell/BuilderTopBar";
+import { BuilderLeftPanel } from "./components/builder-shell/BuilderLeftPanel";
+import { BuilderCenterPanel } from "./components/builder-shell/BuilderCenterPanel";
+import { BuilderRightPanel } from "./components/builder-shell/BuilderRightPanel";
+import { PreviewOverlay } from "./components/preview/PreviewOverlay";
+import { ToolboxItem } from "./components/toolbox/ToolboxItem";
 import { componentRegistry } from "./lib/componentRegistry";
 
 export default function MeasurementBuilder() {
+  const { t } = useTranslation();
   const {
     activeMeasurement,
     isPreviewMode,
     isDirty,
     isSaving,
+    isLoadingStructure,
     handleSave,
     handleBack,
     handleClearCanvas,
@@ -44,6 +47,25 @@ export default function MeasurementBuilder() {
         onDeviceChange={setDevice}
         onExit={togglePreview}
       />
+    );
+  }
+
+  if (isLoadingStructure) {
+    return (
+      <div className="flex h-screen flex-col bg-background">
+        <BuilderTopBar
+          measurementName={activeMeasurement?.name}
+          isDirty={isDirty}
+          isSaving={isSaving}
+          onSave={handleSave}
+          onBack={handleBack}
+          onClear={handleClearCanvas}
+          onPreview={handleTogglePreview}
+        />
+        <div className="flex flex-1 items-center justify-center text-muted-foreground">
+          {t("common.loading")}
+        </div>
+      </div>
     );
   }
 

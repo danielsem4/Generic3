@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { arrayMove } from "@dnd-kit/sortable";
 import type {
   IQComponent,
   IQScreen,
@@ -28,11 +29,13 @@ interface MeasurementBuilderStore {
   deleteMeasurement: (id: string) => void;
   duplicateMeasurement: (id: string) => void;
   loadMeasurement: (id: string) => void;
+  hydrateScreens: (screens: IQScreen[]) => void;
 
   addScreen: () => void;
   removeScreen: (index: number) => void;
   setActiveScreen: (index: number) => void;
   renameScreen: (index: number, title: string) => void;
+  reorderScreens: (fromIndex: number, toIndex: number) => void;
 
   addComponent: (component: IQComponent, index: number) => void;
   addComponentToRow: (
@@ -52,11 +55,13 @@ interface MeasurementBuilderStore {
   saveCurrentMeasurement: () => void;
 }
 
+const EMPTY_COMPONENTS: IQComponent[] = [];
+
 export function selectActiveScreenComponents(state: {
   screens: IQScreen[];
   activeScreenIndex: number;
 }): IQComponent[] {
-  return state.screens[state.activeScreenIndex]?.components ?? [];
+  return state.screens[state.activeScreenIndex]?.components ?? EMPTY_COMPONENTS;
 }
 
 export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
@@ -109,15 +114,25 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
     loadMeasurement: (id) => {
       const q = get().measurements.find((q) => q.id === id);
       if (!q) return;
+      const screens = q.screens?.length ? q.screens : [createDefaultScreen()];
       set({
         activeMeasurementId: id,
-        screens: q.screens,
+        screens,
         activeScreenIndex: 0,
         selectedComponentId: null,
         isPreviewMode: false,
         isDirty: false,
       });
     },
+
+    hydrateScreens: (screens) =>
+      set({
+        screens: screens.length ? screens : [createDefaultScreen()],
+        activeScreenIndex: 0,
+        selectedComponentId: null,
+        isPreviewMode: false,
+        isDirty: false,
+      }),
 
     addScreen: () =>
       set((state) => {
@@ -165,6 +180,37 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         const newScreens = [...state.screens];
         newScreens[index] = { ...newScreens[index], title };
         return { screens: newScreens, isDirty: true };
+      }),
+
+    reorderScreens: (fromIndex, toIndex) =>
+      set((state) => {
+        if (fromIndex === toIndex) return state;
+        if (
+          fromIndex < 0 ||
+          toIndex < 0 ||
+          fromIndex >= state.screens.length ||
+          toIndex >= state.screens.length
+        ) {
+          return state;
+        }
+
+        const newScreens = arrayMove(state.screens, fromIndex, toIndex);
+
+        const active = state.activeScreenIndex;
+        let newActive = active;
+        if (active === fromIndex) {
+          newActive = toIndex;
+        } else if (fromIndex < active && active <= toIndex) {
+          newActive = active - 1;
+        } else if (toIndex <= active && active < fromIndex) {
+          newActive = active + 1;
+        }
+
+        return {
+          screens: newScreens,
+          activeScreenIndex: newActive,
+          isDirty: true,
+        };
       }),
 
     addComponent: (component, index) =>

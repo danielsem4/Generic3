@@ -739,6 +739,7 @@ patient: {
         previous: "Назад",
         screenOf: "Экран {{current}} из {{total}}",
       },
+      totalScore: "Общий балл",
     },
     categories: {
       textDisplay: "Текст и отображение",
@@ -785,6 +786,12 @@ patient: {
       correctAnswerType: "Тип ответа",
       correctAnswer: "Правильный ответ",
       grade: "Оценка",
+      optionScore: "Баллы",
+      totalScore: "Общий балл",
+      minLabel: "Метка минимума",
+      maxLabel: "Метка максимума",
+      trueLabel: "Метка истины",
+      falseLabel: "Метка лжи",
     },
     device: {
       mobile: "Мобильный",

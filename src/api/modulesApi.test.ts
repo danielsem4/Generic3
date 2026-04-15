@@ -23,7 +23,7 @@ describe("getClinicModules", () => {
     vi.mocked(api.get).mockResolvedValueOnce({ data: mockModules });
     const result = await getClinicModules("clinic-123");
     expect(result).toEqual(mockModules);
-    expect(api.get).toHaveBeenCalledWith("/api/v1/users/clinic-123/modules/");
+    expect(api.get).toHaveBeenCalledWith("/api/v1/clinics/clinic-123/modules/");
   });
 
   it("returns empty array when server returns empty array", async () => {
