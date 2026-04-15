@@ -36,6 +36,18 @@ export type DeviceSize = "mobile" | "tablet" | "desktop";
 export interface IQOptionItem {
   label: string;
   value: string;
+  isCorrect?: boolean;
+  score?: number;
+}
+
+export const OPTION_BASED_TYPES = new Set<QComponentType>([
+  "dropdown",
+  "multiSelect",
+  "radioGroup",
+]);
+
+export function isOptionBasedComponent(type: QComponentType): boolean {
+  return OPTION_BASED_TYPES.has(type);
 }
 
 interface IQBase {
@@ -147,6 +159,8 @@ export interface IQScale extends IQBase {
   max: number;
   step: number;
   required: boolean;
+  minLabel?: string;
+  maxLabel?: string;
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
@@ -155,6 +169,9 @@ export interface IQScale extends IQBase {
 export interface IQToggleSwitch extends IQBase {
   type: "toggleSwitch";
   defaultValue: boolean;
+  required: boolean;
+  trueLabel?: string;
+  falseLabel?: string;
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;

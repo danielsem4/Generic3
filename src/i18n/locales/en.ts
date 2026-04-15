@@ -723,6 +723,7 @@ modules: {
         previous: "Previous",
         screenOf: "Screen {{current}} of {{total}}",
       },
+      totalScore: "Total Score",
     },
     categories: {
       textDisplay: "Text & Display",
@@ -769,6 +770,12 @@ modules: {
       correctAnswerType: "Answer Type",
       correctAnswer: "Correct Answer",
       grade: "Grade",
+      optionScore: "Score",
+      totalScore: "Total Score",
+      minLabel: "Min Label",
+      maxLabel: "Max Label",
+      trueLabel: "True Label",
+      falseLabel: "False Label",
     },
     device: {
       mobile: "Mobile",

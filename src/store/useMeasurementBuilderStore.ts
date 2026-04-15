@@ -52,11 +52,13 @@ interface MeasurementBuilderStore {
   saveCurrentMeasurement: () => void;
 }
 
+const EMPTY_COMPONENTS: IQComponent[] = [];
+
 export function selectActiveScreenComponents(state: {
   screens: IQScreen[];
   activeScreenIndex: number;
 }): IQComponent[] {
-  return state.screens[state.activeScreenIndex]?.components ?? [];
+  return state.screens[state.activeScreenIndex]?.components ?? EMPTY_COMPONENTS;
 }
 
 export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
@@ -109,9 +111,10 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
     loadMeasurement: (id) => {
       const q = get().measurements.find((q) => q.id === id);
       if (!q) return;
+      const screens = q.screens?.length ? q.screens : [createDefaultScreen()];
       set({
         activeMeasurementId: id,
-        screens: q.screens,
+        screens,
         activeScreenIndex: 0,
         selectedComponentId: null,
         isPreviewMode: false,

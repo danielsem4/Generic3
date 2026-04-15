@@ -549,6 +549,8 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         max: 10,
         step: 1,
         required: false,
+        minLabel: "",
+        maxLabel: "",
         correctAnswerType: "NONE",
         correctAnswer: "",
         grade: 0,
@@ -561,6 +563,16 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           key: "step",
           labelKey: "measurements.props.step",
           fieldType: "number",
+        },
+        {
+          key: "minLabel",
+          labelKey: "measurements.props.minLabel",
+          fieldType: "text",
+        },
+        {
+          key: "maxLabel",
+          labelKey: "measurements.props.maxLabel",
+          fieldType: "text",
         },
         {
           key: "required",
@@ -600,12 +612,30 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         type: "toggleSwitch",
         label: "Toggle",
         defaultValue: false,
+        required: false,
+        trueLabel: "Yes",
+        falseLabel: "No",
         correctAnswerType: "NONE",
         correctAnswer: "",
         grade: 0,
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
+        {
+          key: "trueLabel",
+          labelKey: "measurements.props.trueLabel",
+          fieldType: "text",
+        },
+        {
+          key: "falseLabel",
+          labelKey: "measurements.props.falseLabel",
+          fieldType: "text",
+        },
+        {
+          key: "required",
+          labelKey: "measurements.props.required",
+          fieldType: "toggle",
+        },
         {
           key: "defaultValue",
           labelKey: "measurements.props.defaultValue",

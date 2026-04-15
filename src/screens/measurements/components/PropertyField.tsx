@@ -3,16 +3,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import type { PropertyFieldConfig } from "../lib/componentRegistry";
-import type { IQOptionItem } from "@/common/types/measurement";
+import type { IQOptionItem, CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 import { OptionsListEditor } from "./OptionsListEditor";
 
 interface PropertyFieldProps {
   field: PropertyFieldConfig;
   value: unknown;
   onChange: (key: string, value: unknown) => void;
+  correctAnswerType?: CorrectAnswerType;
+  componentType?: QComponentType;
 }
 
-export function PropertyField({ field, value, onChange }: PropertyFieldProps) {
+export function PropertyField({
+  field,
+  value,
+  onChange,
+  correctAnswerType,
+  componentType,
+}: PropertyFieldProps) {
   const { t } = useTranslation();
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -82,6 +90,8 @@ export function PropertyField({ field, value, onChange }: PropertyFieldProps) {
         <OptionsListEditor
           options={(value as IQOptionItem[]) ?? []}
           onChange={handleOptionsChange}
+          correctAnswerType={correctAnswerType}
+          componentType={componentType}
         />
       )}
     </div>

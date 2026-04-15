@@ -5,8 +5,8 @@ import {
 import { findComponentById } from "../lib/treeUtils";
 import { componentRegistry } from "../lib/componentRegistry";
 import type { PropertyFieldConfig } from "../lib/componentRegistry";
-import type { IQComponent } from "@/common/types/measurement";
-import { DYNAMIC_ANSWER_KEYS } from "@/common/types/measurement";
+import type { IQComponent, IQOptionItem } from "@/common/types/measurement";
+import { DYNAMIC_ANSWER_KEYS, isOptionBasedComponent } from "@/common/types/measurement";
 
 export function usePropertyEditor() {
   const components = useMeasurementBuilderStore(selectActiveScreenComponents);
@@ -27,8 +27,23 @@ export function usePropertyEditor() {
     ? componentRegistry[selectedComponent.type].propertyFields
     : [];
 
+  const isOptionBased = selectedComponent
+    ? isOptionBasedComponent(selectedComponent.type)
+    : false;
+
+  const currentAnswerType =
+    (selectedComponent as unknown as Record<string, unknown> | null)
+      ?.correctAnswerType ?? "NONE";
+
   const propertyFields = allFields
     .filter((field) => {
+      if (
+        isOptionBased &&
+        currentAnswerType === "STATIC" &&
+        (field.key === "correctAnswer" || field.key === "grade")
+      ) {
+        return false;
+      }
       if (!field.visibleWhen || !selectedComponent) return true;
       const currentValue =
         (selectedComponent as unknown as Record<string, unknown>)[field.visibleWhen.key] ??
@@ -52,20 +67,24 @@ export function usePropertyEditor() {
     });
 
   function handlePropertyChange(key: string, value: unknown) {
-    if (!selectedComponentId) return;
+    if (!selectedComponentId || !selectedComponent) return;
 
     if (key === "correctAnswerType") {
-      const prev = selectedComponent
-        ? ((selectedComponent as unknown as Record<string, unknown>).correctAnswerType ??
-          "NONE")
-        : "NONE";
+      const prev = (selectedComponent as unknown as Record<string, unknown>).correctAnswerType ?? "NONE";
 
       if (value === "NONE") {
-        updateComponentProps(selectedComponentId, {
+        const updates: Record<string, unknown> = {
           correctAnswerType: "NONE",
           correctAnswer: "",
           grade: 0,
-        } as Partial<IQComponent>);
+        };
+        if (isOptionBased) {
+          const opts = (selectedComponent as unknown as Record<string, unknown>).options as IQOptionItem[] | undefined;
+          if (opts) {
+            updates.options = opts.map((o) => ({ label: o.label, value: o.value }));
+          }
+        }
+        updateComponentProps(selectedComponentId, updates as Partial<IQComponent>);
         return;
       }
 
@@ -73,12 +92,36 @@ export function usePropertyEditor() {
         (prev === "STATIC" && value === "DYNAMIC") ||
         (prev === "DYNAMIC" && value === "STATIC")
       ) {
-        updateComponentProps(selectedComponentId, {
+        const updates: Record<string, unknown> = {
           correctAnswerType: value,
           correctAnswer: "",
-        } as Partial<IQComponent>);
+        };
+        if (isOptionBased && prev === "STATIC") {
+          const opts = (selectedComponent as unknown as Record<string, unknown>).options as IQOptionItem[] | undefined;
+          if (opts) {
+            updates.options = opts.map((o) => ({ label: o.label, value: o.value }));
+          }
+        }
+        updateComponentProps(selectedComponentId, updates as Partial<IQComponent>);
         return;
       }
+    }
+
+    if (key === "options" && isOptionBased && currentAnswerType === "STATIC") {
+      const opts = value as IQOptionItem[];
+      const correctValues = opts
+        .filter((o) => o.isCorrect)
+        .map((o) => o.value);
+      const totalGrade = opts.reduce(
+        (sum, o) => sum + (o.isCorrect ? (o.score ?? 0) : 0),
+        0,
+      );
+      updateComponentProps(selectedComponentId, {
+        options: opts,
+        correctAnswer: correctValues.join(","),
+        grade: totalGrade,
+      } as Partial<IQComponent>);
+      return;
     }
 
     updateComponentProps(selectedComponentId, {

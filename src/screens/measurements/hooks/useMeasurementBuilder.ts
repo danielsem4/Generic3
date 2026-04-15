@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { useAuthStore } from "@/store/useAuthStore";
 import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
+import { useMeasurementsQuery } from "./useMeasurementsQuery";
 import { useSaveMeasurementStructure } from "./useSaveMeasurementStructure";
 import { transformScreensToPayload } from "../lib/transformStructure";
 
@@ -10,7 +12,11 @@ export function useMeasurementBuilder() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const clinicId = useAuthStore((s) => s.clinicId);
 
+  const { data: fetchedMeasurements } = useMeasurementsQuery(clinicId);
+
+  const addMeasurement = useMeasurementBuilderStore((s) => s.addMeasurement);
   const loadMeasurement = useMeasurementBuilderStore(
     (s) => s.loadMeasurement,
   );
@@ -34,10 +40,19 @@ export function useMeasurementBuilder() {
   );
 
   useEffect(() => {
-    if (id) {
-      loadMeasurement(id);
+    if (!id || !fetchedMeasurements) return;
+
+    const store = useMeasurementBuilderStore.getState();
+    if (store.activeMeasurementId === id) return;
+
+    const measurement = fetchedMeasurements.find((m) => m.id === id);
+    if (!measurement) return;
+
+    if (!store.measurements.some((m) => m.id === id)) {
+      store.addMeasurement(measurement);
     }
-  }, [id, loadMeasurement]);
+    store.loadMeasurement(id);
+  }, [id, fetchedMeasurements]);
 
   async function handleSave() {
     if (!activeMeasurementId) return;

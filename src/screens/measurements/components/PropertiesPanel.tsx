@@ -3,6 +3,7 @@ import { Settings2 } from "lucide-react";
 import { usePropertyEditor } from "../hooks/usePropertyEditor";
 import { PropertyField } from "./PropertyField";
 import { ComponentTypeBadge } from "./ComponentTypeBadge";
+import type { CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 
 export function PropertiesPanel() {
   const { t } = useTranslation();
@@ -20,6 +21,10 @@ export function PropertiesPanel() {
     );
   }
 
+  const correctAnswerType =
+    (selectedComponent as unknown as Record<string, unknown>).correctAnswerType as CorrectAnswerType | undefined;
+  const componentType = selectedComponent.type as QComponentType;
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -36,6 +41,8 @@ export function PropertiesPanel() {
             field={field}
             value={(selectedComponent as unknown as Record<string, unknown>)[field.key]}
             onChange={handlePropertyChange}
+            correctAnswerType={correctAnswerType}
+            componentType={componentType}
           />
         ))}
       </div>

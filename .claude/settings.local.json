@@ -50,7 +50,8 @@
       "Read(//Users/klutz/Desktop/Generic3/src/i18n/locales/**)",
       "Bash(done)",
       "Bash(xargs ls:*)",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "Bash(grep -r \"saveSuccess\\\\|createSuccess\\\\|updateSuccess\" /Users/klutz/Desktop/Generic3/src/screens --include=*.tsx --include=*.ts -l)"
     ]
   }
 }

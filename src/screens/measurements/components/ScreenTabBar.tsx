@@ -14,6 +14,7 @@ interface ScreenTabBarProps {
   onRemoveScreen: (index: number) => void;
   onRenameScreen: (index: number, title: string) => void;
   canDeleteScreen: boolean;
+  totalScore?: number;
 }
 
 export function ScreenTabBar({
@@ -24,6 +25,7 @@ export function ScreenTabBar({
   onRemoveScreen,
   onRenameScreen,
   canDeleteScreen,
+  totalScore,
 }: ScreenTabBarProps) {
   const { t } = useTranslation();
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -113,6 +115,12 @@ export function ScreenTabBar({
       >
         <Plus size={14} />
       </Button>
+
+      {!!totalScore && totalScore > 0 && (
+        <div className="ml-auto shrink-0 text-xs font-medium text-muted-foreground px-2">
+          {t("measurements.builder.totalScore")}: {totalScore}
+        </div>
+      )}
 
       {confirmDeleteIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

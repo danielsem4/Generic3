@@ -737,6 +737,7 @@ patient: {
         previous: "السابق",
         screenOf: "شاشة {{current}} من {{total}}",
       },
+      totalScore: "مجموع النقاط",
     },
     categories: {
       textDisplay: "نص وعرض",
@@ -783,6 +784,12 @@ patient: {
       correctAnswerType: "نوع الإجابة",
       correctAnswer: "الإجابة الصحيحة",
       grade: "الدرجة",
+      optionScore: "النقاط",
+      totalScore: "مجموع النقاط",
+      minLabel: "تسمية الحد الأدنى",
+      maxLabel: "تسمية الحد الأقصى",
+      trueLabel: "تسمية صحيح",
+      falseLabel: "تسمية خطأ",
     },
     device: {
       mobile: "جوال",
