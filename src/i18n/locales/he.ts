@@ -753,6 +753,8 @@ patientActivities: {
       dropdown: "רשימה",
       multiSelect: "מרובה",
       radioGroup: "בחירה",
+      cardRadioGroup: "כרטיס בחירה",
+      cardMultiSelect: "כרטיסים מרובים",
       datePicker: "תאריך",
       timePicker: "שעה",
       scale: "סולם",

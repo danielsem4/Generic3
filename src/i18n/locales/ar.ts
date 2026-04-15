@@ -756,6 +756,8 @@ patient: {
       dropdown: "قائمة",
       multiSelect: "متعدد",
       radioGroup: "خيارات",
+      cardRadioGroup: "بطاقة اختيار",
+      cardMultiSelect: "بطاقات متعددة",
       datePicker: "تاريخ",
       timePicker: "وقت",
       scale: "مقياس",

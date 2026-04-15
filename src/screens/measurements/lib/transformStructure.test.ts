@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { transformScreensToPayload } from "./transformStructure";
+import {
+  transformScreensToPayload,
+  transformPayloadToScreens,
+  type IServerStructureResponse,
+} from "./transformStructure";
 import type { IQScreen } from "@/common/types/measurement";
 
 describe("transformScreensToPayload", () => {
@@ -184,6 +188,8 @@ describe("transformScreensToPayload", () => {
       dropdown: "INPUT_SELECT",
       multiSelect: "INPUT_MULTI_SELECT",
       radioGroup: "INPUT_RADIO",
+      cardRadioGroup: "INPUT_RADIO",
+      cardMultiSelect: "INPUT_MULTI_SELECT",
       datePicker: "INPUT_DATE",
       timePicker: "INPUT_TIME",
       scale: "INPUT_SCALE",
@@ -210,11 +216,17 @@ describe("transformScreensToPayload", () => {
       if (
         frontend === "dropdown" ||
         frontend === "multiSelect" ||
-        frontend === "radioGroup"
+        frontend === "radioGroup" ||
+        frontend === "cardRadioGroup" ||
+        frontend === "cardMultiSelect"
       ) {
         component.options = [];
       }
-      if (frontend === "radioGroup") {
+      if (
+        frontend === "radioGroup" ||
+        frontend === "cardRadioGroup" ||
+        frontend === "cardMultiSelect"
+      ) {
         component.layout = "vertical";
       }
       if (frontend === "toggleSwitch") {
@@ -227,6 +239,189 @@ describe("transformScreensToPayload", () => {
       const result = transformScreensToPayload(screens);
       expect(result.screens[0].elements[0].element_type).toBe(backend);
     }
+  });
+
+  it("round-trips cardRadioGroup with display_style=cards", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "cardRadioGroup",
+            label: "Feeling",
+            required: false,
+            options: [
+              { label: "Good", value: "good" },
+              { label: "Bad", value: "bad" },
+            ],
+            layout: "horizontal",
+            correctAnswerType: "NONE",
+            correctAnswer: "",
+            grade: 0,
+          },
+        ],
+      },
+    ];
+    const payload = transformScreensToPayload(screens);
+    const element = payload.screens[0].elements[0];
+    expect(element.element_type).toBe("INPUT_RADIO");
+    expect(element.config.display_style).toBe("cards");
+    expect(element.config.layout).toBe("horizontal");
+
+    const serverResponse: IServerStructureResponse = {
+      measurement_id: "m1",
+      measurement_name: "Test",
+      screens: [
+        {
+          id: "s1",
+          screen_number: 1,
+          title: "Screen 1",
+          rows: [
+            {
+              row_number: 1,
+              elements: [
+                {
+                  id: "c1",
+                  element_type: element.element_type,
+                  row_number: element.row_number,
+                  order_in_row: element.order_in_row,
+                  label: element.label,
+                  is_required: element.is_required,
+                  config: element.config,
+                  correct_answer_type: element.correct_answer_type,
+                  correct_answers: element.correct_answers,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    const roundTripped = transformPayloadToScreens(serverResponse);
+    const component = roundTripped[0].components[0];
+    expect(component.type).toBe("cardRadioGroup");
+    expect((component as { layout: string }).layout).toBe("horizontal");
+  });
+
+  it("round-trips cardMultiSelect with display_style=cards", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "cardMultiSelect",
+            label: "Symptoms",
+            required: true,
+            options: [
+              { label: "Cough", value: "cough" },
+              { label: "Fever", value: "fever" },
+            ],
+            layout: "vertical",
+            correctAnswerType: "NONE",
+            correctAnswer: "",
+            grade: 0,
+          },
+        ],
+      },
+    ];
+    const payload = transformScreensToPayload(screens);
+    const element = payload.screens[0].elements[0];
+    expect(element.element_type).toBe("INPUT_MULTI_SELECT");
+    expect(element.config.display_style).toBe("cards");
+
+    const serverResponse: IServerStructureResponse = {
+      measurement_id: "m1",
+      measurement_name: "Test",
+      screens: [
+        {
+          id: "s1",
+          screen_number: 1,
+          title: "Screen 1",
+          rows: [
+            {
+              row_number: 1,
+              elements: [
+                {
+                  id: "c1",
+                  element_type: element.element_type,
+                  row_number: element.row_number,
+                  order_in_row: element.order_in_row,
+                  label: element.label,
+                  is_required: element.is_required,
+                  config: element.config,
+                  correct_answer_type: element.correct_answer_type,
+                  correct_answers: element.correct_answers,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    const roundTripped = transformPayloadToScreens(serverResponse);
+    const component = roundTripped[0].components[0];
+    expect(component.type).toBe("cardMultiSelect");
+    expect((component as { layout: string }).layout).toBe("vertical");
+    expect("placeholder" in component).toBe(false);
+  });
+
+  it("preserves back-compat: plain radioGroup/multiSelect without display_style stay plain", () => {
+    const serverResponse: IServerStructureResponse = {
+      measurement_id: "m1",
+      measurement_name: "Legacy",
+      screens: [
+        {
+          id: "s1",
+          screen_number: 1,
+          title: "Legacy Screen",
+          rows: [
+            {
+              row_number: 1,
+              elements: [
+                {
+                  id: "e1",
+                  element_type: "INPUT_RADIO",
+                  row_number: 1,
+                  order_in_row: 1,
+                  label: "Color",
+                  is_required: false,
+                  config: {
+                    options: ["Red", "Blue"],
+                    layout: "vertical",
+                  },
+                  correct_answer_type: "NONE",
+                },
+              ],
+            },
+            {
+              row_number: 2,
+              elements: [
+                {
+                  id: "e2",
+                  element_type: "INPUT_MULTI_SELECT",
+                  row_number: 2,
+                  order_in_row: 1,
+                  label: "Tags",
+                  is_required: false,
+                  config: {
+                    options: ["A", "B"],
+                    placeholder: "Select...",
+                  },
+                  correct_answer_type: "NONE",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    const screens = transformPayloadToScreens(serverResponse);
+    expect(screens[0].components[0].type).toBe("radioGroup");
+    expect(screens[0].components[1].type).toBe("multiSelect");
   });
 
   it("preserves screen titles in order", () => {

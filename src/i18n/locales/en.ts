@@ -742,6 +742,8 @@ modules: {
       dropdown: "Dropdown",
       multiSelect: "Multi",
       radioGroup: "Radio",
+      cardRadioGroup: "Card Radio",
+      cardMultiSelect: "Card Multi",
       datePicker: "Date",
       timePicker: "Time",
       scale: "Scale",
