@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { arrayMove } from "@dnd-kit/sortable";
 import type {
   IQComponent,
   IQScreen,
@@ -34,6 +35,7 @@ interface MeasurementBuilderStore {
   removeScreen: (index: number) => void;
   setActiveScreen: (index: number) => void;
   renameScreen: (index: number, title: string) => void;
+  reorderScreens: (fromIndex: number, toIndex: number) => void;
 
   addComponent: (component: IQComponent, index: number) => void;
   addComponentToRow: (
@@ -178,6 +180,37 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         const newScreens = [...state.screens];
         newScreens[index] = { ...newScreens[index], title };
         return { screens: newScreens, isDirty: true };
+      }),
+
+    reorderScreens: (fromIndex, toIndex) =>
+      set((state) => {
+        if (fromIndex === toIndex) return state;
+        if (
+          fromIndex < 0 ||
+          toIndex < 0 ||
+          fromIndex >= state.screens.length ||
+          toIndex >= state.screens.length
+        ) {
+          return state;
+        }
+
+        const newScreens = arrayMove(state.screens, fromIndex, toIndex);
+
+        const active = state.activeScreenIndex;
+        let newActive = active;
+        if (active === fromIndex) {
+          newActive = toIndex;
+        } else if (fromIndex < active && active <= toIndex) {
+          newActive = active - 1;
+        } else if (toIndex <= active && active < fromIndex) {
+          newActive = active + 1;
+        }
+
+        return {
+          screens: newScreens,
+          activeScreenIndex: newActive,
+          isDirty: true,
+        };
       }),
 
     addComponent: (component, index) =>

@@ -12,6 +12,7 @@ export function BuilderCenterPanel() {
     handleRemoveScreen,
     handleGoToScreen,
     handleRenameScreen,
+    handleReorderScreens,
   } = useScreenManager();
 
   const totalScore = useScreenScore();
@@ -25,6 +26,7 @@ export function BuilderCenterPanel() {
         onAddScreen={handleAddScreen}
         onRemoveScreen={handleRemoveScreen}
         onRenameScreen={handleRenameScreen}
+        onReorderScreens={handleReorderScreens}
         canDeleteScreen={canDeleteScreen}
         totalScore={totalScore}
       />

@@ -11,6 +11,7 @@ export function useScreenManager() {
     (s) => s.setActiveScreen,
   );
   const renameScreen = useMeasurementBuilderStore((s) => s.renameScreen);
+  const reorderScreens = useMeasurementBuilderStore((s) => s.reorderScreens);
 
   const totalScreens = screens.length;
   const canDeleteScreen = screens.length > 1;
@@ -41,6 +42,10 @@ export function useScreenManager() {
     renameScreen(index, title);
   }
 
+  function handleReorderScreens(fromIndex: number, toIndex: number) {
+    reorderScreens(fromIndex, toIndex);
+  }
+
   return {
     screens,
     activeScreenIndex,
@@ -54,5 +59,6 @@ export function useScreenManager() {
     handleGoNext,
     handleGoPrev,
     handleRenameScreen,
+    handleReorderScreens,
   };
 }

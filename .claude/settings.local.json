@@ -54,7 +54,9 @@
       "Bash(grep -r \"saveSuccess\\\\|createSuccess\\\\|updateSuccess\" /Users/klutz/Desktop/Generic3/src/screens --include=*.tsx --include=*.ts -l)",
       "Bash(grep -h \"^import.*from.*\\\\./\\\\|^import.*from \"\"\\\\./\" /Users/klutz/Desktop/Generic3/src/screens/measurements/components/*.tsx)",
       "Bash(echo \"exit=$?\")",
-      "Bash(echo \"tsc exit: $?\")"
+      "Bash(echo \"tsc exit: $?\")",
+      "Bash(ls /Users/klutz/Desktop/Generic3/src/screens/measurements/hooks/useBuilderDnd*)",
+      "Bash(wc:*)"
     ]
   }
 }
