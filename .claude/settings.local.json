@@ -56,7 +56,9 @@
       "Bash(echo \"exit=$?\")",
       "Bash(echo \"tsc exit: $?\")",
       "Bash(ls /Users/klutz/Desktop/Generic3/src/screens/measurements/hooks/useBuilderDnd*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(grep -r \"ring-primary\\\\|data-\\\\[state=\" /Users/klutz/Desktop/Generic3/src/components/ui/*.tsx)",
+      "Bash(grep -n \"class=\"\".*ring\" /Users/klutz/Desktop/Generic3/src/screens/measurements/components/canvas/*.tsx)"
     ]
   }
 }

@@ -32,6 +32,10 @@ export function InteractiveComponentPreview({
       return <MultiSelectPreview component={component} />;
     case "radioGroup":
       return <RadioGroupPreview component={component} />;
+    case "cardRadioGroup":
+      return <CardRadioGroupPreview component={component} />;
+    case "cardMultiSelect":
+      return <CardMultiSelectPreview component={component} />;
     case "datePicker":
       return <DatePickerPreview component={component} />;
     case "timePicker":
@@ -362,6 +366,96 @@ function ToggleSwitchPreview({
     <div className="flex items-center justify-between">
       <label className="text-sm font-medium">{component.label}</label>
       <Switch checked={checked} onCheckedChange={setChecked} />
+    </div>
+  );
+}
+
+function CardRadioGroupPreview({
+  component,
+}: {
+  component: Extract<IQComponent, { type: "cardRadioGroup" }>;
+}) {
+  const [value, setValue] = useState("");
+
+  function handleSelect(optValue: string) {
+    setValue(optValue);
+  }
+
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium">{component.label}</label>
+      <div
+        className={`flex gap-2 ${
+          component.layout === "vertical" ? "flex-col" : "flex-row flex-wrap"
+        }`}
+      >
+        {component.options.map((opt) => {
+          const isSelected = value === opt.value;
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => handleSelect(opt.value)}
+              className={`rounded-lg border px-3 py-2 text-sm text-left transition-colors ${
+                isSelected
+                  ? "ring-2 ring-primary border-primary bg-primary/5"
+                  : "hover:border-primary/50"
+              }`}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function CardMultiSelectPreview({
+  component,
+}: {
+  component: Extract<IQComponent, { type: "cardMultiSelect" }>;
+}) {
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  function handleToggle(optValue: string) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(optValue)) {
+        next.delete(optValue);
+      } else {
+        next.add(optValue);
+      }
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium">{component.label}</label>
+      <div
+        className={`flex gap-2 ${
+          component.layout === "vertical" ? "flex-col" : "flex-row flex-wrap"
+        }`}
+      >
+        {component.options.map((opt) => {
+          const isSelected = selected.has(opt.value);
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => handleToggle(opt.value)}
+              className={`rounded-lg border px-3 py-2 text-sm text-left transition-colors ${
+                isSelected
+                  ? "ring-2 ring-primary border-primary bg-primary/5"
+                  : "hover:border-primary/50"
+              }`}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

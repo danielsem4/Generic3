@@ -756,6 +756,8 @@ patient: {
       dropdown: "قائمة",
       multiSelect: "متعدد",
       radioGroup: "خيارات",
+      cardRadioGroup: "بطاقة اختيار",
+      cardMultiSelect: "بطاقات متعددة",
       datePicker: "تاريخ",
       timePicker: "وقت",
       scale: "مقياس",
@@ -790,6 +792,7 @@ patient: {
       maxLabel: "تسمية الحد الأقصى",
       trueLabel: "تسمية صحيح",
       falseLabel: "تسمية خطأ",
+      allowPartialScore: "السماح بالدرجة الجزئية",
     },
     device: {
       mobile: "جوال",

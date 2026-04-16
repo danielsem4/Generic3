@@ -758,6 +758,8 @@ patient: {
       dropdown: "Список",
       multiSelect: "Мульти",
       radioGroup: "Радио",
+      cardRadioGroup: "Карточки (одна)",
+      cardMultiSelect: "Карточки (много)",
       datePicker: "Дата",
       timePicker: "Время",
       scale: "Шкала",
@@ -792,6 +794,7 @@ patient: {
       maxLabel: "Метка максимума",
       trueLabel: "Метка истины",
       falseLabel: "Метка лжи",
+      allowPartialScore: "Разрешить частичный балл",
     },
     device: {
       mobile: "Мобильный",

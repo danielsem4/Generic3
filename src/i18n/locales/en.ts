@@ -742,6 +742,8 @@ modules: {
       dropdown: "Dropdown",
       multiSelect: "Multi",
       radioGroup: "Radio",
+      cardRadioGroup: "Card Radio",
+      cardMultiSelect: "Card Multi",
       datePicker: "Date",
       timePicker: "Time",
       scale: "Scale",
@@ -776,6 +778,7 @@ modules: {
       maxLabel: "Max Label",
       trueLabel: "True Label",
       falseLabel: "False Label",
+      allowPartialScore: "Allow Partial Score",
     },
     device: {
       mobile: "Mobile",

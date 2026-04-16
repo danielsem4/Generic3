@@ -753,6 +753,8 @@ patientActivities: {
       dropdown: "רשימה",
       multiSelect: "מרובה",
       radioGroup: "בחירה",
+      cardRadioGroup: "כרטיס בחירה",
+      cardMultiSelect: "כרטיסים מרובים",
       datePicker: "תאריך",
       timePicker: "שעה",
       scale: "סולם",
@@ -787,6 +789,7 @@ patientActivities: {
       maxLabel: "תווית מקסימום",
       trueLabel: "תווית אמת",
       falseLabel: "תווית שקר",
+      allowPartialScore: "אפשר ניקוד חלקי",
     },
     device: {
       mobile: "נייד",

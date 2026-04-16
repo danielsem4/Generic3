@@ -9,6 +9,8 @@ import {
   ChevronDown,
   ListChecks,
   CircleDot,
+  LayoutGrid,
+  SquareStack,
   Calendar,
   Clock,
   SlidersHorizontal,
@@ -335,6 +337,7 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         correctAnswerType: "NONE",
         correctAnswer: "",
         grade: 0,
+        allowPartialScore: false,
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
@@ -362,6 +365,12 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
             { label: "Static", value: "STATIC" },
             { label: "Dynamic", value: "DYNAMIC" },
           ],
+        },
+        {
+          key: "allowPartialScore",
+          labelKey: "measurements.props.allowPartialScore",
+          fieldType: "toggle",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC"] },
         },
         {
           key: "correctAnswer",
@@ -422,6 +431,133 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
             { label: "Static", value: "STATIC" },
             { label: "Dynamic", value: "DYNAMIC" },
           ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
+        {
+          key: "grade",
+          labelKey: "measurements.props.grade",
+          fieldType: "number",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
+      ],
+    },
+
+    cardRadioGroup: {
+      labelKey: "measurements.components.cardRadioGroup",
+      icon: LayoutGrid,
+      category: "userInputs",
+      defaultProps: {
+        type: "cardRadioGroup",
+        label: "Card Radio",
+        required: false,
+        options: [{ label: "Option 1", value: "option1" }],
+        layout: "vertical",
+        correctAnswerType: "NONE",
+        correctAnswer: "",
+        grade: 0,
+      },
+      propertyFields: [
+        { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
+        {
+          key: "required",
+          labelKey: "measurements.props.required",
+          fieldType: "toggle",
+        },
+        {
+          key: "layout",
+          labelKey: "measurements.props.layout",
+          fieldType: "select",
+          options: [
+            { label: "Vertical", value: "vertical" },
+            { label: "Horizontal", value: "horizontal" },
+          ],
+        },
+        {
+          key: "options",
+          labelKey: "measurements.props.options",
+          fieldType: "optionsList",
+        },
+        {
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
+        {
+          key: "grade",
+          labelKey: "measurements.props.grade",
+          fieldType: "number",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
+      ],
+    },
+
+    cardMultiSelect: {
+      labelKey: "measurements.components.cardMultiSelect",
+      icon: SquareStack,
+      category: "userInputs",
+      defaultProps: {
+        type: "cardMultiSelect",
+        label: "Card Multi",
+        required: false,
+        options: [{ label: "Option 1", value: "option1" }],
+        layout: "vertical",
+        correctAnswerType: "NONE",
+        correctAnswer: "",
+        grade: 0,
+        allowPartialScore: false,
+      },
+      propertyFields: [
+        { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
+        {
+          key: "required",
+          labelKey: "measurements.props.required",
+          fieldType: "toggle",
+        },
+        {
+          key: "layout",
+          labelKey: "measurements.props.layout",
+          fieldType: "select",
+          options: [
+            { label: "Vertical", value: "vertical" },
+            { label: "Horizontal", value: "horizontal" },
+          ],
+        },
+        {
+          key: "options",
+          labelKey: "measurements.props.options",
+          fieldType: "optionsList",
+        },
+        {
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "allowPartialScore",
+          labelKey: "measurements.props.allowPartialScore",
+          fieldType: "toggle",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC"] },
         },
         {
           key: "correctAnswer",

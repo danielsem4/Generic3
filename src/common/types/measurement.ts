@@ -18,6 +18,8 @@ export type QComponentType =
   | "dropdown"
   | "multiSelect"
   | "radioGroup"
+  | "cardRadioGroup"
+  | "cardMultiSelect"
   | "datePicker"
   | "timePicker"
   | "scale"
@@ -44,6 +46,8 @@ export const OPTION_BASED_TYPES = new Set<QComponentType>([
   "dropdown",
   "multiSelect",
   "radioGroup",
+  "cardRadioGroup",
+  "cardMultiSelect",
 ]);
 
 export function isOptionBasedComponent(type: QComponentType): boolean {
@@ -123,6 +127,7 @@ export interface IQMultiSelect extends IQBase {
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
+  allowPartialScore?: boolean;
 }
 
 export interface IQRadioGroup extends IQBase {
@@ -133,6 +138,27 @@ export interface IQRadioGroup extends IQBase {
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
+}
+
+export interface IQCardRadioGroup extends IQBase {
+  type: "cardRadioGroup";
+  required: boolean;
+  options: IQOptionItem[];
+  layout: "vertical" | "horizontal";
+  correctAnswerType?: CorrectAnswerType;
+  correctAnswer?: string;
+  grade?: number;
+}
+
+export interface IQCardMultiSelect extends IQBase {
+  type: "cardMultiSelect";
+  required: boolean;
+  options: IQOptionItem[];
+  layout: "vertical" | "horizontal";
+  correctAnswerType?: CorrectAnswerType;
+  correctAnswer?: string;
+  grade?: number;
+  allowPartialScore?: boolean;
 }
 
 export interface IQDatePicker extends IQBase {
@@ -199,6 +225,8 @@ export type IQComponent =
   | IQDropdown
   | IQMultiSelect
   | IQRadioGroup
+  | IQCardRadioGroup
+  | IQCardMultiSelect
   | IQDatePicker
   | IQTimePicker
   | IQScale

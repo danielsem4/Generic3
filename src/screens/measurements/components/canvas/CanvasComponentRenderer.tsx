@@ -198,6 +198,25 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           </div>
         </div>
       );
+    case "cardRadioGroup":
+    case "cardMultiSelect":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div
+            className={`flex gap-2 ${component.layout === "vertical" ? "flex-col" : "flex-row flex-wrap"}`}
+          >
+            {component.options.map((opt) => (
+              <div
+                key={opt.value}
+                className="rounded-lg border px-3 py-2 text-sm"
+              >
+                {opt.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
     case "datePicker":
       return (
         <div className="space-y-1">

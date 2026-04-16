@@ -5,7 +5,8 @@ export function useOptionScoring(
   componentType: QComponentType,
   onChange: (options: IQOptionItem[]) => void,
 ) {
-  const isSingleSelect = componentType !== "multiSelect";
+  const isSingleSelect =
+    componentType !== "multiSelect" && componentType !== "cardMultiSelect";
 
   function handleToggleCorrect(index: number) {
     const updated = options.map((opt, i) => {

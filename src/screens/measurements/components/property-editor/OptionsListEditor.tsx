@@ -23,7 +23,7 @@ export function OptionsListEditor({
   const { handleToggleCorrect, handleScoreChange, totalScore } =
     useOptionScoring(options, componentType ?? "dropdown", onChange);
 
-  const isMulti = componentType === "multiSelect";
+  const isMulti = componentType === "multiSelect" || componentType === "cardMultiSelect";
 
   function handleLabelChange(index: number, label: string) {
     const updated = options.map((opt, i) =>

@@ -77,6 +77,7 @@ export function usePropertyEditor() {
           correctAnswerType: "NONE",
           correctAnswer: "",
           grade: 0,
+          allowPartialScore: false,
         };
         if (isOptionBased) {
           const opts = (selectedComponent as unknown as Record<string, unknown>).options as IQOptionItem[] | undefined;

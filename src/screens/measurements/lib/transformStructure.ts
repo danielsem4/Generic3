@@ -14,6 +14,8 @@ const FRONTEND_TO_BACKEND_TYPE: Record<string, string> = {
   dropdown: "INPUT_SELECT",
   multiSelect: "INPUT_MULTI_SELECT",
   radioGroup: "INPUT_RADIO",
+  cardRadioGroup: "INPUT_RADIO",
+  cardMultiSelect: "INPUT_MULTI_SELECT",
   datePicker: "INPUT_DATE",
   timePicker: "INPUT_TIME",
   scale: "INPUT_SCALE",
@@ -40,6 +42,7 @@ interface BackendField {
   config: Record<string, unknown>;
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[];
+  allow_partial_score?: boolean;
 }
 
 interface BackendScreen {
@@ -61,6 +64,7 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
     case "dropdown":
     case "multiSelect":
       return {
+        placeholder: component.placeholder,
         options: component.options.map((o: IQOptionItem) => o.label),
       };
     case "radioGroup":
@@ -68,8 +72,20 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
         options: component.options.map((o: IQOptionItem) => o.label),
         layout: component.layout,
       };
+    case "cardRadioGroup":
+      return {
+        options: component.options.map((o: IQOptionItem) => o.label),
+        layout: component.layout,
+        display_style: "cards",
+      };
+    case "cardMultiSelect":
+      return {
+        options: component.options.map((o: IQOptionItem) => o.label),
+        layout: component.layout,
+        display_style: "cards",
+      };
     case "numberInput":
-      return { min: component.min, max: component.max, step: component.step };
+      return { placeholder: component.placeholder, min: component.min, max: component.max, step: component.step };
     case "scale":
       return {
         min: component.min,
@@ -150,15 +166,34 @@ function mapComponent(
     field.correct_answers = correctAnswers;
   }
 
+  if (
+    (component.type === "multiSelect" || component.type === "cardMultiSelect") &&
+    answerType === "STATIC"
+  ) {
+    field.allow_partial_score =
+      ((component as unknown as Record<string, unknown>).allowPartialScore as boolean) ?? false;
+  }
+
   return field;
 }
 
-const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = Object.fromEntries(
-  Object.entries(FRONTEND_TO_BACKEND_TYPE).map(([frontend, backend]) => [
-    backend,
-    frontend as QComponentType,
-  ]),
-);
+const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = {
+  INPUT_TEXT: "textInput",
+  INPUT_NUMBER: "numberInput",
+  INPUT_SELECT: "dropdown",
+  INPUT_MULTI_SELECT: "multiSelect",
+  INPUT_RADIO: "radioGroup",
+  INPUT_DATE: "datePicker",
+  INPUT_TIME: "timePicker",
+  INPUT_SCALE: "scale",
+  INPUT_BOOLEAN: "toggleSwitch",
+  HEADER: "heading",
+  PARAGRAPH: "paragraph",
+  INFO_CARD: "infoCard",
+  IMAGE: "image",
+  ICON: "icon",
+  BUTTON: "button",
+};
 
 export interface IServerElement {
   id: string;
@@ -170,6 +205,7 @@ export interface IServerElement {
   config: Record<string, unknown>;
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[] | null;
+  allow_partial_score?: boolean;
 }
 
 export interface IServerScreen {
@@ -263,11 +299,16 @@ function buildScalarCorrectAnswer(
 }
 
 function buildComponentFromElement(element: IServerElement): IQComponent | null {
-  const frontendType = BACKEND_TO_FRONTEND_TYPE[element.element_type];
+  let frontendType = BACKEND_TO_FRONTEND_TYPE[element.element_type];
   if (!frontendType) return null;
 
-  const registryDefaults = componentRegistry[frontendType].defaultProps;
   const config = element.config ?? {};
+  const isCards = getString(config, "display_style") === "cards";
+  if (isCards && frontendType === "radioGroup") frontendType = "cardRadioGroup";
+  else if (isCards && frontendType === "multiSelect")
+    frontendType = "cardMultiSelect";
+
+  const registryDefaults = componentRegistry[frontendType].defaultProps;
   const answerType = element.correct_answer_type;
   const correctAnswers = element.correct_answers;
   const isDisplay = DISPLAY_TYPES.includes(frontendType);
@@ -324,9 +365,12 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
         correctAnswerType: answerType,
         correctAnswer,
         grade,
+        ...(frontendType === "multiSelect" && {
+          allowPartialScore: element.allow_partial_score ?? false,
+        }),
       } as IQComponent;
     }
-    case "radioGroup": {
+    case "cardMultiSelect": {
       const baseOptions = buildOptionsFromConfig(config);
       const options =
         answerType === "STATIC"
@@ -338,7 +382,30 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
       const { correctAnswer, grade } = buildScalarCorrectAnswer(correctAnswers);
       return {
         ...base,
-        type: "radioGroup",
+        type: "cardMultiSelect",
+        required,
+        options,
+        layout,
+        correctAnswerType: answerType,
+        correctAnswer,
+        grade,
+        allowPartialScore: element.allow_partial_score ?? false,
+      } as IQComponent;
+    }
+    case "radioGroup":
+    case "cardRadioGroup": {
+      const baseOptions = buildOptionsFromConfig(config);
+      const options =
+        answerType === "STATIC"
+          ? applyOptionCorrectAnswers(baseOptions, correctAnswers)
+          : baseOptions;
+      const layoutValue = getString(config, "layout", "vertical");
+      const layout: "vertical" | "horizontal" =
+        layoutValue === "horizontal" ? "horizontal" : "vertical";
+      const { correctAnswer, grade } = buildScalarCorrectAnswer(correctAnswers);
+      return {
+        ...base,
+        type: frontendType,
         required,
         options,
         layout,
