@@ -6,14 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 interface PatientsTableProps {
   patients: IUser[];
+  viewBasePath?: string;
 }
 
-export const PatientsTable = ({ patients }: PatientsTableProps) => {
+export const PatientsTable = ({ patients, viewBasePath = "/patients" }: PatientsTableProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleViewPatient = (id: number | string) => {
-    navigate(`/patients/${id}`);
+  const handleViewUser = (id: number | string) => {
+    navigate(`${viewBasePath}/${id}`);
   };
 
   return (
@@ -45,7 +46,7 @@ export const PatientsTable = ({ patients }: PatientsTableProps) => {
                 <button
                   className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label={t("home.viewPatient")}
-                  onClick={() => handleViewPatient(user.id ?? user.email)}
+                  onClick={() => handleViewUser(user.id ?? user.email)}
                 >
                   <Eye size={16} />
                 </button>

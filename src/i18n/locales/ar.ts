@@ -205,6 +205,8 @@ const ar = {
     errLastName: "اسم العائلة مطلوب",
     errEmail: "عنوان البريد الإلكتروني غير صالح",
     errPhone: "يجب أن يتكون رقم الهاتف من 10 أرقام بالضبط",
+    backToDirectory: "العودة إلى الدليل",
+    detailError: "فشل في تحميل بيانات الطبيب.",
   },
 
     // Medications

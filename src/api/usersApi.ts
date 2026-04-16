@@ -85,6 +85,25 @@ export const createDoctor = async (
   return response.data;
 };
 
+export interface IDoctorDetailsResponse {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string | null;
+  role: string;
+  clinics: { id: string; clinic_name: string }[];
+}
+
+export const getDoctorDetails = async (
+  userId: string,
+): Promise<IDoctorDetailsResponse> => {
+  const response = await api.get<IDoctorDetailsResponse>(
+    `/api/v1/users/doctors/${userId}/`,
+  );
+  return response.data;
+};
+
 export const getPatientDetails = async (
   userId: string,
 ): Promise<IPatientDetailsResponse> => {

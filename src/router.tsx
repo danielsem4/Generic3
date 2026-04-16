@@ -12,6 +12,7 @@ import Medications from "@/screens/medications/Medications";
 import PatientMedications from "./screens/patient-meds/PatientMedications";
 import ClinicManagers from "@/screens/clinic-managers/ClinicManagers";
 import Doctors from "@/screens/doctors/Doctors";
+import DoctorDetails from "@/screens/doctors/DoctorDetails";
 import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
 import Statistics from "./screens/statistics/Statistics";
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
       { path: "home", element: <HomeRedirect /> },
       { path: "clinic-managers", element: <ClinicManagers /> },
       { path: "doctors", element: <Doctors /> },
+      { path: "doctors/:userId", element: <DoctorDetails /> },
       { path: "modules", element: <Modules /> },
       { path: "settings", element: <Settings /> },
       { path: "patients", element: <Patients /> },

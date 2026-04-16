@@ -207,6 +207,8 @@ patients: {
     errLastName: "Last name is required",
     errEmail: "Invalid email address",
     errPhone: "Phone number must be exactly 10 digits",
+    backToDirectory: "Back to Directory",
+    detailError: "Failed to load doctor details.",
   },
 
   // Medications
