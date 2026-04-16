@@ -778,6 +778,7 @@ modules: {
       maxLabel: "Max Label",
       trueLabel: "True Label",
       falseLabel: "False Label",
+      allowPartialScore: "Allow Partial Score",
     },
     device: {
       mobile: "Mobile",

@@ -127,6 +127,7 @@ export interface IQMultiSelect extends IQBase {
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
+  allowPartialScore?: boolean;
 }
 
 export interface IQRadioGroup extends IQBase {
@@ -157,6 +158,7 @@ export interface IQCardMultiSelect extends IQBase {
   correctAnswerType?: CorrectAnswerType;
   correctAnswer?: string;
   grade?: number;
+  allowPartialScore?: boolean;
 }
 
 export interface IQDatePicker extends IQBase {

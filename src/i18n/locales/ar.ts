@@ -792,6 +792,7 @@ patient: {
       maxLabel: "تسمية الحد الأقصى",
       trueLabel: "تسمية صحيح",
       falseLabel: "تسمية خطأ",
+      allowPartialScore: "السماح بالدرجة الجزئية",
     },
     device: {
       mobile: "جوال",

@@ -789,6 +789,7 @@ patientActivities: {
       maxLabel: "תווית מקסימום",
       trueLabel: "תווית אמת",
       falseLabel: "תווית שקר",
+      allowPartialScore: "אפשר ניקוד חלקי",
     },
     device: {
       mobile: "נייד",

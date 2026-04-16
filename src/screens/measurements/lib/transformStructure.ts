@@ -42,6 +42,7 @@ interface BackendField {
   config: Record<string, unknown>;
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[];
+  allow_partial_score?: boolean;
 }
 
 interface BackendScreen {
@@ -63,6 +64,7 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
     case "dropdown":
     case "multiSelect":
       return {
+        placeholder: component.placeholder,
         options: component.options.map((o: IQOptionItem) => o.label),
       };
     case "radioGroup":
@@ -83,7 +85,7 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
         display_style: "cards",
       };
     case "numberInput":
-      return { min: component.min, max: component.max, step: component.step };
+      return { placeholder: component.placeholder, min: component.min, max: component.max, step: component.step };
     case "scale":
       return {
         min: component.min,
@@ -164,6 +166,14 @@ function mapComponent(
     field.correct_answers = correctAnswers;
   }
 
+  if (
+    (component.type === "multiSelect" || component.type === "cardMultiSelect") &&
+    answerType === "STATIC"
+  ) {
+    field.allow_partial_score =
+      ((component as unknown as Record<string, unknown>).allowPartialScore as boolean) ?? false;
+  }
+
   return field;
 }
 
@@ -195,6 +205,7 @@ export interface IServerElement {
   config: Record<string, unknown>;
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[] | null;
+  allow_partial_score?: boolean;
 }
 
 export interface IServerScreen {
@@ -354,6 +365,9 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
         correctAnswerType: answerType,
         correctAnswer,
         grade,
+        ...(frontendType === "multiSelect" && {
+          allowPartialScore: element.allow_partial_score ?? false,
+        }),
       } as IQComponent;
     }
     case "cardMultiSelect": {
@@ -375,6 +389,7 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
         correctAnswerType: answerType,
         correctAnswer,
         grade,
+        allowPartialScore: element.allow_partial_score ?? false,
       } as IQComponent;
     }
     case "radioGroup":

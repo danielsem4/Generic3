@@ -794,6 +794,7 @@ patient: {
       maxLabel: "Метка максимума",
       trueLabel: "Метка истины",
       falseLabel: "Метка лжи",
+      allowPartialScore: "Разрешить частичный балл",
     },
     device: {
       mobile: "Мобильный",

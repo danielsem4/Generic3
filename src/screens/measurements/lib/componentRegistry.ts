@@ -337,6 +337,7 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         correctAnswerType: "NONE",
         correctAnswer: "",
         grade: 0,
+        allowPartialScore: false,
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
@@ -364,6 +365,12 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
             { label: "Static", value: "STATIC" },
             { label: "Dynamic", value: "DYNAMIC" },
           ],
+        },
+        {
+          key: "allowPartialScore",
+          labelKey: "measurements.props.allowPartialScore",
+          fieldType: "toggle",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC"] },
         },
         {
           key: "correctAnswer",
@@ -513,6 +520,7 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         correctAnswerType: "NONE",
         correctAnswer: "",
         grade: 0,
+        allowPartialScore: false,
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
@@ -544,6 +552,12 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
             { label: "Static", value: "STATIC" },
             { label: "Dynamic", value: "DYNAMIC" },
           ],
+        },
+        {
+          key: "allowPartialScore",
+          labelKey: "measurements.props.allowPartialScore",
+          fieldType: "toggle",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC"] },
         },
         {
           key: "correctAnswer",
