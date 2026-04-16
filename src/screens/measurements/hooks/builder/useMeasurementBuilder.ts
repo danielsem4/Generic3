@@ -80,7 +80,6 @@ export function useMeasurementBuilder() {
       await saveStructure({ measurementId: activeMeasurementId, payload });
       saveCurrentMeasurement();
       toast.success(t("measurements.builder.saveSuccess"));
-      navigate("/modules/measurements");
     } catch {
       toast.error(t("measurements.builder.saveError"));
     }
