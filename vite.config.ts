@@ -18,7 +18,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://generic3-dev.hitheal.org.il/",
+        // target: "https://generic3-dev.hitheal.org.il/",
+        target: "http://localhost:8000",
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: "localhost",
