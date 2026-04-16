@@ -48,7 +48,7 @@ export default function Doctors() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-            <PatientsTable patients={filteredUsers} />
+            <PatientsTable patients={filteredUsers} viewBasePath="/doctors" />
           </CardContent>
         </Card>
       </div>

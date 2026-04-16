@@ -205,6 +205,8 @@ patients: {
     errLastName: "שם משפחה הוא שדה חובה",
     errEmail: "כתובת דוא\"ל לא תקינה",
     errPhone: "מספר הטלפון חייב להכיל בדיוק 10 ספרות",
+    backToDirectory: "חזרה לרשימה",
+    detailError: "טעינת פרטי הרופא נכשלה.",
   },
 
   // Medications
