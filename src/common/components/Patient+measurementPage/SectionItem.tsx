@@ -1,8 +1,8 @@
 import { ChevronRight } from "lucide-react";
-import type { IPatientSectionItem } from "@/common/types/patientDetails";
+import type { ISectionItem } from "@/common/types/section";
 
 interface Props {
-  readonly item: IPatientSectionItem;
+  readonly item: ISectionItem;
   readonly icon: React.ComponentType<{ className?: string }>;
   readonly iconClassName: string;
   readonly onClick?: () => void;

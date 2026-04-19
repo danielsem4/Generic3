@@ -451,6 +451,14 @@ patientActivities: {
   deleteSuccess: "הפעילות נמחקה בהצלחה.",
 },
 
+  // Patient Measurements
+  patientMeasurement: {
+    questionnaires: "שאלונים",
+    cognitiveTests: "בדיקות קוגניטיביות",
+    moduleQuestionnaire: "שאלון מודול",
+    noData: "אין נתונים זמינים",
+  },
+
   // Settings
   settings: {
     title: "הגדרות",

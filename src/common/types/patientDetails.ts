@@ -1,3 +1,5 @@
+import type { IClinic } from "./clinic";
+
 export interface IModule {
   id: number;
   module_name: string;
@@ -14,6 +16,7 @@ export interface IPatientDetailsResponse {
   clinic_name: string;
   modules: IModule[];
   active_measurements: string[];
+  clinics: IClinic[];
   // security: {
   //   is_2fa_enabled: boolean;
   //   joined_at: string;
@@ -28,17 +31,8 @@ export interface IPatientDetails {
   phone: string;
   isResearch: boolean;
   clinicName: string;
-  modules: string[];
-  activeMeasurements: string[];
   // security: {
   //   is2FAEnabled: boolean;
   //   joinedAt: string;
   // };
 }
-
-export interface IPatientSectionItem {
-  id: number;
-  label: string;
-}
-
-export type IModuleRouteMapper = Record<string, () => void>;

@@ -2,7 +2,7 @@ import React from "react";
 import { MedicationSelector } from "./MedicationSelector";
 import { Dosage } from "./Dosage";
 import { FrequencyManager } from "./FrequencyManager";
-import { TimelineCard } from "@/common/components/TimelineCard";
+import { TimelineCard } from "@/common/components/Patient-activities-meds/TimelineCard";
 import type { IMedicationHookData } from "../schema/patientMedicationsSchema";
 import { useTranslation } from "react-i18next";
 

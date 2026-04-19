@@ -4,8 +4,8 @@ import { Activity, Save} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { IPatientActivity } from "@/common/types/activities";
 import { useEditActivity } from "../hooks/useEditActivity";
-import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
-import { TimelineCard } from "@/common/components/TimelineCard";
+import { FullScreenFormModal } from "@/common/components/Patient-activities-meds/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/Patient-activities-meds/TimelineCard";
 import { ActivityFrequencyManager } from "./ActivityFrequencyManager";
 
 interface IEditActivityModalProps {

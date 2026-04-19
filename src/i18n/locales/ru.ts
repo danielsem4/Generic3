@@ -456,6 +456,14 @@ activities: {
   deleteSuccess: "Активность успешно удалена.",
 },
 
+  // Patient Measurements
+  patientMeasurement: {
+    questionnaires: "Шкалы и опросники",
+    cognitiveTests: "Когнитивные тесты",
+    moduleQuestionnaire: "Модульные опросники",
+    noData: "Данные измерений отсутствуют",
+  },
+
   // Settings
   settings: {
     title: "Настройки",

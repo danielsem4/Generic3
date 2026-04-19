@@ -440,6 +440,14 @@ patients: {
     deleteSuccess: "Activity deleted successfully.",
   },
 
+  //patient measurements
+  patientMeasurement: {
+    questionnaires: "Questionnaires",
+    cognitiveTests: "Cognitive Tests",
+    moduleQuestionnaire: "Module Questionnaire",
+    noData: "No data available",
+  },
+
   // Settings
   settings: {
     title: "Settings",

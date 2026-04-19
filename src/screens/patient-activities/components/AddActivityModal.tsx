@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { ActivitySelector } from "./ActivitySelector";
 import { usePatientActivities } from "../hooks/usePatientActivities";
 import { useAddActivity } from "../hooks/useAddActivity";
-import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
-import { TimelineCard } from "@/common/components/TimelineCard";
+import { FullScreenFormModal } from "@/common/components/Patient-activities-meds/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/Patient-activities-meds/TimelineCard";
 import { ActivityFrequencyManager } from "./ActivityFrequencyManager";
 
 interface IAddActivityModalProps {

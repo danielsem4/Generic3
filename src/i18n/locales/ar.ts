@@ -453,6 +453,14 @@ const ar = {
   deleteSuccess: "تم حذف النشاط بنجاح.",
 },
 
+  // Patient Measurements
+  patientMeasurement: {
+    questionnaires: "شكاوى واستبيانات",
+    cognitiveTests: "اختبارات معرفية",
+    moduleQuestionnaire: "استبيان الوحدة",
+    noData: "لا توجد بيانات متاحة",
+  },
+
   // Settings
   settings: {
     title: "الإعدادات",
