@@ -746,6 +746,7 @@ patient: {
       userInputs: "مدخلات المستخدم",
       actions: "إجراءات",
       structure: "هيكل",
+      cognitiveFields: "الحقول المعرفية",
     },
     components: {
       heading: "عنوان",
@@ -766,6 +767,7 @@ patient: {
       toggleSwitch: "تبديل",
       button: "زر",
       rowContainer: "صف",
+      cognitiveField: "حقل",
     },
     props: {
       label: "التسمية",
@@ -795,6 +797,15 @@ patient: {
       trueLabel: "تسمية صحيح",
       falseLabel: "تسمية خطأ",
       allowPartialScore: "السماح بالدرجة الجزئية",
+      fieldKey: "مفتاح الحقل",
+      dataType: "نوع البيانات",
+    },
+    results: {
+      score: "النتيجة",
+      submittedAt: "تم الإرسال",
+      noData: "لا توجد بيانات",
+      yes: "نعم",
+      no: "لا",
     },
     device: {
       mobile: "جوال",

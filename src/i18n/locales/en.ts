@@ -732,6 +732,7 @@ modules: {
       userInputs: "User Inputs",
       actions: "Actions",
       structure: "Structure",
+      cognitiveFields: "Cognitive Fields",
     },
     components: {
       heading: "Heading",
@@ -752,6 +753,7 @@ modules: {
       toggleSwitch: "Toggle",
       button: "Button",
       rowContainer: "Row",
+      cognitiveField: "Field",
     },
     props: {
       label: "Label",
@@ -781,6 +783,15 @@ modules: {
       trueLabel: "True Label",
       falseLabel: "False Label",
       allowPartialScore: "Allow Partial Score",
+      fieldKey: "Field Key",
+      dataType: "Data Type",
+    },
+    results: {
+      score: "Score",
+      submittedAt: "Submitted",
+      noData: "No submission data",
+      yes: "Yes",
+      no: "No",
     },
     device: {
       mobile: "Mobile",

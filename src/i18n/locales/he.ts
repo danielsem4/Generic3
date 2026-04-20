@@ -743,6 +743,7 @@ patientActivities: {
       userInputs: "קלט משתמש",
       actions: "פעולות",
       structure: "מבנה",
+      cognitiveFields: "שדות קוגניטיביים",
     },
     components: {
       heading: "כותרת",
@@ -763,6 +764,7 @@ patientActivities: {
       toggleSwitch: "מתג",
       button: "כפתור",
       rowContainer: "שורה",
+      cognitiveField: "שדה",
     },
     props: {
       label: "תווית",
@@ -792,6 +794,15 @@ patientActivities: {
       trueLabel: "תווית אמת",
       falseLabel: "תווית שקר",
       allowPartialScore: "אפשר ניקוד חלקי",
+      fieldKey: "מפתח שדה",
+      dataType: "סוג נתון",
+    },
+    results: {
+      score: "ציון",
+      submittedAt: "הוגש",
+      noData: "אין נתוני הגשה",
+      yes: "כן",
+      no: "לא",
     },
     device: {
       mobile: "נייד",

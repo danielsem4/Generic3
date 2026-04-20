@@ -25,13 +25,15 @@ export type QComponentType =
   | "scale"
   | "toggleSwitch"
   | "button"
-  | "rowContainer";
+  | "rowContainer"
+  | "cognitiveField";
 
 export type QComponentCategory =
   | "textDisplay"
   | "userInputs"
   | "actions"
-  | "structure";
+  | "structure"
+  | "cognitiveFields";
 
 export type DeviceSize = "mobile" | "tablet" | "desktop";
 
@@ -214,6 +216,13 @@ export interface IQRowContainer extends IQBase {
   children: IQComponent[];
 }
 
+export interface IQCognitiveField extends IQBase {
+  type: "cognitiveField";
+  required: boolean;
+  fieldKey: string;
+  dataType: "number" | "text" | "boolean" | "list";
+}
+
 export type IQComponent =
   | IQHeading
   | IQParagraph
@@ -232,7 +241,8 @@ export type IQComponent =
   | IQScale
   | IQToggleSwitch
   | IQButton
-  | IQRowContainer;
+  | IQRowContainer
+  | IQCognitiveField;
 
 export interface IQScreen {
   id: string;
@@ -246,6 +256,27 @@ export function createDefaultScreen(title?: string): IQScreen {
     title: title ?? "Screen 1",
     components: [],
   };
+}
+
+export interface ISubmissionElementRef {
+  id: string;
+  element_type: string;
+  label: string;
+  config: Record<string, unknown>;
+}
+
+export interface ISubmissionAnswer {
+  element: ISubmissionElementRef;
+  value: unknown;
+  is_correct: boolean | null;
+  points_earned: number | null;
+}
+
+export interface ISubmissionResult {
+  id: string;
+  score: number | null;
+  submitted_at: string;
+  answers: ISubmissionAnswer[];
 }
 
 export const MeasurementType = {

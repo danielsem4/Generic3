@@ -1,5 +1,5 @@
 import api from "@/lib/axios";
-import type { IMeasurement } from "@/common/types/measurement";
+import type { IMeasurement, ISubmissionResult } from "@/common/types/measurement";
 import { type MeasurementType } from "@/common/types/measurement";
 import type {
   BackendStructurePayload,
@@ -128,6 +128,17 @@ export async function fetchMeasurementStructure(
 ): Promise<IServerStructureResponse> {
   const response = await api.get<IServerStructureResponse>(
     `/api/v1/clinics/${clinicId}/measurements/${measurementId}/structure/`,
+  );
+  return response.data;
+}
+
+export async function fetchMeasurementSubmission(
+  clinicId: string,
+  patientId: string,
+  submissionId: string,
+): Promise<ISubmissionResult> {
+  const response = await api.get<ISubmissionResult>(
+    `/api/v1/clinics/${clinicId}/patients/${patientId}/measurement-submissions/${submissionId}/`,
   );
   return response.data;
 }

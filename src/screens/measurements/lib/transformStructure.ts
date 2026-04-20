@@ -26,6 +26,7 @@ const FRONTEND_TO_BACKEND_TYPE: Record<string, string> = {
   image: "IMAGE",
   icon: "ICON",
   button: "BUTTON",
+  cognitiveField: "COGNITIVE_FIELD",
 };
 
 interface CorrectAnswerEntry {
@@ -99,6 +100,11 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
         true_label: component.trueLabel ?? "Yes",
         false_label: component.falseLabel ?? "No",
         default_value: component.defaultValue,
+      };
+    case "cognitiveField":
+      return {
+        field_key: component.fieldKey,
+        data_type: component.dataType,
       };
     default:
       return {};
@@ -193,6 +199,7 @@ const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = {
   IMAGE: "image",
   ICON: "icon",
   BUTTON: "button",
+  COGNITIVE_FIELD: "cognitiveField",
 };
 
 export interface IServerElement {
@@ -469,6 +476,15 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
     case "image":
     case "icon": {
       return base as IQComponent;
+    }
+    case "cognitiveField": {
+      return {
+        ...base,
+        type: "cognitiveField",
+        required: element.is_required,
+        fieldKey: getString(config, "field_key"),
+        dataType: (getString(config, "data_type", "number") as "number" | "text" | "boolean" | "list"),
+      } as IQComponent;
     }
     default:
       return null;

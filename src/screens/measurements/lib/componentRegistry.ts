@@ -17,6 +17,7 @@ import {
   ToggleLeft,
   MousePointerClick,
   Columns,
+  BrainCircuit,
 } from "lucide-react";
 import type { ElementType } from "react";
 import type {
@@ -838,6 +839,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
+      ],
+    },
+
+    cognitiveField: {
+      labelKey: "measurements.components.cognitiveField",
+      icon: BrainCircuit,
+      category: "cognitiveFields",
+      defaultProps: {
+        type: "cognitiveField",
+        label: "Field Label",
+        required: false,
+        fieldKey: "",
+        dataType: "number",
+      },
+      propertyFields: [
+        { key: "label",    labelKey: "measurements.props.label",    fieldType: "text" },
+        { key: "fieldKey", labelKey: "measurements.props.fieldKey", fieldType: "text" },
+        {
+          key: "dataType",
+          labelKey: "measurements.props.dataType",
+          fieldType: "select",
+          options: [
+            { label: "Number",  value: "number" },
+            { label: "Text",    value: "text" },
+            { label: "Boolean", value: "boolean" },
+            { label: "List",    value: "list" },
+          ],
+        },
+        { key: "required", labelKey: "measurements.props.required", fieldType: "toggle" },
       ],
     },
   };

@@ -285,6 +285,7 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         return { screens: newScreens, selectedComponentId: null, isDirty: true };
       }),
 
+
     setPreviewMode: (enabled) =>
       set({ isPreviewMode: enabled, selectedComponentId: null }),
 

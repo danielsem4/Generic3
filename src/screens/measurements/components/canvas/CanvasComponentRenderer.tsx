@@ -4,6 +4,7 @@ import { X, GripVertical } from "lucide-react";
 import type { IQComponent } from "@/common/types/measurement";
 import { RowContainerRenderer } from "./RowContainerRenderer";
 import { InteractiveComponentPreview } from "./InteractiveComponentPreview";
+import { Badge } from "@/components/ui/badge";
 
 interface CanvasComponentRendererProps {
   component: IQComponent;
@@ -270,6 +271,18 @@ function ComponentPreview({ component }: { component: IQComponent }) {
         </button>
       );
     }
+    case "cognitiveField":
+      return (
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <p className="text-sm font-medium">{component.label}</p>
+            <p className="text-xs text-muted-foreground font-mono">
+              {component.fieldKey || "field_key"}
+            </p>
+          </div>
+          <Badge variant="outline" className="text-xs">{component.dataType}</Badge>
+        </div>
+      );
     default:
       return <div className="text-sm text-muted-foreground">{component.label}</div>;
   }

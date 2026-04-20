@@ -748,6 +748,7 @@ patient: {
       userInputs: "Пользовательский ввод",
       actions: "Действия",
       structure: "Структура",
+      cognitiveFields: "Когнитивные поля",
     },
     components: {
       heading: "Заголовок",
@@ -768,6 +769,7 @@ patient: {
       toggleSwitch: "Тоггл",
       button: "Кнопка",
       rowContainer: "Строка",
+      cognitiveField: "Поле",
     },
     props: {
       label: "Метка",
@@ -797,6 +799,15 @@ patient: {
       trueLabel: "Метка истины",
       falseLabel: "Метка лжи",
       allowPartialScore: "Разрешить частичный балл",
+      fieldKey: "Ключ поля",
+      dataType: "Тип данных",
+    },
+    results: {
+      score: "Оценка",
+      submittedAt: "Отправлено",
+      noData: "Нет данных",
+      yes: "Да",
+      no: "Нет",
     },
     device: {
       mobile: "Мобильный",
