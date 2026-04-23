@@ -1,4 +1,3 @@
-
 const en = {
   // Navigation & Sidebar
   nav: {
@@ -807,10 +806,7 @@ modules: {
       size: "Size",
       layout: "Layout",
       defaultValue: "Default Value",
-<<<<<<< Updated upstream
-=======
       correctAnswerType: "Answer Type",
->>>>>>> Stashed changes
       correctAnswer: "Correct Answer",
       grade: "Grade",
     },

@@ -820,10 +820,7 @@ patient: {
       size: "الحجم",
       layout: "التخطيط",
       defaultValue: "القيمة الافتراضية",
-<<<<<<< Updated upstream
-=======
       correctAnswerType: "نوع الإجابة",
->>>>>>> Stashed changes
       correctAnswer: "الإجابة الصحيحة",
       grade: "الدرجة",
     },

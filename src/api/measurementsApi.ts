@@ -1,8 +1,33 @@
 import api from "@/lib/axios";
-import type { IMeasurement } from "@/common/types/measurement";
-import { type MeasurementType } from "@/common/types/measurement";
 import type { BackendStructurePayload } from "@/screens/measurements/lib/transformStructure";
 import type { IAssignMeasurementPayload, IMeasurementSubmission } from "@/common/types/measurements";
+
+
+export type MeasurementType = 'form' | 'score' | 'calculation' | string;
+
+export interface IMeasurementElement {
+  id: string;
+  type: string;
+  label: string;
+  required?: boolean;
+}
+
+export interface IMeasurementScreen {
+  id: string;
+  title: string;
+  elements: IMeasurementElement[];
+}
+
+export interface IMeasurement {
+  id: string;
+  name: string;
+  type: MeasurementType;
+  isPublic: boolean;
+  isActive: boolean;
+  clinicId: string;
+  screens: IMeasurementScreen[]; 
+}
+
 
 export interface ICreateMeasurementPayload {
   measurement_name: string;
@@ -28,6 +53,7 @@ interface IMeasurementRaw {
   is_active: boolean;
 }
 
+
 function mapRawToMeasurement(raw: IMeasurementRaw): IMeasurement {
   return {
     id: raw.measurement,
@@ -36,7 +62,7 @@ function mapRawToMeasurement(raw: IMeasurementRaw): IMeasurement {
     isPublic: raw.is_public,
     isActive: raw.is_active,
     clinicId: raw.clinic,
-    screens: [],
+    screens: [], 
   };
 }
 
@@ -52,19 +78,15 @@ function mapRawPublicMeasurement(raw: IMeasurementRaw): IMeasurement {
   };
 }
 
-export async function fetchMeasurements(
-  clinicId: string,
-): Promise<IMeasurement[]> {
+
+export async function fetchMeasurements(clinicId: string): Promise<IMeasurement[]> {
   const response = await api.get<IMeasurementRaw[]>(
     `/api/v1/clinics/${clinicId}/measurements/`,
   );
   return response.data.map(mapRawToMeasurement);
 }
 
-export const createMeasurement = async (
-  clinicId: string,
-  data: ICreateMeasurementPayload,
-) => {
+export const createMeasurement = async (clinicId: string, data: ICreateMeasurementPayload) => {
   const response = await api.post(
     `/api/v1/clinics/${clinicId}/measurements/`,
     data,
@@ -72,10 +94,7 @@ export const createMeasurement = async (
   return response.data;
 };
 
-export async function deleteMeasurement(
-  clinicId: string,
-  measurementId: string,
-): Promise<void> {
+export async function deleteMeasurement(clinicId: string, measurementId: string): Promise<void> {
   await api.delete(
     `/api/v1/clinics/${clinicId}/measurements/${measurementId}/`,
   );
@@ -100,10 +119,7 @@ export async function fetchPublicMeasurements(): Promise<IMeasurement[]> {
   return response.data.map(mapRawPublicMeasurement);
 }
 
-export async function adoptMeasurement(
-  clinicId: string,
-  measurementId: string,
-): Promise<void> {
+export async function adoptMeasurement(clinicId: string, measurementId: string): Promise<void> {
   await api.post(`/api/v1/clinics/${clinicId}/measurements/`, {
     measurement: measurementId,
   });
@@ -120,7 +136,6 @@ export async function saveMeasurementStructure(
   );
 }
 
-
 export const getPatientSubmissions = async (clinicId: string, userId: string): Promise<IMeasurementSubmission[]> => {
   const response = await api.get(`/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/`);
   return response.data;
@@ -130,7 +145,6 @@ export const getSingleSubmission = async (clinicId: string, userId: string, subm
   const response = await api.get<IMeasurementSubmission[]>(
     `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/`
   );
-  console.log("Raw API Response:", response.data);
   return response.data;
 };
 

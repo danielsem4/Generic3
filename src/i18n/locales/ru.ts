@@ -822,10 +822,7 @@ patient: {
       size: "Размер",
       layout: "Расположение",
       defaultValue: "Значение по умолчанию",
-<<<<<<< Updated upstream
-=======
       correctAnswerType: "Тип ответа",
->>>>>>> Stashed changes
       correctAnswer: "Правильный ответ",
       grade: "Оценка",
     },

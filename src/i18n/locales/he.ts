@@ -823,10 +823,7 @@ patientActivities: {
       size: "גודל",
       layout: "פריסה",
       defaultValue: "ערך ברירת מחדל",
-<<<<<<< Updated upstream
-=======
       correctAnswerType: "סוג תשובה",
->>>>>>> Stashed changes
       correctAnswer: "תשובה נכונה",
       grade: "ציון",
     },

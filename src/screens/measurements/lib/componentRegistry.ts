@@ -165,10 +165,7 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         label: "Text Input",
         placeholder: "Enter text...",
         required: false,
-<<<<<<< Updated upstream
-=======
-        correctAnswerType: "NONE",
->>>>>>> Stashed changes
+        correctAnswerType: "NONE"
         correctAnswer: "",
         grade: 0,
       },
