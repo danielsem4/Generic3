@@ -659,6 +659,7 @@ patient: {
     value: "القيمة",
   },
 
+  // Measurements
   measurements: {
     title: "القياسات",
     createNew: "إنشاء جديد",
@@ -668,10 +669,49 @@ patient: {
     screenCount: "شاشات",
     lastModified: "آخر تعديل",
     createdBy: "أنشئ بواسطة",
+    performance_analysis: "تحليل الأداء",
+    performance_description: "سيتم تحليل البيانات وعرضها هنا بشكل مرئي فور استلامها من النظام.",
     edit: "تعديل",
     delete: "حذف",
     duplicate: "نسخ",
     preview: "معاينة",
+    final_score: "النتيجة النهائية",
+    back_to_patient: "العودة للمريض",
+    list_view: "قائمة الإجابات",
+    analytics_view: "التحليلات",
+    question: "السؤال",
+    answer: "الإجابة",
+    points: "النقاط",
+    status: {
+    excellent: "ممتاز",
+    pass: "ناجح",
+    fail: "يحتاج تحسين"
+  },
+  table: {
+    question_label: "السؤال",
+    answer_provided: "الإجابة المختارة",
+    grade: "الدرجة",
+    score: "النتيجة",
+    status: "الحالة",
+    actions: "إجراءات"
+  },
+   page_title: "تحليل الأداء",
+   page_subtitle: "تحليل شامل لبيانات القياس مع رؤى حول نقاط القوة والضعف.",
+   analytics: {
+   avg_grade: "متوسط الدرجة",
+    passed: "ناجح",
+    needs_improvement: "يحتاج تحسين",
+    questions: "الأسئلة",
+    grade_distribution: "توزيع الدرجات",
+    pass_fail_ratio: "نسبة النجاح / الفشل",
+    passed_label: "ناجح",
+    pass: "ناجح",
+    fail: "فشل"},
+    errors: {
+    fetch_failed: "فشل جلب بيانات التحليل. يرجى المحاولة مرة أخرى.",
+    no_results: "لا توجد نتائج لعرضها. يرجى التأكد من أن القياس يحتوي على إجابات وحاول مرة أخرى."
+  },
+  analytics_placeholder: "سيتم عرض التحليلات هنا بمجرد توفر البيانات. ستتضمن الرسوم البيانية، الجداول، والتفسيرات لمساعدتك في فهم أداء المريض.",
     deleteTitle: "حذف القياس",
     deleteDescription: "هل أنت متأكد من حذف \"{{name}}\"؟ لا يمكن التراجع عن هذا.",
     createTitle: "إنشاء قياس",
@@ -717,6 +757,8 @@ patient: {
       previewMode: "معاينة",
       exitPreview: "إنهاء المعاينة",
       save: "حفظ",
+      saveSuccess: "تم حفظ الهيكل بنجاح",
+      saveError: "فشل حفظ الهيكل. يرجى المحاولة مرة أخرى.",
       back: "رجوع",
       emptyCanvas: "اسحب المكونات من اللوحة اليسرى لبدء البناء",
       noSelection: "اختر مكوناً لتعديل خصائصه",
@@ -778,6 +820,10 @@ patient: {
       size: "الحجم",
       layout: "التخطيط",
       defaultValue: "القيمة الافتراضية",
+<<<<<<< Updated upstream
+=======
+      correctAnswerType: "نوع الإجابة",
+>>>>>>> Stashed changes
       correctAnswer: "الإجابة الصحيحة",
       grade: "الدرجة",
     },

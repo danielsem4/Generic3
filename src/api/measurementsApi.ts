@@ -1,6 +1,8 @@
 import api from "@/lib/axios";
 import type { IMeasurement } from "@/common/types/measurement";
 import { type MeasurementType } from "@/common/types/measurement";
+import type { BackendStructurePayload } from "@/screens/measurements/lib/transformStructure";
+import type { IAssignMeasurementPayload, IMeasurementSubmission } from "@/common/types/measurements";
 
 export interface ICreateMeasurementPayload {
   measurement_name: string;
@@ -106,3 +108,33 @@ export async function adoptMeasurement(
     measurement: measurementId,
   });
 }
+
+export async function saveMeasurementStructure(
+  clinicId: string,
+  measurementId: string,
+  payload: BackendStructurePayload,
+): Promise<void> {
+  await api.post(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/structure/`,
+    payload,
+  );
+}
+
+
+export const getPatientSubmissions = async (clinicId: string, userId: string): Promise<IMeasurementSubmission[]> => {
+  const response = await api.get(`/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/`);
+  return response.data;
+};
+
+export const getSingleSubmission = async (clinicId: string, userId: string, submissionId: string) => {
+  const response = await api.get<IMeasurementSubmission[]>(
+    `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/`
+  );
+  console.log("Raw API Response:", response.data);
+  return response.data;
+};
+
+export const assignMeasurementToPatient = async (clinicId: string, userId: string, data: IAssignMeasurementPayload) => {
+  const response = await api.post(`/api/v1/clinics/${clinicId}/patients/${userId}/measurements/`, data);
+  return response.data;
+};

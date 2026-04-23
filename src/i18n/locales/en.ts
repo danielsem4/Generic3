@@ -501,7 +501,8 @@ patients: {
     confirm: "Confirm",
     close: "Close",
     loading: "Loading...",
-    fetchingDetails: "Fetching details from server..."
+    fetchingDetails: "Fetching details from server...",
+    status: "Status"
   },
 
   // Modules
@@ -608,6 +609,7 @@ modules: {
     },
   },
 },
+
  // Patient Details
   patient: {
     editDetails: "Edit Details",
@@ -645,6 +647,7 @@ modules: {
     value: "Value",
   },
 
+  // Measurements
   measurements: {
     title: "Measurements",
     createNew: "Create New",
@@ -654,10 +657,48 @@ modules: {
     screenCount: "screens",
     lastModified: "Last modified",
     createdBy: "Created by",
+    performance_analysis: "Performance Analysis",
+    performance_description: "Data will be analyzed and displayed here visually once received from the system.",
     edit: "Edit",
     delete: "Delete",
     duplicate: "Duplicate",
     preview: "Preview",
+    final_score: "Final Score",
+    back_to_patient: "Back to Patient",
+    list_view: "Answers List",
+    analytics_view: "Analytics",
+    question: "Question",
+    answer: "Answer",
+    points: "Points",
+    status: {
+    excellent: "Excellent",
+    pass: "Pass",
+    fail: "Fail"},
+    table: {
+    question_label: "Question",
+    answer_provided: "Answer Provided",
+    grade: "Grade",
+    score: "Score",
+    status: "Status",
+    actions: "Actions"
+  },
+    page_title: "Assessment Results",
+    page_subtitle: "Review student answers and overall performance metrics.",
+    analytics: {
+    avg_grade: "Average Grade",
+    passed: "Passed",
+    needs_improvement: "Needs Improvement",
+    questions: "questions",
+    grade_distribution: "Grade Distribution",
+    pass_fail_ratio: "Pass / Fail Ratio",
+    passed_label: "Passed",
+    pass: "Pass",
+    fail: "Fail"},
+    errors: {
+    fetch_failed: "Failed to fetch measurement results. Please try again.",
+    no_results: "No results available for this measurement.",
+  },
+    analytics_placeholder: "Analytics View - Coming Soon",
     deleteTitle: "Delete Measurement",
     deleteDescription: "Are you sure you want to delete \"{{name}}\"? This cannot be undone.",
     createTitle: "Create Measurement",
@@ -703,6 +744,8 @@ modules: {
       previewMode: "Preview",
       exitPreview: "Exit Preview",
       save: "Save",
+      saveSuccess: "Structure saved successfully",
+      saveError: "Failed to save structure. Please try again.",
       back: "Back",
       emptyCanvas: "Drag components from the left panel to start building",
       noSelection: "Select a component to edit its properties",
@@ -764,6 +807,10 @@ modules: {
       size: "Size",
       layout: "Layout",
       defaultValue: "Default Value",
+<<<<<<< Updated upstream
+=======
+      correctAnswerType: "Answer Type",
+>>>>>>> Stashed changes
       correctAnswer: "Correct Answer",
       grade: "Grade",
     },

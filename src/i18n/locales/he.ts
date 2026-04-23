@@ -512,7 +512,8 @@ patientActivities: {
     confirm: "אישור",
     close: "סגירה",
     loading: "טוען...",
-    fetchingDetails: "מושך נתונים מהשרת..."
+    fetchingDetails: "מושך נתונים מהשרת...",
+    status: "סטטוס",
   },
   
   // Modules
@@ -656,6 +657,7 @@ patientActivities: {
     value: "ערך",
   },
 
+// Measurements
   measurements: {
     title: "מדידות",
     createNew: "צור חדש",
@@ -665,6 +667,8 @@ patientActivities: {
     screenCount: "מסכים",
     lastModified: "שונה לאחרונה",
     createdBy: "נוצר על ידי",
+    performance_analysis: "ניתוח ביצועים",
+    performance_description: "הנתונים ינותחו ויוצגו כאן בצורה ויזואלית ברגע שיתקבלו מהמערכת.",
     edit: "עריכה",
     delete: "מחיקה",
     duplicate: "שכפול",
@@ -674,8 +678,50 @@ patientActivities: {
     createTitle: "יצירת מדידה",
     nameLabel: "שם",
     namePlaceholder: "הזן שם מדידה...",
+    results_title: "תוצאות מדידה",
+    back: "חזרה",
+    list_view: "רשימת תשובות",
+    analytics_view: "אנליטיקה",
+    loading: "טוען נתונים...",
+    no_data: "לא נמצאו נתונים למבחן זה",
+    final_score: "ציון סופי",
+    review_subtitle: "סקירת תשובות המטופל ומדדי ביצוע כלליים",
     create: "צור",
     cancel: "ביטול",
+    back_to_patient: "חזרה לפרופיל המטופל",
+    question: "שאלה",
+    answer: "תשובה",
+    points: "נקודות",
+    status: {
+    excellent: "מצוין",
+    pass: "עבר",
+    fail: "נכשל"},
+    table: {
+    question_label: "שאלה",
+    answer_provided: "תשובה נבחרת",
+    score: "ניקוד",
+    status: "סטטוס",
+    actions: "פעולות",
+    grade: "ציון",
+    view_details: "צפייה בפרטים"},
+    page_title: "תוצאות מדידה",
+    page_subtitle: "סקירת תשובות המטופל ומדדי ביצוע כלליים",
+    analytics: {
+    avg_grade: "ציון ממוצע",
+    passed: "עבר",
+    needs_improvement: "דורש שיפור",
+    questions: "שאלות",
+    grade_distribution: "התפלגות ציונים",
+    pass_fail_ratio: "יחס מעבר / כישלון",
+    passed_label: "עבר",
+    pass: "עבר",
+    fail: "נכשל"
+  },
+  errors: {
+    fetch_failed: "שגיאה בטעינת הנתונים מהשרת. וודא שה-ID תקין.",
+    no_results: "לא נמצאו תוצאות עבור מדידה זו."
+  },
+    analytics_placeholder: "הנתונים ינותחו ויוצגו כאן בצורה ויזואלית ברגע שיתקבלו מהמערכת.",
     errName: "השם חייב להכיל לפחות 2 תווים",
     createSuccess: "המדידה נוצרה בהצלחה",
     createError: "יצירת המדידה נכשלה. אנא נסה שוב.",
@@ -714,6 +760,8 @@ patientActivities: {
       previewMode: "תצוגה מקדימה",
       exitPreview: "צא מתצוגה מקדימה",
       save: "שמור",
+      saveSuccess: "המבנה נשמר בהצלחה",
+      saveError: "שמירת המבנה נכשלה. אנא נסה שוב.",
       back: "חזרה",
       emptyCanvas: "גרור רכיבים מהפאנל השמאלי כדי להתחיל לבנות",
       noSelection: "בחר רכיב כדי לערוך את המאפיינים שלו",
@@ -775,6 +823,10 @@ patientActivities: {
       size: "גודל",
       layout: "פריסה",
       defaultValue: "ערך ברירת מחדל",
+<<<<<<< Updated upstream
+=======
+      correctAnswerType: "סוג תשובה",
+>>>>>>> Stashed changes
       correctAnswer: "תשובה נכונה",
       grade: "ציון",
     },

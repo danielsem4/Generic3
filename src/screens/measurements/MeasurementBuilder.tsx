@@ -15,6 +15,7 @@ export default function MeasurementBuilder() {
     activeMeasurement,
     isPreviewMode,
     isDirty,
+    isSaving,
     handleSave,
     handleBack,
     handleClearCanvas,
@@ -51,6 +52,7 @@ export default function MeasurementBuilder() {
       <BuilderTopBar
         measurementName={activeMeasurement?.name}
         isDirty={isDirty}
+        isSaving={isSaving}
         onSave={handleSave}
         onBack={handleBack}
         onClear={handleClearCanvas}

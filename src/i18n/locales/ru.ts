@@ -517,7 +517,8 @@ activities: {
     confirm: "Подтвердить",
     close: "Закрыть",
     loading: "Загрузка...",
-    fetchingDetails: "Получение данных с сервера..."
+    fetchingDetails: "Получение данных с сервера...",
+    status: "Статус"
   },
 
   // Modules
@@ -661,6 +662,7 @@ patient: {
     value: "Значение",
   },
 
+  // Measurements
   measurements: {
     title: "Измерения",
     createNew: "Создать новый",
@@ -670,6 +672,8 @@ patient: {
     screenCount: "экраны",
     lastModified: "Последнее изменение",
     createdBy: "Создан",
+    performance_analysis: "Анализ производительности",
+    performance_description: "Данные будут проанализированы и отображены здесь визуально после получения из системы.",
     edit: "Редактировать",
     delete: "Удалить",
     duplicate: "Дублировать",
@@ -678,6 +682,42 @@ patient: {
     deleteDescription: "Вы уверены, что хотите удалить \"{{name}}\"? Это действие нельзя отменить.",
     createTitle: "Создать измерение",
     nameLabel: "Название",
+    final_score: "Итоговый балл",
+    back_to_patient: "Вернуться к пациенту",
+    list_view: "Список ответов",
+    analytics_view: "Аналитика",
+    question: "Вопрос",
+    answer: "Ответ",
+    points: "Баллы",
+    status: {
+    excellent: "Отлично",
+    pass: "Удовлетворительно",
+    fail: "Требует улучшения"},
+    errors: {
+    fetch_failed: "Не удалось загрузить данные измерения. Пожалуйста, попробуйте снова.",
+    no_results: "Нет данных для отображения. Пожалуйста, убедитесь, что измерение содержит ответы и попробуйте снова."
+  },
+    table: {
+    question_label: "Вопрос",
+    answer_provided: "Ответ",
+    grade: "Оценка",
+    score: "Баллы",
+    status: "Статус",
+    actions: "Действия"
+  },
+   page_title: "Анализ производительности",
+   page_subtitle: "Здесь будет отображаться визуальный анализ данных после получения из системы.",
+   analytics: {
+    avg_grade: "Средняя оценка",
+    passed: "Прошёл",
+    needs_improvement: "Требует улучшения",
+    questions: "Вопросы",
+    grade_distribution: "Распределение оценок",
+    pass_fail_ratio: "Соотношение успеха / неудачи",
+    passed_label: "Успешно",
+    pass: "Успешно",
+    fail: "Неудачно"},
+  analytics_placeholder: "Аналитика будет отображаться здесь после получения данных из системы.",
     namePlaceholder: "Введите название измерения...",
     create: "Создать",
     cancel: "Отмена",
@@ -719,6 +759,8 @@ patient: {
       previewMode: "Предпросмотр",
       exitPreview: "Выйти из предпросмотра",
       save: "Сохранить",
+      saveSuccess: "Структура успешно сохранена",
+      saveError: "Не удалось сохранить структуру. Попробуйте ещё раз.",
       back: "Назад",
       emptyCanvas: "Перетащите компоненты с левой панели, чтобы начать",
       noSelection: "Выберите компонент для редактирования свойств",
@@ -780,6 +822,10 @@ patient: {
       size: "Размер",
       layout: "Расположение",
       defaultValue: "Значение по умолчанию",
+<<<<<<< Updated upstream
+=======
+      correctAnswerType: "Тип ответа",
+>>>>>>> Stashed changes
       correctAnswer: "Правильный ответ",
       grade: "Оценка",
     },

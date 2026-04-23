@@ -37,6 +37,7 @@ export interface PropertyFieldConfig {
   labelKey: string;
   fieldType: PropertyFieldType;
   options?: { label: string; value: string }[];
+  visibleWhen?: { key: string; values: string[] };
 }
 
 export interface ComponentRegistryEntry {
@@ -164,6 +165,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         label: "Text Input",
         placeholder: "Enter text...",
         required: false,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -180,14 +185,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -204,6 +230,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         min: 0,
         max: 100,
         step: 1,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -227,14 +257,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -249,6 +300,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         placeholder: "Select...",
         required: false,
         options: [{ label: "Option 1", value: "option1" }],
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -270,14 +325,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "optionsList",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -292,6 +368,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         placeholder: "Select...",
         required: false,
         options: [{ label: "Option 1", value: "option1" }],
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -313,14 +393,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "optionsList",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -335,6 +436,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         required: false,
         options: [{ label: "Option 1", value: "option1" }],
         layout: "vertical",
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -360,14 +465,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "optionsList",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -381,6 +507,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         label: "Date Picker",
         placeholder: "Select date...",
         required: false,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -397,14 +527,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -418,6 +569,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         label: "Time Picker",
         placeholder: "Select time...",
         required: false,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -434,14 +589,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -457,6 +633,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         max: 10,
         step: 1,
         required: false,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -475,14 +655,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
@@ -495,6 +696,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         type: "toggleSwitch",
         label: "Toggle",
         defaultValue: false,
+<<<<<<< Updated upstream
+=======
+        correctAnswerType: "NONE",
+>>>>>>> Stashed changes
         correctAnswer: "",
         grade: 0,
       },
@@ -506,14 +711,35 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           fieldType: "toggle",
         },
         {
+<<<<<<< Updated upstream
           key: "correctAnswer",
           labelKey: "measurements.props.correctAnswer",
           fieldType: "text",
+=======
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
         {
           key: "grade",
           labelKey: "measurements.props.grade",
           fieldType: "number",
+<<<<<<< Updated upstream
+=======
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+>>>>>>> Stashed changes
         },
       ],
     },
