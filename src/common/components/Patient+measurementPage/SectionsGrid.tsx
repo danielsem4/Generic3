@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Pencil } from "lucide-react";
 import SectionItem from "@/common/components/Patient+measurementPage/SectionItem";
 import type { ISectionConfig } from "@/common/types/section";
 
@@ -9,7 +8,6 @@ function Section({
   iconClassName,
   items = [],
   routeMapper,
-  editLabel,
   emptyLabel,
 }: ISectionConfig) {
   return (
@@ -19,11 +17,6 @@ function Section({
           <Icon className={`h-5 w-5 ${iconClassName}`} />
           <CardTitle className="text-base font-bold">{title}</CardTitle>
         </div>
-
-        <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
-          <Pencil className="h-3 w-3" />
-          {editLabel}
-        </button>
       </CardHeader>
 
       <CardContent className="space-y-3">

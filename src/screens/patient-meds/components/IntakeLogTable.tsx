@@ -6,19 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import type { IIntakeLog, IMedicationLogFilters } from "../schema/patientMedicationsSchema";
 import type { IPatientPrescription } from "@/common/types/Medication";
+import { formatDate } from "@/common/utils/formatDate";
+import { formatTime } from "@/common/utils/formatTime";
 
 interface IntakeLogRowProps {
   log: IIntakeLog;
 }
 
 const IntakeLogRow: React.FC<IntakeLogRowProps> = ({ log }) => {
-  const [date, time] = log.taken_at.split("T");
-  const formattedTime = time?.slice(0, 5) ?? "";
+  const date = formatDate(log.taken_at);
+  const time = formatTime(log.taken_at);
 
   return (
     <TableRow className="hover:bg-muted/5 border-border transition-colors">
       <TableCell className="text-success font-bold">{date}</TableCell>
-      <TableCell className="text-muted-foreground">{formattedTime}</TableCell>
+      <TableCell className="text-muted-foreground">{time}</TableCell>
       <TableCell className="font-bold text-foreground">{log.med_name}</TableCell>
       <TableCell className="text-muted-foreground">{log.dosage_taken}</TableCell>
       <TableCell className="text-muted-foreground">{log.status}</TableCell>

@@ -19,47 +19,65 @@ export default function MeasurementSectionsCard({
   const navigate = useNavigate();
 
   const questionnaireActions: ISectionRouteMapper = Object.fromEntries(
-    questionnaires.map((item) => [item.label, () => navigate(`${item.id}`)]),
+    questionnaires.map((item) => [
+      item.label,
+      () =>
+        navigate(`${item.id}/submissions`, {
+          state: { measurementName: item.label },
+        }),
+    ]),
   );
 
   const cognitiveTestActions: ISectionRouteMapper = Object.fromEntries(
-    cognitiveTests.map((item) => [item.label, () => navigate(`${item.id}`)]),
+    cognitiveTests.map((item) => [
+      item.label,
+      () =>
+        navigate(`${item.id}/submissions`, {
+          state: { measurementName: item.label },
+        }),
+    ]),
   );
 
   const moduleQuestionnaireActions: ISectionRouteMapper = Object.fromEntries(
-    moduleQuestionnaires.map((item) => [item.label, () => navigate(`${item.id}`)]),
+    moduleQuestionnaires.map((item) => [
+      item.label,
+      () =>
+        navigate(`${item.id}/submissions`, {
+          state: { measurementName: item.label },
+        }),
+    ]),
   );
 
   const sections = [
     {
-      title: t("patientMeasurement.questionnaires"),
+      title: t("patientMeasurements.questionnaires"),
       icon: ClipboardList,
       iconClassName: "text-chart-1",
       items: questionnaires,
       routeMapper: questionnaireActions,
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
-      emptyLabel: t("patientMeasurement.noData"),
+      emptyLabel: t("patientMeasurements.noData"),
     },
     {
-      title: t("patientMeasurement.cognitiveTests"),
+      title: t("patientMeasurements.cognitiveTests"),
       icon: Brain,
       iconClassName: "text-chart-2",
       items: cognitiveTests,
       routeMapper: cognitiveTestActions,
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
-      emptyLabel: t("patientMeasurement.noData"),
+      emptyLabel: t("patientMeasurements.noData"),
     },
     {
-      title: t("patientMeasurement.moduleQuestionnaire"),
+      title: t("patientMeasurements.moduleQuestionnaire"),
       icon: Layers3,
       iconClassName: "text-chart-5",
       items: moduleQuestionnaires,
       routeMapper: moduleQuestionnaireActions,
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
-      emptyLabel: t("patientMeasurement.noData"),
+      emptyLabel: t("patientMeasurements.noData"),
     },
   ];
 

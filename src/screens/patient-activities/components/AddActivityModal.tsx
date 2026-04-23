@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { ActivitySelector } from "./ActivitySelector";
 import { usePatientActivities } from "../hooks/usePatientActivities";
 import { useAddActivity } from "../hooks/useAddActivity";
-import { FullScreenFormModal } from "@/common/components/Patient-activities-meds/FullScreenFormModal";
-import { TimelineCard } from "@/common/components/Patient-activities-meds/TimelineCard";
-import { ActivityFrequencyManager } from "./ActivityFrequencyManager";
+import { FullScreenFormModal } from "@/common/components/patient-profile/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/patient-profile/TimelineCard";
+import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
 
 interface IAddActivityModalProps {
   isOpen: boolean;
@@ -65,20 +65,9 @@ export function AddActivityModal({
         setStartDate={addActivityData.setStartDate}
         setEndDate={addActivityData.setEndDate}
       />
-
-      <ActivityFrequencyManager
-        hookData={{
-          frequency: addActivityData.frequency,
-          setFrequency: addActivityData.setFrequency,
-          selectedDays: addActivityData.selectedDays,
-          toggleDay: addActivityData.toggleDay,
-          timeSlots: addActivityData.timeSlots,
-          addTimeSlot: addActivityData.addTimeSlot,
-          removeTimeSlot: addActivityData.removeTimeSlot,
-          updateTimeSlot: addActivityData.updateTimeSlot,
-          dayOfMonth: addActivityData.dayOfMonth,
-          setDayOfMonth: addActivityData.setDayOfMonth,
-        }}
+      <FrequencyScheduleManager
+       hookData={addActivityData}
+       translationKey="patientActivities.addActivity"
       />
     </FullScreenFormModal>
   );

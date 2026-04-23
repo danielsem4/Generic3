@@ -411,6 +411,26 @@ patients: {
       startDate: "Start Date",
       endDate: "End Date",
       frequencyLabel: "Frequency & Schedule",
+      frequencyOptions: {
+        once: "Once",
+        daily: "Daily",
+        weekly: "Weekly",
+        monthly: "Monthly",
+      },
+      daysOfWeek:"Which Days of the Week?",
+      dayOfMonth:"Which Day of the Month?",
+      addTime: "Add Time",
+      days: {
+        MON: "Monday",
+        TUE: "Tuesday",
+        WED: "Wednesday",
+        THU: "Thursday",
+        FRI: "Friday",
+        SAT: "Saturday",
+        SUN: "Sunday"
+      },
+      
+
       editError: "Failed to update activity. Please try again.",
       editSuccess: "Activity updated successfully.",
       saveChanges: "Save Changes",
@@ -441,12 +461,58 @@ patients: {
   },
 
   //patient measurements
-  patientMeasurement: {
+  patientMeasurements: {
     questionnaires: "Questionnaires",
     cognitiveTests: "Cognitive Tests",
     moduleQuestionnaire: "Module Questionnaire",
     noData: "No data available",
+  submissions: {
+    backToMeasurements: "← Back to Measurements",
+    measurementTitleFallback: "Measurement",
+    patientNameFallback: "Patient",
+    pageDescription: "Review historical data or configure new measurements.",
+    settingsButton: "Patient Measurement Settings",
+    tableTitle: "Patient Submissions",
+    tableDescription: "Review the historical data and results submitted by the patient.",
+    loadError: "Failed to load submissions.",
+    empty: "No submissions found.",
+    columns: {
+      submissionDate: "Submission Date",
+      frequency: "Frequency",
+      grade: "Grade",
+      actions: "Actions",
+    },
   },
+  settings: {
+    title: "Measurement Configuration",
+    subtitle: "Configuration for {{name}}",
+    timelineLabel: "Timeline",
+    startDate: "Start Date",
+    endDate: "End Date (Optional)",
+    sendToPatient: "Send to Patient",
+    frequencyLabel: "Frequency & Schedule",
+    addTime: "Add Time",
+    dayOfMonth: "Day of Month",
+    daysOfWeek: "Days of Week",
+    success: "Measurement assigned successfully.",
+    error: "Failed to assign measurement.",
+    frequencyOptions: {
+      once: "Once",
+      daily: "Daily",
+      weekly: "Weekly",
+      monthly: "Monthly",
+    },
+    days: {
+      SUN: "Sunday",
+      MON: "Monday",
+      TUE: "Tuesday",
+      WED: "Wednesday",
+      THU: "Thursday",
+      FRI: "Friday",
+      SAT: "Saturday",
+    },
+  },
+},
 
   // Settings
   settings: {

@@ -4,9 +4,9 @@ import { Activity, Save} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { IPatientActivity } from "@/common/types/activities";
 import { useEditActivity } from "../hooks/useEditActivity";
-import { FullScreenFormModal } from "@/common/components/Patient-activities-meds/FullScreenFormModal";
-import { TimelineCard } from "@/common/components/Patient-activities-meds/TimelineCard";
-import { ActivityFrequencyManager } from "./ActivityFrequencyManager";
+import { FullScreenFormModal } from "@/common/components/patient-profile/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/patient-profile/TimelineCard";
+import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
 
 interface IEditActivityModalProps {
   activity: IPatientActivity | null;
@@ -40,8 +40,10 @@ export function EditActivityModal({
   } = useEditActivity(patientId);
 
   useEffect(() => {
-    if (activity) initForm(activity);
-  }, [activity, initForm]);
+  if (isOpen && activity) {
+    initForm(activity);
+  }
+}, [isOpen, activity, initForm]);
 
   const handleSave = () => {
     if (!activity) return;
@@ -51,6 +53,8 @@ export function EditActivityModal({
   };
 
   if (!activity) return null;
+
+  const frequencyScheduleData = { frequency, setFrequency, selectedDays, toggleDay, timeSlots, addTimeSlot, removeTimeSlot, updateTimeSlot, dayOfMonth, setDayOfMonth, };
 
 
   return (
@@ -92,19 +96,9 @@ export function EditActivityModal({
         setEndDate={setEndDate}
       />
 
-      <ActivityFrequencyManager
-        hookData={{
-          frequency,
-          setFrequency,
-          selectedDays,
-          toggleDay,
-          timeSlots,
-          addTimeSlot,
-          removeTimeSlot,
-          updateTimeSlot,
-          dayOfMonth,
-          setDayOfMonth,
-        }}
+      <FrequencyScheduleManager
+        hookData={frequencyScheduleData}
+        translationKey="patientActivities.editActivity"
       />
     </div>
   </FullScreenFormModal>

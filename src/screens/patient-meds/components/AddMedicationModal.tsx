@@ -4,7 +4,7 @@ import { Pill, CheckCircle2} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePatientMedications } from "../hooks/usePatientMedications";
 import { MedicationForm } from "./MedicationForm";
-import { FullScreenFormModal } from "@/common/components/Patient-activities-meds/FullScreenFormModal";
+import { FullScreenFormModal } from "@/common/components/patient-profile/FullScreenFormModal";
 
 interface IAddMedicationModalProps {
   isOpen: boolean;
