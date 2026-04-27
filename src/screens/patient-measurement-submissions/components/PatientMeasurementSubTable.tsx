@@ -9,6 +9,7 @@ interface ISubmissionItem {
   submissionDate: string;
   frequency: string;
   grade: string | number;
+  maxScore: string | number;
 }
 
 interface Props {
@@ -59,12 +60,15 @@ export default function PatientMeasurementSubmissionsTable({
                   </TableCell>
 
                   <TableCell>
-                    <span className="rounded-md border px-2 py-1 text-xs">
+                    <span className="rounded-md bg-muted text-foreground px-2 py-1 text-xs font-semibold">
                       {item.frequency}
                     </span>
                   </TableCell>
 
-                  <TableCell>{item.grade}</TableCell>
+                  <TableCell>
+                    <span className="font-semibold">{item.grade}</span>
+                    <span className="text-muted-foreground">/{item.maxScore}</span>
+                  </TableCell>
 
                   <TableCell>
                     <div className="flex items-center justify-end gap-3">
@@ -74,7 +78,6 @@ export default function PatientMeasurementSubmissionsTable({
                         disabled
                       >
                         <Eye className="h-4 w-4" />
-                        {t("common.view")}
                       </button>
 
                       <button

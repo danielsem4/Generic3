@@ -4,7 +4,10 @@ import { getPatientDetails } from "@/api/usersApi";
 import { getPatientMeasurementSubmissions } from "@/api/patientMeasurementsApi";
 
 export function usePatientMeasurementSubmissions() {
-  const { userId } = useParams<{ userId: string }>();
+  const { userId, measurementId } = useParams<{
+    userId: string;
+    measurementId: string;
+  }>();
 
   const {
     data: patientResponse,
@@ -28,8 +31,12 @@ export function usePatientMeasurementSubmissions() {
     enabled: !!clinicId && !!userId,
   });
 
+  const filteredSubmissions = submissions.filter(
+    (item) => String(item.measurementId) === String(measurementId),
+  );
+
   return {
-    submissions,
+    submissions: filteredSubmissions,
     isLoading: isPatientLoading || isSubmissionsLoading,
     error: patientError || submissionsError,
   };

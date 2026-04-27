@@ -16,19 +16,23 @@ function formatFrequency(value?: string) {
   }
 }
 
+
 function mapSubmissionRaw(
   raw: IMeasurementSubmissionRaw,
 ): IPatientMeasurementSubmission {
   return {
     id: raw.id,
-    measurementId: raw.measurement, 
+    measurementId: raw.measurement,
     measurementName: raw.measurement_name || "",
-    measurementType: raw.measurement_type || "",
-    submissionDate: raw.submission_date || raw.submitted_at || "-",
+    submissionDate: raw.submitted_at || raw.created_at || "-",
     frequency: formatFrequency(raw.frequency),
     grade:
-      raw.grade !== null && raw.grade !== undefined
-        ? `${raw.grade} / ${raw.max_grade ?? 100}`
+      raw.score !== null && raw.score !== undefined
+        ? String(raw.score)
+        : "-",
+    maxScore:
+      raw.max_score !== null && raw.max_score !== undefined
+        ? String(raw.max_score)
         : "-",
   };
 }
