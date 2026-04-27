@@ -2,6 +2,7 @@ import type {
   IQScreen,
   IQComponent,
   IQOptionItem,
+  IQVisualQuestion,
   CorrectAnswerType,
   QComponentType,
 } from "@/common/types/measurement";
@@ -138,6 +139,20 @@ function mapComponent(
   rowNumber: number,
   orderInRow: number,
 ): BackendField | null {
+  if (component.type === "visualQuestion") {
+    const visualKey = (component as IQVisualQuestion).visualKey.trim();
+    if (!visualKey) return null;
+    return {
+      label: component.label,
+      element_type: visualKey,
+      is_required: (component as IQVisualQuestion).required,
+      row_number: rowNumber,
+      order_in_row: orderInRow,
+      config: {},
+      correct_answer_type: "NONE",
+    };
+  }
+
   const backendType = FRONTEND_TO_BACKEND_TYPE[component.type];
   if (!backendType) return null;
 
@@ -300,7 +315,16 @@ function buildScalarCorrectAnswer(
 
 function buildComponentFromElement(element: IServerElement): IQComponent | null {
   let frontendType = BACKEND_TO_FRONTEND_TYPE[element.element_type];
-  if (!frontendType) return null;
+
+  if (!frontendType) {
+    return {
+      id: element.id,
+      type: "visualQuestion",
+      label: element.label,
+      required: element.is_required,
+      visualKey: element.element_type,
+    } as IQComponent;
+  }
 
   const config = element.config ?? {};
   const isCards = getString(config, "display_style") === "cards";

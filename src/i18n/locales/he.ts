@@ -835,6 +835,7 @@ patientMeasurements: {
       toggleSwitch: "מתג",
       button: "כפתור",
       rowContainer: "שורה",
+      visualQuestion: "שאלה ויזואלית",
     },
     props: {
       label: "תווית",
@@ -864,6 +865,7 @@ patientMeasurements: {
       trueLabel: "תווית אמת",
       falseLabel: "תווית שקר",
       allowPartialScore: "אפשר ניקוד חלקי",
+      visualKey: "מפתח ויזואלי",
     },
     device: {
       mobile: "נייד",

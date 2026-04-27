@@ -17,6 +17,7 @@ import {
   ToggleLeft,
   MousePointerClick,
   Columns,
+  Eye,
 } from "lucide-react";
 import type { ElementType } from "react";
 import type {
@@ -838,6 +839,23 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
       },
       propertyFields: [
         { key: "label", labelKey: "measurements.props.label", fieldType: "text" },
+      ],
+    },
+
+    visualQuestion: {
+      labelKey: "measurements.components.visualQuestion",
+      icon: Eye,
+      category: "userInputs",
+      defaultProps: {
+        type: "visualQuestion",
+        label: "Visual Question",
+        required: false,
+        visualKey: "",
+      },
+      propertyFields: [
+        { key: "label",     labelKey: "measurements.props.label",      fieldType: "text" },
+        { key: "visualKey", labelKey: "measurements.props.visualKey",   fieldType: "text" },
+        { key: "required",  labelKey: "measurements.props.required",    fieldType: "toggle" },
       ],
     },
   };

@@ -839,6 +839,7 @@ patient: {
       toggleSwitch: "Тоггл",
       button: "Кнопка",
       rowContainer: "Строка",
+      visualQuestion: "Визуальный вопрос",
     },
     props: {
       label: "Метка",
@@ -868,6 +869,7 @@ patient: {
       trueLabel: "Метка истины",
       falseLabel: "Метка лжи",
       allowPartialScore: "Разрешить частичный балл",
+      visualKey: "Визуальный ключ",
     },
     device: {
       mobile: "Мобильный",

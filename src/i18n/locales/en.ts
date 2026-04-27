@@ -826,6 +826,7 @@ modules: {
       toggleSwitch: "Toggle",
       button: "Button",
       rowContainer: "Row",
+      visualQuestion: "Visual Question",
     },
     props: {
       label: "Label",
@@ -855,6 +856,7 @@ modules: {
       trueLabel: "True Label",
       falseLabel: "False Label",
       allowPartialScore: "Allow Partial Score",
+      visualKey: "Visual Key",
     },
     device: {
       mobile: "Mobile",

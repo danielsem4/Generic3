@@ -836,6 +836,7 @@ patient: {
       toggleSwitch: "تبديل",
       button: "زر",
       rowContainer: "صف",
+      visualQuestion: "سؤال مرئي",
     },
     props: {
       label: "التسمية",
@@ -865,6 +866,7 @@ patient: {
       trueLabel: "تسمية صحيح",
       falseLabel: "تسمية خطأ",
       allowPartialScore: "السماح بالدرجة الجزئية",
+      visualKey: "المفتاح المرئي",
     },
     device: {
       mobile: "جوال",
