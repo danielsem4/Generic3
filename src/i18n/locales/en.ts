@@ -857,6 +857,12 @@ modules: {
       falseLabel: "False Label",
       allowPartialScore: "Allow Partial Score",
       visualKey: "Visual Key",
+      customKey: "Custom key",
+      spots: "Spots",
+      addSpot: "Add Spot",
+      spotPoint: "Point key",
+      subitems: "Sub-items",
+      addSubitem: "Add sub-item",
     },
     device: {
       mobile: "Mobile",

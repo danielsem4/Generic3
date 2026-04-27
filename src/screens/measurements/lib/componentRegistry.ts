@@ -33,7 +33,9 @@ export type PropertyFieldType =
   | "number"
   | "toggle"
   | "select"
-  | "optionsList";
+  | "optionsList"
+  | "keySelector"
+  | "spotsList";
 
 export interface PropertyFieldConfig {
   key: string;
@@ -851,11 +853,23 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         label: "Visual Question",
         required: false,
         visualKey: "",
+        spots: [],
       },
       propertyFields: [
-        { key: "label",     labelKey: "measurements.props.label",      fieldType: "text" },
-        { key: "visualKey", labelKey: "measurements.props.visualKey",   fieldType: "text" },
-        { key: "required",  labelKey: "measurements.props.required",    fieldType: "toggle" },
+        { key: "label",     labelKey: "measurements.props.label",    fieldType: "text" },
+        {
+          key: "visualKey",
+          labelKey: "measurements.props.visualKey",
+          fieldType: "keySelector",
+          options: [{ label: "Body Map Visual", value: "BODY_MAP_VISUAL" }],
+        },
+        {
+          key: "spots",
+          labelKey: "measurements.props.spots",
+          fieldType: "spotsList",
+          visibleWhen: { key: "visualKey", values: ["BODY_MAP_VISUAL"] },
+        },
+        { key: "required",  labelKey: "measurements.props.required", fieldType: "toggle" },
       ],
     },
   };

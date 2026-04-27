@@ -870,6 +870,12 @@ patient: {
       falseLabel: "Метка лжи",
       allowPartialScore: "Разрешить частичный балл",
       visualKey: "Визуальный ключ",
+      customKey: "Свой ключ",
+      spots: "Точки",
+      addSpot: "Добавить точку",
+      spotPoint: "Ключ точки",
+      subitems: "Подпункты",
+      addSubitem: "Добавить подпункт",
     },
     device: {
       mobile: "Мобильный",

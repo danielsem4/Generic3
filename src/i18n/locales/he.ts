@@ -866,6 +866,12 @@ patientMeasurements: {
       falseLabel: "תווית שקר",
       allowPartialScore: "אפשר ניקוד חלקי",
       visualKey: "מפתח ויזואלי",
+      customKey: "מפתח מותאם",
+      spots: "נקודות",
+      addSpot: "הוסף נקודה",
+      spotPoint: "מפתח נקודה",
+      subitems: "פריטי משנה",
+      addSubitem: "הוסף פריט משנה",
     },
     device: {
       mobile: "נייד",

@@ -274,12 +274,21 @@ function ComponentPreview({ component }: { component: IQComponent }) {
       return (
         <div className="space-y-1">
           <label className="text-sm font-medium">{component.label}</label>
-          <div className="flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-muted-foreground/30 bg-muted/30 py-6 text-muted-foreground">
+          <div className="flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-muted-foreground/30 bg-muted/30 py-4 text-muted-foreground">
             <Eye size={28} strokeWidth={1.5} />
             {component.visualKey ? (
               <span className="text-xs font-mono font-medium">{component.visualKey}</span>
             ) : (
               <span className="text-xs italic">No key set</span>
+            )}
+            {component.spots.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-1 px-3">
+                {component.spots.map((s, i) => (
+                  <span key={i} className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+                    {s.point || "…"}
+                  </span>
+                ))}
+              </div>
             )}
             <span className="text-xs text-center px-4">Visual question — rendered on mobile</span>
           </div>

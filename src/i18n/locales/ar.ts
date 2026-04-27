@@ -867,6 +867,12 @@ patient: {
       falseLabel: "تسمية خطأ",
       allowPartialScore: "السماح بالدرجة الجزئية",
       visualKey: "المفتاح المرئي",
+      customKey: "مفتاح مخصص",
+      spots: "النقاط",
+      addSpot: "إضافة نقطة",
+      spotPoint: "مفتاح النقطة",
+      subitems: "العناصر الفرعية",
+      addSubitem: "إضافة عنصر فرعي",
     },
     device: {
       mobile: "جوال",

@@ -215,10 +215,16 @@ export interface IQRowContainer extends IQBase {
   children: IQComponent[];
 }
 
+export interface IQVisualSpot {
+  point: string;
+  subItems: string[];
+}
+
 export interface IQVisualQuestion extends IQBase {
   type: "visualQuestion";
   required: boolean;
   visualKey: string;
+  spots: IQVisualSpot[];
 }
 
 export type IQComponent =

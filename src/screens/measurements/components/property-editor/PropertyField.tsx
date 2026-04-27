@@ -3,8 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import type { PropertyFieldConfig } from "../../lib/componentRegistry";
-import type { IQOptionItem, CorrectAnswerType, QComponentType } from "@/common/types/measurement";
+import type { IQOptionItem, IQVisualSpot, CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 import { OptionsListEditor } from "./OptionsListEditor";
+import { SpotsListEditor } from "./SpotsListEditor";
 
 interface PropertyFieldProps {
   field: PropertyFieldConfig;
@@ -42,6 +43,21 @@ export function PropertyField({
 
   function handleOptionsChange(options: IQOptionItem[]) {
     onChange(field.key, options);
+  }
+
+  function handleSpotsChange(spots: IQVisualSpot[]) {
+    onChange(field.key, spots);
+  }
+
+  const knownValues = field.options?.map((o) => o.value) ?? [];
+  const isCustomKey = field.fieldType === "keySelector" && !knownValues.includes(value as string);
+
+  function handleKeySelectorChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    onChange(field.key, e.target.value === "__custom__" ? "" : e.target.value);
+  }
+
+  function handleCustomKeyChange(e: React.ChangeEvent<HTMLInputElement>) {
+    onChange(field.key, e.target.value);
   }
 
   return (
@@ -92,6 +108,38 @@ export function PropertyField({
           onChange={handleOptionsChange}
           correctAnswerType={correctAnswerType}
           componentType={componentType}
+        />
+      )}
+
+      {field.fieldType === "keySelector" && (
+        <div className="space-y-1.5">
+          <select
+            value={isCustomKey ? "__custom__" : ((value as string) ?? "")}
+            onChange={handleKeySelectorChange}
+            className="w-full h-8 rounded-md border border-input bg-background px-2 text-sm"
+          >
+            {field.options?.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+            <option value="__custom__">{t("measurements.props.customKey")}</option>
+          </select>
+          {isCustomKey && (
+            <Input
+              value={(value as string) ?? ""}
+              onChange={handleCustomKeyChange}
+              placeholder={t("measurements.props.customKey")}
+              className="h-8 text-sm font-mono"
+            />
+          )}
+        </div>
+      )}
+
+      {field.fieldType === "spotsList" && (
+        <SpotsListEditor
+          spots={(value as IQVisualSpot[]) ?? []}
+          onChange={handleSpotsChange}
         />
       )}
     </div>
