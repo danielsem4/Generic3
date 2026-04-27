@@ -3,16 +3,32 @@ import { Input } from "@/components/ui/input";
 import {Dialog,DialogTrigger,DialogContent,DialogHeader,DialogTitle,DialogFooter,DialogClose,} from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
 import { Pencil } from "lucide-react";
-import type { IPatientDetails } from "@/common/types/patientDetails";
-import { usePatientEditDialog } from "../hooks/usePatientEditDialog";
 
 interface Props {
-  readonly patient: IPatientDetails;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  setFirstName: (value: string) => void;
+  setLastName: (value: string) => void;
+  setPhone: (value: string) => void;
+  setEmail: (value: string) => void;
+  onSave: () => void;
 }
 
-export default function PatientEditDialog({ patient }: Props) {
+export default function PatientInfoEditDialog({
+  firstName,
+  lastName,
+  phone,
+  email,
+  setFirstName,
+  setLastName,
+  setPhone,
+  setEmail,
+  onSave,
+}: Props) {
   const { t } = useTranslation();
-  const dialog = usePatientEditDialog(patient);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -37,8 +53,8 @@ export default function PatientEditDialog({ patient }: Props) {
             </label>
             <Input
               id="firstName"
-              value={dialog.firstName}
-              onChange={dialog.handleFirstNameChange}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
 
@@ -48,8 +64,8 @@ export default function PatientEditDialog({ patient }: Props) {
             </label>
             <Input
               id="lastName"
-              value={dialog.lastName}
-              onChange={dialog.handleLastNameChange}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
 
@@ -59,8 +75,8 @@ export default function PatientEditDialog({ patient }: Props) {
             </label>
             <Input
               id="phone"
-              value={dialog.phone}
-              onChange={dialog.handlePhoneChange}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
 
@@ -70,8 +86,8 @@ export default function PatientEditDialog({ patient }: Props) {
             </label>
             <Input
               id="email"
-              value={dialog.email}
-              onChange={dialog.handleEmailChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -81,7 +97,7 @@ export default function PatientEditDialog({ patient }: Props) {
             <Button variant="outline">{t("patient.cancel")}</Button>
           </DialogClose>
 
-          <Button onClick={dialog.handleSave}>{t("patient.saveChanges")}</Button>
+          <Button onClick={onSave}>{t("patient.saveChanges")}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

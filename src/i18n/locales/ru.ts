@@ -386,7 +386,7 @@ activities: {
 },
   
 // Patient Activities
-  patientActivities: {
+ patientActivities: {
   title: "Мои активности",
   searchPlaceholder: "Поиск активностей...",
   addActivity: {
@@ -412,7 +412,7 @@ activities: {
       THU: "Четверг",
       FRI: "Пятница",
       SAT: "Суббота",
-      SUN: "Воскресенье"
+      SUN: "Воскресенье",
     },
     finalize: "Назначить активность",
     cancel: "Отмена",
@@ -427,18 +427,36 @@ activities: {
     startDate: "Дата начала",
     endDate: "Дата окончания",
     frequencyLabel: "Частота и расписание",
+    frequencyOptions: {
+      once: "Один раз",
+      daily: "Ежедневно",
+      weekly: "Еженедельно",
+      monthly: "Ежемесячно",
+    },
+    daysOfWeek: "В какие дни недели?",
+    dayOfMonth: "В какой день месяца?",
+    addTime: "Добавить время",
+    days: {
+      MON: "Понедельник",
+      TUE: "Вторник",
+      WED: "Среда",
+      THU: "Четверг",
+      FRI: "Пятница",
+      SAT: "Суббота",
+      SUN: "Воскресенье",
+    },
     editError: "Не удалось обновить активность. Попробуйте снова.",
     editSuccess: "Активность успешно обновлена.",
     saveChanges: "Сохранить изменения",
-    cancel: "Отмена"
+    cancel: "Отмена",
   },
   deleteConfirm: {
     title: "Вы уверены, что хотите удалить эту активность?",
     description: "Это действие навсегда удалит активность из записи пациента.",
     cancel: "Отмена",
-    confirm: "Удалить"
+    confirm: "Удалить",
   },
-  logTitle: "Журнал активностей",
+  logTitle: "Журнал активности",
   refreshData: "Обновить данные",
   resetFilters: "Сбросить фильтры",
   defaultSubtitle: "Общая активность",
@@ -450,12 +468,65 @@ activities: {
   filters: {
     allActivities: "Все активности",
     dateFrom: "С даты:",
-    activity: "Активность:"
+    activity: "Активность:",
   },
   deleteError: "Не удалось удалить активность. Попробуйте снова.",
   deleteSuccess: "Активность успешно удалена.",
 },
 
+// Patient Measurements
+patientMeasurements: {
+  questionnaires: "Опросники",
+  cognitiveTests: "Когнитивные тесты",
+  moduleQuestionnaire: "Модульный опросник",
+  noData: "Нет доступных данных",
+  submissions: {
+    backToMeasurements: "← Назад к измерениям",
+    measurementTitleFallback: "Измерение",
+    patientNameFallback: "Пациент",
+    pageDescription: "Просмотр истории или настройка новых измерений.",
+    settingsButton: "Настройки измерений пациента",
+    tableTitle: "Отправки пациента",
+    tableDescription: "Просмотр данных и результатов пациента.",
+    loadError: "Не удалось загрузить данные.",
+    empty: "Данные не найдены.",
+    columns: {
+      submissionDate: "Дата отправки",
+      frequency: "Частота",
+      grade: "Оценка",
+      actions: "Действия",
+    },
+  },
+  settings: {
+    title: "Настройка измерения",
+    subtitle: "Настройка для {{name}}",
+    timelineLabel: "Период",
+    startDate: "Дата начала",
+    endDate: "Дата окончания (необязательно)",
+    sendToPatient: "Отправить пациенту",
+    frequencyLabel: "Частота и расписание",
+    addTime: "Добавить время",
+    dayOfMonth: "День месяца",
+    daysOfWeek: "Дни недели",
+    success: "Измерение успешно назначено.",
+    error: "Не удалось назначить измерение.",
+    frequencyOptions: {
+      once: "Один раз",
+      daily: "Ежедневно",
+      weekly: "Еженедельно",
+      monthly: "Ежемесячно",
+    },
+    days: {
+      SUN: "Воскресенье",
+      MON: "Понедельник",
+      TUE: "Вторник",
+      WED: "Среда",
+      THU: "Четверг",
+      FRI: "Пятница",
+      SAT: "Суббота",
+    },
+  },
+},
   // Settings
   settings: {
     title: "Настройки",

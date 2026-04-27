@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IClinicActivity } from "@/common/types/activities";
 import { addPatientActivity } from "@/api/activitiesApi";
+import { buildFrequencyData } from "@/common/libs/buildFrequencyData";
 
 type TFrequency = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
 
@@ -80,26 +81,14 @@ export function useAddActivity(clinicId: string, userId: string) {
         throw new Error("Missing required identifiers");
       }
 
-      const frequency_data =
-        frequency === "ONCE"
-          ? {
-              date: startDate,
-              time_slots: timeSlots,
-            }
-          : frequency === "DAILY"
-            ? {
-                times_per_day: timeSlots.length,
-                time_slots: timeSlots,
-              }
-            : frequency === "WEEKLY"
-              ? {
-                  days_of_week: selectedDays,
-                  time: timeSlots[0] ?? "12:00",
-                }
-              : {
-                  day_of_month: Number(dayOfMonth),
-                  time: timeSlots[0] ?? "12:00",
-                };
+      const frequency_data = buildFrequencyData({
+         frequency,
+         startDate,
+         timeSlots,
+         selectedDays,
+         dayOfMonth,
+         defaultTime: "12:00",
+    });
 
       return addPatientActivity(clinicId, userId, {
         activity_id: selectedActivity.activity,

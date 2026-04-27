@@ -14,22 +14,6 @@ export function usePatientEditDialog(patient: IPatientDetails) {
     setEmail(patient.email);
   }, [patient]);
 
-  function handleFirstNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFirstName(event.target.value);
-  }
-
-  function handleLastNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setLastName(event.target.value);
-  }
-
-  function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setPhone(event.target.value);
-  }
-
-  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
-  }
-
   function handleSave() {
     console.log({
       patientId: patient.patientId,
@@ -45,10 +29,10 @@ export function usePatientEditDialog(patient: IPatientDetails) {
     lastName,
     phone,
     email,
-    handleFirstNameChange,
-    handleLastNameChange,
-    handlePhoneChange,
-    handleEmailChange,
+    setFirstName,
+    setLastName,
+    setPhone,
+    setEmail,
     handleSave,
   };
 }

@@ -20,6 +20,9 @@ import Activities from "@/screens/activities/ActivitiesPage";
 import MeasurementsPage from "@/screens/measurements/MeasurementsPage";
 import MeasurementBuilder from "@/screens/measurements/MeasurementBuilder";
 import PatientActivities from "./screens/patient-activities/PatientActivities";
+import MeasurementPage from "./screens/patient-measurement/patientMeasurements";
+import PatientMeasurementSubmissionsScreen from "./screens/patient-measurement-submissions/PatientMeasurementSubmissionsScreen";
+
 
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -44,6 +47,8 @@ export const router = createBrowserRouter([
       { path: "modules/measurements/builder/:id", element: <MeasurementBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "patients/:userId/activities", element: <PatientActivities /> },
+      { path: "patients/:userId/measurements", element: <MeasurementPage /> },
+      { path: "patients/:userId/measurements/:measurementId/submissions", element: <PatientMeasurementSubmissionsScreen /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "statistics", element: <Statistics /> },
     ],

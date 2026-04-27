@@ -12,19 +12,20 @@ import {
 } from "@/components/ui/table";
 import type { IActivityLog, IActivityLogFilters, IPatientActivity} from "@/common/types/activities";
 import { ActivityLogFilters } from "./ActivityLogFilters";
+import { formatDate } from "@/common/utils/formatDate";
+import { formatTime } from "@/common/utils/formatTime";
 interface ActivityLogRowProps {
   log: IActivityLog;
 }
 
 const ActivityLogRow: React.FC<ActivityLogRowProps> = ({ log }) => {
-  const [date, time] = log.time_done.split("T");
-  const formattedTime = time?.slice(0, 5) ?? "";
-
+  const date = formatDate(log.time_done);
+  const time = formatTime(log.time_done);
   return (
     <TableRow className="hover:bg-muted/5 border-border transition-colors">
       <TableCell className="font-bold text-foreground">{log.activity_name}</TableCell>
       <TableCell className="text-success font-bold">{date}</TableCell>
-      <TableCell className="text-muted-foreground">{formattedTime}</TableCell>
+      <TableCell className="text-muted-foreground">{time}</TableCell>
     </TableRow>
   );
 };
