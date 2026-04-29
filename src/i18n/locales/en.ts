@@ -768,6 +768,28 @@ modules: {
     showAdopted: "Show already adopted",
     alreadyAdded: "Already added",
     emptyColumn: "No measurements in this category",
+    results_title: "Assessment Results",
+    submitted_at: "Review Students answers and overall performance metrics",
+    list_view: "List View",
+    analytics_view: "Analytics View",
+    analytics: {
+      avg_grade: "Average Grade",
+      passed: "Questions Passed",
+      needs_improvement: "Needs Improvement",
+      questions: "Questions",
+      grade_distribution: "Grade Distribution",
+      pass_fail_ratio: "Pass/Fail Ratio",
+      passed_label: "Passing Rate",
+      pass: "Pass",
+      fail: "Fail",
+    },
+    table: {
+      question_label: "Question",
+      answer_provided: "Answer Provided",
+      status: "Status",
+      grade: "Grade",
+      actions: "Actions",
+    },
     types: {
       questionnaries: "Questionnaires",
       cognitiveTests: "Cognitive Tests",
@@ -861,6 +883,7 @@ modules: {
       tablet: "Tablet",
       desktop: "Desktop",
     },
+    
   },
 
 } as const;

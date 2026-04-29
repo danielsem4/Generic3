@@ -781,6 +781,28 @@ patient: {
     showAdopted: "Показать уже добавленные",
     alreadyAdded: "Уже добавлено",
     emptyColumn: "Нет измерений в этой категории",
+    results_title: "Результаты измерения",
+    submitted_at: "Просмотр ответов студентов и общих показателей эффективности",
+    list_view: "Список", 
+    analytics_view: "Просмотр аналитики",
+    analytics: {
+      avg_grade: "мто средняя оценка",
+      passed: "процент успешных",
+      needs_improvement: "нуждается в улучшении",
+      questions: "количество вопросов",
+      grade_distribution: "распределение оценок",
+      pass_fail_ratio: "соотношение успешных/неуспешных",
+      passed_label: "успешно",
+      pass: "успех",
+      fail: "неудача",
+    },
+    table: {
+      question_label: "Вопрос",
+      answer_provided: "Ответ предоставлен",
+      status: "Статус",
+      grade: "Оценка",
+      actions: "Действия"
+    },
     types: {
       questionnaries: "Опросники",
       cognitiveTests: "Когнитивные тесты",

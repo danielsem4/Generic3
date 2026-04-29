@@ -777,6 +777,30 @@ patientMeasurements: {
     showAdopted: "הצג כבר אומצו",
     alreadyAdded: "כבר נוסף",
     emptyColumn: "אין מדידות בקטגוריה זו",
+    results_title: "תוצאות מבחן",
+    submitted_at: "צפה בתשובות הסטודנטים ובמדדי ביצוע כלליים",
+    list_view: "תצוגת רשימה",
+    analytics_view: "תצוגת אנליטיקה",
+    
+    analytics: {
+      avg_grade: "ציון ממוצע",
+      passed: "שאלות שעברו",
+      needs_improvement: "דורש שיפור",
+      questions: "שאלות",
+      grade_distribution: "התפלגות ציונים",
+      pass_fail_ratio: "יחס עובר/נכשל",
+      passed_label: "אחוז מעבר",
+      pass: "עבר",
+      fail: "נכשל",
+    },
+    table: {
+      question_label: "שאלה",
+      answer_provided: "תשובה שהתקבלה",
+      status: "סטטוס",
+      grade: "ניקוד",
+      actions: "פעולות",
+    }
+  },
     types: {
       questionnaries: "שאלונים",
       cognitiveTests: "מבחנים קוגניטיביים",
@@ -870,7 +894,6 @@ patientMeasurements: {
       tablet: "טאבלט",
       desktop: "מחשב",
     },
-  },
 
 } as const;
 

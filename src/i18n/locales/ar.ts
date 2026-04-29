@@ -778,6 +778,28 @@ patient: {
     showAdopted: "عرض المعتمدة مسبقاً",
     alreadyAdded: "مضاف مسبقاً",
     emptyColumn: "لا توجد قياسات في هذه الفئة",
+    results_title: "النتائج",
+    submitted_at: "مراجعة إجابات الطلاب ومقاييس الأداء العام",
+    list_view: "عرض القائمة",
+    analytics_view: "عرض التحليلات",
+    analytics: {
+      avg_grade: "متوسط الدرجة",
+      passed: "نسبة النجاح",
+      needs_improvement: "تحتاج إلى تحسين",
+      questions: "عدد الأسئلة",
+      grade_distribution: "توزيع الدرجات",
+      pass_fail_ratio: "نسبة النجاح/الفشل",
+      passed_label: "نجح",
+      pass: "نجاح",
+      fail: "فشل",
+    },
+    table: {
+      question_label: "السؤال",
+      answer_provided: "الإجابة التي تم تقديمها",
+      status: "الحالة",
+      grade: "الدرجة",
+      actions: "الإجراءات",
+    },
     types: {
       questionnaries: "استبيانات",
       cognitiveTests: "اختبارات معرفية",
@@ -871,6 +893,7 @@ patient: {
       tablet: "لوحي",
       desktop: "سطح المكتب",
     },
+    
   },
 
 } as const;

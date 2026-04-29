@@ -17,7 +17,7 @@ function formatFrequency(value?: string) {
 }
 
 
-function mapSubmissionRaw(
+export function mapSubmissionRaw(
   raw: IMeasurementSubmissionRaw,
 ): IPatientMeasurementSubmission {
   return {

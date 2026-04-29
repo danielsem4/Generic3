@@ -3,6 +3,7 @@ import {Card,CardContent,CardHeader,CardTitle,} from "@/components/ui/card";
 import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow,} from "@/components/ui/table";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/common/utils/formatDate";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ISubmissionItem {
   id: string;
@@ -14,12 +15,19 @@ interface ISubmissionItem {
 
 interface Props {
   submissions: ISubmissionItem[];
+  clinicId?: string;
 }
 
-export default function PatientMeasurementSubmissionsTable({
-  submissions,
-}: Props) {
+export default function PatientMeasurementSubmissionsTable({ submissions }: Props) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { userId } = useParams<{ clinicId: string; userId: string }>();
+  const handleViewSubmission = (submissionId: string) => {
+  navigate(
+    `/patients/${userId}/measurement-submissions/${submissionId}`
+  );
+};
+
 
   return (
     <Card className="rounded-2xl">
@@ -72,14 +80,9 @@ export default function PatientMeasurementSubmissionsTable({
 
                   <TableCell>
                     <div className="flex items-center justify-end gap-3">
-                      <button
-                        type="button"
-                        className="flex items-center gap-1 text-sm text-muted-foreground"
-                        disabled
-                      >
-                        <Eye className="h-4 w-4" />
+                     <button onClick={() => handleViewSubmission(item.id)}>
+                    <Eye />
                       </button>
-
                       <button
                         type="button"
                         className="text-muted-foreground"
