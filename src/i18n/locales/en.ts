@@ -577,7 +577,8 @@ patients: {
     confirm: "Confirm",
     close: "Close",
     loading: "Loading...",
-    fetchingDetails: "Fetching details from server..."
+    fetchingDetails: "Fetching details from server...",
+    upload_file: "Upload File",
   },
 
   // Modules
@@ -883,6 +884,40 @@ modules: {
       tablet: "Tablet",
       desktop: "Desktop",
     },
+
+    //Files
+    files: {
+    title: "Patient Documents",
+    subtitle: "Manage and view shared medical files",
+
+    upload_button: "Upload Document",
+    dialog_title: "Upload New Document",
+    dialog_desc: "Select a file to upload to the patient record",
+
+    drag_drop: "Drag & drop your file here",
+    supported_formats: "Support for PDF, DOCX, CSV, PNG, JPG, SVG",
+    browse: "Browse computer",
+
+    choose_different: "CHOOSE A DIFFERENT FILE",
+    save_as: "Save file as",
+    size: "{{size}} MB",
+
+    search_placeholder: "Search files...",
+
+    missing_patient_context: "Missing Patient Context",
+    select_patient_hint: "Please select a patient to view their documents",
+
+    empty: {
+      title: "No documents available"
+    },
+
+    table: {
+      name: "Name",
+      date: "Date",
+      owner: "Owner",
+      actions: "Actions"
+    }
+  },
     
   },
 

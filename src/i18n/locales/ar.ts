@@ -587,7 +587,9 @@ patientMeasurements: {
     confirm: "تأكيد",
     close: "إغلاق",
     loading: "جاري التحميل...",
-    fetchingDetails: "جاري جلب البيانات من الخادم..."
+    fetchingDetails: "جاري جلب البيانات من الخادم...",
+    upload_file: "تحميل ملف",
+
   },
 
   // Modules
@@ -893,8 +895,42 @@ patient: {
       tablet: "لوحي",
       desktop: "سطح المكتب",
     },
-    
   },
+
+  // Files
+  files: {
+    title: "مستندات المريض",
+    subtitle: "إدارة وعرض الملفات الطبية",
+
+    upload_button: "تحميل مستند",
+    dialog_title: "تحميل مستند جديد",
+    dialog_desc: "اختر ملفًا لرفعه إلى سجل المريض",
+
+    drag_drop: "اسحب الملف وأفلته هنا",
+    supported_formats: "يدعم PDF و DOCX و CSV و PNG و JPG و SVG",
+    browse: "تصفح الجهاز",
+
+    choose_different: "اختر ملفًا آخر",
+    save_as: "حفظ باسم",
+    size: "{{size}} ميجابايت",
+
+    search_placeholder: "ابحث عن ملفات...",
+
+    missing_patient_context: "لم يتم اختيار مريض",
+    select_patient_hint: "يرجى اختيار مريض لعرض ملفاته",
+
+    empty: {
+      title: "لا توجد مستندات"
+    },
+
+    table: {
+      name: "الاسم",
+      date: "التاريخ",
+      owner: "المالك",
+      actions: "إجراءات"
+    }
+  },
+
 
 } as const;
 
