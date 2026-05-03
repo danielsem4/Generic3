@@ -34,6 +34,7 @@ export function mapSubmissionRaw(
       raw.max_score !== null && raw.max_score !== undefined
         ? String(raw.max_score)
         : "-",
+    answers: raw.answers ?? [],
   };
 }
 
@@ -78,4 +79,38 @@ export async function assignPatientMeasurement(
   );
 
   return data;
+}
+
+export async function deletePatientMeasurementSubmission(
+  clinicId: string,
+  userId: string,
+  submissionId: string,
+) {
+  return api.delete(
+    `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/`
+  );
+}
+
+export async function deleteMeasurementAnswer(
+  clinicId: string,
+  userId: string,
+  submissionId: string,
+  Id: string,
+) {
+  return api.delete(
+    `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/answers/${Id}/`
+  );
+}
+
+export async function updateMeasurementAnswerScore(
+  clinicId: string,
+  userId: string,
+  submissionId: string,
+  answerId: string,
+  score: number,
+) {
+  return api.patch(
+    `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/answers/${answerId}/`,
+    { points_earned: score },
+  );
 }

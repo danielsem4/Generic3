@@ -1,78 +1,101 @@
-import React, { useState } from 'react'; 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { LayoutDashboard, List } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
 import { useAssessmentResults } from "./hooks/useAssessmentResults";
 import { ResultsTable } from "./components/ResultsTable";
-import { Button } from "@/components/ui/button";
-import { LayoutDashboard, List } from "lucide-react";
 import { AnalyticsView } from "./components/AnalyticsView";
-import type { AssessmentAnswer } from '@/api/assesmentApi';
 
 export const AssessmentResultsPage = () => {
   const { t } = useTranslation();
-  
   const [viewMode, setViewMode] = useState<"list" | "analytics">("list");
-  const { submission, stats, isLoading, error } = useAssessmentResults();
+
+const {
+  data: submission,
+  isLoading,
+  error,
+  onEditScore,
+} = useAssessmentResults();
 
   if (isLoading) {
-    return <div className="p-20 text-center font-bold text-slate-500">{t("common.loading", "Loading Data...")}</div>;
-  }
-
-  if (error || !submission) {
     return (
-      <div className="p-20 text-center text-red-500 bg-red-50 rounded-xl border border-red-200 m-6">
-        <h2 className="text-xl font-bold mb-2">{t("measurements.error_title", "Error: Submission not found")}</h2>
-        <p className="text-sm">{t("measurements.error_desc", "Please check if the IDs are valid.")}</p>
+      <div className="p-20 text-center font-bold text-muted-foreground">
+        {t("common.loading", "Loading Data...")}
       </div>
     );
   }
 
-  const displayAnswers: AssessmentAnswer[] = submission.answers || [];
+  if (error || !submission) {
+    return (
+      <div className="p-20 text-center text-destructive bg-destructive/10 rounded-xl border border-destructive/20 m-6">
+        <h2 className="text-xl font-bold mb-2">
+          {t("measurements.error_title", "Error: Submission not found")}
+        </h2>
+        <p className="text-sm">
+          {t("measurements.error_desc", "Please check if the IDs are valid.")}
+        </p>
+      </div>
+    );
+  }
+
+  const displayAnswers: IMeasurementSubmissionAnswerRaw[] =
+    submission.answers ?? [];
+
   return (
-    <div className="min-h-screen bg-slate-50/50" dir={t("direction", "ltr")}>
+    <div className="bg-background" dir={t("direction", "ltr")}>
       <div className="max-w-7xl mx-auto p-6 space-y-6">
-        
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card p-6 rounded-2xl border border-border shadow-sm">
           <div className="text-left">
-            <h1 className="text-2xl font-black text-slate-900">
-              {submission.measurement_name}
+            <h1 className="text-2xl font-black text-foreground">
+              {submission.measurementName}
             </h1>
+
             <div className="flex items-center gap-3 mt-2">
-              <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                {t(`measurements.frequency.${(stats.frequency || "once").toLowerCase()}`, stats.frequency)}
+              <span className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
+                {submission.frequency}
               </span>
-              <p className="text-slate-400 text-xs font-medium">
-                {t("measurements.submitted_at", "Submitted at")}: {submission.submitted_at ? new Date(submission.submitted_at).toLocaleDateString() : ''}
+
+              <p className="text-muted-foreground text-xs font-medium">
+                {t("measurements.submitted_at", "Submitted at")}:{" "}
+                {submission.submissionDate !== "-"
+                  ? new Date(submission.submissionDate).toLocaleDateString()
+                  : "-"}
               </p>
             </div>
           </div>
 
-          {/* Score */}
-          <div className="bg-slate-900 text-white px-6 py-3 rounded-xl flex items-baseline gap-2 shadow-lg">
-            <span className="text-xs text-slate-400 font-bold uppercase tracking-tighter">
-                {t("measurements.score", "Score")}:
+          <div className="bg-primary text-primary-foreground px-6 py-3 rounded-xl flex items-baseline gap-2 shadow-lg">
+            <span className="text-xs font-bold uppercase tracking-tighter opacity-80">
+              {t("measurements.score", "Score")}:
             </span>
-            <span className="text-2xl font-black">{stats.score}</span>
-            <span className="text-slate-500 font-bold">/ {stats.maxScore}</span>
+            <span className="text-2xl font-black">{submission.grade}</span>
+            <span className="font-bold opacity-70">
+              / {submission.maxScore}
+            </span>
           </div>
 
-          {/* View Toggle */}
-          <div className="flex bg-slate-100 p-1 rounded-xl">
-            <Button 
+          <div className="flex bg-muted p-1 rounded-xl">
+            <Button
               variant="ghost"
               onClick={() => setViewMode("list")}
               className={`px-6 py-2 text-xs gap-2 transition-all rounded-lg font-bold ${
-                viewMode === "list" ? "bg-white shadow-sm text-primary" : "text-slate-500"
+                viewMode === "list"
+                  ? "bg-background shadow-sm text-primary"
+                  : "text-muted-foreground"
               }`}
             >
               <List className="w-4 h-4" />
               {t("measurements.list_view", "List")}
             </Button>
-            <Button 
+
+            <Button
               variant="ghost"
               onClick={() => setViewMode("analytics")}
               className={`px-6 py-2 text-xs gap-2 transition-all rounded-lg font-bold ${
-                viewMode === "analytics" ? "bg-white shadow-sm text-primary" : "text-slate-500"
+                viewMode === "analytics"
+                  ? "bg-background shadow-sm text-primary"
+                  : "text-muted-foreground"
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -81,10 +104,14 @@ export const AssessmentResultsPage = () => {
           </div>
         </div>
 
-        <main className="bg-white rounded-2xl border shadow-sm overflow-hidden min-h-[400px]">
+        <main className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
           {viewMode === "list" ? (
             <div className="p-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-              <ResultsTable answers={displayAnswers} />
+              <ResultsTable
+                answers={displayAnswers}
+                onDelete={() => {}}
+                onEditScore={onEditScore}
+              />
             </div>
           ) : (
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 text-left">

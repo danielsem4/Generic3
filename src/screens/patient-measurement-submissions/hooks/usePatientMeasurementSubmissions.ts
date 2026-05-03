@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getPatientDetails } from "@/api/usersApi";
-import { getPatientMeasurementSubmissions } from "@/api/patientMeasurementsApi";
+import {
+  getPatientMeasurementSubmissions,
+  deletePatientMeasurementSubmission,
+} from "@/api/patientMeasurementsApi";
 
 export function usePatientMeasurementSubmissions() {
   const { userId, measurementId } = useParams<{
     userId: string;
     measurementId: string;
   }>();
+
+  const queryClient = useQueryClient();
 
   const {
     data: patientResponse,
@@ -31,6 +36,17 @@ export function usePatientMeasurementSubmissions() {
     enabled: !!clinicId && !!userId,
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (submissionId: string) =>
+      deletePatientMeasurementSubmission(clinicId!, userId!, submissionId),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["patient-measurement-submissions", clinicId, userId],
+      });
+    },
+  });
+
   const filteredSubmissions = submissions.filter(
     (item) => String(item.measurementId) === String(measurementId),
   );
@@ -39,5 +55,7 @@ export function usePatientMeasurementSubmissions() {
     submissions: filteredSubmissions,
     isLoading: isPatientLoading || isSubmissionsLoading,
     error: patientError || submissionsError,
+    onDelete: (id: string) => deleteMutation.mutate(id),
+    isDeleting: deleteMutation.isPending,
   };
 }
