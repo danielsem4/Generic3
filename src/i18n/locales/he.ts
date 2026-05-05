@@ -594,7 +594,9 @@ patientMeasurements: {
     confirm: "אישור",
     close: "סגירה",
     loading: "טוען...",
-    fetchingDetails: "מושך נתונים מהשרת..."
+    fetchingDetails: "מושך נתונים מהשרת...",
+    upload_file: "העלה קובץ",
+    save: "שמור",
   },
   
   // Modules
@@ -864,6 +866,7 @@ measurements: {
     structure: "מבנה",
   },
 
+
   components: {
     heading: "כותרת",
     paragraph: "פסקה",
@@ -921,19 +924,54 @@ measurements: {
     desktop: "מחשב",
   },
   deleteConfirm: {
-  title: "האם אתה בטוח שברצונך למחוק תשובה זו?",
-  description: "פעולה זו תמחק את התשובה לצמיתות מההערכה.",
-  cancel: "ביטול",
-  confirm: "מחק"
-},
-editScore: {
-  title: "עריכת ניקוד שאלה",
-  description: "עדכן את הניקוד עבור תשובה זו.",
-  placeholder: "הזן ניקוד",
-  cancel: "ביטול",
-  save: "שמור"
-},
-},
+    title: "האם אתה בטוח שברצונך למחוק תשובה זו?",
+    description: "פעולה זו תמחק את התשובה לצמיתות מההערכה.",
+    cancel: "ביטול",
+    confirm: "מחק"
+  },
+  editScore: {
+    title: "עריכת ניקוד שאלה",
+    description: "עדכן את הניקוד עבור תשובה זו.",
+    placeholder: "הזן ניקוד",
+    cancel: "ביטול",
+    save: "שמור"
+  },
+  },
+  
+  // Files
+  files: {
+    title: "מסמכי מטופל",
+    subtitle: "ניהול וצפייה בקבצים רפואיים משותפים",
+
+    upload_button: "העלה מסמך",
+    dialog_title: "העלאת מסמך חדש",
+    dialog_desc: "בחר קובץ להעלאה לתיק המטופל",
+
+    drag_drop: "גרור ושחרר קובץ כאן",
+    supported_formats: "תמיכה ב־PDF, DOCX, CSV, PNG, JPG, SVG",
+    browse: "בחר מהמחשב",
+
+    choose_different: "בחר קובץ אחר",
+    save_as: "שמור בשם",
+    size: "{{size}} MB",
+
+    search_placeholder: "חפש קבצים...",
+
+    missing_patient_context: "אין מטופל נבחר",
+    select_patient_hint: "בחר מטופל כדי לצפות במסמכים שלו",
+
+    empty: {
+      title: "אין מסמכים זמינים"
+    },
+
+    table: {
+      name: "שם",
+      date: "תאריך",
+      owner: "בעלים",
+      actions: "פעולות"
+    }
+  }
+
 } as const;
 
 export default he;

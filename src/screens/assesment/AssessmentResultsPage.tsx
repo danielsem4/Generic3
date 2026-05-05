@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,17 @@ export const AssessmentResultsPage = () => {
   const { t } = useTranslation();
   const [viewMode, setViewMode] = useState<"list" | "analytics">("list");
 
-const {
-  data: submission,
-  isLoading,
-  error,
-  onEditScore,
-} = useAssessmentResults();
+  const {
+    data: submission,
+    isLoading,
+    error,
+    onEditScore,
+  } = useAssessmentResults();
+
+  useEffect(() => {
+    if (submission) console.log("✅ Submission loaded:", submission);
+    if (error) console.error("❌ API Error:", error);
+  }, [submission, error]);
 
   if (isLoading) {
     return (
@@ -26,7 +31,8 @@ const {
     );
   }
 
-  if (error || !submission) {
+  // תיקון: בדיקה אם submission קיים ואם יש לו id
+  if (error || !submission || !submission.id) {
     return (
       <div className="p-20 text-center text-destructive bg-destructive/10 rounded-xl border border-destructive/20 m-6">
         <h2 className="text-xl font-bold mb-2">

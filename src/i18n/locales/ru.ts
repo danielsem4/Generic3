@@ -598,7 +598,8 @@ patientMeasurements: {
     confirm: "Подтвердить",
     close: "Закрыть",
     loading: "Загрузка...",
-    fetchingDetails: "Получение данных с сервера..."
+    fetchingDetails: "Получение данных с сервера...",
+    upload_file: "Загрузить файл",
   },
 
   // Modules
@@ -805,6 +806,7 @@ measurements: {
     fail: "Не зачёт",
   },
 
+
   analytics: {
     avg_grade: "Средний балл",
     passed: "Пройденные вопросы",
@@ -925,19 +927,53 @@ measurements: {
     desktop: "Десктоп",
   },
   deleteConfirm: {
-  title: "Вы уверены, что хотите удалить этот ответ?",
-  description: "Это действие навсегда удалит ответ из оценки.",
-  cancel: "Отмена",
-  confirm: "Удалить"
-},
-editScore: {
-  title: "Изменить балл за вопрос",
-  description: "Обновите балл для этого ответа.",
-  placeholder: "Введите балл",
-  cancel: "Отмена",
-  save: "Сохранить"
-},
-},
+    title: "Вы уверены, что хотите удалить этот ответ?",
+    description: "Это действие навсегда удалит ответ из оценки.",
+    cancel: "Отмена",
+    confirm: "Удалить"
+  },
+  editScore: {
+    title: "Изменить балл за вопрос",
+    description: "Обновите балл для этого ответа.",
+    placeholder: "Введите балл",
+    cancel: "Отмена",
+    save: "Сохранить"
+  },
+  },
+
+  // File
+  files: {
+    title: "Документы пациента",
+    subtitle: "Управление и просмотр медицинских файлов",
+
+    upload_button: "Загрузить документ",
+    dialog_title: "Загрузка нового документа",
+    dialog_desc: "Выберите файл для загрузки в карту пациента",
+
+    drag_drop: "Перетащите файл сюда",
+    supported_formats: "Поддерживаются PDF, DOCX, CSV, PNG, JPG, SVG",
+    browse: "Выбрать файл",
+
+    choose_different: "ВЫБРАТЬ ДРУГОЙ ФАЙЛ",
+    save_as: "Сохранить как",
+    size: "{{size}} МБ",
+
+    search_placeholder: "Поиск файлов...",
+
+    missing_patient_context: "Пациент не выбран",
+    select_patient_hint: "Выберите пациента, чтобы увидеть его документы",
+
+    empty: {
+      title: "Нет доступных документов"
+    },
+
+    table: {
+      name: "Название",
+      date: "Дата",
+      owner: "Владелец",
+      actions: "Действия"
+    }
+  }
 
 } as const;
 
