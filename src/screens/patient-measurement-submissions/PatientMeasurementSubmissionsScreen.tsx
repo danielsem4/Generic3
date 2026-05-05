@@ -8,8 +8,8 @@ import PatientMeasurementSubmissionsHeader from "./components/PatientMeasurement
 
 export default function PatientMeasurementSubmissionsScreen() {
   const { t } = useTranslation();
-  const { userId } = useParams<{ userId: string }>();
   const location = useLocation();
+  const { userId } = useParams<{ userId: string; clinicId: string }>();
 
   const measurementName =
     (location.state as { measurementName?: string } | null)?.measurementName ||

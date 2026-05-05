@@ -577,7 +577,8 @@ patients: {
     confirm: "Confirm",
     close: "Close",
     loading: "Loading...",
-    fetchingDetails: "Fetching details from server..."
+    fetchingDetails: "Fetching details from server...",
+    upload_file: "Upload File",
   },
 
   // Modules
@@ -768,6 +769,28 @@ modules: {
     showAdopted: "Show already adopted",
     alreadyAdded: "Already added",
     emptyColumn: "No measurements in this category",
+    results_title: "Assessment Results",
+    submitted_at: "Review Students answers and overall performance metrics",
+    list_view: "List View",
+    analytics_view: "Analytics View",
+    analytics: {
+      avg_grade: "Average Grade",
+      passed: "Questions Passed",
+      needs_improvement: "Needs Improvement",
+      questions: "Questions",
+      grade_distribution: "Grade Distribution",
+      pass_fail_ratio: "Pass/Fail Ratio",
+      passed_label: "Passing Rate",
+      pass: "Pass",
+      fail: "Fail",
+    },
+    table: {
+      question_label: "Question",
+      answer_provided: "Answer Provided",
+      status: "Status",
+      grade: "Grade",
+      actions: "Actions",
+    },
     types: {
       questionnaries: "Questionnaires",
       cognitiveTests: "Cognitive Tests",
@@ -861,6 +884,41 @@ modules: {
       tablet: "Tablet",
       desktop: "Desktop",
     },
+
+    //Files
+    files: {
+    title: "Patient Documents",
+    subtitle: "Manage and view shared medical files",
+
+    upload_button: "Upload Document",
+    dialog_title: "Upload New Document",
+    dialog_desc: "Select a file to upload to the patient record",
+
+    drag_drop: "Drag & drop your file here",
+    supported_formats: "Support for PDF, DOCX, CSV, PNG, JPG, SVG",
+    browse: "Browse computer",
+
+    choose_different: "CHOOSE A DIFFERENT FILE",
+    save_as: "Save file as",
+    size: "{{size}} MB",
+
+    search_placeholder: "Search files...",
+
+    missing_patient_context: "Missing Patient Context",
+    select_patient_hint: "Please select a patient to view their documents",
+
+    empty: {
+      title: "No documents available"
+    },
+
+    table: {
+      name: "Name",
+      date: "Date",
+      owner: "Owner",
+      actions: "Actions"
+    }
+  },
+    
   },
 
 } as const;

@@ -587,7 +587,9 @@ patientMeasurements: {
     confirm: "تأكيد",
     close: "إغلاق",
     loading: "جاري التحميل...",
-    fetchingDetails: "جاري جلب البيانات من الخادم..."
+    fetchingDetails: "جاري جلب البيانات من الخادم...",
+    upload_file: "تحميل ملف",
+
   },
 
   // Modules
@@ -778,6 +780,28 @@ patient: {
     showAdopted: "عرض المعتمدة مسبقاً",
     alreadyAdded: "مضاف مسبقاً",
     emptyColumn: "لا توجد قياسات في هذه الفئة",
+    results_title: "النتائج",
+    submitted_at: "مراجعة إجابات الطلاب ومقاييس الأداء العام",
+    list_view: "عرض القائمة",
+    analytics_view: "عرض التحليلات",
+    analytics: {
+      avg_grade: "متوسط الدرجة",
+      passed: "نسبة النجاح",
+      needs_improvement: "تحتاج إلى تحسين",
+      questions: "عدد الأسئلة",
+      grade_distribution: "توزيع الدرجات",
+      pass_fail_ratio: "نسبة النجاح/الفشل",
+      passed_label: "نجح",
+      pass: "نجاح",
+      fail: "فشل",
+    },
+    table: {
+      question_label: "السؤال",
+      answer_provided: "الإجابة التي تم تقديمها",
+      status: "الحالة",
+      grade: "الدرجة",
+      actions: "الإجراءات",
+    },
     types: {
       questionnaries: "استبيانات",
       cognitiveTests: "اختبارات معرفية",
@@ -872,6 +896,41 @@ patient: {
       desktop: "سطح المكتب",
     },
   },
+
+  // Files
+  files: {
+    title: "مستندات المريض",
+    subtitle: "إدارة وعرض الملفات الطبية",
+
+    upload_button: "تحميل مستند",
+    dialog_title: "تحميل مستند جديد",
+    dialog_desc: "اختر ملفًا لرفعه إلى سجل المريض",
+
+    drag_drop: "اسحب الملف وأفلته هنا",
+    supported_formats: "يدعم PDF و DOCX و CSV و PNG و JPG و SVG",
+    browse: "تصفح الجهاز",
+
+    choose_different: "اختر ملفًا آخر",
+    save_as: "حفظ باسم",
+    size: "{{size}} ميجابايت",
+
+    search_placeholder: "ابحث عن ملفات...",
+
+    missing_patient_context: "لم يتم اختيار مريض",
+    select_patient_hint: "يرجى اختيار مريض لعرض ملفاته",
+
+    empty: {
+      title: "لا توجد مستندات"
+    },
+
+    table: {
+      name: "الاسم",
+      date: "التاريخ",
+      owner: "المالك",
+      actions: "إجراءات"
+    }
+  },
+
 
 } as const;
 

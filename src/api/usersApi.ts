@@ -116,3 +116,5 @@ export const getPatientDetails = async (
 
   return response.data;
 };
+
+
