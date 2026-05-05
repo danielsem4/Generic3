@@ -15,7 +15,7 @@ export default function PatientMeasurementSubmissionsScreen() {
     (location.state as { measurementName?: string } | null)?.measurementName ||
     t("patientMeasurements.submissions.measurementTitleFallback");
 
-  const { submissions, isLoading, error } = usePatientMeasurementSubmissions();
+  const { submissions, isLoading, error, onDelete } = usePatientMeasurementSubmissions();
 
   const {
     isSettingsOpen,
@@ -58,7 +58,7 @@ export default function PatientMeasurementSubmissionsScreen() {
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
-      <PatientMeasurementSubmissionsTable submissions={submissions} />
+      <PatientMeasurementSubmissionsTable submissions={submissions} onDelete={onDelete} />
 
       <PatientMeasurementSettingsDialog
         open={isSettingsOpen}

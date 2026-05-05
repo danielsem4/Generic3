@@ -4,7 +4,7 @@ import type { UseFormReturn } from "react-hook-form";
 import { Search, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import type { ClinicFormValues } from "../../Schema/clinicSchema";
+import type { ClinicFormValues } from "../../schema/clinicSchema";
 import { useAllModulesQuery } from "@/hooks/queries/useAllModulesQuery";
 
 interface Props {

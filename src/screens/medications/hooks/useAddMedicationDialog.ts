@@ -6,7 +6,7 @@ import { addGlobalMedication } from "@/api/medicationService";
 import {
   medicationSchema,
   type MedicationFormValues,
-} from "../Schema/medicationSchema";
+} from "../schema/medicationSchema";
 
 export function useAddMedicationDialog() {
   const [open, setOpen] = useState(false);

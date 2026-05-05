@@ -17,8 +17,6 @@ export function useEditMedication(patientId: string) {
   const [frequency, setFrequency] = useState<PrescriptionFrequency>("DAILY");
 
   const initForm = (prescription: IPatientPrescription) => {
-    console.log({ prescription });
-
     setDosage(prescription.dosage);
     setStartDate(prescription.start_date);
     setEndDate(prescription.end_date);

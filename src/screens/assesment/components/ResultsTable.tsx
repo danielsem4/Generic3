@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle, Clock, Pencil } from "lucide-react";
-import { useState } from "react";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { DeleteButton } from "@/common/components/DeleteButton";
 import { EditAnswerScoreDialog } from "./EditAnswerScoreDialog";
@@ -19,13 +19,33 @@ export const ResultsTable = ({
   onEditScore,
 }: ResultsTableProps) => {
   const { t } = useTranslation();
-
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [editAnswer, setEditAnswer] =
     useState<IMeasurementSubmissionAnswerRaw | null>(null);
 
+  const handleOpenEdit = (answer: IMeasurementSubmissionAnswerRaw) => {
+    setEditAnswer(answer);
+  };
+
+  const handleOpenDelete = (id: string) => {
+    setDeleteId(id);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteId) onDelete(deleteId);
+    setDeleteId(null);
+  };
+
+  const handleCloseDelete = () => {
+    setDeleteId(null);
+  };
+
+  const handleEditDialogChange = (open: boolean) => {
+    if (!open) setEditAnswer(null);
+  };
+
   return (
-    <div className="w-full overflow-x-auto p-4" dir="ltr">
+    <div className="w-full overflow-x-auto p-4">
       <table className="w-full text-left border-collapse font-sans">
         <thead>
           <tr className="border-b border-border">
@@ -72,8 +92,8 @@ export const ResultsTable = ({
                       isExcellent
                         ? "bg-success/10 text-success border-success/20"
                         : isPass
-                        ? "bg-primary/10 text-primary border-primary/20"
-                        : "bg-destructive/10 text-destructive border-destructive/20"
+                          ? "bg-primary/10 text-primary border-primary/20"
+                          : "bg-destructive/10 text-destructive border-destructive/20"
                     }`}
                   >
                     {isExcellent && <CheckCircle2 className="w-3.5 h-3.5" />}
@@ -94,7 +114,6 @@ export const ResultsTable = ({
                   >
                     {score}
                   </span>
-                  <span className="text-muted-foreground"> / 100</span>
                 </td>
 
                 <td className="py-6 px-4">
@@ -103,12 +122,11 @@ export const ResultsTable = ({
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8"
-                      onClick={() => setEditAnswer(answer)}
+                      onClick={() => handleOpenEdit(answer)}
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
-
-                    <DeleteButton onClick={() => setDeleteId(answer.id)} />
+                    <DeleteButton onClick={() => handleOpenDelete(answer.id)} />
                   </div>
                 </td>
               </tr>
@@ -117,28 +135,21 @@ export const ResultsTable = ({
         </tbody>
       </table>
 
-      {/* DELETE */}
       <ConfirmDialog
         open={!!deleteId}
-        onOpenChange={() => setDeleteId(null)}
+        onOpenChange={handleCloseDelete}
         title={t("measurements.deleteConfirm.title")}
         description={t("measurements.deleteConfirm.description")}
         confirmLabel={t("measurements.deleteConfirm.confirm")}
         cancelLabel={t("measurements.deleteConfirm.cancel")}
-        onConfirm={() => {
-          if (deleteId) onDelete(deleteId);
-          setDeleteId(null);
-        }}
+        onConfirm={handleConfirmDelete}
         variant="destructive"
       />
 
-      {/* EDIT */}
       <EditAnswerScoreDialog
         open={!!editAnswer}
         answer={editAnswer}
-        onOpenChange={(open) => {
-          if (!open) setEditAnswer(null);
-        }}
+        onOpenChange={handleEditDialogChange}
         onSave={onEditScore}
       />
     </div>

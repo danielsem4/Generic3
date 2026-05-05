@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { ClipboardList, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FullScreenFormModal } from "@/common/components/patient-profile/FullScreenFormModal";
-import { TimelineCard } from "@/common/components/patient-profile/TimelineCard";
+import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/TimelineCard";
 import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
 
 interface IProps {

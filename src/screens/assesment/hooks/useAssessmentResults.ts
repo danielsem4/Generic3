@@ -2,7 +2,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getPatientDetails } from "@/api/usersApi";
 import {
-  getPatientMeasurementSubmissions,
+  getSingleSubmission,
+  deleteMeasurementAnswer,
   updateMeasurementAnswerScore,
 } from "@/api/patientMeasurementsApi";
 
@@ -24,14 +25,7 @@ export function useAssessmentResults() {
 
   const submissionQuery = useQuery({
     queryKey: ["patient-measurement-submission", clinicId, userId, submissionId],
-    queryFn: async () => {
-      const submissions = await getPatientMeasurementSubmissions(
-        clinicId!,
-        userId!,
-      );
-
-      return submissions.find((item) => item.id === submissionId) ?? null;
-    },
+    queryFn: () => getSingleSubmission(clinicId!, userId!, submissionId!),
     enabled: Boolean(clinicId && userId && submissionId),
     retry: false,
   });
@@ -45,24 +39,54 @@ export function useAssessmentResults() {
         answerId,
         score,
       ),
-
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["patient-measurement-submission", clinicId, userId, submissionId],
+        queryKey: [
+          "patient-measurement-submission",
+          clinicId,
+          userId,
+          submissionId,
+        ],
       });
-
       queryClient.invalidateQueries({
         queryKey: ["patient-measurement-submissions", clinicId, userId],
       });
     },
   });
 
+  const deleteAnswerMutation = useMutation({
+    mutationFn: (answerId: string) =>
+      deleteMeasurementAnswer(clinicId!, userId!, submissionId!, answerId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [
+          "patient-measurement-submission",
+          clinicId,
+          userId,
+          submissionId,
+        ],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["patient-measurement-submissions", clinicId, userId],
+      });
+    },
+  });
+
+  const handleEditScore = (answerId: string, score: number) => {
+    editScoreMutation.mutate({ answerId, score });
+  };
+
+  const handleDeleteAnswer = (answerId: string) => {
+    deleteAnswerMutation.mutate(answerId);
+  };
+
   return {
     data: submissionQuery.data,
     isLoading: patientQuery.isLoading || submissionQuery.isLoading,
     error: patientQuery.error || submissionQuery.error,
-    onEditScore: (answerId: string, score: number) =>
-      editScoreMutation.mutate({ answerId, score }),
+    onEditScore: handleEditScore,
     isEditingScore: editScoreMutation.isPending,
+    onDeleteAnswer: handleDeleteAnswer,
+    isDeletingAnswer: deleteAnswerMutation.isPending,
   };
 }

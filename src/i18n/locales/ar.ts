@@ -597,7 +597,7 @@ patientMeasurements: {
     loading: "جاري التحميل...",
     fetchingDetails: "جاري جلب البيانات من الخادم...",
     upload_file: "تحميل ملف",
-
+    system: "النظام",
   },
 
   // Modules

@@ -587,6 +587,7 @@ patients: {
     loading: "Loading...",
     fetchingDetails: "Fetching details from server...",
     upload_file: "Upload File",
+    system: "System",
   },
 
   // Modules

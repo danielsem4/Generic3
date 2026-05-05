@@ -7,7 +7,7 @@ import {
   type PatientType,
   type PatientFormValues,
   type ResearchPatientFormValues,
-} from "../Schema/patientsSchema";
+} from "../schema/patientsSchema";
 import { useAddPatient } from "./useAddPatient";
 
 export function useAddPatientDialog() {

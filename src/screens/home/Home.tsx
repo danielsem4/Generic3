@@ -116,7 +116,7 @@ export default function Home() {
             <StatCard
               key={card.labelKey}
               icon={card.icon}
-              label={t(card.labelKey)}
+              title={t(card.labelKey)}
               value={card.getValue(users, modules)}
             />
           ))}

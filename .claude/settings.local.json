@@ -58,7 +58,12 @@
       "Bash(ls /Users/klutz/Desktop/Generic3/src/screens/measurements/hooks/useBuilderDnd*)",
       "Bash(wc:*)",
       "Bash(grep -r \"ring-primary\\\\|data-\\\\[state=\" /Users/klutz/Desktop/Generic3/src/components/ui/*.tsx)",
-      "Bash(grep -n \"class=\"\".*ring\" /Users/klutz/Desktop/Generic3/src/screens/measurements/components/canvas/*.tsx)"
+      "Bash(grep -n \"class=\"\".*ring\" /Users/klutz/Desktop/Generic3/src/screens/measurements/components/canvas/*.tsx)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(ls -la /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
+      "Bash(cat /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
+      "Bash(grep -E \"^export \\(interface I|type I\\)\" /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
+      "Bash(grep -E \"^export \\(interface [^I]|type [^I]\\)\" /Users/klutz/Desktop/Generic3/src/common/types/*.ts)"
     ]
   }
 }

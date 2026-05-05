@@ -1,16 +1,13 @@
 import type { IMeasurementSubmissionRaw, IPatientMeasurementSubmission } from "@/common/types/patientMeasurementSubmission";
 import api from "@/lib/axios";
 
-function formatFrequency(value?: string) {
+function normalizeFrequency(value?: string): string {
   switch (value) {
     case "ONCE":
-      return "Once";
     case "DAILY":
-      return "Daily";
     case "WEEKLY":
-      return "Weekly";
     case "MONTHLY":
-      return "Monthly";
+      return value;
     default:
       return value || "-";
   }
@@ -25,7 +22,7 @@ export function mapSubmissionRaw(
     measurementId: raw.measurement,
     measurementName: raw.measurement_name || "",
     submissionDate: raw.submitted_at || raw.created_at || "-",
-    frequency: formatFrequency(raw.frequency),
+    frequency: normalizeFrequency(raw.frequency),
     grade:
       raw.score !== null && raw.score !== undefined
         ? String(raw.score)
@@ -48,6 +45,18 @@ export async function getPatientMeasurementSubmissions(
 
   const submissions = Array.isArray(data) ? data : data.results ?? [];
   return submissions.map(mapSubmissionRaw);
+}
+
+export async function getSingleSubmission(
+  clinicId: string,
+  userId: string,
+  submissionId: string,
+): Promise<IPatientMeasurementSubmission> {
+  const { data } = await api.get(
+    `/api/v1/clinics/${clinicId}/patients/${userId}/measurement-submissions/${submissionId}/`,
+  );
+
+  return mapSubmissionRaw(data);
 }
 
 export type TMeasurementFrequency = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";

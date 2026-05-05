@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createDoctor } from "@/api/usersApi";
-import type { DoctorFormValues } from "../Schema/doctorSchema";
+import type { DoctorFormValues } from "../schema/doctorSchema";
 
 export function useAddDoctor() {
   const queryClient = useQueryClient();

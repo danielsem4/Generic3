@@ -107,12 +107,9 @@ export const getDoctorDetails = async (
 export const getPatientDetails = async (
   userId: string,
 ): Promise<IPatientDetailsResponse> => {
-  console.log({ requestedUserId: userId });
-
   const response = await api.get<IPatientDetailsResponse>(
     `/api/v1/users/patients/${userId}/`,
   );
-  console.log({ patientDetails: response.data });
 
   return response.data;
 };

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
 import { createPatient } from "@/api/usersApi";
-import type { PatientFormValues, ResearchPatientFormValues, PatientType } from "../Schema/patientsSchema";
+import type { PatientFormValues, ResearchPatientFormValues, PatientType } from "../schema/patientsSchema";
 
 type AddPatientInput = (PatientFormValues | ResearchPatientFormValues) & { patientType: PatientType };
 
