@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { doctorSchema, type DoctorFormValues } from "../Schema/doctorSchema";
+import { doctorSchema, type DoctorFormValues } from "../schema/doctorSchema";
 import { useAddDoctor } from "./useAddDoctor";
 
 export function useAddDoctorDialog() {

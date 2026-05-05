@@ -250,7 +250,7 @@ const ru = {
   },
 
   // Patient Medications
-  ppatientMeds: {
+  patientMeds: {
   title: "Мои лекарства",
   addMedication: "Добавить лекарство",
   searchPlaceholder: "Поиск лекарств...",
@@ -600,6 +600,7 @@ patientMeasurements: {
     loading: "Загрузка...",
     fetchingDetails: "Получение данных с сервера...",
     upload_file: "Загрузить файл",
+    system: "Система",
   },
 
   // Modules

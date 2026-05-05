@@ -3,7 +3,7 @@ import type { FieldError, UseFormRegister, UseFormReturn } from "react-hook-form
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import type { ClinicFormValues } from "../../Schema/clinicSchema";
+import type { ClinicFormValues } from "../../schema/clinicSchema";
 import { ClinicManagerSelectCard } from "./ClinicManagerSelectCard";
 import { useSelectableManagers } from "../../hooks/useSelectableManagers";
 

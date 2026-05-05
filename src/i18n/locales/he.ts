@@ -596,6 +596,7 @@ patientMeasurements: {
     loading: "טוען...",
     fetchingDetails: "מושך נתונים מהשרת...",
     upload_file: "העלה קובץ",
+    system: "מערכת",
     save: "שמור",
   },
   

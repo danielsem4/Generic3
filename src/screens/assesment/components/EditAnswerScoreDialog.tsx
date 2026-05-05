@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -7,9 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useTranslation } from "react-i18next";
 import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
-import { useState } from "react";
 
 interface EditAnswerScoreDialogProps {
   answer: IMeasurementSubmissionAnswerRaw | null;
@@ -27,24 +27,31 @@ export function EditAnswerScoreDialog({
   const { t } = useTranslation();
   const [scoreValue, setScoreValue] = useState("");
 
+  const handleDialogOpenChange = (isOpen: boolean) => {
+    if (isOpen && answer) {
+      setScoreValue(String(answer.points_earned ?? 0));
+    }
+    onOpenChange(isOpen);
+  };
+
+  const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setScoreValue(e.target.value);
+  };
+
   const handleSave = () => {
     if (!answer) return;
+    const parsed = Number(scoreValue);
+    if (isNaN(parsed) || parsed < 0) return;
+    onSave(answer.id, parsed);
+    onOpenChange(false);
+  };
 
-    onSave(answer.id, Number(scoreValue));
+  const handleCancel = () => {
     onOpenChange(false);
   };
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(isOpen) => {
-        if (isOpen && answer) {
-          setScoreValue(String(answer.points_earned ?? 0));
-        }
-
-        onOpenChange(isOpen);
-      }}
-    >
+    <Dialog open={open} onOpenChange={handleDialogOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("measurements.editScore.title")}</DialogTitle>
@@ -52,21 +59,19 @@ export function EditAnswerScoreDialog({
 
         <div className="space-y-3">
           <p className="text-sm text-muted-foreground">{answer?.label}</p>
-
           <Input
             type="number"
             min={0}
             value={scoreValue}
-            onChange={(e) => setScoreValue(e.target.value)}
+            onChange={handleScoreChange}
             placeholder={t("measurements.editScore.placeholder")}
           />
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={handleCancel}>
             {t("measurements.editScore.cancel")}
           </Button>
-
           <Button onClick={handleSave}>
             {t("measurements.editScore.save")}
           </Button>

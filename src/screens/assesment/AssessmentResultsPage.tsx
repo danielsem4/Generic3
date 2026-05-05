@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,31 +16,24 @@ export const AssessmentResultsPage = () => {
     isLoading,
     error,
     onEditScore,
+    onDeleteAnswer,
   } = useAssessmentResults();
-
-  useEffect(() => {
-    if (submission) console.log("✅ Submission loaded:", submission);
-    if (error) console.error("❌ API Error:", error);
-  }, [submission, error]);
 
   if (isLoading) {
     return (
       <div className="p-20 text-center font-bold text-muted-foreground">
-        {t("common.loading", "Loading Data...")}
+        {t("common.loading")}
       </div>
     );
   }
 
-  // תיקון: בדיקה אם submission קיים ואם יש לו id
   if (error || !submission || !submission.id) {
     return (
       <div className="p-20 text-center text-destructive bg-destructive/10 rounded-xl border border-destructive/20 m-6">
         <h2 className="text-xl font-bold mb-2">
-          {t("measurements.error_title", "Error: Submission not found")}
+          {t("measurements.error_title")}
         </h2>
-        <p className="text-sm">
-          {t("measurements.error_desc", "Please check if the IDs are valid.")}
-        </p>
+        <p className="text-sm">{t("measurements.error_desc")}</p>
       </div>
     );
   }
@@ -48,8 +41,24 @@ export const AssessmentResultsPage = () => {
   const displayAnswers: IMeasurementSubmissionAnswerRaw[] =
     submission.answers ?? [];
 
+  const translatedFrequency =
+    submission.frequency === "-"
+      ? "-"
+      : t(
+          `patientMeasurements.settings.frequencyOptions.${submission.frequency.toLowerCase()}`,
+          submission.frequency,
+        );
+
+  const handleSetListView = () => {
+    setViewMode("list");
+  };
+
+  const handleSetAnalyticsView = () => {
+    setViewMode("analytics");
+  };
+
   return (
-    <div className="bg-background" dir={t("direction", "ltr")}>
+    <div className="bg-background">
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card p-6 rounded-2xl border border-border shadow-sm">
           <div className="text-left">
@@ -59,11 +68,11 @@ export const AssessmentResultsPage = () => {
 
             <div className="flex items-center gap-3 mt-2">
               <span className="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                {submission.frequency}
+                {translatedFrequency}
               </span>
 
               <p className="text-muted-foreground text-xs font-medium">
-                {t("measurements.submitted_at", "Submitted at")}:{" "}
+                {t("measurements.submitted_at")}:{" "}
                 {submission.submissionDate !== "-"
                   ? new Date(submission.submissionDate).toLocaleDateString()
                   : "-"}
@@ -73,7 +82,7 @@ export const AssessmentResultsPage = () => {
 
           <div className="bg-primary text-primary-foreground px-6 py-3 rounded-xl flex items-baseline gap-2 shadow-lg">
             <span className="text-xs font-bold uppercase tracking-tighter opacity-80">
-              {t("measurements.score", "Score")}:
+              {t("measurements.score")}:
             </span>
             <span className="text-2xl font-black">{submission.grade}</span>
             <span className="font-bold opacity-70">
@@ -84,7 +93,7 @@ export const AssessmentResultsPage = () => {
           <div className="flex bg-muted p-1 rounded-xl">
             <Button
               variant="ghost"
-              onClick={() => setViewMode("list")}
+              onClick={handleSetListView}
               className={`px-6 py-2 text-xs gap-2 transition-all rounded-lg font-bold ${
                 viewMode === "list"
                   ? "bg-background shadow-sm text-primary"
@@ -92,12 +101,12 @@ export const AssessmentResultsPage = () => {
               }`}
             >
               <List className="w-4 h-4" />
-              {t("measurements.list_view", "List")}
+              {t("measurements.list_view")}
             </Button>
 
             <Button
               variant="ghost"
-              onClick={() => setViewMode("analytics")}
+              onClick={handleSetAnalyticsView}
               className={`px-6 py-2 text-xs gap-2 transition-all rounded-lg font-bold ${
                 viewMode === "analytics"
                   ? "bg-background shadow-sm text-primary"
@@ -105,7 +114,7 @@ export const AssessmentResultsPage = () => {
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
-              {t("measurements.analytics_view", "Analytics")}
+              {t("measurements.analytics_view")}
             </Button>
           </div>
         </div>
@@ -115,7 +124,7 @@ export const AssessmentResultsPage = () => {
             <div className="p-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
               <ResultsTable
                 answers={displayAnswers}
-                onDelete={() => {}}
+                onDelete={onDeleteAnswer}
                 onEditScore={onEditScore}
               />
             </div>

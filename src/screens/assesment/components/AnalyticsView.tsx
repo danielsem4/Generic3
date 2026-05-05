@@ -11,7 +11,7 @@ export const AnalyticsView = ({ answers }: { answers: IMeasurementSubmissionAnsw
   const { avgGrade, passRate, distributionData, pieData, total, passedCount, failedCount } = useAnalytics(answers);
 
   return (
-    <div className="p-8 space-y-6 bg-card" dir="ltr">
+    <div className="p-8 space-y-6 bg-card">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard title={t("measurements.analytics.avg_grade")} value={`${avgGrade}%`} icon={Award} colorClass="bg-primary/10" iconColor="text-primary" />
         <StatCard title={t("measurements.analytics.passed")} value={passedCount} subValue={`/ ${total}`} icon={Target} colorClass="bg-success/10" iconColor="text-success" />
