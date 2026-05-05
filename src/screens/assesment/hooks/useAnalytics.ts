@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
-import type { IMeasurementAnswer } from "@/common/types/measurements";
+import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
 
-export const useAnalytics = (answers: IMeasurementAnswer[]) => {
+export const useAnalytics = (answers: IMeasurementSubmissionAnswerRaw[]) => {
   const { t } = useTranslation();
   const total = answers.length;
-  const passedCount = answers.filter(a => a.is_correct === true).length;
-  const failedCount = total - passedCount;
+  const passedCount = answers.filter((a) => (a.points_earned ?? 0) > 0).length;
+  const failedCount = answers.filter((a) => (a.points_earned ?? 0) === 0).length;
   const avgGrade = total > 0 ? Math.round(answers.reduce((acc, curr) => acc + (curr.points_earned || 0), 0) / total) : 0;
   const passRate = total > 0 ? Math.round((passedCount / total) * 100) : 0;
 

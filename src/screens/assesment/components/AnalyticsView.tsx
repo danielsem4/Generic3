@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import type { IMeasurementAnswer } from "@/common/types/measurements";
+import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
 import { Award, Target, TrendingDown } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAnalytics } from "../hooks/useAnalytics";
-import { StatCard } from "./AnalyticsCards"; 
+import { StatCard } from "./AnalyticsCards";
 
-export const AnalyticsView = ({ answers }: { answers: IMeasurementAnswer[] }) => {
+export const AnalyticsView = ({ answers }: { answers: IMeasurementSubmissionAnswerRaw[] }) => {
   const { t } = useTranslation();
   const { avgGrade, passRate, distributionData, pieData, total, passedCount, failedCount } = useAnalytics(answers);
 
@@ -22,16 +22,16 @@ export const AnalyticsView = ({ answers }: { answers: IMeasurementAnswer[] }) =>
         <Card className="md:col-span-3 border-border shadow-sm bg-background/50">
           <CardHeader>
             <CardTitle className="text-lg font-bold text-foreground">{t("measurements.analytics.grade_distribution")}</CardTitle>
-            </CardHeader>
+          </CardHeader>
           <CardContent className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={distributionData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="oklch(var(--border) / 0.5)" />
-                <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize: 12, fill: 'oklch(var(--muted-foreground))'}} />
+                <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: "oklch(var(--muted-foreground))" }} />
                 <YAxis hide />
-                <Tooltip cursor={{fill: 'transparent'}} contentStyle={{backgroundColor: 'oklch(var(--card))', border: '1px solid oklch(var(--border))', borderRadius: '8px'}} />
+                <Tooltip cursor={{ fill: "transparent" }} contentStyle={{ backgroundColor: "oklch(var(--card))", border: "1px solid oklch(var(--border))", borderRadius: "8px" }} />
                 <Bar dataKey="count" radius={[6, 6, 0, 0]} barSize={50}>
-                  {distributionData.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
+                  {distributionData.map((entry) => <Cell key={entry.range} fill={entry.fill} />)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -41,13 +41,13 @@ export const AnalyticsView = ({ answers }: { answers: IMeasurementAnswer[] }) =>
         <Card className="md:col-span-2 border-border shadow-sm bg-background/50">
           <CardHeader>
             <CardTitle className="text-lg font-bold text-foreground">{t("measurements.analytics.pass_fail_ratio")}</CardTitle>
-            </CardHeader>
+          </CardHeader>
           <CardContent className="h-[300px] p-0 flex flex-col items-center">
             <div className="relative w-full h-[220px] flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie data={pieData} innerRadius={75} outerRadius={95} paddingAngle={5} dataKey="value" startAngle={90} endAngle={-270}>
-                    {pieData.map((entry, i) => <Cell key={i} fill={entry.color} stroke="none" />)}
+                    {pieData.map((entry) => <Cell key={entry.name} fill={entry.color} stroke="none" />)}
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>

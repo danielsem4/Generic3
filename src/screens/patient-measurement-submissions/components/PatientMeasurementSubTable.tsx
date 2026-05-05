@@ -1,9 +1,24 @@
-import { Eye, Trash2 } from "lucide-react";
-import {Card,CardContent,CardHeader,CardTitle,} from "@/components/ui/card";
-import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow,} from "@/components/ui/table";
+import { Eye } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/common/utils/formatDate";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
+import { DeleteButton } from "@/common/components/DeleteButton";
 
 interface ISubmissionItem {
   id: string;
@@ -15,19 +30,18 @@ interface ISubmissionItem {
 
 interface Props {
   submissions: ISubmissionItem[];
-  clinicId?: string;
+  onDelete: (id: string) => void;
 }
 
-export default function PatientMeasurementSubmissionsTable({ submissions }: Props) {
+export default function PatientMeasurementSubmissionsTable({
+  submissions,
+  onDelete,
+}: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId } = useParams<{ clinicId: string; userId: string }>();
-  const handleViewSubmission = (submissionId: string) => {
-  navigate(
-    `/patients/${userId}/measurement-submissions/${submissionId}`
-  );
-};
+  const { userId } = useParams<{ userId: string }>();
 
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   return (
     <Card className="rounded-2xl">
@@ -75,21 +89,27 @@ export default function PatientMeasurementSubmissionsTable({ submissions }: Prop
 
                   <TableCell>
                     <span className="font-semibold">{item.grade}</span>
-                    <span className="text-muted-foreground">/{item.maxScore}</span>
+                    <span className="text-muted-foreground">
+                      /{item.maxScore}
+                    </span>
                   </TableCell>
 
                   <TableCell>
                     <div className="flex items-center justify-end gap-3">
-                     <button onClick={() => handleViewSubmission(item.id)}>
-                    <Eye />
-                      </button>
                       <button
-                        type="button"
-                        className="text-muted-foreground"
-                        disabled
+                        onClick={() =>
+                          navigate(
+                            `/patients/${userId}/measurement-submissions/${item.id}`
+                          )
+                        }
+                        className="text-primary hover:opacity-80"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Eye className="h-4 w-4" />
                       </button>
+
+                      <DeleteButton
+                        onClick={() => setDeleteId(item.id)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -107,6 +127,20 @@ export default function PatientMeasurementSubmissionsTable({ submissions }: Prop
           </TableBody>
         </Table>
       </CardContent>
+
+      <ConfirmDialog
+        open={!!deleteId}
+        onOpenChange={() => setDeleteId(null)}
+        title={t("patientMeasurements.deleteConfirm.title")}
+        description={t("patientMeasurements.deleteConfirm.description")}
+        confirmLabel={t("patientMeasurements.deleteConfirm.confirm")}
+        cancelLabel={t("patientMeasurements.deleteConfirm.cancel")}
+        onConfirm={() => {
+          if (deleteId) onDelete(deleteId);
+          setDeleteId(null);
+        }}
+        variant="destructive"
+      />
     </Card>
   );
 }

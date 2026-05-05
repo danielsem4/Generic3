@@ -512,6 +512,14 @@ patients: {
       SAT: "Saturday",
     },
   },
+  deleteConfirm: {
+  title: "Are you sure you want to delete this measurement?",
+  description: "This will permanently remove the measurement from the patient's record.",
+  cancel: "Cancel",
+  confirm: "Delete"
+},
+  deleteSuccess: "Measurement deleted successfully.",
+  deleteError: "Failed to delete measurement. Please try again.",
 },
 
   // Settings
@@ -722,6 +730,8 @@ modules: {
     value: "Value",
   },
 
+  
+  // Measurements
   measurements: {
     title: "Measurements",
     createNew: "Create New",
@@ -769,10 +779,21 @@ modules: {
     showAdopted: "Show already adopted",
     alreadyAdded: "Already added",
     emptyColumn: "No measurements in this category",
+
     results_title: "Assessment Results",
-    submitted_at: "Review Students answers and overall performance metrics",
+    submitted_at: "Submitted at",
     list_view: "List View",
     analytics_view: "Analytics View",
+    score: "Score",
+    error_title: "Error: Submission not found",
+    error_desc: "Please check if the IDs are valid.",
+
+    status: {
+      excellent: "Excellent",
+      pass: "Pass",
+      fail: "Fail",
+    },
+
     analytics: {
       avg_grade: "Average Grade",
       passed: "Questions Passed",
@@ -783,7 +804,9 @@ modules: {
       passed_label: "Passing Rate",
       pass: "Pass",
       fail: "Fail",
+      count: "Count",
     },
+
     table: {
       question_label: "Question",
       answer_provided: "Answer Provided",
@@ -791,11 +814,13 @@ modules: {
       grade: "Grade",
       actions: "Actions",
     },
+
     types: {
       questionnaries: "Questionnaires",
       cognitiveTests: "Cognitive Tests",
       moduleQuestionnaire: "Module Questionnaire",
     },
+
     builder: {
       title: "Screen Builder",
       clearCanvas: "Clear Canvas",
@@ -824,12 +849,14 @@ modules: {
       },
       totalScore: "Total Score",
     },
+
     categories: {
       textDisplay: "Text & Display",
       userInputs: "User Inputs",
       actions: "Actions",
       structure: "Structure",
     },
+
     components: {
       heading: "Heading",
       paragraph: "Paragraph",
@@ -850,6 +877,7 @@ modules: {
       button: "Button",
       rowContainer: "Row",
     },
+
     props: {
       label: "Label",
       text: "Text",
@@ -879,14 +907,29 @@ modules: {
       falseLabel: "False Label",
       allowPartialScore: "Allow Partial Score",
     },
+
     device: {
       mobile: "Mobile",
       tablet: "Tablet",
       desktop: "Desktop",
     },
+    deleteConfirm: {
+      title: "Are you sure you want to delete this answer?",
+      description: "This will permanently remove the answer from the assessment.",
+      cancel: "Cancel",
+      confirm: "Delete"
+    },
+    editScore: {
+      title: "Edit question score",
+      description: "Update the score for this answer.",
+      placeholder: "Enter score",
+      cancel: "Cancel",
+      save: "Save"
+    },
+  },
 
-    //Files
-    files: {
+  // Files
+  files: {
     title: "Patient Documents",
     subtitle: "Manage and view shared medical files",
 
@@ -917,9 +960,7 @@ modules: {
       owner: "Owner",
       actions: "Actions"
     }
-  },
-    
-  },
+  }
 
 } as const;
 
