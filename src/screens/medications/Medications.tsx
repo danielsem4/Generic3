@@ -5,6 +5,7 @@ import { MedicationSearchSort } from "./components/MedicationSearchSort";
 import { MedicationList } from "./components/MedicationList";
 import { AddMedicationModal } from "./components/AddMedicationModal";
 import { AddToClinicModal } from "./components/AddToClinicModal";
+import { BackButton } from "@/components/ui/BackButton";
 
 export default function Medications() {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ export default function Medications() {
 
   return (
     <div className="min-h-screen bg-background p-8">
+      <BackButton />
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>

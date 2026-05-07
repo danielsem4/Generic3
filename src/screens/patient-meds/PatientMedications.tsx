@@ -11,6 +11,8 @@ import { AddMedicationModal } from "./components/AddMedicationModal";
 import { EditMedicationModal } from "./components/EditMedicationModal";
 import type { IPatientPrescription } from "@/common/types/Medication";
 import { useAuthStore } from "@/store/useAuthStore";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function PatientMedications() {
   const { t, i18n } = useTranslation();
@@ -48,6 +50,7 @@ export default function PatientMedications() {
       className="p-4 space-y-6 bg-background min-h-screen text-left"
       dir={i18n.dir()}
     >
+      <BackButton />
       {/* Search Bar Container */}
       <div className="flex justify-center max-w-4xl mx-auto">
         <div className="relative w-full">

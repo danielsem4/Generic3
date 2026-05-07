@@ -1,10 +1,20 @@
 import { useAuthStore } from "@/store/useAuthStore";
 import { AdminActivitiesView } from "./components/AdminActivitiesView";
 import { ClinicActivitiesView } from "./components/ClinicActivitiesView";
-  
+import { BackButton } from "@/components/ui/BackButton";
+
 export default function ActivitiesPage() {
   const role = useAuthStore((s) => s.role);
 
-  if (role === "ADMIN") return <AdminActivitiesView />;
-  return <ClinicActivitiesView />;
+  return (
+    <div className="p-8 space-y-4 max-w-5xl mx-auto">
+      <BackButton />
+
+      {role === "ADMIN" ? (
+        <AdminActivitiesView />
+      ) : (
+        <ClinicActivitiesView />
+      )}
+    </div>
+  );
 }
