@@ -11,7 +11,7 @@ const he = {
     doctors: "רופאים",
     clinicManagers: "מנהלי מרפאות",
     manage: "ניהול",
-    statistics: "סטטיסטיקה",
+    analytics: "אנליטיקה",
     clinicModules: "מודולים של המרפאה",
     pageNotReady: "דף {{title}} עדיין לא קיים!",
     logout: "התנתקות",
@@ -686,8 +686,8 @@ patientMeasurements: {
         title: "חיישני פרקינסון",
         description: "איסוף נתוני חיישנים להערכת תנועה בפרקינסון.",
       },
-      statistics: {
-        title: "סטטיסטיקה",
+      analytics: {
+        title: "אנליטיקה",
         description: "ניתוח נתונים, גרפים ומדדי ביצוע קליניים.",
       },
       settings: {
@@ -725,20 +725,10 @@ patientMeasurements: {
   enable: "הפעל",
   },
 
-  // Statistics
-  statistics: {
-    title: "סטטיסטיקה",
-    description: "מדדי ביצועי מרפאה וניתוח מודולים",
-    loading: "טוען סטטיסטיקה...",
-    error: "שגיאה בטעינת סטטיסטיקה",
-    totalDoctors: "סה\"כ רופאים",
-    totalPatients: "סה\"כ מטופלים",
-    researchPatients: "מטופלי מחקר",
-    nonResearchPatients: "מטופלים רגילים",
-    modules: "מודולים",
-    moduleStats: "סטטיסטיקה",
-    label: "תווית",
-    value: "ערך",
+  // Analytics
+  analytics: {
+    title: "אנליטיקה",
+    description: "מדדי ביצועי מרפאה ואנליטיקה",
   },
 
   // Measurements

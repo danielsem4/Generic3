@@ -12,7 +12,7 @@ const en = {
     doctors: "Doctors",
     clinicManagers: "Clinic Managers",
     manage: "Manage",
-    statistics: "Statistics",
+    analytics: "Analytics",
     clinicModules: "Clinic Modules",
     pageNotReady: "{{title}} page does not exist yet!",
     logout: "Logout",
@@ -676,8 +676,8 @@ modules: {
       title: "Parkinson Sensors",
       description: "Sensor data collection for Parkinson's motor assessment.",
     },
-    statistics: {
-      title: "Statistics",
+    analytics: {
+      title: "Analytics",
       description: "Data analytics, charts, and clinical performance metrics.",
     },
     settings: {
@@ -715,20 +715,10 @@ modules: {
     enable: "Enable",
   },
 
-  // Statistics
-  statistics: {
-    title: "Statistics",
-    description: "Clinic performance metrics and module analytics",
-    loading: "Loading statistics...",
-    error: "Error loading statistics",
-    totalDoctors: "Total Doctors",
-    totalPatients: "Total Patients",
-    researchPatients: "Research Patients",
-    nonResearchPatients: "Non-Research Patients",
-    modules: "Modules",
-    moduleStats: "Statistics",
-    label: "Label",
-    value: "Value",
+  // Analytics
+  analytics: {
+    title: "Analytics",
+    description: "Clinic performance metrics and analytics",
   },
 
   

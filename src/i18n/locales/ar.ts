@@ -11,7 +11,7 @@ const ar = {
     doctors: "الأطباء",
     clinicManagers: "مديرو العيادات",
     manage: "إدارة",
-    statistics: "إحصائيات",
+    analytics: "التحليلات",
     clinicModules: "وحدات العيادة",
     pageNotReady: "صفحة {{title}} غير موجودة بعد!",
     logout: "تسجيل الخروج",
@@ -686,8 +686,8 @@ patientMeasurements: {
       title: "مستشعرات باركنسون",
       description: "جمع بيانات المستشعرات لتقييم الحركة عند مرضى باركنسون.",
     },
-    statistics: {
-      title: "الإحصائيات",
+    analytics: {
+      title: "التحليلات",
       description: "تحليلات البيانات والرسوم البيانية ومقاييس الأداء السريري.",
     },
     settings: {
@@ -725,20 +725,10 @@ patient: {
   enable: "تفعيل",
 },
 
-  // Statistics
-  statistics: {
-    title: "الإحصائيات",
-    description: "مقاييس أداء العيادة وتحليلات الوحدات",
-    loading: "جارٍ تحميل الإحصائيات...",
-    error: "خطأ في تحميل الإحصائيات",
-    totalDoctors: "إجمالي الأطباء",
-    totalPatients: "إجمالي المرضى",
-    researchPatients: "مرضى البحث",
-    nonResearchPatients: "المرضى غير البحثيين",
-    modules: "الوحدات",
-    moduleStats: "الإحصائيات",
-    label: "التسمية",
-    value: "القيمة",
+  // Analytics
+  analytics: {
+    title: "التحليلات",
+    description: "مقاييس أداء العيادة والتحليلات",
   },
   
   // Measurements

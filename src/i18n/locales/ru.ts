@@ -11,7 +11,7 @@ const ru = {
     doctors: "Врачи",
     clinicManagers: "Менеджеры клиник",
     manage: "Управление",
-    statistics: "Статистика",
+    analytics: "Аналитика",
     clinicModules: "Модули клиники",
     pageNotReady: "Страница {{title}} ещё не существует!",
     logout: "Выйти",
@@ -689,8 +689,8 @@ patientMeasurements: {
       title: "Датчики Паркинсон",
       description: "Сбор данных датчиков для оценки моторики при Паркинсоне.",
     },
-    statistics: {
-      title: "Статистика",
+    analytics: {
+      title: "Аналитика",
       description: "Аналитика данных, графики и показатели клинической эффективности.",
     },
     settings: {
@@ -728,20 +728,10 @@ patient: {
   cancel: "Отмена",
   enable: "Включить",
 },
-  // Statistics
-  statistics: {
-    title: "Статистика",
-    description: "Показатели эффективности клиники и аналитика модулей",
-    loading: "Загрузка статистики...",
-    error: "Ошибка загрузки статистики",
-    totalDoctors: "Всего врачей",
-    totalPatients: "Всего пациентов",
-    researchPatients: "Исследовательские пациенты",
-    nonResearchPatients: "Обычные пациенты",
-    modules: "Модули",
-    moduleStats: "Статистика",
-    label: "Метка",
-    value: "Значение",
+  // Analytics
+  analytics: {
+    title: "Аналитика",
+    description: "Показатели эффективности клиники и аналитика",
   },
 
  // Measurements
