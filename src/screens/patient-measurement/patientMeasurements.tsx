@@ -3,6 +3,8 @@ import EntityHeader from "@/common/components/Patient+measurementPage/PatientHea
 import { useMeasurementPage } from "./hooks/useMeasurementsPage";
 import MeasurementSectionsCard from "./components/MeasurementSectionsCard";
 import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function MeasurementPage() {
   const { t } = useTranslation();
@@ -33,6 +35,7 @@ export default function MeasurementPage() {
 
   return (
     <div className="space-y-6 p-6">
+      < BackButton />
       <EntityHeader
        data={patient}
        renderActions={<PatientEditDialog patient={patient} />}

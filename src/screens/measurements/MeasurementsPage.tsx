@@ -9,6 +9,8 @@ import { CreateMeasurementDialog } from "./components/dialogs/CreateMeasurementD
 import { DeleteMeasurementDialog } from "./components/dialogs/DeleteMeasurementDialog";
 import { EditMeasurementDialog } from "./components/dialogs/EditMeasurementDialog";
 import { AddExistingMeasurementDialog } from "./components/dialogs/AddExistingMeasurementDialog";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function MeasurementsPage() {
   const { t } = useTranslation();
@@ -42,6 +44,7 @@ export default function MeasurementsPage() {
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8">
+      < BackButton />
       <div className="flex justify-between items-center gap-4">
         <div className="flex items-center gap-3">
           <div className="bg-sky-500/10 p-2.5 rounded-xl text-sky-600 shadow-sm">

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { usePatientFiles } from "./hooks/usePatientFiles";
 import { UploadFileDialog } from "./components/UploadFileDialog";
+import { BackButton } from "@/components/ui/BackButton";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -23,6 +24,9 @@ export const PatientFilesPage = () => {
 
   return (
     <div className="flex flex-col gap-6 p-6 min-h-screen bg-transparent">
+      <div className="flex justify-start">
+        <BackButton />
+      </div>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-card p-6 rounded-2xl border border-border shadow-sm">
         <div className="text-left">
           <h1 className="text-2xl font-black text-foreground">

@@ -5,6 +5,8 @@ import { usePatientMeasurementSettingsDialog } from "./hooks/usePatientMeasureme
 import PatientMeasurementSettingsDialog from "./components/PatientMeasurementSettingsDialog";
 import PatientMeasurementSubmissionsTable from "./components/PatientMeasurementSubTable";
 import PatientMeasurementSubmissionsHeader from "./components/PatientMeasurementSubHeader";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function PatientMeasurementSubmissionsScreen() {
   const { t } = useTranslation();
@@ -52,6 +54,7 @@ export default function PatientMeasurementSubmissionsScreen() {
 
   return (
     <div className="space-y-6 p-6">
+      <BackButton />
       <PatientMeasurementSubmissionsHeader
         userId={userId}
         measurementName={measurementName}
