@@ -66,7 +66,7 @@ const MODULE_CONFIG: Record<string, ModuleConfig> = {
   parkinson: { icon: Stethoscope, accent: "purple" },
   "parkinson report": { icon: ClipboardList, accent: "lime" },
   "parkinson sensors": { icon: Radio, accent: "pink" },
-  statistics: { icon: BarChart3, accent: "slate" },
+  analytics: { icon: BarChart3, accent: "slate" },
   settings: { icon: Settings, accent: "zinc" },
   "market test": { icon: ShoppingCart, accent: "yellow" },
   pass: { icon: KeyRound, accent: "stone" },
