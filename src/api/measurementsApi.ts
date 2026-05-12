@@ -4,6 +4,7 @@ import { type MeasurementType } from "@/common/types/measurement";
 import type {
   BackendStructurePayload,
   IServerStructureResponse,
+  IServerElement,
 } from "@/screens/measurements/lib/transformStructure";
 
 export interface ICreateMeasurementPayload {
@@ -128,6 +129,88 @@ export async function fetchMeasurementStructure(
 ): Promise<IServerStructureResponse> {
   const response = await api.get<IServerStructureResponse>(
     `/api/v1/clinics/${clinicId}/measurements/${measurementId}/structure/`,
+  );
+  return response.data;
+}
+
+export async function fetchMeasurementVersions(
+  clinicId: string,
+  measurementId: string,
+): Promise<string[]> {
+  const response = await api.get<string[]>(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/versions/`,
+  );
+  return response.data;
+}
+
+export interface IVariantElementPayload {
+  element_type: string;
+  row_number: number;
+  order_in_row: number;
+  version_key: string;
+  label: string;
+  is_required: boolean;
+  config: Record<string, unknown>;
+  correct_answer_type: string;
+  correct_answers?: { answer: string; points: number }[];
+  allow_partial_score?: boolean;
+}
+
+export interface IVariantElementUpdatePayload {
+  label?: string;
+  correct_answers?: { answer: string; points: number }[];
+  correct_answer_type?: string;
+  allow_partial_score?: boolean;
+  config?: Record<string, unknown>;
+}
+
+export async function createVariantElement(
+  clinicId: string,
+  measurementId: string,
+  screenNumber: number,
+  payload: IVariantElementPayload,
+): Promise<IServerElement> {
+  const response = await api.post<IServerElement>(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/screens/${screenNumber}/elements/`,
+    payload,
+  );
+  return response.data;
+}
+
+export async function updateVariantElement(
+  clinicId: string,
+  measurementId: string,
+  screenNumber: number,
+  elementId: string,
+  payload: IVariantElementUpdatePayload,
+): Promise<IServerElement> {
+  const response = await api.patch<IServerElement>(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/screens/${screenNumber}/elements/${elementId}/`,
+    payload,
+  );
+  return response.data;
+}
+
+export async function deleteVariantElement(
+  clinicId: string,
+  measurementId: string,
+  screenNumber: number,
+  elementId: string,
+): Promise<void> {
+  await api.delete(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/screens/${screenNumber}/elements/${elementId}/`,
+  );
+}
+
+export async function publishVariantElement(
+  clinicId: string,
+  measurementId: string,
+  screenNumber: number,
+  elementId: string,
+): Promise<IServerElement> {
+  const response = await api.patch<IServerElement>(
+    `/api/v1/clinics/${clinicId}/measurements/${measurementId}/screens/${screenNumber}/elements/${elementId}/`,
+    { status: "PUBLISHED" },
   );
   return response.data;
 }

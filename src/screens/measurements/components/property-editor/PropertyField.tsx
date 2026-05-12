@@ -13,6 +13,7 @@ interface PropertyFieldProps {
   onChange: (key: string, value: unknown) => void;
   correctAnswerType?: CorrectAnswerType;
   componentType?: QComponentType;
+  disabled?: boolean;
 }
 
 export function PropertyField({
@@ -21,6 +22,7 @@ export function PropertyField({
   onChange,
   correctAnswerType,
   componentType,
+  disabled,
 }: PropertyFieldProps) {
   const { t } = useTranslation();
 
@@ -61,7 +63,7 @@ export function PropertyField({
   }
 
   return (
-    <div className="space-y-1.5">
+    <div className={`space-y-1.5 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
       <Label className="text-xs">{t(field.labelKey)}</Label>
 
       {field.fieldType === "text" && (
@@ -69,6 +71,7 @@ export function PropertyField({
           value={(value as string) ?? ""}
           onChange={handleTextChange}
           className="h-8 text-sm"
+          disabled={disabled}
         />
       )}
 
@@ -78,6 +81,7 @@ export function PropertyField({
           value={(value as number) ?? 0}
           onChange={handleNumberChange}
           className="h-8 text-sm"
+          disabled={disabled}
         />
       )}
 
@@ -85,6 +89,7 @@ export function PropertyField({
         <Switch
           checked={(value as boolean) ?? false}
           onCheckedChange={handleToggleChange}
+          disabled={disabled}
         />
       )}
 
@@ -92,7 +97,8 @@ export function PropertyField({
         <select
           value={String(value ?? "")}
           onChange={handleSelectChange}
-          className="w-full h-8 rounded-md border border-input bg-background px-2 text-sm"
+          disabled={disabled}
+          className="w-full h-8 rounded-md border border-input bg-background px-2 text-sm disabled:cursor-not-allowed"
         >
           {field.options?.map((opt) => (
             <option key={opt.value} value={opt.value}>

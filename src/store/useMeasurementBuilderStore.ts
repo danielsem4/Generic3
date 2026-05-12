@@ -14,6 +14,15 @@ import {
   moveComponent as moveComponentInTree,
 } from "@/screens/measurements/lib/treeUtils";
 
+interface LocalNewVersion {
+  key: string;
+  sourceValues: Record<string, unknown>;
+  v1ServerId?: string;
+  screenNumber?: number;
+  rowNumber?: number;
+  orderInRow?: number;
+}
+
 interface MeasurementBuilderStore {
   measurements: IMeasurement[];
   activeMeasurementId: string | null;
@@ -23,6 +32,10 @@ interface MeasurementBuilderStore {
   isPreviewMode: boolean;
   previewDevice: DeviceSize;
   isDirty: boolean;
+  panelVersionKey: string;
+  globalPreviewVersion: string;
+  localNewVersion: LocalNewVersion | null;
+  draftsByVersion: Record<string, Record<string, unknown>>;
 
   addMeasurement: (q: IMeasurement) => void;
   updateMeasurement: (id: string, updates: Partial<IMeasurement>) => void;
@@ -51,6 +64,11 @@ interface MeasurementBuilderStore {
 
   setPreviewMode: (enabled: boolean) => void;
   setPreviewDevice: (device: DeviceSize) => void;
+  setPanelVersionKey: (key: string) => void;
+  setGlobalPreviewVersion: (key: string) => void;
+  setLocalNewVersion: (v: LocalNewVersion | null) => void;
+  patchDraftOverride: (versionKey: string, key: string, value: unknown) => void;
+  clearDraftForVersion: (versionKey: string) => void;
 
   saveCurrentMeasurement: () => void;
 }
@@ -74,6 +92,10 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
     isPreviewMode: false,
     previewDevice: "mobile",
     isDirty: false,
+    panelVersionKey: "v1",
+    globalPreviewVersion: "v1",
+    localNewVersion: null,
+    draftsByVersion: {},
 
     addMeasurement: (q) =>
       set((state) => ({ measurements: [...state.measurements, q] })),
@@ -122,6 +144,10 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         selectedComponentId: null,
         isPreviewMode: false,
         isDirty: false,
+        panelVersionKey: "v1",
+        globalPreviewVersion: "v1",
+        localNewVersion: null,
+        draftsByVersion: {},
       });
     },
 
@@ -264,7 +290,8 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         return { screens: newScreens, isDirty: true };
       }),
 
-    selectComponent: (id) => set({ selectedComponentId: id }),
+    selectComponent: (id) =>
+      set({ selectedComponentId: id, panelVersionKey: "v1", localNewVersion: null, draftsByVersion: {} }),
 
     updateComponentProps: (id, updates) =>
       set((state) => {
@@ -289,6 +316,33 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
       set({ isPreviewMode: enabled, selectedComponentId: null }),
 
     setPreviewDevice: (device) => set({ previewDevice: device }),
+
+    setPanelVersionKey: (key) => set({ panelVersionKey: key }),
+
+    setGlobalPreviewVersion: (key) =>
+      set((s) => ({
+        globalPreviewVersion: key,
+        ...(s.selectedComponentId
+          ? { panelVersionKey: key, draftsByVersion: {}, localNewVersion: null }
+          : {}),
+      })),
+
+    setLocalNewVersion: (v) => set({ localNewVersion: v }),
+
+    patchDraftOverride: (versionKey, key, value) =>
+      set((s) => ({
+        draftsByVersion: {
+          ...s.draftsByVersion,
+          [versionKey]: { ...(s.draftsByVersion[versionKey] ?? {}), [key]: value },
+        },
+      })),
+
+    clearDraftForVersion: (versionKey) =>
+      set((s) => {
+        const next = { ...s.draftsByVersion };
+        delete next[versionKey];
+        return { draftsByVersion: next };
+      }),
 
     saveCurrentMeasurement: () => {
       const state = get();

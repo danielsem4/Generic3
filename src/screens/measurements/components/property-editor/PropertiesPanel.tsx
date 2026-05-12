@@ -1,14 +1,29 @@
 import { useTranslation } from "react-i18next";
 import { Settings2 } from "lucide-react";
+import { toast } from "sonner";
+import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
 import { usePropertyEditor } from "../../hooks/canvas/usePropertyEditor";
+import { useComponentVersionPanel } from "../../hooks/canvas/useComponentVersionPanel";
 import { PropertyField } from "./PropertyField";
 import { ComponentTypeBadge } from "../shared/ComponentTypeBadge";
+import { VersionControlPanel } from "./VersionControlPanel";
 import type { CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 
 export function PropertiesPanel() {
   const { t } = useTranslation();
   const { selectedComponent, propertyFields, handlePropertyChange } =
     usePropertyEditor();
+
+  const {
+    panelVersionKey,
+    componentVersions,
+    isReadOnly,
+    variantDisplayValues,
+    draftOverrides,
+    setPanelVersionKey,
+    handleDraftChange,
+    handleBranchNewVersion,
+  } = useComponentVersionPanel();
 
   if (!selectedComponent) {
     return (
@@ -21,9 +36,34 @@ export function PropertiesPanel() {
     );
   }
 
-  const correctAnswerType =
-    (selectedComponent as unknown as Record<string, unknown>).correctAnswerType as CorrectAnswerType | undefined;
+  function getFieldValue(key: string): unknown {
+    if (panelVersionKey === "v1") {
+      return (selectedComponent as unknown as Record<string, unknown>)[key];
+    }
+    return draftOverrides[key] ?? variantDisplayValues?.[key];
+  }
+
+  function handleChange(key: string, value: unknown) {
+    const currentVersionKey = useMeasurementBuilderStore.getState().panelVersionKey;
+    if (currentVersionKey === "v1") {
+      handlePropertyChange(key, value);
+    } else {
+      handleDraftChange(key, value);
+    }
+  }
+
+  const correctAnswerType = getFieldValue("correctAnswerType") as
+    | CorrectAnswerType
+    | undefined;
   const componentType = selectedComponent.type as QComponentType;
+
+  async function onBranchNew() {
+    try {
+      await handleBranchNewVersion();
+    } catch {
+      toast.error(t("measurements.builder.versions.branchError"));
+    }
+  }
 
   return (
     <div className="space-y-4">
@@ -34,15 +74,24 @@ export function PropertiesPanel() {
         <ComponentTypeBadge type={selectedComponent.type} />
       </div>
 
+      <VersionControlPanel
+        versions={componentVersions}
+        activeVersion={panelVersionKey}
+        onVersionChange={setPanelVersionKey}
+        onBranchNew={onBranchNew}
+        isBusy={false}
+      />
+
       <div className="space-y-3">
         {propertyFields.map((field) => (
           <PropertyField
             key={field.key}
             field={field}
-            value={(selectedComponent as unknown as Record<string, unknown>)[field.key]}
-            onChange={handlePropertyChange}
+            value={getFieldValue(field.key)}
+            onChange={handleChange}
             correctAnswerType={correctAnswerType}
             componentType={componentType}
+            disabled={isReadOnly}
           />
         ))}
       </div>

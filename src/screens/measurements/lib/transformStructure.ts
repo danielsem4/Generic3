@@ -221,6 +221,8 @@ export interface IServerElement {
   element_type: string;
   row_number: number;
   order_in_row: number;
+  version_key: string;
+  status?: "DRAFT" | "PUBLISHED";
   label: string;
   is_required: boolean;
   config: Record<string, unknown>;
@@ -319,7 +321,14 @@ function buildScalarCorrectAnswer(
   };
 }
 
-function buildComponentFromElement(element: IServerElement): IQComponent | null {
+function buildComponentFromElement(element: IServerElement, screenNumber: number): IQComponent | null {
+  const positionMeta = {
+    version_key: element.version_key ?? "v1",
+    _screenNumber: screenNumber,
+    _rowNumber: element.row_number,
+    _orderInRow: element.order_in_row,
+  };
+
   let frontendType = BACKEND_TO_FRONTEND_TYPE[element.element_type];
 
   if (!frontendType) {
@@ -334,6 +343,7 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
           : [],
       }));
     return {
+      ...positionMeta,
       id: element.id,
       type: "visualQuestion",
       label: element.label,
@@ -357,6 +367,7 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
 
   const base = {
     ...registryDefaults,
+    ...positionMeta,
     id: element.id,
     label: element.label,
   };
@@ -523,11 +534,14 @@ function buildScreenFromServer(serverScreen: IServerScreen): IQScreen {
 
   const components: IQComponent[] = [];
   for (const row of sortedRows) {
-    const sortedElements = [...row.elements].sort(
+    const v1Elements = row.elements.filter(
+      (e) => (e.version_key ?? "v1") === "v1",
+    );
+    const sortedElements = [...v1Elements].sort(
       (a, b) => a.order_in_row - b.order_in_row,
     );
     const children = sortedElements
-      .map(buildComponentFromElement)
+      .map((e) => buildComponentFromElement(e, serverScreen.screen_number))
       .filter((c): c is IQComponent => c !== null);
 
     if (children.length === 0) continue;

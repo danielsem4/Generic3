@@ -1,8 +1,11 @@
+import { useParams } from "react-router-dom";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { useTranslation } from "react-i18next";
 import { useMeasurementBuilder } from "./hooks/builder/useMeasurementBuilder";
 import { useBuilderDnd } from "./hooks/builder/useBuilderDnd";
 import { usePreviewMode } from "./hooks/builder/usePreviewMode";
+import { useMeasurementVersionsQuery } from "./hooks/queries/useMeasurementVersionsQuery";
+import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
 import { BuilderTopBar } from "./components/builder-shell/BuilderTopBar";
 import { BuilderLeftPanel } from "./components/builder-shell/BuilderLeftPanel";
 import { BuilderCenterPanel } from "./components/builder-shell/BuilderCenterPanel";
@@ -13,6 +16,12 @@ import { componentRegistry } from "./lib/componentRegistry";
 
 export default function MeasurementBuilder() {
   const { t } = useTranslation();
+  const { id: measurementId } = useParams<{ id: string }>();
+  const { data: versionsData } = useMeasurementVersionsQuery(measurementId);
+  const versions = versionsData && versionsData.length > 0 ? versionsData : ["v1"];
+  const globalPreviewVersion = useMeasurementBuilderStore((s) => s.globalPreviewVersion);
+  const setGlobalPreviewVersion = useMeasurementBuilderStore((s) => s.setGlobalPreviewVersion);
+
   const {
     activeMeasurement,
     isPreviewMode,
@@ -57,6 +66,9 @@ export default function MeasurementBuilder() {
           measurementName={activeMeasurement?.name}
           isDirty={isDirty}
           isSaving={isSaving}
+          versions={versions}
+          globalPreviewVersion={globalPreviewVersion}
+          onGlobalVersionChange={setGlobalPreviewVersion}
           onSave={handleSave}
           onBack={handleBack}
           onClear={handleClearCanvas}
@@ -75,6 +87,9 @@ export default function MeasurementBuilder() {
         measurementName={activeMeasurement?.name}
         isDirty={isDirty}
         isSaving={isSaving}
+        versions={versions}
+        globalPreviewVersion={globalPreviewVersion}
+        onGlobalVersionChange={setGlobalPreviewVersion}
         onSave={handleSave}
         onBack={handleBack}
         onClear={handleClearCanvas}

@@ -58,6 +58,10 @@ export function isOptionBasedComponent(type: QComponentType): boolean {
 interface IQBase {
   id: string;
   label: string;
+  version_key?: string;
+  _screenNumber?: number;
+  _rowNumber?: number;
+  _orderInRow?: number;
 }
 
 export interface IQHeading extends IQBase {

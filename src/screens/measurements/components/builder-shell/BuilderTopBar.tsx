@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Trash2, Eye, Save } from "lucide-react";
+import { ArrowLeft, Trash2, Eye, Save, GitBranch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface BuilderTopBarProps {
   measurementName?: string;
   isDirty: boolean;
   isSaving: boolean;
+  versions?: string[];
+  globalPreviewVersion?: string;
+  onGlobalVersionChange?: (version: string) => void;
   onSave: () => void;
   onBack: () => void;
   onClear: () => void;
@@ -16,6 +19,9 @@ export function BuilderTopBar({
   measurementName,
   isDirty,
   isSaving,
+  versions,
+  globalPreviewVersion = "v1",
+  onGlobalVersionChange,
   onSave,
   onBack,
   onClear,
@@ -40,6 +46,26 @@ export function BuilderTopBar({
       </div>
 
       <div className="flex items-center gap-2">
+        {versions && versions.length > 1 && (
+          <div className="flex items-center gap-1.5 rounded-md border bg-background px-2 py-1">
+            <GitBranch size={13} className="text-muted-foreground shrink-0" />
+            <select
+              value={globalPreviewVersion}
+              onChange={(e) => onGlobalVersionChange?.(e.target.value)}
+              className="bg-transparent text-xs font-medium outline-none cursor-pointer"
+            >
+              {versions.map((v) => {
+                const num = v.match(/^v(\d+)$/)?.[1];
+                const label = num ? `${t("measurements.builder.versions.version")} ${num}` : v;
+                return (
+                  <option key={v} value={v}>
+                    {label}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
         <Button variant="outline" size="sm" onClick={onClear} className="gap-1">
           <Trash2 size={14} />
           {t("measurements.builder.clearCanvas")}

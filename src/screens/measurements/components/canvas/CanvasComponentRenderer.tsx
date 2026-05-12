@@ -4,6 +4,9 @@ import { X, GripVertical, Eye } from "lucide-react";
 import type { IQComponent } from "@/common/types/measurement";
 import { RowContainerRenderer } from "./RowContainerRenderer";
 import { InteractiveComponentPreview } from "./InteractiveComponentPreview";
+import { useVersionContext } from "../version-selector/VersionContext";
+import { useMeasurementBuilderStore } from "@/store/useMeasurementBuilderStore";
+import { variantToDisplayValues } from "../../hooks/canvas/useComponentVersionPanel";
 
 interface CanvasComponentRendererProps {
   component: IQComponent;
@@ -42,6 +45,46 @@ export function CanvasComponentRenderer({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  const { panelVersionKey, globalPreviewVersion, getVariantForComponent } = useVersionContext();
+  const panelVersionKeyFromStore = useMeasurementBuilderStore((s) => s.panelVersionKey);
+  const selectedComponentId = useMeasurementBuilderStore((s) => s.selectedComponentId);
+  const localNewVersion = useMeasurementBuilderStore((s) => s.localNewVersion);
+  const draftsByVersion = useMeasurementBuilderStore((s) => s.draftsByVersion);
+
+  // globalPreviewVersion drives what ALL canvas components display
+  const displayVersion = globalPreviewVersion;
+  const isDisplayNonV1 = displayVersion !== "v1";
+  const globalVariant = isDisplayNonV1
+    ? getVariantForComponent(component.id, displayVersion)
+    : undefined;
+
+  // panelVersionKey is only for the selected component's edit session
+  const panelVersion = panelVersionKey ?? panelVersionKeyFromStore;
+  const draftOverrides = draftsByVersion[panelVersion] ?? {};
+  const isThisSelected = component.id === selectedComponentId;
+  const isLocalNewVersion = localNewVersion?.key === panelVersion;
+
+  let displayComponent = component;
+
+  if (isThisSelected && panelVersion !== "v1") {
+    // Selected component: show panel-version data + draft overrides
+    const base: Record<string, unknown> = isLocalNewVersion
+      ? { ...(localNewVersion?.sourceValues ?? {}) }
+      : globalVariant && panelVersion === displayVersion
+        ? variantToDisplayValues(globalVariant, component)
+        : (() => {
+            const v = getVariantForComponent(component.id, panelVersion);
+            return v ? variantToDisplayValues(v, component) : {};
+          })();
+    displayComponent = { ...component, ...base, ...draftOverrides } as IQComponent;
+  } else if (isDisplayNonV1 && globalVariant) {
+    // Non-selected (or selected on v1 panel): show global preview version
+    displayComponent = {
+      ...component,
+      ...variantToDisplayValues(globalVariant, component),
+    } as IQComponent;
+  }
 
   if (component.type === "rowContainer") {
     return (
@@ -97,11 +140,22 @@ export function CanvasComponentRenderer({
         </button>
       )}
 
+      {isSelected && !isPreview && (
+        <div className="absolute -top-2.5 right-6 z-10 flex items-center gap-1 rounded-full border bg-card px-2 py-0.5 text-xs font-mono font-medium shadow-sm">
+          <span
+            className={`h-2 w-2 shrink-0 rounded-full ${
+              panelVersion === "v1" ? "bg-green-500" : "bg-amber-400"
+            }`}
+          />
+          {panelVersion}
+        </div>
+      )}
+
       <div className={!isPreview ? "pl-5" : ""}>
         {isPreview ? (
-          <InteractiveComponentPreview component={component} />
+          <InteractiveComponentPreview component={displayComponent} />
         ) : (
-          <ComponentPreview component={component} />
+          <ComponentPreview component={displayComponent} />
         )}
       </div>
     </div>

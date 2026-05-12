@@ -1,4 +1,4 @@
-import type { IQComponent, IQRowContainer } from "@/common/types/measurement";
+import type { IQComponent, IQRowContainer, IQScreen } from "@/common/types/measurement";
 
 export interface FindResult {
   component: IQComponent;
@@ -90,6 +90,27 @@ export function updateComponentById(
     }
     return comp;
   });
+}
+
+export function getElementPosition(
+  screens: IQScreen[],
+  screenIdx: number,
+  componentId: string,
+): { rowNumber: number; orderInRow: number } | undefined {
+  const screen = screens[screenIdx];
+  if (!screen) return undefined;
+  let rowNumber = 1;
+  for (const comp of screen.components) {
+    if (comp.type === "rowContainer") {
+      for (let i = 0; i < comp.children.length; i++) {
+        if (comp.children[i].id === componentId) return { rowNumber, orderInRow: i + 1 };
+      }
+    } else if (comp.id === componentId) {
+      return { rowNumber, orderInRow: 1 };
+    }
+    rowNumber++;
+  }
+  return undefined;
 }
 
 export function moveComponent(
