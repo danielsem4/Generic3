@@ -867,6 +867,7 @@ modules: {
       toggleSwitch: "Toggle",
       button: "Button",
       rowContainer: "Row",
+      visualQuestion: "Visual Question",
     },
 
     props: {
@@ -897,6 +898,13 @@ modules: {
       trueLabel: "True Label",
       falseLabel: "False Label",
       allowPartialScore: "Allow Partial Score",
+      visualKey: "Visual Key",
+      customKey: "Custom key",
+      spots: "Spots",
+      addSpot: "Add Spot",
+      spotPoint: "Point key",
+      subitems: "Sub-items",
+      addSubitem: "Add sub-item",
     },
 
     device: {

@@ -25,7 +25,8 @@ export type QComponentType =
   | "scale"
   | "toggleSwitch"
   | "button"
-  | "rowContainer";
+  | "rowContainer"
+  | "visualQuestion";
 
 export type QComponentCategory =
   | "textDisplay"
@@ -214,6 +215,18 @@ export interface IQRowContainer extends IQBase {
   children: IQComponent[];
 }
 
+export interface IQVisualSpot {
+  point: string;
+  subItems: string[];
+}
+
+export interface IQVisualQuestion extends IQBase {
+  type: "visualQuestion";
+  required: boolean;
+  visualKey: string;
+  spots: IQVisualSpot[];
+}
+
 export type IQComponent =
   | IQHeading
   | IQParagraph
@@ -232,7 +245,8 @@ export type IQComponent =
   | IQScale
   | IQToggleSwitch
   | IQButton
-  | IQRowContainer;
+  | IQRowContainer
+  | IQVisualQuestion;
 
 export interface IQScreen {
   id: string;

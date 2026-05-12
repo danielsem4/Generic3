@@ -2,6 +2,8 @@ import type {
   IQScreen,
   IQComponent,
   IQOptionItem,
+  IQVisualQuestion,
+  IQVisualSpot,
   CorrectAnswerType,
   QComponentType,
 } from "@/common/types/measurement";
@@ -138,6 +140,25 @@ function mapComponent(
   rowNumber: number,
   orderInRow: number,
 ): BackendField | null {
+  if (component.type === "visualQuestion") {
+    const vis = component as IQVisualQuestion;
+    const visualKey = vis.visualKey.trim();
+    if (!visualKey) return null;
+    const config: Record<string, unknown> =
+      visualKey === "BODY_MAP_VISUAL" && vis.spots.length > 0
+        ? { spots: vis.spots.map((s) => ({ point: s.point, subItems: s.subItems })) }
+        : {};
+    return {
+      label: component.label,
+      element_type: visualKey,
+      is_required: vis.required,
+      row_number: rowNumber,
+      order_in_row: orderInRow,
+      config,
+      correct_answer_type: "NONE",
+    };
+  }
+
   const backendType = FRONTEND_TO_BACKEND_TYPE[component.type];
   if (!backendType) return null;
 
@@ -300,7 +321,27 @@ function buildScalarCorrectAnswer(
 
 function buildComponentFromElement(element: IServerElement): IQComponent | null {
   let frontendType = BACKEND_TO_FRONTEND_TYPE[element.element_type];
-  if (!frontendType) return null;
+
+  if (!frontendType) {
+    const config = element.config ?? {};
+    const rawSpots = Array.isArray(config.spots) ? config.spots : [];
+    const spots: IQVisualSpot[] = rawSpots
+      .filter((s): s is Record<string, unknown> => typeof s === "object" && s !== null)
+      .map((s) => ({
+        point: typeof s.point === "string" ? s.point : "",
+        subItems: Array.isArray(s.subItems)
+          ? s.subItems.filter((v): v is string => typeof v === "string")
+          : [],
+      }));
+    return {
+      id: element.id,
+      type: "visualQuestion",
+      label: element.label,
+      required: element.is_required,
+      visualKey: element.element_type,
+      spots,
+    } as IQComponent;
+  }
 
   const config = element.config ?? {};
   const isCards = getString(config, "display_style") === "cards";
