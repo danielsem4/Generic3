@@ -5,17 +5,19 @@ import { usePatientMeasurementSettingsDialog } from "./hooks/usePatientMeasureme
 import PatientMeasurementSettingsDialog from "./components/PatientMeasurementSettingsDialog";
 import PatientMeasurementSubmissionsTable from "./components/PatientMeasurementSubTable";
 import PatientMeasurementSubmissionsHeader from "./components/PatientMeasurementSubHeader";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function PatientMeasurementSubmissionsScreen() {
   const { t } = useTranslation();
-  const { userId } = useParams<{ userId: string }>();
   const location = useLocation();
+  const { userId } = useParams<{ userId: string; clinicId: string }>();
 
   const measurementName =
     (location.state as { measurementName?: string } | null)?.measurementName ||
     t("patientMeasurements.submissions.measurementTitleFallback");
 
-  const { submissions, isLoading, error } = usePatientMeasurementSubmissions();
+  const { submissions, isLoading, error, onDelete } = usePatientMeasurementSubmissions();
 
   const {
     isSettingsOpen,
@@ -52,13 +54,14 @@ export default function PatientMeasurementSubmissionsScreen() {
 
   return (
     <div className="space-y-6 p-6">
+      <BackButton />
       <PatientMeasurementSubmissionsHeader
         userId={userId}
         measurementName={measurementName}
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
-      <PatientMeasurementSubmissionsTable submissions={submissions} />
+      <PatientMeasurementSubmissionsTable submissions={submissions} onDelete={onDelete} />
 
       <PatientMeasurementSettingsDialog
         open={isSettingsOpen}

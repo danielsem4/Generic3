@@ -34,8 +34,6 @@ export function buildRoleConfig(role: UserRole): RoleConfig {
   const clinicId = useAuthStore.getState().clinicId ?? "";
   const userId = useAuthStore.getState().userId ?? "";
 
-  console.log({ clinicId, userId });
-
   const configs: Record<UserRole, RoleConfig> = {
     ADMIN: {
       queryFn: fetchAllGlobalMedications,

@@ -15,13 +15,15 @@ import Doctors from "@/screens/doctors/Doctors";
 import DoctorDetails from "@/screens/doctors/DoctorDetails";
 import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
-import Statistics from "./screens/statistics/Statistics";
+import Analytics from "./screens/analytics/Analytics";
 import Activities from "@/screens/activities/ActivitiesPage";
 import MeasurementsPage from "@/screens/measurements/MeasurementsPage";
 import MeasurementBuilder from "@/screens/measurements/MeasurementBuilder";
 import PatientActivities from "./screens/patient-activities/PatientActivities";
 import MeasurementPage from "./screens/patient-measurement/patientMeasurements";
 import PatientMeasurementSubmissionsScreen from "./screens/patient-measurement-submissions/PatientMeasurementSubmissionsScreen";
+import { AssessmentResultsPage } from "./screens/assesment/AssessmentResultsPage";
+import { PatientFilesPage } from "@/screens/files/PatientFilesPage";
 
 
 export const router = createBrowserRouter([
@@ -49,8 +51,10 @@ export const router = createBrowserRouter([
       { path: "patients/:userId/activities", element: <PatientActivities /> },
       { path: "patients/:userId/measurements", element: <MeasurementPage /> },
       { path: "patients/:userId/measurements/:measurementId/submissions", element: <PatientMeasurementSubmissionsScreen /> },
+      { path: "patients/:userId/measurement-submissions/:submissionId", element: <AssessmentResultsPage /> },
+      { path: "patients/:userId/files", element: <PatientFilesPage /> },
       { path: "clinic", element: <ClinicOverview /> },
-      { path: "statistics", element: <Statistics /> },
+      { path: "analytics", element: <Analytics /> },
     ],
   },
   {

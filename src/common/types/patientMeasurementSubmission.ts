@@ -10,6 +10,7 @@ export interface IMeasurementSubmissionAnswerRaw {
   value: string | number | boolean | string[] | null;
   is_correct: boolean | null;
   points_earned: number | null;
+  answers: IMeasurementSubmissionAnswerRaw[];
 }
 
 export interface IMeasurementSubmissionRaw {
@@ -33,4 +34,5 @@ export interface IPatientMeasurementSubmission {
   frequency: string;
   grade: string | number;
   maxScore: string | number;
+  answers: IMeasurementSubmissionAnswerRaw[];
 }

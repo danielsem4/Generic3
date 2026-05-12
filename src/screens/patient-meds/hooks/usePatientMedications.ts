@@ -69,17 +69,6 @@ export function usePatientMedications(userId: string) {
           : freq === "MONTHLY"
             ? { weeks_of_month: selectedWeeks, days_of_week: selectedDays }
             : { time_slots: timeSlots, times_per_day: timeSlots.length };
-      console.log({
-        sendingData: {
-          medication: selectedMed!.id,
-          start_date: startDate,
-          end_date: endDate,
-          dosage: `${dosageAmount} ${dosageUnit}`,
-          frequency: freq,
-          frequency_data,
-        },
-      });
-
       return addPatientMedication(clinicId!, userId, {
         medication_id: selectedMed!.id,
         doctor_user_id: doctorId!,

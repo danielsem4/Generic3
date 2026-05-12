@@ -47,7 +47,5 @@ export function usePatientDetails() {
 
   const functions: ISectionItem[] = [];
 
-  console.log({ returnedModules: modules });
-
   return { patient, modules, metrics, functions, isLoading, error };
 }

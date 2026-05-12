@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createClinic } from "@/api/clinicsApi";
-import type { ClinicFormValues } from "../Schema/clinicSchema";
+import type { ClinicFormValues } from "../schema/clinicSchema";
 
 export function useAddClinic() {
   const queryClient = useQueryClient();

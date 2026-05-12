@@ -1,8 +1,16 @@
-import { Eye, Trash2 } from "lucide-react";
-import {Card,CardContent,CardHeader,CardTitle,} from "@/components/ui/card";
-import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow,} from "@/components/ui/table";
+import { useState } from "react";
+import { Eye } from "lucide-react";
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from "@/components/ui/card";
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "@/common/utils/formatDate";
+import { useNavigate, useParams } from "react-router-dom";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
+import { DeleteButton } from "@/common/components/DeleteButton";
 
 interface ISubmissionItem {
   id: string;
@@ -14,12 +22,34 @@ interface ISubmissionItem {
 
 interface Props {
   submissions: ISubmissionItem[];
+  onDelete: (id: string) => void;
 }
 
 export default function PatientMeasurementSubmissionsTable({
   submissions,
+  onDelete,
 }: Props) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  const handleViewSubmission = (submissionId: string) => {
+    navigate(`/patients/${userId}/measurement-submissions/${submissionId}`);
+  };
+
+  const handleOpenDelete = (id: string) => {
+    setDeleteId(id);
+  };
+
+  const handleCloseDelete = () => {
+    setDeleteId(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteId) onDelete(deleteId);
+    setDeleteId(null);
+  };
 
   return (
     <Card className="rounded-2xl">
@@ -61,32 +91,31 @@ export default function PatientMeasurementSubmissionsTable({
 
                   <TableCell>
                     <span className="rounded-md bg-muted text-foreground px-2 py-1 text-xs font-semibold">
-                      {item.frequency}
+                      {item.frequency === "-"
+                        ? "-"
+                        : t(
+                            `patientMeasurements.settings.frequencyOptions.${item.frequency.toLowerCase()}`,
+                            item.frequency,
+                          )}
                     </span>
                   </TableCell>
 
                   <TableCell>
                     <span className="font-semibold">{item.grade}</span>
-                    <span className="text-muted-foreground">/{item.maxScore}</span>
+                    <span className="text-muted-foreground">
+                      /{item.maxScore}
+                    </span>
                   </TableCell>
 
                   <TableCell>
                     <div className="flex items-center justify-end gap-3">
                       <button
-                        type="button"
-                        className="flex items-center gap-1 text-sm text-muted-foreground"
-                        disabled
+                        onClick={() => handleViewSubmission(item.id)}
+                        className="text-primary hover:opacity-80"
                       >
                         <Eye className="h-4 w-4" />
                       </button>
-
-                      <button
-                        type="button"
-                        className="text-muted-foreground"
-                        disabled
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
+                      <DeleteButton onClick={() => handleOpenDelete(item.id)} />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -104,6 +133,17 @@ export default function PatientMeasurementSubmissionsTable({
           </TableBody>
         </Table>
       </CardContent>
+
+      <ConfirmDialog
+        open={!!deleteId}
+        onOpenChange={handleCloseDelete}
+        title={t("patientMeasurements.deleteConfirm.title")}
+        description={t("patientMeasurements.deleteConfirm.description")}
+        confirmLabel={t("patientMeasurements.deleteConfirm.confirm")}
+        cancelLabel={t("patientMeasurements.deleteConfirm.cancel")}
+        onConfirm={handleConfirmDelete}
+        variant="destructive"
+      />
     </Card>
   );
 }

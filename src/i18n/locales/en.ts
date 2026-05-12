@@ -12,7 +12,7 @@ const en = {
     doctors: "Doctors",
     clinicManagers: "Clinic Managers",
     manage: "Manage",
-    statistics: "Statistics",
+    analytics: "Analytics",
     clinicModules: "Clinic Modules",
     pageNotReady: "{{title}} page does not exist yet!",
     logout: "Logout",
@@ -512,6 +512,14 @@ patients: {
       SAT: "Saturday",
     },
   },
+  deleteConfirm: {
+  title: "Are you sure you want to delete this measurement?",
+  description: "This will permanently remove the measurement from the patient's record.",
+  cancel: "Cancel",
+  confirm: "Delete"
+},
+  deleteSuccess: "Measurement deleted successfully.",
+  deleteError: "Failed to delete measurement. Please try again.",
 },
 
   // Settings
@@ -577,7 +585,9 @@ patients: {
     confirm: "Confirm",
     close: "Close",
     loading: "Loading...",
-    fetchingDetails: "Fetching details from server..."
+    fetchingDetails: "Fetching details from server...",
+    upload_file: "Upload File",
+    system: "System",
   },
 
   // Modules
@@ -666,8 +676,8 @@ modules: {
       title: "Parkinson Sensors",
       description: "Sensor data collection for Parkinson's motor assessment.",
     },
-    statistics: {
-      title: "Statistics",
+    analytics: {
+      title: "Analytics",
       description: "Data analytics, charts, and clinical performance metrics.",
     },
     settings: {
@@ -705,22 +715,14 @@ modules: {
     enable: "Enable",
   },
 
-  // Statistics
-  statistics: {
-    title: "Statistics",
-    description: "Clinic performance metrics and module analytics",
-    loading: "Loading statistics...",
-    error: "Error loading statistics",
-    totalDoctors: "Total Doctors",
-    totalPatients: "Total Patients",
-    researchPatients: "Research Patients",
-    nonResearchPatients: "Non-Research Patients",
-    modules: "Modules",
-    moduleStats: "Statistics",
-    label: "Label",
-    value: "Value",
+  // Analytics
+  analytics: {
+    title: "Analytics",
+    description: "Clinic performance metrics and analytics",
   },
 
+  
+  // Measurements
   measurements: {
     title: "Measurements",
     createNew: "Create New",
@@ -768,11 +770,48 @@ modules: {
     showAdopted: "Show already adopted",
     alreadyAdded: "Already added",
     emptyColumn: "No measurements in this category",
+
+    results_title: "Assessment Results",
+    submitted_at: "Submitted at",
+    list_view: "List View",
+    analytics_view: "Analytics View",
+    score: "Score",
+    error_title: "Error: Submission not found",
+    error_desc: "Please check if the IDs are valid.",
+
+    status: {
+      excellent: "Excellent",
+      pass: "Pass",
+      fail: "Fail",
+    },
+
+    analytics: {
+      avg_grade: "Average Grade",
+      passed: "Questions Passed",
+      needs_improvement: "Needs Improvement",
+      questions: "Questions",
+      grade_distribution: "Grade Distribution",
+      pass_fail_ratio: "Pass/Fail Ratio",
+      passed_label: "Passing Rate",
+      pass: "Pass",
+      fail: "Fail",
+      count: "Count",
+    },
+
+    table: {
+      question_label: "Question",
+      answer_provided: "Answer Provided",
+      status: "Status",
+      grade: "Grade",
+      actions: "Actions",
+    },
+
     types: {
       questionnaries: "Questionnaires",
       cognitiveTests: "Cognitive Tests",
       moduleQuestionnaire: "Module Questionnaire",
     },
+
     builder: {
       title: "Screen Builder",
       clearCanvas: "Clear Canvas",
@@ -801,12 +840,14 @@ modules: {
       },
       totalScore: "Total Score",
     },
+
     categories: {
       textDisplay: "Text & Display",
       userInputs: "User Inputs",
       actions: "Actions",
       structure: "Structure",
     },
+
     components: {
       heading: "Heading",
       paragraph: "Paragraph",
@@ -828,6 +869,7 @@ modules: {
       rowContainer: "Row",
       visualQuestion: "Visual Question",
     },
+
     props: {
       label: "Label",
       text: "Text",
@@ -864,12 +906,60 @@ modules: {
       subitems: "Sub-items",
       addSubitem: "Add sub-item",
     },
+
     device: {
       mobile: "Mobile",
       tablet: "Tablet",
       desktop: "Desktop",
     },
+    deleteConfirm: {
+      title: "Are you sure you want to delete this answer?",
+      description: "This will permanently remove the answer from the assessment.",
+      cancel: "Cancel",
+      confirm: "Delete"
+    },
+    editScore: {
+      title: "Edit question score",
+      description: "Update the score for this answer.",
+      placeholder: "Enter score",
+      cancel: "Cancel",
+      save: "Save"
+    },
   },
+
+  // Files
+  files: {
+    title: "Patient Documents",
+    subtitle: "Manage and view shared medical files",
+
+    upload_button: "Upload Document",
+    dialog_title: "Upload New Document",
+    dialog_desc: "Select a file to upload to the patient record",
+
+    drag_drop: "Drag & drop your file here",
+    supported_formats: "Support for PDF, DOCX, CSV, PNG, JPG, SVG",
+    browse: "Browse computer",
+
+    choose_different: "CHOOSE A DIFFERENT FILE",
+    save_as: "Save file as",
+    size: "{{size}} MB",
+
+    search_placeholder: "Search files...",
+
+    missing_patient_context: "Missing Patient Context",
+    select_patient_hint: "Please select a patient to view their documents",
+
+    empty: {
+      title: "No documents available"
+    },
+
+    table: {
+      name: "Name",
+      date: "Date",
+      owner: "Owner",
+      actions: "Actions"
+    }
+  }
 
 } as const;
 

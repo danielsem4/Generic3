@@ -22,6 +22,7 @@ export default function PatientSectionsCard({
     Medications: () => navigate("medications"),
     Activities: () => navigate("activities"),
     Measurements: () => navigate("measurements"),
+    "File Share": () => navigate("files")
   };
 
   const METRIC_ACTIONS: ISectionRouteMapper = {};

@@ -11,6 +11,8 @@ import { AddActivityModal } from "./components/AddActivityModal";
 import { EditActivityModal } from "./components/EditActivityModal";
 import type { IPatientActivity } from "@/common/types/activities";
 import { useAuthStore } from "@/store/useAuthStore";
+import { BackButton } from "@/components/ui/BackButton";
+
 
 export default function PatientActivities() {
   const { t, i18n } = useTranslation();
@@ -56,6 +58,7 @@ export default function PatientActivities() {
       className="p-4 space-y-6 bg-background min-h-screen text-left"
       dir={i18n.dir()}
     >
+        <BackButton />
       <div className="flex justify-center max-w-4xl mx-auto">
         <div className="relative w-full">
           <Search

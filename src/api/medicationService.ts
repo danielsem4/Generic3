@@ -34,8 +34,6 @@ import api from "@/lib/axios";
 
 export async function fetchAllGlobalMedications(): Promise<IMedication[]> {
   const response = await api.get<IMedication[]>("/api/v1/medications/");
-  console.log({ medications: response.data });
-
   return response.data;
 }
 
@@ -67,8 +65,6 @@ export async function fetchPatientMedicationLogs(
     `/api/v1/clinics/${clinicId}/patients/${patientId}/medication-logs/`,
     { params: filters },
   );
-  console.log({ data: response.data });
-
   return response.data;
 }
 

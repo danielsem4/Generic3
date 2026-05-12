@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Trash2, Pencil, Bell, CheckCircle2, Activity } from "lucide-react";
+import { Pencil, Bell, CheckCircle2, Activity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import type { IPatientActivity } from "@/common/types/activities";
+import { DeleteButton } from "@/common/components/DeleteButton";
 
 interface ActivityCardProps {
   activity: IPatientActivity;
@@ -21,34 +22,17 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
   const { t } = useTranslation();
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const handleDeleteClick = () => {
-    setDeleteOpen(true);
-  };
-
-  const handleDeleteConfirm = () => {
-    onDelete(activity.id);
-    setDeleteOpen(false);
-  };
-
-  const handleEdit = () => {
-    onEdit(activity);
-  };
-
   return (
     <Card className="border-border bg-card shadow-sm rounded-md overflow-hidden w-full mb-1">
       <CardContent className="p-0 px-4 flex justify-between items-center h-12">
         <div className="flex items-center gap-3">
           {canManage && (
             <div className="flex items-center gap-1 px-2 bg-muted/30 rounded-full border border-border h-8">
-              <button
-                className="p-0.5 text-muted-foreground hover:text-destructive cursor-pointer"
-                onClick={handleDeleteClick}
-              >
-                <Trash2 size={15} />
-              </button>
+              
+              <DeleteButton onClick={() => setDeleteOpen(true)} />
 
               <button
-                onClick={handleEdit}
+                onClick={() => onEdit(activity)}
                 className="p-0.5 text-muted-foreground hover:text-primary border-x border-border px-2 cursor-pointer"
               >
                 <Pencil size={15} />
@@ -86,7 +70,10 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
         description={t("patientActivities.deleteConfirm.description")}
         confirmLabel={t("patientActivities.deleteConfirm.confirm")}
         cancelLabel={t("patientActivities.deleteConfirm.cancel")}
-        onConfirm={handleDeleteConfirm}
+        onConfirm={() => {
+          onDelete(activity.id);
+          setDeleteOpen(false);
+        }}
         variant="destructive"
       />
     </Card>

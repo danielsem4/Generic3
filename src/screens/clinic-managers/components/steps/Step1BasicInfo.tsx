@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import type { UseFormReturn } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import type { ClinicFormValues } from "../../Schema/clinicSchema";
+import type { ClinicFormValues } from "../../schema/clinicSchema";
 
 interface Props {
   form: UseFormReturn<ClinicFormValues>;

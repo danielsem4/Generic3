@@ -1,4 +1,4 @@
-import { useState,useCallback } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -63,7 +63,7 @@ export function useEditActivity(patientId: string) {
     });
   };
 
-  const initForm = useCallback((activity: IPatientActivity) => {
+  function initForm(activity: IPatientActivity) {
     setActivityId(activity.id);
     setStartDate(activity.start_date ?? "");
     setEndDate(activity.end_date ?? "");
@@ -103,7 +103,7 @@ export function useEditActivity(patientId: string) {
       setTimeSlots([activity.frequency_data.time ?? "12:00"]);
       setSelectedDays([]);
     }
-  }, []);
+  }
 
   const { mutate: submitEdit, isPending } = useMutation({
     mutationFn: () => {

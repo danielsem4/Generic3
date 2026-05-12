@@ -8,7 +8,7 @@ import {
   STEP3_CREATE_FIELDS,
   STEP3_EXISTING_FIELDS,
   type ClinicFormValues,
-} from "../Schema/clinicSchema";
+} from "../schema/clinicSchema";
 import { useAddClinic } from "./useAddClinic";
 
 export const TOTAL_STEPS = 3;
