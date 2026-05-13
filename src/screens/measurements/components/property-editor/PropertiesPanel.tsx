@@ -7,7 +7,10 @@ import { useComponentVersionPanel } from "../../hooks/canvas/useComponentVersion
 import { PropertyField } from "./PropertyField";
 import { ComponentTypeBadge } from "../shared/ComponentTypeBadge";
 import { VersionControlPanel } from "./VersionControlPanel";
-import type { CorrectAnswerType, QComponentType } from "@/common/types/measurement";
+import type {
+  CorrectAnswerType,
+  QComponentType,
+} from "@/common/types/measurement";
 
 export function PropertiesPanel() {
   const { t } = useTranslation();
@@ -18,6 +21,7 @@ export function PropertiesPanel() {
     panelVersionKey,
     componentVersions,
     isReadOnly,
+    hasSubmissions,
     variantDisplayValues,
     draftOverrides,
     setPanelVersionKey,
@@ -44,7 +48,8 @@ export function PropertiesPanel() {
   }
 
   function handleChange(key: string, value: unknown) {
-    const currentVersionKey = useMeasurementBuilderStore.getState().panelVersionKey;
+    const currentVersionKey =
+      useMeasurementBuilderStore.getState().panelVersionKey;
     if (currentVersionKey === "v1") {
       handlePropertyChange(key, value);
     } else {
@@ -57,9 +62,11 @@ export function PropertiesPanel() {
     | undefined;
   const componentType = selectedComponent.type as QComponentType;
 
-  async function onBranchNew() {
+  async function onBranchNew(key?: string) {
+    console.log({ key });
+
     try {
-      await handleBranchNewVersion();
+      handleBranchNewVersion(key);
     } catch {
       toast.error(t("measurements.builder.versions.branchError"));
     }
@@ -80,6 +87,7 @@ export function PropertiesPanel() {
         onVersionChange={setPanelVersionKey}
         onBranchNew={onBranchNew}
         isBusy={false}
+        isLocked={hasSubmissions}
       />
 
       <div className="space-y-3">

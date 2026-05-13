@@ -880,6 +880,10 @@ const ar = {
         draftSaved: "تم حفظ المسودة",
         publishVersion: "نشر النسخة",
         publishError: "فشل نشر النسخة",
+        lockedMode: "مقفل (توجد تقديمات)",
+        versionKeyLabel: "مفتاح الإصدار",
+        saveVersionSuccess: "تم حفظ الإصدار",
+        saveVersionError: "فشل حفظ الإصدار",
       },
     },
 

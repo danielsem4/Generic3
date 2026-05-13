@@ -36,6 +36,7 @@ interface MeasurementBuilderStore {
   globalPreviewVersion: string;
   localNewVersion: LocalNewVersion | null;
   draftsByVersion: Record<string, Record<string, unknown>>;
+  hasSubmissions: boolean;
 
   addMeasurement: (q: IMeasurement) => void;
   updateMeasurement: (id: string, updates: Partial<IMeasurement>) => void;
@@ -69,6 +70,7 @@ interface MeasurementBuilderStore {
   setLocalNewVersion: (v: LocalNewVersion | null) => void;
   patchDraftOverride: (versionKey: string, key: string, value: unknown) => void;
   clearDraftForVersion: (versionKey: string) => void;
+  setHasSubmissions: (v: boolean) => void;
 
   saveCurrentMeasurement: () => void;
 }
@@ -96,6 +98,7 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
     globalPreviewVersion: "v1",
     localNewVersion: null,
     draftsByVersion: {},
+    hasSubmissions: false,
 
     addMeasurement: (q) =>
       set((state) => ({ measurements: [...state.measurements, q] })),
@@ -318,6 +321,8 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
     setPreviewDevice: (device) => set({ previewDevice: device }),
 
     setPanelVersionKey: (key) => set({ panelVersionKey: key }),
+
+    setHasSubmissions: (v) => set({ hasSubmissions: v }),
 
     setGlobalPreviewVersion: (key) =>
       set((s) => ({

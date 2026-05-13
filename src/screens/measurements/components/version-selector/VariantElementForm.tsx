@@ -33,7 +33,7 @@ interface VariantElementFormProps {
 function optionsFromElement(el: IServerElement): IQOptionItem[] {
   const raw = el.config?.options;
   if (!Array.isArray(raw)) return [];
-  return (raw as string[]).map((label) => ({ label, value: label }));
+  return (raw as string[]).map((label) => ({ id: crypto.randomUUID(), label, value: label }));
 }
 
 function applyCorrectAnswers(
@@ -42,9 +42,11 @@ function applyCorrectAnswers(
 ): IQOptionItem[] {
   const answers = el.correct_answers ?? [];
   if (answers.length === 0) return options;
-  const byLabel = new Map(answers.map((a) => [a.answer, a.points]));
+  const byLabel = new Map(
+    answers.filter((a) => a.answer !== "").map((a) => [a.answer, a.points]),
+  );
   return options.map((o) =>
-    byLabel.has(o.label)
+    o.label && byLabel.has(o.label)
       ? { ...o, isCorrect: true, score: byLabel.get(o.label) ?? 0 }
       : o,
   );

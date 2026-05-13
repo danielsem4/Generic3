@@ -49,6 +49,7 @@ export function CanvasComponentRenderer({
   const { panelVersionKey, globalPreviewVersion, getVariantForComponent } = useVersionContext();
   const panelVersionKeyFromStore = useMeasurementBuilderStore((s) => s.panelVersionKey);
   const selectedComponentId = useMeasurementBuilderStore((s) => s.selectedComponentId);
+  const hasSubmissions = useMeasurementBuilderStore((s) => s.hasSubmissions);
   const localNewVersion = useMeasurementBuilderStore((s) => s.localNewVersion);
   const draftsByVersion = useMeasurementBuilderStore((s) => s.draftsByVersion);
 
@@ -120,7 +121,7 @@ export function CanvasComponentRenderer({
         isPreview ? "" : "cursor-pointer"
       }`}
     >
-      {!isPreview && (
+      {!isPreview && !hasSubmissions && (
         <div
           {...listeners}
           {...attributes}
@@ -130,7 +131,7 @@ export function CanvasComponentRenderer({
         </div>
       )}
 
-      {!isPreview && (
+      {!isPreview && !hasSubmissions && (
         <button
           type="button"
           onClick={handleRemoveClick}
@@ -243,8 +244,8 @@ function ComponentPreview({ component }: { component: IQComponent }) {
         <div className="space-y-1">
           <label className="text-sm font-medium">{component.label}</label>
           <div className={`flex gap-3 ${component.layout === "vertical" ? "flex-col" : "flex-row"}`}>
-            {component.options.map((opt) => (
-              <div key={opt.value} className="flex items-center gap-1.5 text-sm">
+            {component.options.map((opt, i) => (
+              <div key={opt.id ?? `${i}-${opt.value}`} className="flex items-center gap-1.5 text-sm">
                 <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40" />
                 {opt.label}
               </div>
@@ -260,9 +261,9 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           <div
             className={`flex gap-2 ${component.layout === "vertical" ? "flex-col" : "flex-row flex-wrap"}`}
           >
-            {component.options.map((opt) => (
+            {component.options.map((opt, i) => (
               <div
-                key={opt.value}
+                key={opt.id ?? `${i}-${opt.value}`}
                 className="rounded-lg border px-3 py-2 text-sm"
               >
                 {opt.label}

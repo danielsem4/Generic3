@@ -887,6 +887,10 @@ const ru = {
         draftSaved: "Черновик сохранён",
         publishVersion: "Опубликовать версию",
         publishError: "Не удалось опубликовать версию",
+        lockedMode: "Заблокировано (есть ответы)",
+        versionKeyLabel: "Ключ версии",
+        saveVersionSuccess: "Версия сохранена",
+        saveVersionError: "Не удалось сохранить версию",
       },
     },
 

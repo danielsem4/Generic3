@@ -873,6 +873,10 @@ modules: {
         draftSaved: "Draft saved",
         publishVersion: "Publish Version",
         publishError: "Failed to publish version",
+        lockedMode: "Locked (submissions exist)",
+        versionKeyLabel: "Version Key",
+        saveVersionSuccess: "Version saved",
+        saveVersionError: "Failed to save version",
       },
     },
 

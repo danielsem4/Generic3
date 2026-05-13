@@ -29,7 +29,8 @@ export function variantToDisplayValues(
   const rawOpts = config.options;
   if (Array.isArray(rawOpts) && rawOpts.length > 0) {
     const byLabel = new Map(ca.map((a) => [a.answer, a.points]));
-    overrides.options = (rawOpts as string[]).map((label) => ({
+    overrides.options = (rawOpts as string[]).map((label, i) => ({
+      id: `sv-${i}-${label}`,
       label,
       value: label,
       isCorrect: byLabel.has(label),
@@ -61,6 +62,7 @@ function createVersionPlaceholders(component: IQComponent): Record<string, unkno
 
   if ("options" in component && Array.isArray(c.options)) {
     values.options = (c.options as IQOptionItem[]).map(() => ({
+      id: crypto.randomUUID(),
       label: "",
       value: "",
       isCorrect: false,
@@ -175,6 +177,7 @@ export function useComponentVersionPanel() {
   const draftsByVersion = useMeasurementBuilderStore((s) => s.draftsByVersion);
   const patchDraftOverride = useMeasurementBuilderStore((s) => s.patchDraftOverride);
   const clearDraftForVersion = useMeasurementBuilderStore((s) => s.clearDraftForVersion);
+  const hasSubmissions = useMeasurementBuilderStore((s) => s.hasSubmissions);
   const components = useMeasurementBuilderStore(selectActiveScreenComponents);
 
   const found = selectedComponentId
@@ -218,7 +221,7 @@ export function useComponentVersionPanel() {
       ? [...baseVersions, localNewVersion.key]
       : baseVersions;
 
-  const isReadOnly = false;
+  const isReadOnly = hasSubmissions && panelVersionKey === "v1";
 
   // Display values: local branch source → merged with draft overrides
   const baseDisplayValues: Record<string, unknown> | null = isLocalNewVersion
@@ -241,17 +244,23 @@ export function useComponentVersionPanel() {
   // ── handlers ──────────────────────────────────────────────────────────────
 
   function handleDraftChange(key: string, value: unknown) {
-    patchDraftOverride(panelVersionKey, key, value);
+    const currentKey = useMeasurementBuilderStore.getState().panelVersionKey;
+    patchDraftOverride(currentKey, key, value);
   }
 
-  function handleBranchNewVersion() {
+  function handleBranchNewVersion(customKey?: string) {
     if (!selectedComponentId || !selectedComponent) return;
 
-    const existingNums = componentVersions
-      .filter((vk) => /^v\d+$/.test(vk))
-      .map((vk) => parseInt(vk.slice(1), 10));
-    const next = existingNums.length > 0 ? Math.max(...existingNums) + 1 : 2;
-    const newKey = `v${next}`;
+    let newKey: string;
+    if (customKey) {
+      newKey = customKey;
+    } else {
+      const existingNums = componentVersions
+        .filter((vk) => /^v\d+$/.test(vk))
+        .map((vk) => parseInt(vk.slice(1), 10));
+      const next = existingNums.length > 0 ? Math.max(...existingNums) + 1 : 2;
+      newKey = `v${next}`;
+    }
 
     const sourceValues = createVersionPlaceholders(selectedComponent);
 
@@ -334,6 +343,7 @@ export function useComponentVersionPanel() {
     panelVersionKey,
     componentVersions,
     isReadOnly,
+    hasSubmissions,
     currentVariant,
     isLocalNewVersion,
     v1Element,

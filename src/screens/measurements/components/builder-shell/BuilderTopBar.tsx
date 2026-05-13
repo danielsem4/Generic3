@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Trash2, Eye, Save, GitBranch } from "lucide-react";
+import { ArrowLeft, Trash2, Eye, Save, GitBranch, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface BuilderTopBarProps {
   measurementName?: string;
   isDirty: boolean;
   isSaving: boolean;
+  isLocked?: boolean;
   versions?: string[];
   globalPreviewVersion?: string;
   onGlobalVersionChange?: (version: string) => void;
@@ -19,6 +20,7 @@ export function BuilderTopBar({
   measurementName,
   isDirty,
   isSaving,
+  isLocked,
   versions,
   globalPreviewVersion = "v1",
   onGlobalVersionChange,
@@ -42,6 +44,12 @@ export function BuilderTopBar({
         </h1>
         {isDirty && (
           <span className="h-2 w-2 rounded-full bg-amber-500" title="Unsaved" />
+        )}
+        {isLocked && (
+          <div className="flex items-center gap-1 rounded-md bg-amber-50 border border-amber-200 px-2 py-0.5 text-xs text-amber-700">
+            <Lock size={11} />
+            {t("measurements.builder.versions.lockedMode")}
+          </div>
         )}
       </div>
 

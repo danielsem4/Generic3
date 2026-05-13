@@ -600,7 +600,6 @@ const he = {
     fetchingDetails: "מושך נתונים מהשרת...",
     upload_file: "העלה קובץ",
     system: "מערכת",
-    save: "שמור",
   },
   
   // Modules
@@ -883,6 +882,10 @@ const he = {
         draftSaved: "הטיוטה נשמרה",
         publishVersion: "פרסם גרסה",
         publishError: "שגיאה בפרסום הגרסה",
+        lockedMode: "נעול (קיימות הגשות)",
+        versionKeyLabel: "מפתח גרסה",
+        saveVersionSuccess: "הגרסה נשמרה",
+        saveVersionError: "שגיאה בשמירת הגרסה",
       },
     },
 

@@ -28,6 +28,7 @@ export default function MeasurementBuilder() {
     isDirty,
     isSaving,
     isLoadingStructure,
+    hasSubmissions,
     handleSave,
     handleBack,
     handleClearCanvas,
@@ -66,6 +67,7 @@ export default function MeasurementBuilder() {
           measurementName={activeMeasurement?.name}
           isDirty={isDirty}
           isSaving={isSaving}
+          isLocked={hasSubmissions}
           versions={versions}
           globalPreviewVersion={globalPreviewVersion}
           onGlobalVersionChange={setGlobalPreviewVersion}
@@ -87,6 +89,7 @@ export default function MeasurementBuilder() {
         measurementName={activeMeasurement?.name}
         isDirty={isDirty}
         isSaving={isSaving}
+        isLocked={hasSubmissions}
         versions={versions}
         globalPreviewVersion={globalPreviewVersion}
         onGlobalVersionChange={setGlobalPreviewVersion}

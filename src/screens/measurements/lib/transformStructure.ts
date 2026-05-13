@@ -45,6 +45,26 @@ interface BackendField {
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[];
   allow_partial_score?: boolean;
+  version_key?: string;
+}
+
+export interface VersionElementInput {
+  label: string;
+  element_type: string;
+  is_required: boolean;
+  row_number: number;
+  order_in_row: number;
+  config: Record<string, unknown>;
+  correct_answer_type: string;
+  correct_answers?: CorrectAnswerEntry[];
+  allow_partial_score?: boolean;
+}
+
+export interface VersionElementOverride {
+  screenNumber: number;
+  rowNumber: number;
+  orderInRow: number;
+  element: VersionElementInput;
 }
 
 interface BackendScreen {
@@ -241,6 +261,7 @@ export interface IServerScreen {
 export interface IServerStructureResponse {
   measurement_id: string;
   measurement_name: string;
+  has_submissions?: boolean;
   screens: IServerScreen[];
 }
 
@@ -606,5 +627,85 @@ export function transformScreensToPayload(
         elements,
       };
     }),
+  };
+}
+
+export function buildVersionStructurePayload(
+  structure: IServerStructureResponse,
+  versionKey: string,
+  override: VersionElementOverride | null,
+): BackendStructurePayload {
+  const sortedScreens = [...structure.screens].sort(
+    (a, b) => a.screen_number - b.screen_number,
+  );
+
+  return {
+    screens: sortedScreens.map((screen) => {
+      const elements: BackendField[] = [];
+
+      for (const row of screen.rows) {
+        for (const el of row.elements) {
+          if ((el.version_key ?? "v1") !== versionKey) continue;
+
+          const isOverridden =
+            override !== null &&
+            override.screenNumber === screen.screen_number &&
+            override.rowNumber === el.row_number &&
+            override.orderInRow === el.order_in_row;
+
+          elements.push(
+            isOverridden && override
+              ? overrideToBackendField(override.element, versionKey)
+              : serverElementToBackendField(el),
+          );
+        }
+      }
+
+      if (override && override.screenNumber === screen.screen_number) {
+        const alreadyAdded = elements.some(
+          (e) =>
+            e.row_number === override.rowNumber &&
+            e.order_in_row === override.orderInRow,
+        );
+        if (!alreadyAdded) {
+          elements.push(overrideToBackendField(override.element, versionKey));
+        }
+      }
+
+      return { title: screen.title, elements };
+    }),
+  };
+}
+
+function serverElementToBackendField(el: IServerElement): BackendField {
+  return {
+    label: el.label,
+    element_type: el.element_type,
+    is_required: el.is_required,
+    row_number: el.row_number,
+    order_in_row: el.order_in_row,
+    config: el.config,
+    correct_answer_type: el.correct_answer_type,
+    ...(el.correct_answers ? { correct_answers: el.correct_answers as CorrectAnswerEntry[] } : {}),
+    ...(el.allow_partial_score !== undefined ? { allow_partial_score: el.allow_partial_score } : {}),
+    version_key: el.version_key ?? "v1",
+  };
+}
+
+function overrideToBackendField(
+  el: VersionElementInput,
+  versionKey: string,
+): BackendField {
+  return {
+    label: el.label,
+    element_type: el.element_type,
+    is_required: el.is_required,
+    row_number: el.row_number,
+    order_in_row: el.order_in_row,
+    config: el.config,
+    correct_answer_type: el.correct_answer_type as CorrectAnswerType,
+    ...(el.correct_answers ? { correct_answers: el.correct_answers } : {}),
+    ...(el.allow_partial_score !== undefined ? { allow_partial_score: el.allow_partial_score } : {}),
+    version_key: versionKey,
   };
 }
