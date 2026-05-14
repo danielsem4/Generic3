@@ -821,6 +821,13 @@ const he = {
       cognitiveTests: "מבחנים קוגניטיביים",
       moduleQuestionnaire: "שאלון מודול",
     },
+    versionControl: "ניהול גרסאות",
+    branchVersion: "צור גרסה חדשה",
+    deleteVersion: "מחק גרסה",
+    noVersions: "אין גרסאות עדיין",
+    activeVersion: "פעיל",
+    deleteVersionConfirm: "למחוק גרסה זו? הרכיב יחזור לגרסה אחרת.",
+    selectVersion: "בחר גרסה",
 
     builder: {
       title: "בניית מסך",

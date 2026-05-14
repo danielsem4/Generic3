@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useMeasurementBuilder } from "./hooks/builder/useMeasurementBuilder";
 import { useBuilderDnd } from "./hooks/builder/useBuilderDnd";
 import { usePreviewMode } from "./hooks/builder/usePreviewMode";
+import { useGlobalVersionSwitcher } from "./hooks/builder/useGlobalVersionSwitcher";
 import { BuilderTopBar } from "./components/builder-shell/BuilderTopBar";
 import { BuilderLeftPanel } from "./components/builder-shell/BuilderLeftPanel";
 import { BuilderCenterPanel } from "./components/builder-shell/BuilderCenterPanel";
@@ -27,6 +28,9 @@ export default function MeasurementBuilder() {
 
   const { sensors, activeItem, handleDragStart, handleDragEnd } =
     useBuilderDnd();
+
+  const { versionLabels, hasVersions, handleSwitchAll } =
+    useGlobalVersionSwitcher();
 
   const {
     previewDevice,
@@ -57,10 +61,13 @@ export default function MeasurementBuilder() {
           measurementName={activeMeasurement?.name}
           isDirty={isDirty}
           isSaving={isSaving}
+          versionLabels={versionLabels}
+          hasVersions={hasVersions}
           onSave={handleSave}
           onBack={handleBack}
           onClear={handleClearCanvas}
           onPreview={handleTogglePreview}
+          onSwitchAllVersions={handleSwitchAll}
         />
         <div className="flex flex-1 items-center justify-center text-muted-foreground">
           {t("common.loading")}
@@ -75,10 +82,13 @@ export default function MeasurementBuilder() {
         measurementName={activeMeasurement?.name}
         isDirty={isDirty}
         isSaving={isSaving}
+        versionLabels={versionLabels}
+        hasVersions={hasVersions}
         onSave={handleSave}
         onBack={handleBack}
         onClear={handleClearCanvas}
         onPreview={handleTogglePreview}
+        onSwitchAllVersions={handleSwitchAll}
       />
 
       <DndContext

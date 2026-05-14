@@ -257,7 +257,7 @@ const ru = {
     standardDosage: "Стандартная дозировка",
     intakeLogTitle: "Журнал приема лекарств",
     refreshData: "Обновить данные",
-    regularDosage: "Регулярная дозировка",
+     regularDosage: "Регулярная дозировка",
     activeStatus: "Активно",
     newPrescription: "Новый рецепт",
     configureSchedule: "Настройка расписания и дозировки лекарства.",
@@ -854,6 +854,13 @@ const ru = {
       },
       totalScore: "Общий балл",
     },
+    versionControl: "Управление версиями",
+    branchVersion: "Создать новую версию",
+    deleteVersion: "Удалить версию",
+    noVersions: "Версий пока нет",
+    activeVersion: "Активная",
+    deleteVersionConfirm: "Удалить эту версию? Компонент вернётся к другой версии.",
+    selectVersion: "Выбрать версию",
 
     categories: {
       textDisplay: "Текст и отображение",

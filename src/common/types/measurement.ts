@@ -37,6 +37,7 @@ export type QComponentCategory =
 export type DeviceSize = "mobile" | "tablet" | "desktop";
 
 export interface IQOptionItem {
+  id: string;
   label: string;
   value: string;
   isCorrect?: boolean;
@@ -55,9 +56,18 @@ export function isOptionBasedComponent(type: QComponentType): boolean {
   return OPTION_BASED_TYPES.has(type);
 }
 
+export interface IQComponentVersion {
+  id: string;
+  versionLabel: string;
+  snapshot: Record<string, unknown>;
+  createdAt: string;
+}
+
 interface IQBase {
   id: string;
   label: string;
+  versions?: IQComponentVersion[];
+  activeVersionId?: string;
 }
 
 export interface IQHeading extends IQBase {

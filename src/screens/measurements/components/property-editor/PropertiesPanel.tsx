@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Settings2 } from "lucide-react";
 import { usePropertyEditor } from "../../hooks/canvas/usePropertyEditor";
+import { useVersionControl } from "../../hooks/canvas/useVersionControl";
 import { PropertyField } from "./PropertyField";
+import { VersionControlSection } from "./VersionControlSection";
 import { ComponentTypeBadge } from "../shared/ComponentTypeBadge";
 import type { CorrectAnswerType, QComponentType } from "@/common/types/measurement";
 
@@ -9,6 +11,13 @@ export function PropertiesPanel() {
   const { t } = useTranslation();
   const { selectedComponent, propertyFields, handlePropertyChange } =
     usePropertyEditor();
+  const {
+    versions,
+    activeVersionId,
+    handleBranchVersion,
+    handleSwitchVersion,
+    handleDeleteVersion,
+  } = useVersionControl();
 
   if (!selectedComponent) {
     return (
@@ -33,6 +42,14 @@ export function PropertiesPanel() {
         </h3>
         <ComponentTypeBadge type={selectedComponent.type} />
       </div>
+
+      <VersionControlSection
+        versions={versions}
+        activeVersionId={activeVersionId}
+        onBranch={handleBranchVersion}
+        onSwitch={handleSwitchVersion}
+        onDelete={handleDeleteVersion}
+      />
 
       <div className="space-y-3">
         {propertyFields.map((field) => (

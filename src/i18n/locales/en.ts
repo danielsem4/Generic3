@@ -839,6 +839,13 @@ modules: {
         screenOf: "Screen {{current}} of {{total}}",
       },
       totalScore: "Total Score",
+      versionControl: "Version Control",
+      branchVersion: "Branch New Version",
+      deleteVersion: "Delete Version",
+      noVersions: "No versions yet",
+      activeVersion: "Active",
+      deleteVersionConfirm: "Delete this version? The component will revert to another version.",
+      selectVersion: "Select Version",
     },
 
     categories: {

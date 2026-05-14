@@ -12,7 +12,14 @@ import {
   removeComponentById,
   updateComponentById,
   moveComponent as moveComponentInTree,
+  transformComponentById,
 } from "@/screens/measurements/lib/treeUtils";
+import {
+  branchNewVersion,
+  switchActiveVersion,
+  deleteVersion,
+  switchToVersionByLabel,
+} from "@/screens/measurements/lib/versionUtils";
 
 interface MeasurementBuilderStore {
   measurements: IMeasurement[];
@@ -48,6 +55,11 @@ interface MeasurementBuilderStore {
   selectComponent: (id: string | null) => void;
   updateComponentProps: (id: string, updates: Partial<IQComponent>) => void;
   clearCanvas: () => void;
+
+  branchComponentVersion: (componentId: string) => void;
+  switchComponentVersion: (componentId: string, versionId: string) => void;
+  deleteComponentVersion: (componentId: string, versionId: string) => void;
+  switchAllComponentsVersion: (versionLabel: string) => void;
 
   setPreviewMode: (enabled: boolean) => void;
   setPreviewDevice: (device: DeviceSize) => void;
@@ -272,6 +284,64 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         const screen = { ...newScreens[state.activeScreenIndex] };
         screen.components = updateComponentById(screen.components, id, updates);
         newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    branchComponentVersion: (componentId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          branchNewVersion,
+        );
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    switchComponentVersion: (componentId, versionId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          (comp) => switchActiveVersion(comp, versionId),
+        );
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    deleteComponentVersion: (componentId, versionId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          (comp) => deleteVersion(comp, versionId),
+        );
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    switchAllComponentsVersion: (versionLabel) =>
+      set((state) => {
+        function switchAll(components: IQComponent[]): IQComponent[] {
+          return components.map((comp) => {
+            const switched = switchToVersionByLabel(comp, versionLabel);
+            if (switched.type === "rowContainer") {
+              return { ...switched, children: switchAll(switched.children) } as IQComponent;
+            }
+            return switched;
+          });
+        }
+
+        const newScreens = state.screens.map((screen) => ({
+          ...screen,
+          components: switchAll(screen.components),
+        }));
         return { screens: newScreens, isDirty: true };
       }),
 

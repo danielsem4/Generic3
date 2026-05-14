@@ -57,6 +57,7 @@ describe("transformScreensToPayload", () => {
     expect(element.order_in_row).toBe(1);
     expect(element.correct_answer_type).toBe("NONE");
     expect(element.correct_answers).toBeUndefined();
+    expect(element.version_key).toBe("v1");
   });
 
   it("maps a dropdown with STATIC answer type", () => {
@@ -72,8 +73,8 @@ describe("transformScreensToPayload", () => {
             placeholder: "Pick",
             required: false,
             options: [
-              { label: "Red", value: "red", isCorrect: true, score: 5 },
-              { label: "Blue", value: "blue" },
+              { id: "o1", label: "Red", value: "red", isCorrect: true, score: 5 },
+              { id: "o2", label: "Blue", value: "blue" },
             ],
             correctAnswerType: "STATIC",
             correctAnswer: "Red",
@@ -253,8 +254,8 @@ describe("transformScreensToPayload", () => {
             label: "Feeling",
             required: false,
             options: [
-              { label: "Good", value: "good" },
-              { label: "Bad", value: "bad" },
+              { id: "o1", label: "Good", value: "good" },
+              { id: "o2", label: "Bad", value: "bad" },
             ],
             layout: "horizontal",
             correctAnswerType: "NONE",
@@ -292,6 +293,7 @@ describe("transformScreensToPayload", () => {
                   config: element.config,
                   correct_answer_type: element.correct_answer_type,
                   correct_answers: element.correct_answers,
+                  version_key: "v1",
                 },
               ],
             },
@@ -317,8 +319,8 @@ describe("transformScreensToPayload", () => {
             label: "Symptoms",
             required: true,
             options: [
-              { label: "Cough", value: "cough" },
-              { label: "Fever", value: "fever" },
+              { id: "o1", label: "Cough", value: "cough" },
+              { id: "o2", label: "Fever", value: "fever" },
             ],
             layout: "vertical",
             correctAnswerType: "NONE",
@@ -355,6 +357,7 @@ describe("transformScreensToPayload", () => {
                   config: element.config,
                   correct_answer_type: element.correct_answer_type,
                   correct_answers: element.correct_answers,
+                  version_key: "v1",
                 },
               ],
             },
@@ -394,6 +397,7 @@ describe("transformScreensToPayload", () => {
                     layout: "vertical",
                   },
                   correct_answer_type: "NONE",
+                  version_key: "v1",
                 },
               ],
             },
@@ -412,6 +416,7 @@ describe("transformScreensToPayload", () => {
                     placeholder: "Select...",
                   },
                   correct_answer_type: "NONE",
+                  version_key: "v1",
                 },
               ],
             },
@@ -437,8 +442,8 @@ describe("transformScreensToPayload", () => {
             placeholder: "Select...",
             required: false,
             options: [
-              { label: "Option A", value: "option_a", isCorrect: true, score: 5 },
-              { label: "Option B", value: "option_b", isCorrect: true, score: 5 },
+              { id: "o1", label: "Option A", value: "option_a", isCorrect: true, score: 5 },
+              { id: "o2", label: "Option B", value: "option_b", isCorrect: true, score: 5 },
             ],
             correctAnswerType: "STATIC",
             correctAnswer: "option_a,option_b",
@@ -471,8 +476,8 @@ describe("transformScreensToPayload", () => {
             placeholder: "Select...",
             required: false,
             options: [
-              { label: "Option A", value: "option_a", isCorrect: true, score: 5 },
-              { label: "Option B", value: "option_b", isCorrect: true, score: 5 },
+              { id: "o1", label: "Option A", value: "option_a", isCorrect: true, score: 5 },
+              { id: "o2", label: "Option B", value: "option_b", isCorrect: true, score: 5 },
             ],
             correctAnswerType: "STATIC",
             correctAnswer: "option_a,option_b",
@@ -498,7 +503,7 @@ describe("transformScreensToPayload", () => {
             label: "Tags",
             placeholder: "Select...",
             required: false,
-            options: [{ label: "A", value: "a" }],
+            options: [{ id: "o1", label: "A", value: "a" }],
             correctAnswerType: "NONE",
             correctAnswer: "",
             grade: 0,
@@ -523,8 +528,8 @@ describe("transformScreensToPayload", () => {
             label: "Symptoms",
             required: true,
             options: [
-              { label: "Cough", value: "cough", isCorrect: true, score: 3 },
-              { label: "Fever", value: "fever", isCorrect: true, score: 7 },
+              { id: "o1", label: "Cough", value: "cough", isCorrect: true, score: 3 },
+              { id: "o2", label: "Fever", value: "fever", isCorrect: true, score: 7 },
             ],
             layout: "vertical",
             correctAnswerType: "STATIC",
@@ -562,6 +567,7 @@ describe("transformScreensToPayload", () => {
                   correct_answer_type: element.correct_answer_type,
                   correct_answers: element.correct_answers,
                   allow_partial_score: element.allow_partial_score,
+                  version_key: "v1",
                 },
               ],
             },
@@ -613,5 +619,120 @@ describe("transformScreensToPayload", () => {
       false_label: "No",
       default_value: true,
     });
+  });
+
+  it("emits multiple flat elements for versioned component", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "textInput",
+            label: "Name v2",
+            placeholder: "Enter name v2",
+            required: true,
+            correctAnswerType: "NONE",
+            correctAnswer: "",
+            grade: 0,
+            versions: [
+              {
+                id: "ver-1",
+                versionLabel: "v1",
+                snapshot: {
+                  type: "textInput",
+                  label: "Name v1",
+                  placeholder: "Enter name v1",
+                  required: true,
+                  correctAnswerType: "NONE",
+                  correctAnswer: "",
+                  grade: 0,
+                },
+                createdAt: "2026-01-01T00:00:00.000Z",
+              },
+              {
+                id: "ver-2",
+                versionLabel: "v2",
+                snapshot: {
+                  type: "textInput",
+                  label: "Name v2",
+                  placeholder: "Enter name v2",
+                  required: true,
+                  correctAnswerType: "NONE",
+                  correctAnswer: "",
+                  grade: 0,
+                },
+                createdAt: "2026-01-02T00:00:00.000Z",
+              },
+            ],
+            activeVersionId: "ver-2",
+          },
+        ],
+      },
+    ];
+    const result = transformScreensToPayload(screens);
+    const elements = result.screens[0].elements;
+    expect(elements).toHaveLength(2);
+    expect(elements[0].version_key).toBe("v1");
+    expect(elements[0].label).toBe("Name v1");
+    expect(elements[0].row_number).toBe(1);
+    expect(elements[0].order_in_row).toBe(1);
+    expect(elements[1].version_key).toBe("v2");
+    expect(elements[1].label).toBe("Name v2");
+    expect(elements[1].row_number).toBe(1);
+    expect(elements[1].order_in_row).toBe(1);
+  });
+
+  it("round-trips versioned elements through save and load", () => {
+    const serverResponse: IServerStructureResponse = {
+      measurement_id: "m1",
+      measurement_name: "Test",
+      screens: [
+        {
+          id: "s1",
+          screen_number: 1,
+          title: "Screen 1",
+          rows: [
+            {
+              row_number: 1,
+              elements: [
+                {
+                  id: "el-v1",
+                  element_type: "INPUT_TEXT",
+                  row_number: 1,
+                  order_in_row: 1,
+                  label: "Patient name (original)",
+                  is_required: true,
+                  config: { placeholder: "Enter name" },
+                  correct_answer_type: "NONE",
+                  version_key: "v1",
+                },
+                {
+                  id: "el-v2",
+                  element_type: "INPUT_TEXT",
+                  row_number: 1,
+                  order_in_row: 1,
+                  label: "Patient name (revised)",
+                  is_required: true,
+                  config: { placeholder: "Type name" },
+                  correct_answer_type: "NONE",
+                  version_key: "v2",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    const screens = transformPayloadToScreens(serverResponse);
+    const comp = screens[0].components[0];
+    expect(comp.versions).toHaveLength(2);
+    expect(comp.versions![0].versionLabel).toBe("v1");
+    expect(comp.versions![1].versionLabel).toBe("v2");
+    // Active version defaults to v1
+    expect(comp.activeVersionId).toBe("el-v1");
+    // Base component has v1 properties
+    expect(comp.label).toBe("Patient name (original)");
   });
 });

@@ -4,11 +4,18 @@ import type {
   IQOptionItem,
   IQVisualQuestion,
   IQVisualSpot,
+  IQComponentVersion,
   CorrectAnswerType,
   QComponentType,
 } from "@/common/types/measurement";
 import { isOptionBasedComponent } from "@/common/types/measurement";
 import { componentRegistry } from "./componentRegistry";
+import {
+  extractSnapshot,
+  applySnapshot,
+  toBackendVersionKey,
+  toFrontendVersionLabel,
+} from "./versionUtils";
 
 const FRONTEND_TO_BACKEND_TYPE: Record<string, string> = {
   textInput: "INPUT_TEXT",
@@ -45,6 +52,7 @@ interface BackendField {
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[];
   allow_partial_score?: boolean;
+  version_key: string;
 }
 
 interface BackendScreen {
@@ -139,6 +147,7 @@ function mapComponent(
   component: IQComponent,
   rowNumber: number,
   orderInRow: number,
+  versionKey: string,
 ): BackendField | null {
   if (component.type === "visualQuestion") {
     const vis = component as IQVisualQuestion;
@@ -180,6 +189,7 @@ function mapComponent(
     order_in_row: orderInRow,
     config: buildConfig(component),
     correct_answer_type: answerType,
+    version_key: versionKey,
   };
 
   const correctAnswers = buildCorrectAnswers(component, answerType);
@@ -196,6 +206,32 @@ function mapComponent(
   }
 
   return field;
+}
+
+function emitFieldsForComponent(
+  component: IQComponent,
+  rowNumber: number,
+  orderInRow: number,
+): BackendField[] {
+  if (!component.versions || component.versions.length === 0) {
+    const field = mapComponent(component, rowNumber, orderInRow, "v1");
+    return field ? [field] : [];
+  }
+
+  const activeId = component.activeVersionId;
+  const currentSnapshot = extractSnapshot(component);
+  const versions = component.versions.map((v) =>
+    v.id === activeId ? { ...v, snapshot: currentSnapshot } : v,
+  );
+
+  const fields: BackendField[] = [];
+  for (const version of versions) {
+    const vComp = applySnapshot(component, version.snapshot);
+    const versionKey = toBackendVersionKey(version.versionLabel);
+    const field = mapComponent(vComp, rowNumber, orderInRow, versionKey);
+    if (field) fields.push(field);
+  }
+  return fields;
 }
 
 const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = {
@@ -227,6 +263,8 @@ export interface IServerElement {
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[] | null;
   allow_partial_score?: boolean;
+  version_key: string;
+  created_at?: string;
 }
 
 export interface IServerScreen {
@@ -291,6 +329,7 @@ function buildOptionsFromConfig(
   config: Record<string, unknown>,
 ): IQOptionItem[] {
   return getStringArray(config, "options").map((label) => ({
+    id: crypto.randomUUID(),
     label,
     value: label,
   }));
@@ -516,6 +555,44 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
   }
 }
 
+function buildComponentFromSlot(elements: IServerElement[]): IQComponent | null {
+  const v1Element = elements.find((el) => el.version_key === "v1");
+  const baseElement = v1Element ?? elements[0];
+  if (!baseElement) return null;
+
+  const baseComp = buildComponentFromElement(baseElement);
+  if (!baseComp) return null;
+
+  if (elements.length === 1) return baseComp;
+
+  const versions: IQComponentVersion[] = [];
+  for (const el of elements) {
+    const vComp = buildComponentFromElement(el);
+    if (!vComp) continue;
+    const snapshot = extractSnapshot(vComp);
+    versions.push({
+      id: el.id,
+      versionLabel: toFrontendVersionLabel(el.version_key),
+      snapshot,
+      createdAt: el.created_at ?? new Date().toISOString(),
+    });
+  }
+
+  versions.sort((a, b) =>
+    a.versionLabel.localeCompare(b.versionLabel, undefined, { numeric: true }),
+  );
+
+  const v1Version = versions.find(
+    (v) => v.versionLabel === toFrontendVersionLabel("v1"),
+  );
+
+  return {
+    ...baseComp,
+    versions,
+    activeVersionId: v1Version?.id ?? versions[0]?.id,
+  } as IQComponent;
+}
+
 function buildScreenFromServer(serverScreen: IServerScreen): IQScreen {
   const sortedRows = [...(serverScreen.rows ?? [])].sort(
     (a, b) => a.row_number - b.row_number,
@@ -523,12 +600,19 @@ function buildScreenFromServer(serverScreen: IServerScreen): IQScreen {
 
   const components: IQComponent[] = [];
   for (const row of sortedRows) {
-    const sortedElements = [...row.elements].sort(
-      (a, b) => a.order_in_row - b.order_in_row,
-    );
-    const children = sortedElements
-      .map(buildComponentFromElement)
-      .filter((c): c is IQComponent => c !== null);
+    const slotMap = new Map<number, IServerElement[]>();
+    for (const el of row.elements) {
+      if (!slotMap.has(el.order_in_row)) slotMap.set(el.order_in_row, []);
+      slotMap.get(el.order_in_row)!.push(el);
+    }
+
+    const sortedSlots = [...slotMap.keys()].sort((a, b) => a - b);
+    const children: IQComponent[] = [];
+    for (const slotKey of sortedSlots) {
+      const slotElements = slotMap.get(slotKey)!;
+      const comp = buildComponentFromSlot(slotElements);
+      if (comp) children.push(comp);
+    }
 
     if (children.length === 0) continue;
 
@@ -571,18 +655,13 @@ export function transformScreensToPayload(
         if (component.type === "rowContainer") {
           let orderInRow = 1;
           for (const child of component.children) {
-            const field = mapComponent(child, rowNumber, orderInRow);
-            if (field) {
-              elements.push(field);
-              orderInRow++;
-            }
+            const fields = emitFieldsForComponent(child, rowNumber, orderInRow);
+            elements.push(...fields);
+            if (fields.length > 0) orderInRow++;
           }
           rowNumber++;
         } else {
-          const field = mapComponent(component, rowNumber, 1);
-          if (field) {
-            elements.push(field);
-          }
+          elements.push(...emitFieldsForComponent(component, rowNumber, 1));
           rowNumber++;
         }
       }

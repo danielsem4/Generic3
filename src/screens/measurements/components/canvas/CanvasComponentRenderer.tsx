@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { X, GripVertical, Eye } from "lucide-react";
 import type { IQComponent } from "@/common/types/measurement";
+import { getActiveVersionLabel } from "../../lib/versionUtils";
 import { RowContainerRenderer } from "./RowContainerRenderer";
 import { InteractiveComponentPreview } from "./InteractiveComponentPreview";
 
@@ -97,6 +98,12 @@ export function CanvasComponentRenderer({
         </button>
       )}
 
+      {!isPreview && getActiveVersionLabel(component) && (
+        <span className="absolute right-2 top-1 text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+          {getActiveVersionLabel(component)}
+        </span>
+      )}
+
       <div className={!isPreview ? "pl-5" : ""}>
         {isPreview ? (
           <InteractiveComponentPreview component={component} />
@@ -190,7 +197,7 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           <label className="text-sm font-medium">{component.label}</label>
           <div className={`flex gap-3 ${component.layout === "vertical" ? "flex-col" : "flex-row"}`}>
             {component.options.map((opt) => (
-              <div key={opt.value} className="flex items-center gap-1.5 text-sm">
+              <div key={opt.id} className="flex items-center gap-1.5 text-sm">
                 <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40" />
                 {opt.label}
               </div>
@@ -208,7 +215,7 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           >
             {component.options.map((opt) => (
               <div
-                key={opt.value}
+                key={opt.id}
                 className="rounded-lg border px-3 py-2 text-sm"
               >
                 {opt.label}

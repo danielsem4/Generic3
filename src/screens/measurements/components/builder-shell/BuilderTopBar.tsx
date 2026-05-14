@@ -1,25 +1,31 @@
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Trash2, Eye, Save } from "lucide-react";
+import { ArrowLeft, Trash2, Eye, Save, GitBranch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface BuilderTopBarProps {
   measurementName?: string;
   isDirty: boolean;
   isSaving: boolean;
+  versionLabels: string[];
+  hasVersions: boolean;
   onSave: () => void;
   onBack: () => void;
   onClear: () => void;
   onPreview: () => void;
+  onSwitchAllVersions: (label: string) => void;
 }
 
 export function BuilderTopBar({
   measurementName,
   isDirty,
   isSaving,
+  versionLabels,
+  hasVersions,
   onSave,
   onBack,
   onClear,
   onPreview,
+  onSwitchAllVersions,
 }: BuilderTopBarProps) {
   const { t } = useTranslation();
 
@@ -40,6 +46,27 @@ export function BuilderTopBar({
       </div>
 
       <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 rounded-md border bg-background px-2 py-1">
+          <GitBranch size={14} className="text-muted-foreground" />
+          <span className="text-xs font-medium text-muted-foreground">
+            {t("measurements.builder.selectVersion")}
+          </span>
+          <select
+            onChange={(e) => onSwitchAllVersions(e.target.value)}
+            defaultValue=""
+            disabled={!hasVersions}
+            className="bg-transparent text-sm font-medium outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <option value="" disabled>
+              {hasVersions ? "--" : "1"}
+            </option>
+            {versionLabels.map((label) => (
+              <option key={label} value={label}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
         <Button variant="outline" size="sm" onClick={onClear} className="gap-1">
           <Trash2 size={14} />
           {t("measurements.builder.clearCanvas")}
