@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { X, GripVertical } from "lucide-react";
 import type { IQComponent } from "@/common/types/measurement";
+import { getActiveVersionLabel } from "../../lib/versionUtils";
 import { RowContainerRenderer } from "./RowContainerRenderer";
 import { InteractiveComponentPreview } from "./InteractiveComponentPreview";
 
@@ -95,6 +96,12 @@ export function CanvasComponentRenderer({
         >
           <X size={12} />
         </button>
+      )}
+
+      {!isPreview && getActiveVersionLabel(component) && (
+        <span className="absolute right-2 top-1 text-[10px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+          {getActiveVersionLabel(component)}
+        </span>
       )}
 
       <div className={!isPreview ? "pl-5" : ""}>

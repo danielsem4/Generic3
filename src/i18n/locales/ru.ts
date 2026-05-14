@@ -852,6 +852,12 @@ measurements: {
       screenOf: "Экран {{current}} из {{total}}",
     },
     totalScore: "Общий балл",
+    versionControl: "Управление версиями",
+    branchVersion: "Создать новую версию",
+    deleteVersion: "Удалить версию",
+    noVersions: "Версий пока нет",
+    activeVersion: "Активная",
+    deleteVersionConfirm: "Удалить эту версию? Компонент вернётся к другой версии.",
   },
 
   categories: {

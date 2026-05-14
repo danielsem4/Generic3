@@ -848,6 +848,12 @@ measurements: {
       screenOf: "מסך {{current}} מתוך {{total}}",
     },
     totalScore: "ציון כולל",
+    versionControl: "ניהול גרסאות",
+    branchVersion: "צור גרסה חדשה",
+    deleteVersion: "מחק גרסה",
+    noVersions: "אין גרסאות עדיין",
+    activeVersion: "פעיל",
+    deleteVersionConfirm: "למחוק גרסה זו? הרכיב יחזור לגרסה אחרת.",
   },
 
   categories: {

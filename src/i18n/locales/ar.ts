@@ -848,6 +848,12 @@ patient: {
         screenOf: "الشاشة {{current}} من {{total}}",
       },
       totalScore: "إجمالي الدرجة",
+      versionControl: "التحكم بالإصدارات",
+      branchVersion: "إنشاء إصدار جديد",
+      deleteVersion: "حذف الإصدار",
+      noVersions: "لا توجد إصدارات بعد",
+      activeVersion: "نشط",
+      deleteVersionConfirm: "حذف هذا الإصدار؟ سيعود المكون إلى إصدار آخر.",
     },
 
     categories: {

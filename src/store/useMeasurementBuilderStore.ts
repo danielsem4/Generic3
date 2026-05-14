@@ -12,7 +12,13 @@ import {
   removeComponentById,
   updateComponentById,
   moveComponent as moveComponentInTree,
+  transformComponentById,
 } from "@/screens/measurements/lib/treeUtils";
+import {
+  branchNewVersion,
+  switchActiveVersion,
+  deleteVersion,
+} from "@/screens/measurements/lib/versionUtils";
 
 interface MeasurementBuilderStore {
   measurements: IMeasurement[];
@@ -48,6 +54,10 @@ interface MeasurementBuilderStore {
   selectComponent: (id: string | null) => void;
   updateComponentProps: (id: string, updates: Partial<IQComponent>) => void;
   clearCanvas: () => void;
+
+  branchComponentVersion: (componentId: string) => void;
+  switchComponentVersion: (componentId: string, versionId: string) => void;
+  deleteComponentVersion: (componentId: string, versionId: string) => void;
 
   setPreviewMode: (enabled: boolean) => void;
   setPreviewDevice: (device: DeviceSize) => void;
@@ -271,6 +281,45 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
         const newScreens = [...state.screens];
         const screen = { ...newScreens[state.activeScreenIndex] };
         screen.components = updateComponentById(screen.components, id, updates);
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    branchComponentVersion: (componentId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          branchNewVersion,
+        );
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    switchComponentVersion: (componentId, versionId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          (comp) => switchActiveVersion(comp, versionId),
+        );
+        newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    deleteComponentVersion: (componentId, versionId) =>
+      set((state) => {
+        const newScreens = [...state.screens];
+        const screen = { ...newScreens[state.activeScreenIndex] };
+        screen.components = transformComponentById(
+          screen.components,
+          componentId,
+          (comp) => deleteVersion(comp, versionId),
+        );
         newScreens[state.activeScreenIndex] = screen;
         return { screens: newScreens, isDirty: true };
       }),

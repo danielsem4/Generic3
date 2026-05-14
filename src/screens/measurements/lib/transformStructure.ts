@@ -2,11 +2,13 @@ import type {
   IQScreen,
   IQComponent,
   IQOptionItem,
+  IQComponentVersion,
   CorrectAnswerType,
   QComponentType,
 } from "@/common/types/measurement";
 import { isOptionBasedComponent } from "@/common/types/measurement";
 import { componentRegistry } from "./componentRegistry";
+import { extractSnapshot, applySnapshot } from "./versionUtils";
 
 const FRONTEND_TO_BACKEND_TYPE: Record<string, string> = {
   textInput: "INPUT_TEXT",
@@ -33,6 +35,20 @@ interface CorrectAnswerEntry {
   points: number;
 }
 
+interface BackendFieldVersion {
+  id: string;
+  version_label: string;
+  is_active: boolean;
+  label: string;
+  element_type: string;
+  is_required: boolean;
+  config: Record<string, unknown>;
+  correct_answer_type: CorrectAnswerType;
+  correct_answers?: CorrectAnswerEntry[];
+  allow_partial_score?: boolean;
+  created_at: string;
+}
+
 interface BackendField {
   label: string;
   element_type: string;
@@ -43,6 +59,7 @@ interface BackendField {
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[];
   allow_partial_score?: boolean;
+  versions?: BackendFieldVersion[];
 }
 
 interface BackendScreen {
@@ -174,6 +191,44 @@ function mapComponent(
       ((component as unknown as Record<string, unknown>).allowPartialScore as boolean) ?? false;
   }
 
+  if (component.versions && component.versions.length > 0) {
+    field.versions = component.versions.map((v) => {
+      const vComp = applySnapshot(component, v.snapshot);
+      const vBackendType = FRONTEND_TO_BACKEND_TYPE[vComp.type] ?? backendType;
+      const vIsDisplay = ["heading", "paragraph", "infoCard", "image", "icon", "button"].includes(vComp.type);
+      const vAnswerType: CorrectAnswerType = vIsDisplay
+        ? "NONE"
+        : ((vComp as unknown as Record<string, unknown>).correctAnswerType as CorrectAnswerType) ?? "NONE";
+
+      const bv: BackendFieldVersion = {
+        id: v.id,
+        version_label: v.versionLabel,
+        is_active: v.id === component.activeVersionId,
+        label: vIsDisplay ? getDisplayLabel(vComp) : vComp.label,
+        element_type: vBackendType,
+        is_required: "required" in vComp
+          ? ((vComp as unknown as Record<string, unknown>).required as boolean)
+          : false,
+        config: buildConfig(vComp),
+        correct_answer_type: vAnswerType,
+        created_at: v.createdAt,
+      };
+
+      const vCorrectAnswers = buildCorrectAnswers(vComp, vAnswerType);
+      if (vCorrectAnswers) bv.correct_answers = vCorrectAnswers;
+
+      if (
+        (vComp.type === "multiSelect" || vComp.type === "cardMultiSelect") &&
+        vAnswerType === "STATIC"
+      ) {
+        bv.allow_partial_score =
+          ((vComp as unknown as Record<string, unknown>).allowPartialScore as boolean) ?? false;
+      }
+
+      return bv;
+    });
+  }
+
   return field;
 }
 
@@ -195,6 +250,20 @@ const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = {
   BUTTON: "button",
 };
 
+interface IServerElementVersion {
+  id: string;
+  version_label: string;
+  is_active: boolean;
+  label: string;
+  element_type: string;
+  is_required: boolean;
+  config: Record<string, unknown>;
+  correct_answer_type: CorrectAnswerType;
+  correct_answers?: CorrectAnswerEntry[] | null;
+  allow_partial_score?: boolean;
+  created_at: string;
+}
+
 export interface IServerElement {
   id: string;
   element_type: string;
@@ -206,6 +275,7 @@ export interface IServerElement {
   correct_answer_type: CorrectAnswerType;
   correct_answers?: CorrectAnswerEntry[] | null;
   allow_partial_score?: boolean;
+  versions?: IServerElementVersion[] | null;
 }
 
 export interface IServerScreen {
@@ -475,6 +545,46 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
   }
 }
 
+function rebuildVersionsFromServer(
+  component: IQComponent,
+  serverVersions: IServerElementVersion[] | null | undefined,
+): IQComponent {
+  if (!serverVersions || serverVersions.length === 0) return component;
+
+  const versions: IQComponentVersion[] = [];
+  let activeVersionId: string | undefined;
+
+  for (const sv of serverVersions) {
+    const pseudoElement: IServerElement = {
+      id: sv.id,
+      element_type: sv.element_type,
+      row_number: 0,
+      order_in_row: 0,
+      label: sv.label,
+      is_required: sv.is_required,
+      config: sv.config,
+      correct_answer_type: sv.correct_answer_type,
+      correct_answers: sv.correct_answers,
+      allow_partial_score: sv.allow_partial_score,
+    };
+    const vComp = buildComponentFromElement(pseudoElement);
+    if (!vComp) continue;
+
+    const snapshot = extractSnapshot(vComp);
+    versions.push({
+      id: sv.id,
+      versionLabel: sv.version_label,
+      snapshot,
+      createdAt: sv.created_at,
+    });
+
+    if (sv.is_active) activeVersionId = sv.id;
+  }
+
+  if (versions.length === 0) return component;
+  return { ...component, versions, activeVersionId } as IQComponent;
+}
+
 function buildScreenFromServer(serverScreen: IServerScreen): IQScreen {
   const sortedRows = [...(serverScreen.rows ?? [])].sort(
     (a, b) => a.row_number - b.row_number,
@@ -486,7 +596,11 @@ function buildScreenFromServer(serverScreen: IServerScreen): IQScreen {
       (a, b) => a.order_in_row - b.order_in_row,
     );
     const children = sortedElements
-      .map(buildComponentFromElement)
+      .map((el) => {
+        const comp = buildComponentFromElement(el);
+        if (!comp) return null;
+        return rebuildVersionsFromServer(comp, el.versions);
+      })
       .filter((c): c is IQComponent => c !== null);
 
     if (children.length === 0) continue;

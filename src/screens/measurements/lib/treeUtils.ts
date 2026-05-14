@@ -92,6 +92,23 @@ export function updateComponentById(
   });
 }
 
+export function transformComponentById(
+  components: IQComponent[],
+  id: string,
+  transform: (component: IQComponent) => IQComponent,
+): IQComponent[] {
+  return components.map((comp) => {
+    if (comp.id === id) return transform(comp);
+    if (comp.type === "rowContainer") {
+      return {
+        ...comp,
+        children: transformComponentById(comp.children, id, transform),
+      } as IQRowContainer;
+    }
+    return comp;
+  });
+}
+
 export function moveComponent(
   components: IQComponent[],
   fromId: string,

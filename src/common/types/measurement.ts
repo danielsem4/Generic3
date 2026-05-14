@@ -54,9 +54,18 @@ export function isOptionBasedComponent(type: QComponentType): boolean {
   return OPTION_BASED_TYPES.has(type);
 }
 
+export interface IQComponentVersion {
+  id: string;
+  versionLabel: string;
+  snapshot: Record<string, unknown>;
+  createdAt: string;
+}
+
 interface IQBase {
   id: string;
   label: string;
+  versions?: IQComponentVersion[];
+  activeVersionId?: string;
 }
 
 export interface IQHeading extends IQBase {
