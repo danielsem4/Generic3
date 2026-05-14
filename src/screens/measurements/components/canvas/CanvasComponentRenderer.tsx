@@ -197,7 +197,7 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           <label className="text-sm font-medium">{component.label}</label>
           <div className={`flex gap-3 ${component.layout === "vertical" ? "flex-col" : "flex-row"}`}>
             {component.options.map((opt) => (
-              <div key={opt.value} className="flex items-center gap-1.5 text-sm">
+              <div key={opt.id} className="flex items-center gap-1.5 text-sm">
                 <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/40" />
                 {opt.label}
               </div>
@@ -215,7 +215,7 @@ function ComponentPreview({ component }: { component: IQComponent }) {
           >
             {component.options.map((opt) => (
               <div
-                key={opt.value}
+                key={opt.id}
                 className="rounded-lg border px-3 py-2 text-sm"
               >
                 {opt.label}

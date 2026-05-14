@@ -82,7 +82,7 @@ export function usePropertyEditor() {
         if (isOptionBased) {
           const opts = (selectedComponent as unknown as Record<string, unknown>).options as IQOptionItem[] | undefined;
           if (opts) {
-            updates.options = opts.map((o) => ({ label: o.label, value: o.value }));
+            updates.options = opts.map((o) => ({ id: o.id, label: o.label, value: o.value }));
           }
         }
         updateComponentProps(selectedComponentId, updates as Partial<IQComponent>);
@@ -100,7 +100,7 @@ export function usePropertyEditor() {
         if (isOptionBased && prev === "STATIC") {
           const opts = (selectedComponent as unknown as Record<string, unknown>).options as IQOptionItem[] | undefined;
           if (opts) {
-            updates.options = opts.map((o) => ({ label: o.label, value: o.value }));
+            updates.options = opts.map((o) => ({ id: o.id, label: o.label, value: o.value }));
           }
         }
         updateComponentProps(selectedComponentId, updates as Partial<IQComponent>);

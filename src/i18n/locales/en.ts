@@ -845,6 +845,7 @@ modules: {
       noVersions: "No versions yet",
       activeVersion: "Active",
       deleteVersionConfirm: "Delete this version? The component will revert to another version.",
+      selectVersion: "Select Version",
     },
 
     categories: {

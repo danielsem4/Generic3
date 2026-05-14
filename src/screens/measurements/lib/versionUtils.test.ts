@@ -16,7 +16,7 @@ function makeDropdown(overrides?: Partial<IQComponent>): IQComponent {
     label: "Test Dropdown",
     placeholder: "Select...",
     required: false,
-    options: [{ label: "A", value: "a" }],
+    options: [{ id: "o1", label: "A", value: "a" }],
     correctAnswerType: "NONE",
     correctAnswer: "",
     grade: 0,

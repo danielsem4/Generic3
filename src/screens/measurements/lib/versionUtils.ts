@@ -119,6 +119,38 @@ export function deleteVersion(
   return { ...component, versions: filtered };
 }
 
+export function switchToVersionByLabel(
+  component: IQComponent,
+  targetLabel: string,
+): IQComponent {
+  const versions = component.versions ?? [];
+  if (versions.length === 0) return component;
+
+  const target = versions.find((v) => v.versionLabel === targetLabel);
+  const fallback = versions[0];
+  const chosen = target ?? fallback;
+
+  if (chosen.id === component.activeVersionId) return component;
+  return switchActiveVersion(component, chosen.id);
+}
+
+export function collectVersionLabels(
+  components: IQComponent[],
+): string[] {
+  const labels = new Set<string>();
+  for (const comp of components) {
+    if (comp.versions) {
+      for (const v of comp.versions) labels.add(v.versionLabel);
+    }
+    if (comp.type === "rowContainer") {
+      for (const label of collectVersionLabels(comp.children)) {
+        labels.add(label);
+      }
+    }
+  }
+  return [...labels].sort();
+}
+
 export function getActiveVersionLabel(
   component: IQComponent,
 ): string | null {

@@ -186,7 +186,7 @@ function DropdownPreview({
           {component.placeholder}
         </option>
         {component.options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option key={opt.id} value={opt.value}>
             {opt.label}
           </option>
         ))}
@@ -220,7 +220,7 @@ function MultiSelectPreview({
       <div className="space-y-1.5">
         {component.options.map((opt) => (
           <label
-            key={opt.value}
+            key={opt.id}
             className="flex items-center gap-2 text-sm cursor-pointer"
           >
             <input
@@ -256,7 +256,7 @@ function RadioGroupPreview({
       >
         {component.options.map((opt) => (
           <label
-            key={opt.value}
+            key={opt.id}
             className="flex items-center gap-1.5 text-sm cursor-pointer"
           >
             <input
@@ -393,7 +393,7 @@ function CardRadioGroupPreview({
           const isSelected = value === opt.value;
           return (
             <button
-              key={opt.value}
+              key={opt.id}
               type="button"
               onClick={() => handleSelect(opt.value)}
               className={`rounded-lg border px-3 py-2 text-sm text-left transition-colors ${
@@ -442,7 +442,7 @@ function CardMultiSelectPreview({
           const isSelected = selected.has(opt.value);
           return (
             <button
-              key={opt.value}
+              key={opt.id}
               type="button"
               onClick={() => handleToggle(opt.value)}
               className={`rounded-lg border px-3 py-2 text-sm text-left transition-colors ${

@@ -858,6 +858,7 @@ measurements: {
     noVersions: "Версий пока нет",
     activeVersion: "Активная",
     deleteVersionConfirm: "Удалить эту версию? Компонент вернётся к другой версии.",
+    selectVersion: "Выбрать версию",
   },
 
   categories: {

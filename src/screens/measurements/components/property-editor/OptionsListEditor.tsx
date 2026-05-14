@@ -34,7 +34,7 @@ export function OptionsListEditor({
 
   function handleAdd() {
     const num = options.length + 1;
-    onChange([...options, { label: `Option ${num}`, value: `option${num}` }]);
+    onChange([...options, { id: crypto.randomUUID(), label: `Option ${num}`, value: `option${num}` }]);
   }
 
   function handleRemove(index: number) {
@@ -44,7 +44,7 @@ export function OptionsListEditor({
   return (
     <div className="space-y-2">
       {options.map((opt, index) => (
-        <div key={index} className="flex items-center gap-1">
+        <div key={opt.id} className="flex items-center gap-1">
           {showScoring && (
             <button
               type="button"

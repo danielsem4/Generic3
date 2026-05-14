@@ -854,6 +854,7 @@ patient: {
       noVersions: "لا توجد إصدارات بعد",
       activeVersion: "نشط",
       deleteVersionConfirm: "حذف هذا الإصدار؟ سيعود المكون إلى إصدار آخر.",
+      selectVersion: "اختر إصدار",
     },
 
     categories: {

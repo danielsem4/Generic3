@@ -18,6 +18,7 @@ import {
   branchNewVersion,
   switchActiveVersion,
   deleteVersion,
+  switchToVersionByLabel,
 } from "@/screens/measurements/lib/versionUtils";
 
 interface MeasurementBuilderStore {
@@ -58,6 +59,7 @@ interface MeasurementBuilderStore {
   branchComponentVersion: (componentId: string) => void;
   switchComponentVersion: (componentId: string, versionId: string) => void;
   deleteComponentVersion: (componentId: string, versionId: string) => void;
+  switchAllComponentsVersion: (versionLabel: string) => void;
 
   setPreviewMode: (enabled: boolean) => void;
   setPreviewDevice: (device: DeviceSize) => void;
@@ -321,6 +323,25 @@ export const useMeasurementBuilderStore = create<MeasurementBuilderStore>()(
           (comp) => deleteVersion(comp, versionId),
         );
         newScreens[state.activeScreenIndex] = screen;
+        return { screens: newScreens, isDirty: true };
+      }),
+
+    switchAllComponentsVersion: (versionLabel) =>
+      set((state) => {
+        function switchAll(components: IQComponent[]): IQComponent[] {
+          return components.map((comp) => {
+            const switched = switchToVersionByLabel(comp, versionLabel);
+            if (switched.type === "rowContainer") {
+              return { ...switched, children: switchAll(switched.children) } as IQComponent;
+            }
+            return switched;
+          });
+        }
+
+        const newScreens = state.screens.map((screen) => ({
+          ...screen,
+          components: switchAll(screen.components),
+        }));
         return { screens: newScreens, isDirty: true };
       }),
 

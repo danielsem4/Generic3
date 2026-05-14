@@ -36,6 +36,7 @@ export type QComponentCategory =
 export type DeviceSize = "mobile" | "tablet" | "desktop";
 
 export interface IQOptionItem {
+  id: string;
   label: string;
   value: string;
   isCorrect?: boolean;

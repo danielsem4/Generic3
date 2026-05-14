@@ -340,6 +340,7 @@ function buildOptionsFromConfig(
   config: Record<string, unknown>,
 ): IQOptionItem[] {
   return getStringArray(config, "options").map((label) => ({
+    id: crypto.randomUUID(),
     label,
     value: label,
   }));

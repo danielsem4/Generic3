@@ -854,6 +854,7 @@ measurements: {
     noVersions: "אין גרסאות עדיין",
     activeVersion: "פעיל",
     deleteVersionConfirm: "למחוק גרסה זו? הרכיב יחזור לגרסה אחרת.",
+    selectVersion: "בחר גרסה",
   },
 
   categories: {
