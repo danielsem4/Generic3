@@ -37,7 +37,7 @@ function nextVersionLabel(versions: IQComponentVersion[]): string {
     const match = v.versionLabel.match(/^v(\d+)/);
     return match ? Math.max(max, Number(match[1])) : max;
   }, 0);
-  return `v${maxNum + 1}.0`;
+  return `v${maxNum + 1}`;
 }
 
 export function branchNewVersion(component: IQComponent): IQComponent {
@@ -47,13 +47,13 @@ export function branchNewVersion(component: IQComponent): IQComponent {
   if (existing.length === 0) {
     const v1: IQComponentVersion = {
       id: crypto.randomUUID(),
-      versionLabel: "v1.0",
+      versionLabel: "v1",
       snapshot: extractSnapshot(component),
       createdAt: now,
     };
     const v2: IQComponentVersion = {
       id: crypto.randomUUID(),
-      versionLabel: "v2.0",
+      versionLabel: "v2",
       snapshot: extractSnapshot(component),
       createdAt: now,
     };
@@ -158,4 +158,12 @@ export function getActiveVersionLabel(
   if (versions.length === 0) return null;
   const active = versions.find((v) => v.id === component.activeVersionId);
   return active?.versionLabel ?? null;
+}
+
+export function toBackendVersionKey(frontendLabel: string): string {
+  return frontendLabel.replace(/\.0$/, "");
+}
+
+export function toFrontendVersionLabel(backendKey: string): string {
+  return backendKey;
 }

@@ -57,12 +57,12 @@ describe("applySnapshot", () => {
 });
 
 describe("branchNewVersion", () => {
-  it("creates v1.0 and v2.0 on first branch", () => {
+  it("creates v1 and v2 on first branch", () => {
     const comp = makeDropdown();
     const result = branchNewVersion(comp);
     expect(result.versions).toHaveLength(2);
-    expect(result.versions![0].versionLabel).toBe("v1.0");
-    expect(result.versions![1].versionLabel).toBe("v2.0");
+    expect(result.versions![0].versionLabel).toBe("v1");
+    expect(result.versions![1].versionLabel).toBe("v2");
     expect(result.activeVersionId).toBe(result.versions![1].id);
   });
 
@@ -70,7 +70,7 @@ describe("branchNewVersion", () => {
     const comp = branchNewVersion(makeDropdown());
     const result = branchNewVersion(comp);
     expect(result.versions).toHaveLength(3);
-    expect(result.versions![2].versionLabel).toBe("v3.0");
+    expect(result.versions![2].versionLabel).toBe("v3");
     expect(result.activeVersionId).toBe(result.versions![2].id);
   });
 
@@ -156,6 +156,6 @@ describe("getActiveVersionLabel", () => {
 
   it("returns the active version label", () => {
     const comp = branchNewVersion(makeDropdown());
-    expect(getActiveVersionLabel(comp)).toBe("v2.0");
+    expect(getActiveVersionLabel(comp)).toBe("v2");
   });
 });
