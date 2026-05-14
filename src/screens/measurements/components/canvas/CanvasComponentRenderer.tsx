@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { X, GripVertical } from "lucide-react";
+import { X, GripVertical, Eye } from "lucide-react";
 import type { IQComponent } from "@/common/types/measurement";
 import { getActiveVersionLabel } from "../../lib/versionUtils";
 import { RowContainerRenderer } from "./RowContainerRenderer";
@@ -277,6 +277,30 @@ function ComponentPreview({ component }: { component: IQComponent }) {
         </button>
       );
     }
+    case "visualQuestion":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div className="flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-muted-foreground/30 bg-muted/30 py-4 text-muted-foreground">
+            <Eye size={28} strokeWidth={1.5} />
+            {component.visualKey ? (
+              <span className="text-xs font-mono font-medium">{component.visualKey}</span>
+            ) : (
+              <span className="text-xs italic">No key set</span>
+            )}
+            {component.spots.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-1 px-3">
+                {component.spots.map((s, i) => (
+                  <span key={i} className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+                    {s.point || "…"}
+                  </span>
+                ))}
+              </div>
+            )}
+            <span className="text-xs text-center px-4">Visual question — rendered on mobile</span>
+          </div>
+        </div>
+      );
     default:
       return <div className="text-sm text-muted-foreground">{component.label}</div>;
   }

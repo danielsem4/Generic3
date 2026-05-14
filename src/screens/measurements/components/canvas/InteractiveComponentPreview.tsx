@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { IQComponent } from "@/common/types/measurement";
 import { Switch } from "@/components/ui/switch";
+import { Eye } from "lucide-react";
 
 export function InteractiveComponentPreview({
   component,
@@ -46,6 +47,19 @@ export function InteractiveComponentPreview({
       return <ToggleSwitchPreview component={component} />;
     case "button":
       return <ButtonPreview component={component} />;
+    case "visualQuestion":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div className="flex flex-col items-center justify-center gap-2 rounded-md bg-muted/40 py-8 text-muted-foreground">
+            <Eye size={32} strokeWidth={1.2} />
+            {component.visualKey && (
+              <span className="text-xs font-mono">{component.visualKey}</span>
+            )}
+            <span className="text-xs">Visual question — mobile only</span>
+          </div>
+        </div>
+      );
     default:
       return (
         <div className="text-sm text-muted-foreground">{component.label}</div>
