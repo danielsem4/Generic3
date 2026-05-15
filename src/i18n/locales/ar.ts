@@ -765,7 +765,12 @@ analytics: {
     mostUsed: "القياسات الأكثر استخداماً",
     types: "أنواع القياسات",
     }
-  }
+  },
+  export: "تصدير",
+  filters: {
+  startDate: "تاريخ البداية",
+  endDate: "تاريخ النهاية",
+},
 },
 
   // Measurements

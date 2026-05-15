@@ -759,6 +759,11 @@ modules: {
     types: "Active Measurement Types",
   },
   },
+  export: "Export",
+  filters: {
+  startDate: "Start date",
+  endDate: "End date",
+},
 },
   
   // Measurements

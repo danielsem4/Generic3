@@ -771,6 +771,11 @@ analytics: {
     types: "Активные типы измерений",
   },
 },
+export:  "Экспорт",
+filters: {
+  startDate: "Дата начала",
+  endDate: "Дата окончания",
+},
 },
 
   // Measurements

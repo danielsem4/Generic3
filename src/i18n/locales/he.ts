@@ -766,7 +766,12 @@ analytics: {
     mostUsed: "המדד הנפוץ ביותר",
     types: "סוגי מדדים פעילים",
     }
-  }
+  },
+  export: "ייצוא",
+  filters: {
+  startDate: "תאריך התחלה",
+  endDate: "תאריך סיום",
+},
 },
 
   // Measurements

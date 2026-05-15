@@ -11,6 +11,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { ExportExcelButton } from "./ExportExcelButton";
 
 interface AnalyticsChartCardProps {
   title: string;
@@ -32,9 +33,14 @@ export function AnalyticsChartCard({
 }: Readonly<AnalyticsChartCardProps>) {
   return (
     <Card className="rounded-2xl">
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-base font-semibold">{title}</CardTitle>
-      </CardHeader>
+        <ExportExcelButton
+         data={data}
+         fileName={title.toLowerCase().replaceAll(" ", "-")}
+         sheetName="Analytics"
+        />
+     </CardHeader>
 
       <CardContent>
         <ChartContainer config={chartConfig} className="h-72 w-full">
