@@ -727,10 +727,47 @@ const he = {
   },
 
   // Analytics
-  analytics: {
-    title: "אנליטיקה",
-    description: "מדדי ביצועי מרפאה ואנליטיקה",
+analytics: {
+  title: "אנליטיקה",
+  subtitle: "לחץ על כרטיס כדי לצפות בסטטיסטיקות וגרפים מפורטים.",
+  cards: {
+    activities: {
+      title: "אנליטיקת פעילויות",
+      description: "ניתוח שימוש בפעילויות, מגמות ונתוני מעורבות מטופלים."
+    },
+    medications: {
+      title: "אנליטיקת תרופות",
+      description: "ניתוח שימוש בתרופות, היענות לטיפול ומגמות קשורות."
+    },
+    measurements: {
+      title: "אנליטיקת מדדים",
+      description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים."
+    }
   },
+  activities: {
+    title: "אנליטיקת פעילויות",
+    description: "ניתוח שימוש בפעילויות, מגמות ונתוני מעורבות מטופלים.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן"
+  },
+  medications: {
+    title: "אנליטיקת תרופות",
+    description: "ניתוח שימוש בתרופות, היענות לטיפול ומגמות קשורות.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן"
+  },
+  measurements: {
+    title: "אנליטיקת מדדים",
+    description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן",
+    summary: {
+    total: "סך הכל הגשות",
+    mostUsed: "המדד הנפוץ ביותר",
+    types: "סוגי מדדים פעילים",
+    }
+  }
+},
 
   // Measurements
   measurements: {

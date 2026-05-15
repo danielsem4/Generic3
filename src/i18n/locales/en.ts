@@ -716,11 +716,50 @@ modules: {
   },
 
   // Analytics
-  analytics: {
-    title: "Analytics",
-    description: "Clinic performance metrics and analytics",
+ analytics: {
+  title: "Analytics",
+  subtitle: "Click a card to view detailed statistics and charts.",
+  loading: "Loading analytics data...",
+  cards:{
+    activities: {
+      title: "Activities Analytics",
+      description: "Analyze activity usage, trends, and patient engagement data.",
+    },
+    medications: {
+      title: "Medications Analytics", 
+      description: "Analyze medication usage, adherence, and related trends.",
+    },
+    measurements: {   
+      title: "Measurements Analytics",
+      description: "Review measurement results, submissions, and patient responses.",
+    },
+    title: "Activities Analytics",
+    description: "View activity usage, trends, and patient engagement data.",
   },
-
+    activities: {
+      title: "Activities Analytics",
+      description: "Analyze activity usage, trends, and patient engagement data.",
+      busiestDaysChart: "Busiest Days",
+      usageChart: "Usage Over Time",
+    },
+    medications: {
+      title: "Medications Analytics",
+      description: "Analyze medication usage, adherence, and related trends.",
+      busiestDaysChart: "Busiest Days",
+      usageChart: "Usage Over Time",
+    },
+   measurements: {
+  title: "Measurements Analytics",
+  description: "Review measurement results, submissions, and patient responses.",
+  busiestDaysChart: "Busiest Days",
+  usageChart: "Usage Over Time",
+  summary: {
+    total: "Total Submissions",
+    mostUsed: "Most Used Measurement",
+    types: "Active Measurement Types",
+  },
+  },
+},
   
   // Measurements
   measurements: {
