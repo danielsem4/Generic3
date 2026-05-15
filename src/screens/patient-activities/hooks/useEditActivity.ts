@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -45,7 +45,10 @@ export function useEditActivity(patientId: string) {
     setTimeSlots((prev) => {
       const next = prev.filter((_, i) => i !== index);
 
-      if ((frequency === "WEEKLY" || frequency === "MONTHLY") && next.length === 0) {
+      if (
+        (frequency === "WEEKLY" || frequency === "MONTHLY") &&
+        next.length === 0
+      ) {
         return ["12:00"];
       }
 
@@ -63,7 +66,7 @@ export function useEditActivity(patientId: string) {
     });
   };
 
-  function initForm(activity: IPatientActivity) {
+  const initForm = useCallback((activity: IPatientActivity) => {
     setActivityId(activity.id);
     setStartDate(activity.start_date ?? "");
     setEndDate(activity.end_date ?? "");
@@ -103,7 +106,7 @@ export function useEditActivity(patientId: string) {
       setTimeSlots([activity.frequency_data.time ?? "12:00"]);
       setSelectedDays([]);
     }
-  }
+  }, []);
 
   const { mutate: submitEdit, isPending } = useMutation({
     mutationFn: () => {
@@ -111,14 +114,14 @@ export function useEditActivity(patientId: string) {
         throw new Error("Missing required identifiers");
       }
 
-     const frequency_data = buildFrequencyData({
+      const frequency_data = buildFrequencyData({
         frequency,
         startDate,
         timeSlots,
         selectedDays,
         dayOfMonth,
-       defaultTime: "12:00",
-    });
+        defaultTime: "12:00",
+      });
 
       return editPatientActivity(clinicId, patientId, activityId, {
         doctor_user_id,

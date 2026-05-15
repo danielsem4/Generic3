@@ -421,26 +421,7 @@ const he = {
       activityLabel: "פעילות",
       timelineLabel: "ציר זמן",
       startDate: "תאריך התחלה",
-      endDate: "תאריך סיום",
-      frequencyLabel: "תדירות ולוח זמנים",
-      frequencyOptions: {
-        once: "פעם אחת",
-        daily: "יומי",
-        weekly: "שבועי",
-        monthly: "חודשי",
-      },
-      daysOfWeek: "באילו ימים בשבוע?",
-      dayOfMonth: "באיזה יום בחודש?",
-      addTime: "הוסף שעה",
-      days: {
-        MON: "שני",
-        TUE: "שלישי",
-        WED: "רביעי",
-        THU: "חמישי",
-        FRI: "שישי",
-        SAT: "שבת",
-        SUN: "ראשון",
-      },
+      endDate: "תאריך סיום",      
       editError: "עדכון הפעילות נכשל. נסה שוב.",
       editSuccess: "הפעילות עודכנה בהצלחה.",
       saveChanges: "שמור שינויים",
@@ -500,27 +481,11 @@ const he = {
       startDate: "תאריך התחלה",
       endDate: "תאריך סיום (אופציונלי)",
       sendToPatient: "שלח למטופל",
-      frequencyLabel: "תדירות ולוח זמנים",
       addTime: "הוסף שעה",
       dayOfMonth: "יום בחודש",
       daysOfWeek: "ימים בשבוע",
       success: "המדד הוקצה בהצלחה.",
       error: "הקצאת המדד נכשלה.",
-      frequencyOptions: {
-        once: "פעם אחת",
-        daily: "יומי",
-        weekly: "שבועי",
-        monthly: "חודשי",
-      },
-      days: {
-        SUN: "ראשון",
-        MON: "שני",
-        TUE: "שלישי",
-        WED: "רביעי",
-        THU: "חמישי",
-        FRI: "שישי",
-        SAT: "שבת",
-      },
     },
     deleteConfirm: {
       title: "האם אתה בטוח שברצונך למחוק מדד זה?",
@@ -1018,7 +983,29 @@ analytics: {
       owner: "בעלים",
       actions: "פעולות"
     }
+  },
+  // frequencyManager
+frequencyManager: {
+  frequencyLabel: "תדירות ולוח זמנים",
+  addTime: "הוסף שעה",
+  dayOfMonth: "יום בחודש",
+  daysOfWeek: "ימים בשבוע",
+  frequencyOptions: {
+    once: "חד פעמי",
+    daily: "יומי",
+    weekly: "שבועי",
+    monthly: "חודשי",
+  },
+  days: {
+    SUN: "ראשון",
+    MON: "שני",
+    TUE: "שלישי",
+    WED: "רביעי",
+    THU: "חמישי",
+    FRI: "שישי",
+    SAT: "שבת",
   }
+}
 
 } as const;
 

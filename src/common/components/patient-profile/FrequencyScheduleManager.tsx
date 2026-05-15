@@ -18,16 +18,15 @@ interface IFrequencyScheduleManagerProps {
     dayOfMonth: string;
     setDayOfMonth: (value: string) => void;
   };
-  translationKey: string;
   maxSlotsByFrequency?: boolean;
 }
 
 export const FrequencyScheduleManager = ({
   hookData,
-  translationKey,
   maxSlotsByFrequency = true,
 }: IFrequencyScheduleManagerProps) => {
   const { t } = useTranslation();
+  const translationKey = "frequencyManager";
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   return (
@@ -63,6 +62,7 @@ export const FrequencyScheduleManager = ({
             <p className="text-[10px] font-bold text-muted-foreground uppercase">
               {t(`${translationKey}.daysOfWeek`)}
             </p>
+
             <div className="flex flex-wrap gap-2">
               {days.map((day) => (
                 <button
@@ -89,6 +89,7 @@ export const FrequencyScheduleManager = ({
             <p className="text-[10px] font-bold text-muted-foreground uppercase">
               {t(`${translationKey}.dayOfMonth`)}
             </p>
+
             <input
               type="number"
               min="1"

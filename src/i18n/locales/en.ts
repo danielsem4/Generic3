@@ -409,28 +409,7 @@ patients: {
       activityLabel: "Activity",
       timelineLabel: "Timeline",
       startDate: "Start Date",
-      endDate: "End Date",
-      frequencyLabel: "Frequency & Schedule",
-      frequencyOptions: {
-        once: "Once",
-        daily: "Daily",
-        weekly: "Weekly",
-        monthly: "Monthly",
-      },
-      daysOfWeek:"Which Days of the Week?",
-      dayOfMonth:"Which Day of the Month?",
-      addTime: "Add Time",
-      days: {
-        MON: "Monday",
-        TUE: "Tuesday",
-        WED: "Wednesday",
-        THU: "Thursday",
-        FRI: "Friday",
-        SAT: "Saturday",
-        SUN: "Sunday"
-      },
-      
-
+      endDate: "End Date",      
       editError: "Failed to update activity. Please try again.",
       editSuccess: "Activity updated successfully.",
       saveChanges: "Save Changes",
@@ -490,27 +469,11 @@ patients: {
     startDate: "Start Date",
     endDate: "End Date (Optional)",
     sendToPatient: "Send to Patient",
-    frequencyLabel: "Frequency & Schedule",
     addTime: "Add Time",
     dayOfMonth: "Day of Month",
     daysOfWeek: "Days of Week",
     success: "Measurement assigned successfully.",
     error: "Failed to assign measurement.",
-    frequencyOptions: {
-      once: "Once",
-      daily: "Daily",
-      weekly: "Weekly",
-      monthly: "Monthly",
-    },
-    days: {
-      SUN: "Sunday",
-      MON: "Monday",
-      TUE: "Tuesday",
-      WED: "Wednesday",
-      THU: "Thursday",
-      FRI: "Friday",
-      SAT: "Saturday",
-    },
   },
   deleteConfirm: {
   title: "Are you sure you want to delete this measurement?",
@@ -1010,7 +973,29 @@ modules: {
       owner: "Owner",
       actions: "Actions"
     }
+  },
+  // frequencyManager
+  frequencyManager: {
+  frequencyLabel: "Frequency & Schedule",
+  addTime: "Add Time",
+  dayOfMonth: "Day of Month",
+  daysOfWeek: "Days of Week",
+  frequencyOptions: {
+    once: "Once",
+    daily: "Daily",
+    weekly: "Weekly",
+    monthly: "Monthly",
+  },
+  days: {
+    SUN: "Sunday",
+    MON: "Monday",
+    TUE: "Tuesday",
+    WED: "Wednesday",
+    THU: "Thursday",
+    FRI: "Friday",
+    SAT: "Saturday",
   }
+}
 
 } as const;
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { Pill, CheckCircle2} from "lucide-react";
 import { Button } from "@/components/ui/button";

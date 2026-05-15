@@ -3,7 +3,15 @@ import type {
   IClinicMedication,
   IPatientPrescription,
   PrescriptionFrequency,
+  IMedicationFrequencyData,
 } from "@/common/types/Medication";
+
+import type {
+  IIntakeLog,
+  IMedicationLogFilters,
+} from "@/screens/patient-meds/schema/patientMedicationsSchema";
+
+import api from "@/lib/axios";
 
 export interface IAddPatientMedicationPayload {
   medication_id: string;
@@ -12,12 +20,7 @@ export interface IAddPatientMedicationPayload {
   end_date: string;
   dosage: string;
   frequency: PrescriptionFrequency;
-  frequency_data: {
-    time_slots?: string[];
-    times_per_day?: number;
-    days_of_week?: string[];
-    weeks_of_month?: string[];
-  };
+  frequency_data: IMedicationFrequencyData;
 }
 
 export interface IUpdatePrescriptionPayload {
@@ -25,12 +28,8 @@ export interface IUpdatePrescriptionPayload {
   start_date: string;
   end_date: string;
   frequency: PrescriptionFrequency;
+  frequency_data: IMedicationFrequencyData;
 }
-import type {
-  IIntakeLog,
-  IMedicationLogFilters,
-} from "@/screens/patient-meds/schema/patientMedicationsSchema";
-import api from "@/lib/axios";
 
 export async function fetchAllGlobalMedications(): Promise<IMedication[]> {
   const response = await api.get<IMedication[]>("/api/v1/medications/");

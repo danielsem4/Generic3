@@ -116,7 +116,6 @@ export default function PatientMeasurementSettingsDialog({
             {/* frequency */}
             <FrequencyScheduleManager
               hookData={frequencyScheduleData}
-              translationKey="patientMeasurements.settings"
             />
           </div>
         </div>

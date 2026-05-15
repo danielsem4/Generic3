@@ -426,25 +426,6 @@ const ru = {
       timelineLabel: "Период",
       startDate: "Дата начала",
       endDate: "Дата окончания",
-      frequencyLabel: "Частота и расписание",
-      frequencyOptions: {
-        once: "Один раз",
-        daily: "Ежедневно",
-        weekly: "Еженедельно",
-        monthly: "Ежемесячно",
-      },
-      daysOfWeek: "В какие дни недели?",
-      dayOfMonth: "В какой день месяца?",
-      addTime: "Добавить время",
-      days: {
-        MON: "Понедельник",
-        TUE: "Вторник",
-        WED: "Среда",
-        THU: "Четверг",
-        FRI: "Пятница",
-        SAT: "Суббота",
-        SUN: "Воскресенье",
-      },
       editError: "Не удалось обновить активность. Попробуйте снова.",
       editSuccess: "Активность успешно обновлена.",
       saveChanges: "Сохранить изменения",
@@ -504,27 +485,11 @@ const ru = {
       startDate: "Дата начала",
       endDate: "Дата окончания (необязательно)",
       sendToPatient: "Отправить пациенту",
-      frequencyLabel: "Частота и расписание",
       addTime: "Добавить время",
       dayOfMonth: "День месяца",
       daysOfWeek: "Дни недели",
       success: "Измерение успешно назначено.",
       error: "Не удалось назначить измерение.",
-      frequencyOptions: {
-        once: "Один раз",
-        daily: "Ежедневно",
-        weekly: "Еженедельно",
-        monthly: "Ежемесячно",
-      },
-      days: {
-        SUN: "Воскресенье",
-        MON: "Понедельник",
-        TUE: "Вторник",
-        WED: "Среда",
-        THU: "Четверг",
-        FRI: "Пятница",
-        SAT: "Суббота",
-      },
     },
     deleteConfirm: {
       title: "Вы уверены, что хотите удалить это измерение?",
@@ -1022,7 +987,29 @@ filters: {
       owner: "Владелец",
       actions: "Действия"
     }
-  }
+  },
+// frequencyManager
+frequencyManager: {
+  frequencyLabel: "Частота и расписание",
+  addTime: "Добавить время",
+  dayOfMonth: "День месяца",
+  daysOfWeek: "Дни недели",
+  frequencyOptions: {
+    once: "Один раз",
+    daily: "Ежедневно",
+    weekly: "Еженедельно",
+    monthly: "Ежемесячно",
+  },
+  days: {
+    SUN: "Воскресенье",
+    MON: "Понедельник",
+    TUE: "Вторник",
+    WED: "Среда",
+    THU: "Четверг",
+    FRI: "Пятница",
+    SAT: "Суббота",
+  },
+}
 
 } as const;
 

@@ -67,7 +67,6 @@ export function AddActivityModal({
       />
       <FrequencyScheduleManager
        hookData={addActivityData}
-       translationKey="patientActivities.addActivity"
       />
     </FullScreenFormModal>
   );

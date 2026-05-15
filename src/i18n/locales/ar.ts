@@ -419,25 +419,6 @@ const ar = {
       timelineLabel: "الجدول الزمني",
       startDate: "تاريخ البدء",
       endDate: "تاريخ الانتهاء",
-      frequencyLabel: "التكرار والجدول",
-      frequencyOptions: {
-        once: "مرة واحدة",
-        daily: "يومي",
-        weekly: "أسبوعي",
-        monthly: "شهري",
-      },
-      daysOfWeek: "أي أيام في الأسبوع؟",
-      dayOfMonth: "أي يوم في الشهر؟",
-      addTime: "إضافة وقت",
-      days: {
-        MON: "الإثنين",
-        TUE: "الثلاثاء",
-        WED: "الأربعاء",
-        THU: "الخميس",
-        FRI: "الجمعة",
-        SAT: "السبت",
-        SUN: "الأحد",
-      },
       editError: "فشل في تحديث النشاط. حاول مرة أخرى.",
       editSuccess: "تم تحديث النشاط بنجاح.",
       saveChanges: "حفظ التغييرات",
@@ -497,27 +478,11 @@ const ar = {
       startDate: "تاريخ البدء",
       endDate: "تاريخ الانتهاء (اختياري)",
       sendToPatient: "إرسال إلى المريض",
-      frequencyLabel: "التكرار والجدول",
       addTime: "إضافة وقت",
       dayOfMonth: "يوم في الشهر",
       daysOfWeek: "أيام الأسبوع",
       success: "تم تعيين القياس بنجاح.",
       error: "فشل في تعيين القياس.",
-      frequencyOptions: {
-        once: "مرة واحدة",
-        daily: "يومي",
-        weekly: "أسبوعي",
-        monthly: "شهري",
-      },
-      days: {
-        SUN: "الأحد",
-        MON: "الإثنين",
-        TUE: "الثلاثاء",
-        WED: "الأربعاء",
-        THU: "الخميس",
-        FRI: "الجمعة",
-        SAT: "السبت",
-      },
     },
     deleteConfirm: {
       title: "هل أنت متأكد أنك تريد حذف هذا القياس؟",
@@ -1017,7 +982,30 @@ analytics: {
       owner: "المالك",
       actions: "إجراءات"
     }
-  }
+  },
+
+// frequencyManager
+frequencyManager: {
+  frequencyLabel: "التكرار والجدول الزمني",
+  addTime: "إضافة وقت",
+  dayOfMonth: "اليوم في الشهر",
+  daysOfWeek: "أيام الأسبوع",
+  frequencyOptions: {
+    once: "مرة واحدة",
+    daily: "يومي",
+    weekly: "أسبوعي",
+    monthly: "شهري",
+  },
+  days: {
+    SUN: "الأحد",
+    MON: "الاثنين",
+    TUE: "الثلاثاء",
+    WED: "الأربعاء",
+    THU: "الخميس",
+    FRI: "الجمعة",
+    SAT: "السبت",
+  },
+}
 
 } as const;
 
