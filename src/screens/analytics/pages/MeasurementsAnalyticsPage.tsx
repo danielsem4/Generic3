@@ -3,11 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { AnalyticsChartCard } from "../components/AnalyticsChartCard";
 import { AnalyticsDateFilters } from "../components/AnalyticsDateFilters";
-import {
-  getMeasurementsBusiestDays,
-  getMeasurementsUsage,
-  getMeasurementsSummary, 
-} from "@/api/analyticsApi";
+import { getMeasurementsAnalytics } from "@/api/analyticsApi";
 import { fillMissingDays } from "../utils/fillMissingDays"; 
 import { useAuthStore } from "@/store/useAuthStore";
 import { BackButton } from "@/components/ui/BackButton";
@@ -19,29 +15,26 @@ export default function MeasurementsAnalyticsPage() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const { data: summary } = useQuery({
-    queryKey: ["analytics", "measurements", "summary", clinicId, startDate, endDate],
-    queryFn: () => getMeasurementsSummary(clinicId!, startDate, endDate),
+  const {
+    data: analyticsData,
+    isLoading,
+  } = useQuery({
+    queryKey: ["analytics", "measurements", clinicId, startDate, endDate],
+    queryFn: () => getMeasurementsAnalytics(clinicId!, startDate, endDate),
     enabled: !!clinicId,
   });
-
-  const { data: usage = [], isLoading: isUsageLoading } = useQuery({
-    queryKey: ["analytics", "measurements", "usage", clinicId, startDate, endDate],
-    queryFn: () => getMeasurementsUsage(clinicId!, startDate, endDate),
-    enabled: !!clinicId,
-  });
-
-  const { data: busiestDays = [], isLoading: isBusiestDaysLoading } = useQuery({
-    queryKey: ["analytics", "measurements", "busiest-days", clinicId, startDate, endDate],
-    queryFn: () => getMeasurementsBusiestDays(clinicId!, startDate, endDate),
-    enabled: !!clinicId,
-  });
-
-  const isLoading = isUsageLoading || isBusiestDaysLoading;
 
   if (isLoading) {
-    return <div className="p-20 text-center font-bold text-muted-foreground">{t("analytics.loading")}</div>;
+    return (
+      <div className="p-20 text-center font-bold text-muted-foreground">
+        {t("analytics.loading")}
+      </div>
+    );
   }
+
+  const summary = analyticsData?.summary;
+  const usage = analyticsData?.usage ?? [];
+  const busiestDays = analyticsData?.busiest_days ?? [];
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -92,7 +85,6 @@ export default function MeasurementsAnalyticsPage() {
         </div>
       </div>
 
-      {/* גרפים */}
       <div className="grid gap-8">
         <AnalyticsChartCard
           title={t("analytics.measurements.usageChart")}

@@ -3,10 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { AnalyticsChartCard } from "../components/AnalyticsChartCard";
 import { AnalyticsDateFilters } from "../components/AnalyticsDateFilters";
-import {
-  getActivitiesBusiestDays,
-  getActivitiesUsage,
-} from "@/api/analyticsApi";
+import {getActivitiesAnalytics,} from "@/api/analyticsApi";
 import { fillMissingDays } from "../utils/fillMissingDays"; 
 import { useAuthStore } from "@/store/useAuthStore";
 import { BackButton } from "@/components/ui/BackButton";
@@ -19,37 +16,17 @@ export default function ActivitiesAnalyticsPage() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const {
-    data: usage = [],
-    isLoading: isUsageLoading,
-    error: usageError,
+const {
+    data: analyticsData,
+    isLoading,
+    error,
   } = useQuery({
-    queryKey: ["analytics", "activities", "usage", clinicId, startDate, endDate],
-    queryFn: () => getActivitiesUsage(clinicId!, startDate, endDate),
+    queryKey: ["analytics", "activities", clinicId, startDate, endDate],
+    queryFn: () => getActivitiesAnalytics(clinicId!, startDate, endDate),
     enabled: !!clinicId,
   });
 
-  const {
-    data: busiestDays = [],
-    isLoading: isBusiestDaysLoading,
-    error: busiestDaysError,
-  } = useQuery({
-    queryKey: [
-      "analytics",
-      "activities",
-      "busiest-days",
-      clinicId,
-      startDate,
-      endDate,
-    ],
-    queryFn: () => getActivitiesBusiestDays(clinicId!, startDate, endDate),
-    enabled: !!clinicId,
-  });
-
-  const isLoading = isUsageLoading || isBusiestDaysLoading;
-  const error = usageError || busiestDaysError;
-
-  if (isLoading) {
+if (isLoading) {
     return (
       <div className="p-20 text-center font-bold text-muted-foreground">
         {t("analytics.loading")}
@@ -64,6 +41,10 @@ export default function ActivitiesAnalyticsPage() {
       </div>
     );
   }
+
+  const usage = analyticsData?.usage ?? [];
+  const busiestDays = analyticsData?.busiest_days ?? [];
+  const summary = analyticsData?.summary;
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -91,17 +72,39 @@ export default function ActivitiesAnalyticsPage() {
           onEndDateChange={setEndDate}
         />
       </div>
+{/* 🟢 כרטיסיות סיכום עליונות לפעילויות */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="bg-card p-6 rounded-2xl border border-border shadow-sm">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            Total Logs
+          </p>
+          <h3 className="text-3xl font-black mt-2 text-foreground">
+            {summary?.total_logs || 0}
+          </h3>
+        </div>
+
+        <div className="bg-card p-6 rounded-2xl border border-border shadow-sm border-l-4 border-l-primary">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            Most Used
+          </p>
+          <h3 className="text-xl font-bold mt-2 text-foreground truncate">
+            {summary?.most_used || t("analytics.noData")}
+          </h3>
+        </div>
+
+        <div className="bg-card p-6 rounded-2xl border border-border shadow-sm">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            Active Activities
+          </p>
+          <h3 className="text-3xl font-black mt-2 text-foreground">
+            {summary?.number_of_activities || 0}
+          </h3>
+        </div>
+      </div>
 
       <div className="grid gap-6">
-        <AnalyticsChartCard
-          title={t("analytics.activities.usageChart")}
-          data={usage}
-        />
-
-        <AnalyticsChartCard
-          title={t("analytics.activities.busiestDaysChart")}
-          data={fillMissingDays(busiestDays)}
-        />
+        <AnalyticsChartCard title={t("analytics.activities.usageChart")} data={usage} />
+        <AnalyticsChartCard title={t("analytics.activities.busiestDaysChart")} data={fillMissingDays(busiestDays)} />
       </div>
     </div>
   );

@@ -14,8 +14,12 @@ export function AnalyticsCard({
   description,
 }: Readonly<AnalyticsCardProps>) {
   const Icon = item.icon;
-  const s = ANALYTICS_ACCENT_STYLES[item.accent];
-
+const s = ANALYTICS_ACCENT_STYLES[item.accent] || {
+    border: "border-l-4 border-l-slate-300",
+    iconBg: "bg-slate-100",
+    iconText: "text-slate-500",
+  };
+  
   return (
     <Card
       className={[

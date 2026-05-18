@@ -31,9 +31,9 @@ export function FullScreenFormModal({
   cancelText,
 }: IFullScreenFormModalProps) {
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+   <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className="!fixed !inset-0 !z-[100] !max-w-none !w-screen !h-screen !m-0 !p-0 !bg-background !border-none !translate-x-0 !translate-y-0 !rounded-none overflow-y-auto"
+        className="!fixed !inset-0 !z-[100] !max-w-none !w-screen !h-screen !m-0 !p-0 !bg-background !border-none !translate-x-0 !translate-y-0 !rounded-none overflow-y-auto [&>button]:hidden"
         dir={dir}
       >
         <div className="flex justify-center items-start w-full min-h-screen bg-background">

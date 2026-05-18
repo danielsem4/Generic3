@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { useTranslation } from "react-i18next";
 
 interface AnalyticsDateFiltersProps {
@@ -21,12 +22,12 @@ export function AnalyticsDateFilters({
         <label className="text-xs font-medium text-muted-foreground">
           {t("analytics.filters.startDate")}
         </label>
-
-        <input
+        
+         <Input
           type="date"
           value={startDate}
           onChange={(event) => onStartDateChange(event.target.value)}
-          className="rounded-md border bg-background px-3 py-2 text-sm"
+          className="bg-secondary border-none h-12 rounded-xl text-sm font-medium text-foreground cursor-pointer"
         />
       </div>
 
@@ -35,11 +36,11 @@ export function AnalyticsDateFilters({
           {t("analytics.filters.endDate")}
         </label>
 
-        <input
+        <Input
           type="date"
           value={endDate}
           onChange={(event) => onEndDateChange(event.target.value)}
-          className="rounded-md border bg-background px-3 py-2 text-sm"
+          className="bg-secondary border-none h-12 rounded-xl text-sm font-medium text-foreground cursor-pointer"
         />
       </div>
     </div>

@@ -683,6 +683,7 @@ modules: {
   title: "Analytics",
   subtitle: "Click a card to view detailed statistics and charts.",
   loading: "Loading analytics data...",
+  error: "Failed to load analytics. Please try again.",
   cards:{
     activities: {
       title: "Activities Analytics",
@@ -696,8 +697,10 @@ modules: {
       title: "Measurements Analytics",
       description: "Review measurement results, submissions, and patient responses.",
     },
-    title: "Activities Analytics",
-    description: "View activity usage, trends, and patient engagement data.",
+    file_share: { 
+    title: "File Sharing",
+    description: "Statistics and tracking of file transfers and shares within the system."
+},
   },
     activities: {
       title: "Activities Analytics",
