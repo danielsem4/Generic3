@@ -854,6 +854,9 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
         required: false,
         visualKey: "",
         spots: [],
+        correctAnswerType: "NONE",
+        correctAnswer: "",
+        grade: 0,
       },
       propertyFields: [
         { key: "label",     labelKey: "measurements.props.label",    fieldType: "text" },
@@ -861,7 +864,10 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           key: "visualKey",
           labelKey: "measurements.props.visualKey",
           fieldType: "keySelector",
-          options: [{ label: "Body Map Visual", value: "BODY_MAP_VISUAL" }],
+          options: [
+            { label: "Body Map Visual", value: "BODY_MAP_VISUAL" },
+            { label: "Cognitive Field", value: "COGNITIVE_FIELD" },
+          ],
         },
         {
           key: "spots",
@@ -870,6 +876,28 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
           visibleWhen: { key: "visualKey", values: ["BODY_MAP_VISUAL"] },
         },
         { key: "required",  labelKey: "measurements.props.required", fieldType: "toggle" },
+        {
+          key: "correctAnswerType",
+          labelKey: "measurements.props.correctAnswerType",
+          fieldType: "select",
+          options: [
+            { label: "None", value: "NONE" },
+            { label: "Static", value: "STATIC" },
+            { label: "Dynamic", value: "DYNAMIC" },
+          ],
+        },
+        {
+          key: "correctAnswer",
+          labelKey: "measurements.props.correctAnswer",
+          fieldType: "text",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
+        {
+          key: "grade",
+          labelKey: "measurements.props.grade",
+          fieldType: "number",
+          visibleWhen: { key: "correctAnswerType", values: ["STATIC", "DYNAMIC"] },
+        },
       ],
     },
   };

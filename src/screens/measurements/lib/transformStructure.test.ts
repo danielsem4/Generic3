@@ -581,6 +581,133 @@ describe("transformScreensToPayload", () => {
     expect((component as { allowPartialScore: boolean }).allowPartialScore).toBe(true);
   });
 
+  it("maps a visualQuestion with STATIC answer type and grade", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "visualQuestion",
+            label: "Body Check",
+            required: true,
+            visualKey: "BODY_MAP_VISUAL",
+            spots: [{ point: "Head", subItems: ["Pain"] }],
+            correctAnswerType: "STATIC",
+            correctAnswer: "Head",
+            grade: 10,
+          },
+        ],
+      },
+    ];
+    const result = transformScreensToPayload(screens);
+    const element = result.screens[0].elements[0];
+    expect(element.element_type).toBe("BODY_MAP_VISUAL");
+    expect(element.correct_answer_type).toBe("STATIC");
+    expect(element.correct_answers).toEqual([{ answer: "Head", points: 10 }]);
+    expect(element.version_key).toBe("v1");
+  });
+
+  it("maps a visualQuestion with NONE answer type (no correct_answers)", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "visualQuestion",
+            label: "Body Check",
+            required: false,
+            visualKey: "BODY_MAP_VISUAL",
+            spots: [],
+            correctAnswerType: "NONE",
+            correctAnswer: "",
+            grade: 0,
+          },
+        ],
+      },
+    ];
+    const result = transformScreensToPayload(screens);
+    const element = result.screens[0].elements[0];
+    expect(element.correct_answer_type).toBe("NONE");
+    expect(element.correct_answers).toBeUndefined();
+  });
+
+  it("maps a cognitiveField (visualQuestion with COGNITIVE_FIELD key) with STATIC answer", () => {
+    const screens: IQScreen[] = [
+      {
+        id: "s1",
+        title: "Screen 1",
+        components: [
+          {
+            id: "c1",
+            type: "visualQuestion",
+            label: "What year is it?",
+            required: true,
+            visualKey: "COGNITIVE_FIELD",
+            spots: [],
+            correctAnswerType: "STATIC",
+            correctAnswer: "2026",
+            grade: 10,
+          },
+        ],
+      },
+    ];
+    const result = transformScreensToPayload(screens);
+    const element = result.screens[0].elements[0];
+    expect(element.element_type).toBe("COGNITIVE_FIELD");
+    expect(element.label).toBe("What year is it?");
+    expect(element.is_required).toBe(true);
+    expect(element.config).toEqual({});
+    expect(element.correct_answer_type).toBe("STATIC");
+    expect(element.correct_answers).toEqual([{ answer: "2026", points: 10 }]);
+    expect(element.version_key).toBe("v1");
+  });
+
+  it("round-trips a COGNITIVE_FIELD element through save and load", () => {
+    const serverResponse: IServerStructureResponse = {
+      measurement_id: "m1",
+      measurement_name: "Cognitive Test",
+      screens: [
+        {
+          id: "s1",
+          screen_number: 1,
+          title: "Screen 1",
+          rows: [
+            {
+              row_number: 1,
+              elements: [
+                {
+                  id: "c1",
+                  element_type: "COGNITIVE_FIELD",
+                  row_number: 1,
+                  order_in_row: 1,
+                  label: "What year is it?",
+                  is_required: true,
+                  config: {},
+                  correct_answer_type: "STATIC",
+                  correct_answers: [{ answer: "2026", points: 10 }],
+                  version_key: "v1",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    const screens = transformPayloadToScreens(serverResponse);
+    const component = screens[0].components[0];
+    expect(component.type).toBe("visualQuestion");
+    expect((component as { visualKey: string }).visualKey).toBe("COGNITIVE_FIELD");
+    expect((component as { required: boolean }).required).toBe(true);
+    expect(component.label).toBe("What year is it?");
+    expect((component as { correctAnswerType: string }).correctAnswerType).toBe("STATIC");
+    expect((component as { correctAnswer: string }).correctAnswer).toBe("2026");
+    expect((component as { grade: number }).grade).toBe(10);
+  });
+
   it("preserves screen titles in order", () => {
     const screens: IQScreen[] = [
       { id: "s1", title: "First", components: [] },

@@ -157,15 +157,22 @@ function mapComponent(
       visualKey === "BODY_MAP_VISUAL" && vis.spots.length > 0
         ? { spots: vis.spots.map((s) => ({ point: s.point, subItems: s.subItems })) }
         : {};
-    return {
+    const answerType: CorrectAnswerType = vis.correctAnswerType ?? "NONE";
+    const field: BackendField = {
       label: component.label,
       element_type: visualKey,
       is_required: vis.required,
       row_number: rowNumber,
       order_in_row: orderInRow,
       config,
-      correct_answer_type: "NONE",
+      correct_answer_type: answerType,
+      version_key: versionKey,
     };
+    const correctAnswers = buildCorrectAnswers(component, answerType);
+    if (correctAnswers) {
+      field.correct_answers = correctAnswers;
+    }
+    return field;
   }
 
   const backendType = FRONTEND_TO_BACKEND_TYPE[component.type];
@@ -372,6 +379,7 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
           ? s.subItems.filter((v): v is string => typeof v === "string")
           : [],
       }));
+    const { correctAnswer, grade } = buildScalarCorrectAnswer(element.correct_answers);
     return {
       id: element.id,
       type: "visualQuestion",
@@ -379,6 +387,9 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
       required: element.is_required,
       visualKey: element.element_type,
       spots,
+      correctAnswerType: element.correct_answer_type,
+      correctAnswer,
+      grade,
     } as IQComponent;
   }
 
