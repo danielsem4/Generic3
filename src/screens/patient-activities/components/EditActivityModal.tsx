@@ -98,7 +98,6 @@ export function EditActivityModal({
 
       <FrequencyScheduleManager
         hookData={frequencyScheduleData}
-        translationKey="patientActivities.editActivity"
       />
     </div>
   </FullScreenFormModal>

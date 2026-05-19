@@ -409,28 +409,7 @@ patients: {
       activityLabel: "Activity",
       timelineLabel: "Timeline",
       startDate: "Start Date",
-      endDate: "End Date",
-      frequencyLabel: "Frequency & Schedule",
-      frequencyOptions: {
-        once: "Once",
-        daily: "Daily",
-        weekly: "Weekly",
-        monthly: "Monthly",
-      },
-      daysOfWeek:"Which Days of the Week?",
-      dayOfMonth:"Which Day of the Month?",
-      addTime: "Add Time",
-      days: {
-        MON: "Monday",
-        TUE: "Tuesday",
-        WED: "Wednesday",
-        THU: "Thursday",
-        FRI: "Friday",
-        SAT: "Saturday",
-        SUN: "Sunday"
-      },
-      
-
+      endDate: "End Date",      
       editError: "Failed to update activity. Please try again.",
       editSuccess: "Activity updated successfully.",
       saveChanges: "Save Changes",
@@ -490,27 +469,11 @@ patients: {
     startDate: "Start Date",
     endDate: "End Date (Optional)",
     sendToPatient: "Send to Patient",
-    frequencyLabel: "Frequency & Schedule",
     addTime: "Add Time",
     dayOfMonth: "Day of Month",
     daysOfWeek: "Days of Week",
     success: "Measurement assigned successfully.",
     error: "Failed to assign measurement.",
-    frequencyOptions: {
-      once: "Once",
-      daily: "Daily",
-      weekly: "Weekly",
-      monthly: "Monthly",
-    },
-    days: {
-      SUN: "Sunday",
-      MON: "Monday",
-      TUE: "Tuesday",
-      WED: "Wednesday",
-      THU: "Thursday",
-      FRI: "Friday",
-      SAT: "Saturday",
-    },
   },
   deleteConfirm: {
   title: "Are you sure you want to delete this measurement?",
@@ -716,11 +679,58 @@ modules: {
   },
 
   // Analytics
-  analytics: {
-    title: "Analytics",
-    description: "Clinic performance metrics and analytics",
+ analytics: {
+  title: "Analytics",
+  subtitle: "Click a card to view detailed statistics and charts.",
+  loading: "Loading analytics data...",
+  error: "Failed to load analytics. Please try again.",
+  cards:{
+    activities: {
+      title: "Activities Analytics",
+      description: "Analyze activity usage, trends, and patient engagement data.",
+    },
+    medications: {
+      title: "Medications Analytics", 
+      description: "Analyze medication usage, adherence, and related trends.",
+    },
+    measurements: {   
+      title: "Measurements Analytics",
+      description: "Review measurement results, submissions, and patient responses.",
+    },
+    file_share: { 
+    title: "File Sharing",
+    description: "Statistics and tracking of file transfers and shares within the system."
+},
   },
-
+    activities: {
+      title: "Activities Analytics",
+      description: "Analyze activity usage, trends, and patient engagement data.",
+      busiestDaysChart: "Busiest Days",
+      usageChart: "Usage Over Time",
+    },
+    medications: {
+      title: "Medications Analytics",
+      description: "Analyze medication usage, adherence, and related trends.",
+      busiestDaysChart: "Busiest Days",
+      usageChart: "Usage Over Time",
+    },
+   measurements: {
+  title: "Measurements Analytics",
+  description: "Review measurement results, submissions, and patient responses.",
+  busiestDaysChart: "Busiest Days",
+  usageChart: "Usage Over Time",
+  summary: {
+    total: "Total Submissions",
+    mostUsed: "Most Used Measurement",
+    types: "Active Measurement Types",
+  },
+  },
+  export: "Export",
+  filters: {
+  startDate: "Start date",
+  endDate: "End date",
+},
+},
   
   // Measurements
   measurements: {
@@ -966,7 +976,29 @@ modules: {
       owner: "Owner",
       actions: "Actions"
     }
+  },
+  // frequencyManager
+  frequencyManager: {
+  frequencyLabel: "Frequency & Schedule",
+  addTime: "Add Time",
+  dayOfMonth: "Day of Month",
+  daysOfWeek: "Days of Week",
+  frequencyOptions: {
+    once: "Once",
+    daily: "Daily",
+    weekly: "Weekly",
+    monthly: "Monthly",
+  },
+  days: {
+    SUN: "Sunday",
+    MON: "Monday",
+    TUE: "Tuesday",
+    WED: "Wednesday",
+    THU: "Thursday",
+    FRI: "Friday",
+    SAT: "Saturday",
   }
+}
 
 } as const;
 

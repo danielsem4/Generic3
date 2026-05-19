@@ -10,7 +10,7 @@ import {
 } from "@/api/medicationService";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { PrescriptionFrequency } from "@/common/types/Medication";
-import type { ISelectedMed } from "../schema/patientMedicationsSchema";
+import type { ISelectedMed, FrequencyType } from "../schema/patientMedicationsSchema";
 
 export function usePatientMedications(userId: string) {
   const { t } = useTranslation();
@@ -40,11 +40,9 @@ export function usePatientMedications(userId: string) {
   const [endDate, setEndDate] = useState("2100-12-31");
   const [dosageAmount, setDosageAmount] = useState("1");
   const [dosageUnit, setDosageUnit] = useState("ml");
-  const [frequency, setFrequency] = useState<
-    "once" | "daily" | "weekly" | "monthly"
-  >("daily");
+  const [frequency, setFrequency] = useState<FrequencyType>("DAILY");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedWeeks, setSelectedWeeks] = useState<string[]>([]);
+  const [dayOfMonth, setDayOfMonth] = useState("1");
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
 
   const filteredPrescriptions = serverPrescriptions.filter((p) =>
@@ -62,13 +60,14 @@ export function usePatientMedications(userId: string) {
 
   const { mutate: submitAdd, isPending: isAddPending } = useMutation({
     mutationFn: () => {
-      const freq = frequency.toUpperCase() as PrescriptionFrequency;
-      const frequency_data =
-        freq === "WEEKLY"
-          ? { time_slots: timeSlots, days_of_week: selectedDays }
-          : freq === "MONTHLY"
-            ? { weeks_of_month: selectedWeeks, days_of_week: selectedDays }
-            : { time_slots: timeSlots, times_per_day: timeSlots.length };
+      const freq = frequency as PrescriptionFrequency;
+
+const frequency_data =
+  freq === "WEEKLY"
+    ? { time_slots: timeSlots, days_of_week: selectedDays }
+    : freq === "MONTHLY"
+      ? { time_slots: timeSlots, day_of_month: Number(dayOfMonth) }
+      : { time_slots: timeSlots, times_per_day: timeSlots.length };
       return addPatientMedication(clinicId!, userId, {
         medication_id: selectedMed!.id,
         doctor_user_id: doctorId!,
@@ -84,10 +83,10 @@ export function usePatientMedications(userId: string) {
         queryKey: ["patient-medications", clinicId, userId],
       });
       setSelectedMed(null);
-      setFrequency("daily");
+      setFrequency("DAILY");
       setTimeSlots([]);
       setSelectedDays([]);
-      setSelectedWeeks([]);
+      setDayOfMonth("1");
       toast.success(t("patientMeds.addSuccess"));
     },
     onError: () => {
@@ -106,9 +105,6 @@ export function usePatientMedications(userId: string) {
     );
   };
 
-  const toggleWeek = (week: string) => {
-    setSelectedWeeks([week]);
-  };
 
   const addTimeSlot = () => {
     setTimeSlots((prev) => [...prev, "12:00"]);
@@ -130,10 +126,11 @@ export function usePatientMedications(userId: string) {
     frequency,
     setFrequency,
     selectedDays,
-    selectedWeeks,
     timeSlots,
     searchTerm,
     setSearchTerm,
+    dayOfMonth,
+    setDayOfMonth,
     filteredPrescriptions,
     isAddModalOpen,
     setIsAddModalOpen,
@@ -152,7 +149,6 @@ export function usePatientMedications(userId: string) {
 
     // functions
     toggleDay,
-    toggleWeek,
     addTimeSlot,
     removeTimeSlot,
     handleFinalize,

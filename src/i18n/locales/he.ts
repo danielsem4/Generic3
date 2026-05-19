@@ -421,26 +421,7 @@ const he = {
       activityLabel: "פעילות",
       timelineLabel: "ציר זמן",
       startDate: "תאריך התחלה",
-      endDate: "תאריך סיום",
-      frequencyLabel: "תדירות ולוח זמנים",
-      frequencyOptions: {
-        once: "פעם אחת",
-        daily: "יומי",
-        weekly: "שבועי",
-        monthly: "חודשי",
-      },
-      daysOfWeek: "באילו ימים בשבוע?",
-      dayOfMonth: "באיזה יום בחודש?",
-      addTime: "הוסף שעה",
-      days: {
-        MON: "שני",
-        TUE: "שלישי",
-        WED: "רביעי",
-        THU: "חמישי",
-        FRI: "שישי",
-        SAT: "שבת",
-        SUN: "ראשון",
-      },
+      endDate: "תאריך סיום",      
       editError: "עדכון הפעילות נכשל. נסה שוב.",
       editSuccess: "הפעילות עודכנה בהצלחה.",
       saveChanges: "שמור שינויים",
@@ -500,27 +481,11 @@ const he = {
       startDate: "תאריך התחלה",
       endDate: "תאריך סיום (אופציונלי)",
       sendToPatient: "שלח למטופל",
-      frequencyLabel: "תדירות ולוח זמנים",
       addTime: "הוסף שעה",
       dayOfMonth: "יום בחודש",
       daysOfWeek: "ימים בשבוע",
       success: "המדד הוקצה בהצלחה.",
       error: "הקצאת המדד נכשלה.",
-      frequencyOptions: {
-        once: "פעם אחת",
-        daily: "יומי",
-        weekly: "שבועי",
-        monthly: "חודשי",
-      },
-      days: {
-        SUN: "ראשון",
-        MON: "שני",
-        TUE: "שלישי",
-        WED: "רביעי",
-        THU: "חמישי",
-        FRI: "שישי",
-        SAT: "שבת",
-      },
     },
     deleteConfirm: {
       title: "האם אתה בטוח שברצונך למחוק מדד זה?",
@@ -727,10 +692,58 @@ const he = {
   },
 
   // Analytics
-  analytics: {
-    title: "אנליטיקה",
-    description: "מדדי ביצועי מרפאה ואנליטיקה",
+analytics: {
+  title: "אנליטיקה",
+  subtitle: "לחץ על כרטיס כדי לצפות בסטטיסטיקות וגרפים מפורטים.",
+  loading: "טוען ניתוח...",
+  error: "טעינת הנתונים נכשלה. אנא נסה שוב.",
+  cards: {
+    activities: {
+      title: "אנליטיקת פעילויות",
+      description: "ניתוח שימוש בפעילויות, מגמות ונתוני מעורבות מטופלים."
+    },
+    medications: {
+      title: "אנליטיקת תרופות",
+      description: "ניתוח שימוש בתרופות, היענות לטיפול ומגמות קשורות."
+    },
+    measurements: {
+      title: "אנליטיקת מדדים",
+      description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים."
+    },
+    file_share: {
+    title: "שיתוף קבצים",
+    description: "סטטיסטיקות ומעקב אחר העברות ושיתופי קבצים במערכת."
+}
   },
+  activities: {
+    title: "אנליטיקת פעילויות",
+    description: "ניתוח שימוש בפעילויות, מגמות ונתוני מעורבות מטופלים.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן"
+  },
+  medications: {
+    title: "אנליטיקת תרופות",
+    description: "ניתוח שימוש בתרופות, היענות לטיפול ומגמות קשורות.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן"
+  },
+  measurements: {
+    title: "אנליטיקת מדדים",
+    description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים.",
+    busiestDaysChart: "ימים עמוסים ביותר",
+    usageChart: "שימוש לאורך זמן",
+    summary: {
+    total: "סך הכל הגשות",
+    mostUsed: "המדד הנפוץ ביותר",
+    types: "סוגי מדדים פעילים",
+    }
+  },
+  export: "ייצוא",
+  filters: {
+  startDate: "תאריך התחלה",
+  endDate: "תאריך סיום",
+},
+},
 
   // Measurements
   measurements: {
@@ -976,7 +989,29 @@ const he = {
       owner: "בעלים",
       actions: "פעולות"
     }
+  },
+  // frequencyManager
+frequencyManager: {
+  frequencyLabel: "תדירות ולוח זמנים",
+  addTime: "הוסף שעה",
+  dayOfMonth: "יום בחודש",
+  daysOfWeek: "ימים בשבוע",
+  frequencyOptions: {
+    once: "חד פעמי",
+    daily: "יומי",
+    weekly: "שבועי",
+    monthly: "חודשי",
+  },
+  days: {
+    SUN: "ראשון",
+    MON: "שני",
+    TUE: "שלישי",
+    WED: "רביעי",
+    THU: "חמישי",
+    FRI: "שישי",
+    SAT: "שבת",
   }
+}
 
 } as const;
 

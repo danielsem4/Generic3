@@ -16,6 +16,17 @@ export interface IClinicMedication {
 
 export type PrescriptionFrequency = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
 
+export interface IMedicationFrequencyData {
+  time_slots?: string[];
+  times_per_day?: number;
+
+  days_of_week?: string[];
+
+  time?: string;
+
+  day_of_month?: number;
+}
+
 export interface IPatientPrescription {
   id: string;
   patient: string;
@@ -32,10 +43,7 @@ export interface IPatientPrescription {
 
   dosage: string;
   frequency: PrescriptionFrequency;
-  frequency_data: {
-    time_slots?: string[]; // for DAILY frequency
-    times_per_day?: number; // for DAILY frequency
-  };
+  frequency_data: IMedicationFrequencyData;
 }
 
 // Pre-defined for future log-history feature — not rendered in this release

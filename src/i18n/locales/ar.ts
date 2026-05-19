@@ -419,25 +419,6 @@ const ar = {
       timelineLabel: "الجدول الزمني",
       startDate: "تاريخ البدء",
       endDate: "تاريخ الانتهاء",
-      frequencyLabel: "التكرار والجدول",
-      frequencyOptions: {
-        once: "مرة واحدة",
-        daily: "يومي",
-        weekly: "أسبوعي",
-        monthly: "شهري",
-      },
-      daysOfWeek: "أي أيام في الأسبوع؟",
-      dayOfMonth: "أي يوم في الشهر؟",
-      addTime: "إضافة وقت",
-      days: {
-        MON: "الإثنين",
-        TUE: "الثلاثاء",
-        WED: "الأربعاء",
-        THU: "الخميس",
-        FRI: "الجمعة",
-        SAT: "السبت",
-        SUN: "الأحد",
-      },
       editError: "فشل في تحديث النشاط. حاول مرة أخرى.",
       editSuccess: "تم تحديث النشاط بنجاح.",
       saveChanges: "حفظ التغييرات",
@@ -497,27 +478,11 @@ const ar = {
       startDate: "تاريخ البدء",
       endDate: "تاريخ الانتهاء (اختياري)",
       sendToPatient: "إرسال إلى المريض",
-      frequencyLabel: "التكرار والجدول",
       addTime: "إضافة وقت",
       dayOfMonth: "يوم في الشهر",
       daysOfWeek: "أيام الأسبوع",
       success: "تم تعيين القياس بنجاح.",
       error: "فشل في تعيين القياس.",
-      frequencyOptions: {
-        once: "مرة واحدة",
-        daily: "يومي",
-        weekly: "أسبوعي",
-        monthly: "شهري",
-      },
-      days: {
-        SUN: "الأحد",
-        MON: "الإثنين",
-        TUE: "الثلاثاء",
-        WED: "الأربعاء",
-        THU: "الخميس",
-        FRI: "الجمعة",
-        SAT: "السبت",
-      },
     },
     deleteConfirm: {
       title: "هل أنت متأكد أنك تريد حذف هذا القياس؟",
@@ -724,11 +689,60 @@ const ar = {
   },
 
   // Analytics
-  analytics: {
-    title: "التحليلات",
-    description: "مقاييس أداء العيادة والتحليلات",
+analytics: {
+  title: "التحليلات",
+  subtitle: "انقر على بطاقة لعرض الإحصائيات والرسوم البيانية التفصيلية.",
+  loading: "جارٍ تحميل التحليلات...",
+  error: "فشل تحميل التحليلات. يرجى المحاولة مرة أخرى.",
+
+  cards: {
+    activities: {
+      title: "تحليلات الأنشطة",
+      description: "تحليل استخدام النشاط والاتجاهات وبيانات مشاركة المرضى."
+    },
+    medications: {
+      title: "تحليلات الأدوية",
+      description: "تحليل استخدام الأدوية والالتزام بالعلاج والاتجاهات ذات الصلة."
+    },
+    measurements: {
+      title: "تحليلات القياسات",
+      description: "مراجعة نتائج القياسات والتقديمات وردود فعل المرضى."
+    },
+    file_share: {
+      title: "مشاركة الملفات",
+      description: "الإحصائيات وتعقب نقل ومشاركة الملفات داخل النظام."
+    }
   },
-  
+  activities: {
+    title: "تحليلات الأنشطة",
+    description: "تحليل استخدام النشاط والاتجاهات وبيانات مشاركة المرضى.",
+    busiestDaysChart: "الأيام الأكثر ازدحاماً",
+    usageChart: "الاستخدام بروֹر الوقت"
+  },
+  medications: {
+    title: "تحليلات الأدوية",
+    description: "تحليل استخدام الأدوية والالتزام بالعلاج والاتجاهات ذات الصلة.",
+    busiestDaysChart: "الأيام الأكثر ازدحاماً",
+    usageChart: "الاستخدام بروֹر الوقت"
+  },
+  measurements: {
+    title: "تحليلات القياسات",
+    description: "مراجعة نتائج القياسات والتقديمات وردود فعل المرضى.",
+    busiestDaysChart:" الأيام الأكثر ازدحاماً",
+    usageChart: "الاستخدام بروֹר الوقت",
+    summary: {
+    total: "إجمالي القياسات",
+    mostUsed: "القياسات الأكثر استخداماً",
+    types: "أنواع القياسات",
+    }
+  },
+  export: "تصدير",
+  filters: {
+  startDate: "تاريخ البداية",
+  endDate: "تاريخ النهاية",
+},
+},
+
   // Measurements
   measurements: {
     title: "القياسات",
@@ -973,7 +987,30 @@ const ar = {
       owner: "المالك",
       actions: "إجراءات"
     }
-  }
+  },
+
+// frequencyManager
+frequencyManager: {
+  frequencyLabel: "التكرار والجدول الزمني",
+  addTime: "إضافة وقت",
+  dayOfMonth: "اليوم في الشهر",
+  daysOfWeek: "أيام الأسبوع",
+  frequencyOptions: {
+    once: "مرة واحدة",
+    daily: "يومي",
+    weekly: "أسبوعي",
+    monthly: "شهري",
+  },
+  days: {
+    SUN: "الأحد",
+    MON: "الاثنين",
+    TUE: "الثلاثاء",
+    WED: "الأربعاء",
+    THU: "الخميس",
+    FRI: "الجمعة",
+    SAT: "السبت",
+  },
+}
 
 } as const;
 
