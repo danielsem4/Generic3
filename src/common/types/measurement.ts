@@ -235,6 +235,9 @@ export interface IQVisualQuestion extends IQBase {
   required: boolean;
   visualKey: string;
   spots: IQVisualSpot[];
+  correctAnswerType?: CorrectAnswerType;
+  correctAnswer?: string;
+  grade?: number;
 }
 
 export type IQComponent =
