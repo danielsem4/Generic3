@@ -547,10 +547,14 @@ patients: {
     noDescription: "No description available for this activity",
     confirm: "Confirm",
     close: "Close",
-    loading: "Loading...",
     fetchingDetails: "Fetching details from server...",
     upload_file: "Upload File",
     system: "System",
+    loading: {
+      title: "Processing your request",
+      fetchData: "Please wait while we gather the details.",
+      buttonText: "Please wait..."
+    },
   },
 
   // Modules

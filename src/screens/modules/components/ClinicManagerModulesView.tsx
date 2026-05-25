@@ -16,10 +16,16 @@ import {
 import { useClinicManagerModules } from "../hooks/useClinicManagerModules";
 import { ModulesTable } from "./ModulesTable";
 import { AddClinicModuleDialog } from "./AddClinicModuleDialog";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
+import { useModulesQuery } from "@/hooks/queries/useModulesQuery";
+import { useAuthStore } from "@/store/useAuthStore";
+
 
 export function ClinicManagerModulesView() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const clinicId = useAuthStore((s) => s.clinicId);
+  const { isFetching } = useModulesQuery(clinicId);
   const {
     filteredModules,
     availableModules,
@@ -46,11 +52,12 @@ export function ClinicManagerModulesView() {
     navigate(`/modules/${slug}`);
   };
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 
@@ -63,6 +70,7 @@ export function ClinicManagerModulesView() {
   }
 
   return (
+
     <div className="mx-auto max-w-6xl px-6 py-10">
       <div className="flex items-center justify-between mb-6">
         <div>

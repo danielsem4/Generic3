@@ -12,6 +12,7 @@ import { EditActivityModal } from "./components/EditActivityModal";
 import type { IPatientActivity } from "@/common/types/activities";
 import { useAuthStore } from "@/store/useAuthStore";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 
 export default function PatientActivities() {
@@ -28,6 +29,7 @@ export default function PatientActivities() {
     handleDelete,
     isAddModalOpen,
     setIsAddModalOpen,
+    isLoading,
   } = usePatientActivities(clinicId!, userId!);
 
   const {
@@ -52,6 +54,15 @@ export default function PatientActivities() {
   const handleEditModalClose = (open: boolean) => {
     if (!open) setEditingActivity(null);
   };
+
+  if (isLoading) {
+    return (
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
+    );
+  }
 
   return (
     <div

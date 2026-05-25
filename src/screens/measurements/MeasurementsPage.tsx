@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Ruler, Plus, Search, Loader2 } from "lucide-react";
+import { Ruler, Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRole } from "@/hooks/common/useRole";
@@ -10,6 +10,7 @@ import { DeleteMeasurementDialog } from "./components/dialogs/DeleteMeasurementD
 import { EditMeasurementDialog } from "./components/dialogs/EditMeasurementDialog";
 import { AddExistingMeasurementDialog } from "./components/dialogs/AddExistingMeasurementDialog";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 
 export default function MeasurementsPage() {
@@ -90,9 +91,10 @@ export default function MeasurementsPage() {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center py-12">
-          <Loader2 className="animate-spin text-primary" size={40} />
-        </div>
+        <LoadingSpinner 
+          title={t("common.loading.title")} 
+          description={t("common.loading.fetchData")} 
+        />
       ) : (
         <MeasurementList
           groups={groupedMeasurements}

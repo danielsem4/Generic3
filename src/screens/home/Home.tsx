@@ -15,6 +15,7 @@ import type { UserRole } from "@/common/types/Role";
 import type { LucideIcon } from "lucide-react";
 import type { IUser } from "@/common/Users";
 import type { IModule } from "@/common/types/patientDetails";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 interface StatCardConfig {
   icon: LucideIcon;
@@ -105,7 +106,12 @@ export default function Home() {
   const { role, users, modules, isLoading, error } = useHome();
   const { cards, tableTitle } = useDashboardConfig(role, t);
 
-  if (isLoading) return <div>{t("home.loading")}</div>;
+  if (isLoading) 
+    return <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />;
+      
   if (error) return <div>{t("home.error")}</div>;
 
   return (

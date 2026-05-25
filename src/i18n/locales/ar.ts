@@ -556,10 +556,14 @@ const ar = {
     noDescription: "لا يوجد وصف متاح لهذا النشاط",
     confirm: "تأكيد",
     close: "إغلاق",
-    loading: "جاري التحميل...",
     fetchingDetails: "جاري جلب البيانات من الخادم...",
     upload_file: "تحميل ملف",
     system: "النظام",
+    loading: {
+      title: "معالجة طلبك",
+      fetchData: "يرجى الانتظار بينما نجمع التفاصيل.",
+      buttonText: "يرجى الانتظار..."
+}
   },
 
   // Modules

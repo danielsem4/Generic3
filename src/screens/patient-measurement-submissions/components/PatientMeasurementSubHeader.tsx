@@ -1,7 +1,7 @@
 import { Settings } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { BackButton } from "@/components/ui/BackButton"; 
 
 interface Props {
   userId?: string;
@@ -18,12 +18,11 @@ export default function PatientMeasurementSubmissionsHeader({
 
   return (
     <>
-      <Link
-        to={`/patients/${userId}/measurements`}
-        className="text-sm text-muted-foreground hover:text-foreground"
-      >
-        {t("patientMeasurements.submissions.backToMeasurements")}
-      </Link>
+      <BackButton 
+        to={`/patients/${userId}/measurements`} 
+        label={t("patientMeasurements.submissions.backToMeasurements")}
+        className="p-0 h-auto hover:bg-transparent text-sm text-muted-foreground hover:text-foreground"
+      />
 
       <div className="flex items-start justify-between gap-4">
         <div>

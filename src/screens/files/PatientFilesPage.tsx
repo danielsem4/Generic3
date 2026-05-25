@@ -87,7 +87,7 @@ export const PatientFilesPage = () => {
                   <TableCell colSpan={4} className="text-center py-20">
                     <Loader2 className="w-8 h-8 text-primary animate-spin mx-auto mb-2 opacity-50" />
                     <span className="font-bold text-muted-foreground tracking-tight">
-                      {t("common.loading")}
+                      {t("common.loading.title")}
                     </span>
                   </TableCell>
                 </TableRow>

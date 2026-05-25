@@ -1,4 +1,3 @@
-import { Loader2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,6 +8,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { LoadingButton } from "@/components/ui/LoadingButton"; 
+import { useTranslation } from "react-i18next";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -32,11 +33,10 @@ export function ConfirmDialog({
   onConfirm,
   isLoading = false,
   variant = "default",
-}: ConfirmDialogProps) {
-  const variantClasses =
-    variant === "destructive"
-      ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-      : "";
+}: Readonly<ConfirmDialogProps>) {
+  const { t } = useTranslation();
+
+  const buttonVariant = variant === "destructive" ? "destructive" : "default";
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -46,17 +46,16 @@ export function ConfirmDialog({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={onConfirm}
-            disabled={isLoading}
-            className={variantClasses}
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              confirmLabel
-            )}
+          <AlertDialogCancel disabled={isLoading}>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <LoadingButton
+              variant={buttonVariant}
+              onClick={onConfirm}
+              loading={isLoading}
+              loadingText={t("common.loading.buttonText", "Please wait...")} // מציג טקסט לצד האייקון המסתובב!
+            >
+              {confirmLabel}
+            </LoadingButton>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

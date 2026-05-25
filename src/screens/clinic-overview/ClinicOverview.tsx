@@ -17,6 +17,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function ClinicOverview() {
   const { t } = useTranslation();
@@ -40,9 +41,10 @@ export default function ClinicOverview() {
 
   if (isLoading) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="animate-spin text-primary" size={40} />
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 

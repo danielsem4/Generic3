@@ -15,6 +15,7 @@ export type AnalyticsItem = {
 
 interface UseAnalyticsModulesResult {
   items: AnalyticsItem[];
+  isLoading: boolean;
 }
 
 const ICONS: Record<string, React.ElementType> = {
@@ -38,22 +39,19 @@ const VALID_ROUTES = [
 
 export function useAnalyticsModules(): UseAnalyticsModulesResult {
   const [items, setItems] = React.useState<AnalyticsItem[]>([]);
-
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   React.useEffect(() => {
     let isMounted = true;
 
     const loadModules = async () => {
       try {
-        // משיכת רשימת המודולות הבסיסית (כרטיסיות בלבד, ללא דאטה של גרפים)
         const modules = (await getAllModules()) as { module_name: string }[];
 
         if (!isMounted) return;
 
         const mappedItems: AnalyticsItem[] = modules.map((module) => {
-          // מנקים רווחים בשביל התרגום הדינמי ב-JSON (למשל file_share)
           const key = module.module_name.toLowerCase().replace(/\s+/g, "_");
           
-          // ניתוב מול הראוטר המקומי
           const routeKey = module.module_name.toLowerCase();
           const href = `/analytics/${routeKey}`;
 
@@ -61,14 +59,15 @@ export function useAnalyticsModules(): UseAnalyticsModulesResult {
             key,
             icon: ICONS[key] || ClipboardList,
             accent: ACCENTS[key] || "gray",
-            // רק תרופות, מדידות ופעילויות יובילו לעמוד שלהן, השאר ל-not-found
             href: VALID_ROUTES.includes(href) ? href : "/not-found",
           };
         });
 
         setItems(mappedItems);
+        setIsLoading(false);
       } catch (error) {
         console.error("Failed to load modules for cards", error);
+        setIsLoading(false);
       }
     };
 
@@ -79,5 +78,8 @@ export function useAnalyticsModules(): UseAnalyticsModulesResult {
     };
   }, []);
 
-  return { items };
+  return {
+  items,
+  isLoading
+  };
 }

@@ -18,13 +18,13 @@ export function usePatientMedications(userId: string) {
   const doctorId = useAuthStore((state) => state.userId);
   const queryClient = useQueryClient();
 
-  const { data: serverPrescriptions = [] } = useQuery({
+const { data: serverPrescriptions = [], isLoading: isLoadingPatientMeds } = useQuery({
     queryKey: ["patient-medications", clinicId, userId],
     queryFn: () => fetchPatientMedications(clinicId!, userId),
     enabled: !!clinicId && !!userId,
   });
 
-  const { data: clinicMedications = [] } = useQuery({
+  const { data: clinicMedications = [], isLoading: isLoadingClinicMeds } = useQuery({
     queryKey: ["clinic-medications", clinicId],
     queryFn: () => fetchClinicMedications(clinicId!),
     enabled: !!clinicId,
@@ -120,6 +120,8 @@ const frequency_data =
   );
 };
 
+const isLoading = isLoadingPatientMeds || isLoadingClinicMeds;
+
   return {
     // states
     clinicMedications,
@@ -146,6 +148,7 @@ const frequency_data =
     dosageUnit,
     setDosageUnit,
     updateTimeSlot,
+    isLoading,
 
     // functions
     toggleDay,
