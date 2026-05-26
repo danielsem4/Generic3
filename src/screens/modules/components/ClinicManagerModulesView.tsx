@@ -1,11 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { PlusCircle, Loader2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import type { IModule } from "@/common/types/patientDetails";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -19,6 +18,7 @@ import { AddClinicModuleDialog } from "./AddClinicModuleDialog";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 import { useModulesQuery } from "@/hooks/queries/useModulesQuery";
 import { useAuthStore } from "@/store/useAuthStore";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 
 export function ClinicManagerModulesView() {
@@ -52,7 +52,7 @@ export function ClinicManagerModulesView() {
     navigate(`/modules/${slug}`);
   };
 
-  if (isLoading || isFetching) {
+if (isLoading) {
     return (
       <LoadingSpinner 
         title={t("common.loading.title")} 
@@ -86,14 +86,16 @@ export function ClinicManagerModulesView() {
         </Button>
       </div>
 
-      <ModulesTable
-        modules={filteredModules}
-        role="CLINIC_MANAGER"
-        searchTerm={searchTerm}
-        onSearchChange={handleSearchChange}
-        onDelete={openDelete}
-        onView={handleView}
-      />
+      <div className={isFetching ? "opacity-70 transition-opacity" : ""}>
+        <ModulesTable
+          modules={filteredModules}
+          role="CLINIC_MANAGER"
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          onDelete={openDelete}
+          onView={handleView}
+        />
+      </div>
 
       <AddClinicModuleDialog
         isOpen={isAddDialogOpen}
@@ -118,17 +120,15 @@ export function ClinicManagerModulesView() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={closeDelete}>{t("modules.cancel")}</AlertDialogCancel>
-            <AlertDialogAction
+            
+            <LoadingButton
               onClick={handleDelete}
-              disabled={isDeleting}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              loading={isDeleting}
+              loadingText={t("common.loading.deleting", "Deleting...")}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90 font-medium"
             >
-              {isDeleting ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                t("modules.removeClinicModuleTitle")
-              )}
-            </AlertDialogAction>
+              {t("modules.removeClinicModuleTitle")}
+            </LoadingButton>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

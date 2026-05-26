@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { UseFormReturn } from "react-hook-form";
 import type { ActivityFormValues } from "../schema/activitySchema";
+import { LoadingButton } from "@/components/ui/LoadingButton"; 
 
 interface Props {
   isOpen: boolean;
@@ -83,17 +83,14 @@ export function AddActivityDialog({
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               {t("common.cancel")}
             </Button>
-            <Button
+            <LoadingButton
               type="submit"
-              disabled={isSubmitting}
+              loading={isSubmitting}
+              loadingText={t("common.loading.adding", "Adding...")} // או מפתח תרגום מתאים
               className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
             >
-              {isSubmitting ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                t("activities.addBtn")
-              )}
-            </Button>
+              {t("activities.addBtn")}
+            </LoadingButton>
           </div>
         </form>
       </DialogContent>

@@ -28,7 +28,7 @@ export default function Medications() {
   const canDelete = role === "ADMIN" || role === "CLINIC_MANAGER";
 
   if (isLoading) {
-   return (
+    return (
       <LoadingSpinner 
         title={t("common.loading.title")} 
         description={t("common.loading.fetchData")} 

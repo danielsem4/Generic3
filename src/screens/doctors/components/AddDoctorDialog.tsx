@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAddDoctorDialog } from "../hooks/useAddDoctorDialog";
+import { LoadingButton } from "@/components/ui/LoadingButton"; 
 
 interface FormFieldProps {
   id: string;
@@ -68,13 +69,14 @@ export function AddDoctorDialog() {
             <FormField id="email" type="email" register={form.register as never} error={form.formState.errors.email} />
             <FormField id="phoneNumber" type="tel" register={form.register as never} error={form.formState.errors.phoneNumber} />
           </div>
-          <Button
+          <LoadingButton
             type="submit"
-            disabled={isSubmitting}
+            loading={isSubmitting}
+            loadingText={t("common.loading.registering", "Registering...")}
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg font-bold rounded-full mt-6 transition-colors shadow-sm"
           >
             {t("doctors.registerButton")}
-          </Button>
+          </LoadingButton>
         </form>
       </DialogContent>
     </Dialog>

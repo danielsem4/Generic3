@@ -8,20 +8,10 @@ import { useAdminModules } from "../hooks/useAdminModules";
 import { ModuleFormDialog } from "./ModuleFormDialog";
 import { ModulesTable } from "./ModulesTable";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
-import { useEffect, useState } from "react";
 
 export function AdminModulesView() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [isBackLoading, setIsBackLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsBackLoading(false);
-    }, 400); 
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const {
     filteredModules,
@@ -44,7 +34,7 @@ export function AdminModulesView() {
     handleDelete,
   } = useAdminModules();
 
-  if (isLoading || isBackLoading) {
+ if (isLoading) {
     return (
       <LoadingSpinner 
         title={t("common.loading.title")} 
