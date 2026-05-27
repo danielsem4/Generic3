@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Search, Check, Loader2 } from "lucide-react";
+import { Search, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { LoadingButton } from "@/components/ui/LoadingButton"; 
 import {
   Dialog,
   DialogContent,
@@ -103,13 +104,13 @@ export function AddClinicModuleDialog({
           <Button variant="outline" onClick={onClose} disabled={isSaving}>
             {t("modules.cancel")}
           </Button>
-          <Button onClick={onSave} disabled={isSaving}>
-            {isSaving ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              t("modules.saveModules")
-            )}
-          </Button>
+          <LoadingButton 
+            onClick={onSave} 
+            loading={isSaving}
+            loadingText={t("common.loading.saving", "Saving...")}
+          >
+            {t("modules.saveModules")}
+          </LoadingButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

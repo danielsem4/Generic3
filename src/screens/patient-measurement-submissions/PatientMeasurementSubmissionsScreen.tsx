@@ -5,13 +5,23 @@ import { usePatientMeasurementSettingsDialog } from "./hooks/usePatientMeasureme
 import PatientMeasurementSettingsDialog from "./components/PatientMeasurementSettingsDialog";
 import PatientMeasurementSubmissionsTable from "./components/PatientMeasurementSubTable";
 import PatientMeasurementSubmissionsHeader from "./components/PatientMeasurementSubHeader";
-import { BackButton } from "@/components/ui/BackButton";
-
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
+import { useEffect, useState } from "react";
 
 export default function PatientMeasurementSubmissionsScreen() {
   const { t } = useTranslation();
   const location = useLocation();
   const { userId } = useParams<{ userId: string; clinicId: string }>();
+
+  // 🟢 סטייט פשוט ונקי לכניסה בלבד
+  const [isScreenLoading, setIsScreenLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsScreenLoading(false);
+    }, 450); 
+    return () => clearTimeout(timer);
+  }, []);
 
   const measurementName =
     (location.state as { measurementName?: string } | null)?.measurementName ||
@@ -39,9 +49,17 @@ export default function PatientMeasurementSubmissionsScreen() {
     submitMeasurementSettings,
     isPending,
   } = usePatientMeasurementSettingsDialog();
-
-  if (isLoading) {
-    return <div className="p-6">{t("common.loading")}</div>;
+  
+  // 🟢 ספינר ממורכז קבוע, תמיד באותו מיקום מושלם על כל המסך (בלי תלות ב-Layout)
+  if (isLoading || isScreenLoading) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
+        <LoadingSpinner 
+          title={t("common.loading.title", "Loading")} 
+          description={t("common.loading.fetchData", "Fetching data...")} 
+        />
+      </div>
+    );
   }
 
   if (error) {
@@ -54,7 +72,6 @@ export default function PatientMeasurementSubmissionsScreen() {
 
   return (
     <div className="space-y-6 p-6">
-      <BackButton />
       <PatientMeasurementSubmissionsHeader
         userId={userId}
         measurementName={measurementName}

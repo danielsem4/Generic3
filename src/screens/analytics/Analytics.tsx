@@ -21,21 +21,21 @@ export default function Analytics() {
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-        {items.map((item) => (
-          <Link
-            key={item.key}
-            to={item.href}
-            className="block w-full rounded-2xl"
-          >
-            <AnalyticsCard
-              item={item}
-              title={t(`analytics.cards.${item.key}.title`)}
-              description={t(`analytics.cards.${item.key}.description`)}
-            />
-          </Link>
-        ))}
-      </div>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          {items.map((item) => (
+            <Link
+              key={item.key}
+              to={item.href}
+              className="block w-full rounded-2xl"
+            >
+              <AnalyticsCard
+                item={item}
+                title={t(`analytics.cards.${item.key}.title`)}
+                description={t(`analytics.cards.${item.key}.description`)}
+              />
+            </Link>
+          ))}
+        </div>
     </div>
   );
 }

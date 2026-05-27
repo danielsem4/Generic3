@@ -19,7 +19,10 @@ export type ModuleFormValues = z.infer<typeof moduleSchema>;
 export function useAdminModules() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { data: modules = [], isLoading, error } = useAllModulesQuery();
+  const { data: modules = [], isLoading, error } = useAllModulesQuery({
+    gcTime: 0,
+    staleTime: 0
+  });
   const [moduleToEdit, setModuleToEdit] = useState<IModule | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [moduleToDelete, setModuleToDelete] = useState<IModule | null>(null);

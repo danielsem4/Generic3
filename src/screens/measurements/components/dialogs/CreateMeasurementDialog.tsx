@@ -18,6 +18,7 @@ import {
 } from "../../schema/measurementSchema";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 const MEASUREMENT_TYPES = [
   { value: MeasurementType.QUESTIONNAIRES, labelKey: "measurements.types.questionnaries" },
@@ -142,9 +143,13 @@ export function CreateMeasurementDialog({
             >
               {t("measurements.cancel")}
             </Button>
-            <Button type="submit" disabled={isSubmitting}>
+            <LoadingButton 
+              type="submit" 
+              loading={isSubmitting}
+              loadingText={t("common.loading.creating", "Creating...")} // או מפתח תרגום רלוונטי
+            >
               {t("measurements.create")}
-            </Button>
+            </LoadingButton>
           </DialogFooter>
         </form>
       </DialogContent>

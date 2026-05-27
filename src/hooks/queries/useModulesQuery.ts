@@ -6,5 +6,10 @@ export const useModulesQuery = (clinicId: string | null) => {
     queryKey: ["clinic-modules", clinicId],
     queryFn: () => getClinicModules(clinicId!),
     enabled: !!clinicId,
+
+    staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };

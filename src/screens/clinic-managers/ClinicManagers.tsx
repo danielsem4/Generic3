@@ -9,6 +9,7 @@ import { AddClinicDialog } from "./components/AddClinicDialog";
 import { ClinicManagersTable } from "./components/ClinicManagersTable";
 import { EditClinicManagerDialog } from "./components/EditClinicManagerDialog";
 import { ClinicSelectDialog } from "./components/ClinicSelectDialog";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function ClinicManagers() {
   const { t } = useTranslation();
@@ -33,10 +34,12 @@ export default function ClinicManagers() {
     handleDelete,
   } = useClinicManagerActions();
 
-  if (isLoading) return (
-    <div className="p-10 text-center text-muted-foreground font-medium">
-      {t("home.loading")}
-    </div>
+  if (isLoading) 
+    return (
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
   );
 
   return (

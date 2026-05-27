@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Loader2 } from "lucide-react";
 import { useModules } from "../hooks/useModules";
 import { ModulesTable } from "./ModulesTable";
 import type { IModule } from "@/common/types/patientDetails";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export function ReadOnlyModulesView() {
   const { t } = useTranslation();
@@ -17,9 +17,10 @@ export function ReadOnlyModulesView() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 

@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { MeasurementType } from "@/common/types/measurement";
 import type { IMeasurement } from "@/common/types/measurement";
 import { useAddExistingMeasurement } from "../../hooks/list-page/useAddExistingMeasurement";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 const TYPE_LABEL_KEYS: Record<MeasurementType, string> = {
   [MeasurementType.QUESTIONNAIRES]: "measurements.types.questionnaries",
@@ -161,15 +162,14 @@ export function AddExistingMeasurementDialog({
           <Button variant="outline" onClick={() => handleOpenChange(false)}>
             {t("measurements.cancel")}
           </Button>
-          <Button
+          <LoadingButton
             onClick={handleConfirm}
-            disabled={selectedIds.size === 0 || isAdopting}
+            disabled={selectedIds.size === 0}
+            loading={isAdopting}
+            loadingText={t("common.loading.adding", "Adding...")} // או מפתח תרגום רלוונטי
           >
-            {isAdopting ? (
-              <Loader2 className="animate-spin mr-2" size={16} />
-            ) : null}
             {t("measurements.addCount", { count: selectedIds.size })}
-          </Button>
+          </LoadingButton>
         </div>
       </DialogContent>
     </Dialog>

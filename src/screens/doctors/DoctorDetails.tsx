@@ -1,23 +1,23 @@
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Mail, Phone, Building2, Pencil } from "lucide-react";
+import { Mail, Phone, Building2, Pencil } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useDoctorDetails } from "./hooks/useDoctorDetails";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
+import { BackButton } from "@/components/ui/BackButton"; 
 
 export default function DoctorDetails() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { doctor, isLoading, error } = useDoctorDetails();
 
-  function handleBack() {
-    navigate("/doctors");
-  }
 
   if (isLoading) {
     return (
-      <div className="p-10 text-center text-muted-foreground font-medium">
-        {t("home.loading")}
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
+        <LoadingSpinner 
+          title={t("common.loading.title")} 
+          description={t("common.loading.fetchData")} 
+        />
       </div>
     );
   }
@@ -33,13 +33,11 @@ export default function DoctorDetails() {
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto space-y-6">
-        <button
-          onClick={handleBack}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          {t("doctors.backToDirectory")}
-        </button>
+        <BackButton 
+          to="/doctors" 
+          label={t("doctors.backToDirectory")}
+          className="p-0 h-auto hover:bg-transparent text-sm text-muted-foreground hover:text-foreground"
+        />
 
         <Card className="w-full rounded-xl p-6">
           <div className="mb-6 flex items-start justify-between">

@@ -1,11 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { PlusCircle, Search, Dumbbell, Loader2 } from "lucide-react";
+import { PlusCircle, Search, Dumbbell } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { useActivitiesPage } from "../hooks/useActivitiesPage";
 import { ActivityItem } from "./ActivityItem";
 import { AddActivityToClinicDialog } from "./AddActivityToClinic";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export function ClinicActivitiesView() {
   const { t } = useTranslation();
@@ -30,9 +31,10 @@ export function ClinicActivitiesView() {
 
   if (isLoading) {
     return (
-      <div className="flex h-[60vh] items-center justify-center">
-        <Loader2 className="animate-spin text-primary" size={40} />
-      </div>
+    <LoadingSpinner 
+      title={t("common.loading.title")} 
+      description={t("common.loading.fetchData")} 
+    />
     );
   }
 

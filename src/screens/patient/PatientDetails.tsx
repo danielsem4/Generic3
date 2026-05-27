@@ -4,6 +4,8 @@ import PatientSectionsCard from "./components/PatientCards";
 import EntityHeader from "@/common/components/Patient+measurementPage/PatientHeader";
 import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
+
 
 export default function PatientDetails() {
   const { t } = useTranslation();
@@ -12,12 +14,13 @@ export default function PatientDetails() {
 
   if (isLoading) {
     return (
-      <div className="p-10 text-center text-muted-foreground font-medium">
-        {t("home.loading")}
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
-
+  
   if (error || !patient) {
     return (
       <div className="p-10 text-center text-destructive font-medium">
@@ -28,7 +31,7 @@ export default function PatientDetails() {
 
   return (
     <div className="p-6 space-y-6">
-      <BackButton />
+      <BackButton to="/patients" />
       <EntityHeader
        data={patient}
        renderActions={<PatientEditDialog patient={patient} />}

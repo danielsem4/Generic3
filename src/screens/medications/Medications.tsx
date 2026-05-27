@@ -6,6 +6,7 @@ import { MedicationList } from "./components/MedicationList";
 import { AddMedicationModal } from "./components/AddMedicationModal";
 import { AddToClinicModal } from "./components/AddToClinicModal";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function Medications() {
   const { t } = useTranslation();
@@ -28,9 +29,10 @@ export default function Medications() {
 
   if (isLoading) {
     return (
-      <div className="p-10 text-center text-muted-foreground font-medium">
-        {t("home.loading")}
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 

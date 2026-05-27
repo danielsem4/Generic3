@@ -15,23 +15,30 @@ export function usePatientMeasurementSubmissions() {
   const queryClient = useQueryClient();
 
   const {
-    data: patientResponse,
-    isLoading: isPatientLoading,
-    error: patientError,
-  } = useQuery({
-    queryKey: ["patient", userId],
-    queryFn: () => getPatientDetails(userId!),
-    enabled: !!userId,
-  });
+  data: patientResponse,
+  isLoading: isPatientLoading,
+  isFetching: isPatientFetching,
+  error: patientError,
+} = useQuery({
+  queryKey: ["patient", userId],
+  queryFn: () => getPatientDetails(userId!),
+  enabled: !!userId,
+});
 
   const clinicId = patientResponse?.clinics?.[0]?.id;
 
   const {
     data: submissions = [],
     isLoading: isSubmissionsLoading,
+    isFetching: isSubmissionsFetching,
     error: submissionsError,
   } = useQuery({
-    queryKey: ["patient-measurement-submissions", clinicId, userId],
+    queryKey: [
+  "patient-measurement-submissions",
+  clinicId,
+  userId,
+  measurementId,
+],
     queryFn: () => getPatientMeasurementSubmissions(clinicId!, userId!),
     enabled: !!clinicId && !!userId,
   });
@@ -42,7 +49,12 @@ export function usePatientMeasurementSubmissions() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["patient-measurement-submissions", clinicId, userId],
+  queryKey: [
+    "patient-measurement-submissions",
+    clinicId,
+    userId,
+    measurementId,
+  ],
       });
     },
   });
@@ -54,6 +66,7 @@ export function usePatientMeasurementSubmissions() {
   return {
     submissions: filteredSubmissions,
     isLoading: isPatientLoading || isSubmissionsLoading,
+    isFetching: isPatientFetching || isSubmissionsFetching,
     error: patientError || submissionsError,
     onDelete: (id: string) => deleteMutation.mutate(id),
     isDeleting: deleteMutation.isPending,

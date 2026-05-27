@@ -559,11 +559,15 @@ const he = {
     noDescription: "אין תיאור זמין לפעילות זו",
     confirm: "אישור",
     close: "סגירה",
-    loading: "טוען...",
     fetchingDetails: "מושך נתונים מהשרת...",
     upload_file: "העלה קובץ",
     system: "מערכת",
     save: "שמור",
+    loading: {
+      title: "מעבד את הבקשה שלך",
+      fetchData: "אנא המתן בזמן שאנו אוספים את הנתונים.",
+      buttonText: "אנא המתן..."
+    }
   },
   
   // Modules

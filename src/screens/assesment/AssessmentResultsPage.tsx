@@ -6,6 +6,7 @@ import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeas
 import { useAssessmentResults } from "./hooks/useAssessmentResults";
 import { ResultsTable } from "./components/ResultsTable";
 import { AnalyticsView } from "./components/AnalyticsView";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export const AssessmentResultsPage = () => {
   const { t } = useTranslation();
@@ -21,9 +22,10 @@ export const AssessmentResultsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="p-20 text-center font-bold text-muted-foreground">
-        {t("common.loading")}
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 

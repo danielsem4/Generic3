@@ -1,16 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { PlusCircle, Loader2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import type { IModule } from "@/common/types/patientDetails";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { useAdminModules } from "../hooks/useAdminModules";
 import { ModuleFormDialog } from "./ModuleFormDialog";
 import { ModulesTable } from "./ModulesTable";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export function AdminModulesView() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+
   const {
     filteredModules,
     isLoading,
@@ -32,26 +34,29 @@ export function AdminModulesView() {
     handleDelete,
   } = useAdminModules();
 
-  const handleView = (module: IModule) => {
-    const slug = module.module_name.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/modules/${slug}`);
-  };
-
-  if (isLoading) {
+ if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
 
-  if (error) {
+   if (error) {
     return (
       <div className="flex items-center justify-center py-20">
         <p className="text-destructive">{t("home.error")}</p>
       </div>
     );
   }
+
+
+  const handleView = (module: IModule) => {
+    const slug = module.module_name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/modules/${slug}`);
+  };
+
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">

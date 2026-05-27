@@ -7,18 +7,21 @@ import { usePatients } from "./hooks/usePatients";
 import { PatientsTable } from "./components/PatientsTable";
 import { useTranslation } from "react-i18next";
 import { useRole } from "@/hooks/common/useRole";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function Patients() {
   const { t } = useTranslation();
   const role = useRole();
   const { filteredUsers, searchTerm, handleSearchChange, isLoading } = usePatients();
 
-  if (isLoading)
+  if (isLoading) {
     return (
-      <div className="p-10 text-center text-muted-foreground font-medium">
-        {t("home.loading")}
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
+  }
 
   return (
     <div className="min-h-screen bg-background p-8">

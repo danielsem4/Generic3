@@ -5,15 +5,18 @@ import { Input } from "@/components/ui/input";
 import { PatientsTable } from "@/screens/patients/components/PatientsTable";
 import { useDoctors } from "./hooks/useDoctors";
 import { AddDoctorDialog } from "./components/AddDoctorDialog";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function Doctors() {
   const { t } = useTranslation();
   const { filteredUsers, searchTerm, handleSearchChange, isLoading } = useDoctors();
 
-  if (isLoading) return (
-    <div className="p-10 text-center text-muted-foreground font-medium">
-      {t("home.loading")}
-    </div>
+  if (isLoading) 
+    return (
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
   );
 
   return (

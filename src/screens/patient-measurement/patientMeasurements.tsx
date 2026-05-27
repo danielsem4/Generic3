@@ -4,6 +4,7 @@ import { useMeasurementPage } from "./hooks/useMeasurementsPage";
 import MeasurementSectionsCard from "./components/MeasurementSectionsCard";
 import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 
 export default function MeasurementPage() {
@@ -19,12 +20,13 @@ export default function MeasurementPage() {
 
   if (isLoading) {
     return (
-      <div className="p-10 text-center font-medium text-muted-foreground">
-        {t("home.loading")}
-      </div>
+      <LoadingSpinner 
+        title={t("common.loading.title")} 
+        description={t("common.loading.fetchData")} 
+      />
     );
   }
-
+  
   if (error || !patient) {
     return (
       <div className="p-10 text-center font-medium text-destructive">

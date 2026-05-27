@@ -12,6 +12,7 @@ import { EditMedicationModal } from "./components/EditMedicationModal";
 import type { IPatientPrescription } from "@/common/types/Medication";
 import { useAuthStore } from "@/store/useAuthStore";
 import { BackButton } from "@/components/ui/BackButton";
+import { LoadingSpinner } from "@/common/components/LoadingSpinner"; 
 
 
 export default function PatientMedications() {
@@ -26,12 +27,22 @@ export default function PatientMedications() {
     handleDelete,
     isAddModalOpen,
     setIsAddModalOpen,
+    isLoading, 
   } = usePatientMedications(userId!);
 
   const { intakeLogs, filters, handleFilterChange, handleResetFilters, refetch } =
     usePatientMedicationLogs(userId!);
 
   const [editingPrescription, setEditingPrescription] = useState<IPatientPrescription | null>(null);
+
+  if (isLoading) {
+    return (
+      <LoadingSpinner 
+        title={t("common.loading.title", "Loading")} 
+        description={t("common.loading.fetchData", "Fetching data...")} 
+      />
+    );
+  }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);

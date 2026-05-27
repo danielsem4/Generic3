@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAddToClinicDialog } from "../hooks/useAddToClinicDialog";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface MedicationSelectItemProps {
   id: string;
@@ -123,14 +124,16 @@ export function AddToClinicModal() {
           <Button variant="outline" onClick={handleCloseCancel}>
             {t("nav.cancel")}
           </Button>
-          <Button
+         <LoadingButton
             onClick={onConfirm}
-            disabled={selected.size === 0 || isSubmitting}
+            disabled={selected.size === 0}
+            loading={isSubmitting}
+            loadingText={t("common.loading.confirming", "Confirming...")}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
           >
             {t("medications.confirm")}{" "}
             {selected.size > 0 && `(${selected.size})`}
-          </Button>
+          </LoadingButton>
         </div>
       </DialogContent>
     </Dialog>
