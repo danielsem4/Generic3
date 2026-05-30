@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pencil, Bell, CheckCircle2, Pill } from "lucide-react";
+import { Pencil, Bell, CheckCircle2, Pill, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import type { IPatientPrescription } from "@/common/types/Medication";
 import { DeleteButton } from "@/common/components/DeleteButton";
+import { useNotifyPatient } from "@/hooks/common/useNotifyPatient";
 
 interface MedicationCardProps {
   prescription: IPatientPrescription;
@@ -22,6 +23,16 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
   const { t } = useTranslation();
   const [deleteOpen, setDeleteOpen] = useState(false);
 
+const { mutate: notifyPatient, isPending } = useNotifyPatient();
+
+const handleNotifyClick = () => {
+  if (!prescription.id) return; 
+  
+  notifyPatient({
+    type: "MEDICATION",
+    objectId: prescription.id, 
+  });
+};
   return (
     <Card className="border-border bg-card shadow-sm rounded-md overflow-hidden w-full mb-1">
       <CardContent className="p-0 px-4 flex justify-between items-center h-12">
@@ -38,8 +49,16 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
                 <Pencil size={15} />
               </button>
 
-              <button className="p-1 text-muted-foreground hover:text-warning cursor-pointer">
-                <Bell size={15} />
+              <button 
+                onClick={handleNotifyClick}
+                disabled={isPending}
+                className="p-1 text-muted-foreground hover:text-warning cursor-pointer disabled:opacity-50"
+              >
+                {isPending ? (
+                  <Loader2 size={15} className="animate-spin" />
+                ) : (
+                  <Bell size={15} />
+                )}
               </button>
             </div>
           )}
@@ -70,9 +89,8 @@ export const MedicationCard: React.FC<MedicationCardProps> = ({
         description={t("patientMeds.deleteConfirm.description")}
         confirmLabel={t("patientMeds.deleteConfirm.confirm")}
         cancelLabel={t("patientMeds.deleteConfirm.cancel")}
-        onConfirm={() => {
+       onConfirm={() => {
           onDelete(prescription.id);
-          setDeleteOpen(false);
         }}
         variant="destructive"
       />

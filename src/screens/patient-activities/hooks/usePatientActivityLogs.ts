@@ -12,6 +12,7 @@ export function usePatientActivityLogs(clinicId: string, userId: string) {
   const {
     data: activityLogs = [],
     isLoading,
+    isRefetching,
     error,
     refetch,
   } = useQuery({
@@ -48,6 +49,7 @@ export function usePatientActivityLogs(clinicId: string, userId: string) {
     handleFilterChange,
     handleResetFilters,
     refetch,
+    isRefetching,
     isLoading,
     error,
   };

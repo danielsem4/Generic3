@@ -1,13 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Activity, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ActivitySelector } from "./ActivitySelector";
 import { usePatientActivities } from "../hooks/usePatientActivities";
 import { useAddActivity } from "../hooks/useAddActivity";
 import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
 import { TimelineCard } from "@/common/components/TimelineCard";
 import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface IAddActivityModalProps {
   isOpen: boolean;
@@ -40,14 +40,16 @@ export function AddActivityModal({
       title={t("patientActivities.addActivity.newActivity")}
       cancelText={t("patientActivities.addActivity.cancel")}
       finalizeButton={
-        <Button
+       <LoadingButton
           onClick={handleFinalizeAction}
-          disabled={!addActivityData.selectedActivity || addActivityData.isAddPending}
-          className="min-w-[320px] h-16 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center gap-3"
+          disabled={!addActivityData.selectedActivity}
+          loading={addActivityData.isAddPending} 
+          loadingText={t("common.loading.adding", "Adding...")}
+          className="min-w-[320px] h-16 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center justify-center gap-3"
         >
           <CheckCircle2 size={24} />
-          {t("patientActivities.addActivity.finalize")}
-        </Button>
+          <span>{t("patientActivities.addActivity.finalize")}</span>
+        </LoadingButton>
       }
     >
       <ActivitySelector

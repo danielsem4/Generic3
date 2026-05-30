@@ -38,6 +38,7 @@ export default function PatientActivities() {
     handleFilterChange,
     handleResetFilters,
     refetch,
+    isRefetching,
   } = usePatientActivityLogs(clinicId!, userId!);
 
   const [editingActivity, setEditingActivity] =
@@ -120,6 +121,7 @@ export default function PatientActivities() {
           onFilterChange={handleFilterChange}
           onResetFilters={handleResetFilters}
           onRefresh={refetch}
+          isRefreshing={isRefetching}
           activities={filteredActivities}
         />
       </div>

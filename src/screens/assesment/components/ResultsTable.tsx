@@ -33,7 +33,6 @@ export const ResultsTable = ({
 
   const handleConfirmDelete = () => {
     if (deleteId) onDelete(deleteId);
-    setDeleteId(null);
   };
 
   const handleCloseDelete = () => {

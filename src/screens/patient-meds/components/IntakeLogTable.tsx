@@ -8,6 +8,7 @@ import type { IIntakeLog, IMedicationLogFilters } from "../schema/patientMedicat
 import type { IPatientPrescription } from "@/common/types/Medication";
 import { formatDate } from "@/common/utils/formatDate";
 import { formatTime } from "@/common/utils/formatTime";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface IntakeLogRowProps {
   log: IIntakeLog;
@@ -34,10 +35,11 @@ interface IntakeLogTableProps {
   onFilterChange: (updated: Partial<IMedicationLogFilters>) => void;
   onResetFilters: () => void;
   onRefresh: () => void;
+  isRefreshing?: boolean;
   prescriptions: IPatientPrescription[];
 }
 
-export function IntakeLogTable({ intakeLogs, filters, onFilterChange, onResetFilters, onRefresh, prescriptions }: IntakeLogTableProps) {
+export function IntakeLogTable({ intakeLogs, filters, onFilterChange, onResetFilters, onRefresh, isRefreshing = false,  prescriptions }: IntakeLogTableProps) {
   const { t } = useTranslation();
 
   const handleMedicationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,12 +65,15 @@ export function IntakeLogTable({ intakeLogs, filters, onFilterChange, onResetFil
           >
             {t("patientMeds.resetFilters")}
           </Button>
-          <Button
+         <LoadingButton
             onClick={onRefresh}
-            className="bg-primary text-primary-foreground hover:opacity-90 gap-2 h-9 px-4 text-xs transition-opacity shadow-sm"
+            loading={isRefreshing} 
+            loadingText={t("patientMeds.refreshData")} 
+            className="bg-primary text-primary-foreground hover:opacity-90 h-9 px-4 text-xs transition-opacity shadow-sm flex items-center justify-center gap-2 rounded-md font-medium"
           >
-            <RotateCcw size={14} /> {t("patientMeds.refreshData")}
-          </Button>
+            {!isRefreshing && <RotateCcw size={14} />} 
+            <span>{t("patientMeds.refreshData")}</span>
+          </LoadingButton>
         </div>
       </div>
 
