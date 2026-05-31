@@ -6,8 +6,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Upload, Loader2, CloudUpload } from "lucide-react";
+import { Upload, CloudUpload } from "lucide-react";
 import { useUploadFileDialog } from "../hooks/useUploadFileDialog";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 export const UploadFileDialog = () => {
   const { t } = useTranslation();
@@ -129,17 +130,14 @@ export const UploadFileDialog = () => {
           >
             {t("common.cancel")}
           </Button>
-          <Button
-            disabled={!file || isUploading}
+          <LoadingButton
+            disabled={!file}
             onClick={handleUpload}
-            className="rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground min-w-[120px] shadow-sm disabled:opacity-50"
+            loading={isUploading}
+            className="rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground min-w-[120px] shadow-sm disabled:opacity-50 flex items-center justify-center"
           >
-            {isUploading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              t("common.upload_file")
-            )}
-          </Button>
+            {t("common.upload_file")}
+          </LoadingButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

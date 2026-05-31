@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Activity, Save} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import type { IPatientActivity } from "@/common/types/activities";
 import { useEditActivity } from "../hooks/useEditActivity";
 import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
 import { TimelineCard } from "@/common/components/TimelineCard";
 import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface IEditActivityModalProps {
   activity: IPatientActivity | null;
@@ -66,14 +66,15 @@ export function EditActivityModal({
     title={t("patientActivities.editActivity.title")}
     cancelText={t("patientActivities.editActivity.cancel")}
     finalizeButton={
-      <Button
-        onClick={handleSave}
-        disabled={isPending}
-        className="min-w-[280px] h-14 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center gap-3"
-      >
-        <Save size={22} />
-        {t("patientActivities.editActivity.saveChanges")}
-      </Button>
+      <LoadingButton
+          onClick={handleSave}
+          loading={isPending} 
+          loadingText={t("common.loading.saving", "Saving...")}
+          className="min-w-[280px] h-14 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center justify-center gap-3"
+        >
+          <Save size={22} />
+          <span>{t("patientActivities.editActivity.saveChanges")}</span>
+        </LoadingButton>
     }
   >
     <div className="space-y-6">

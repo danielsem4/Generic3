@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Pencil } from "lucide-react";
 import type { IPatientDetails } from "@/common/types/patientDetails";
 import { usePatientEditDialog } from "../hooks/usePatientEditDialog";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface Props {
   readonly patient: IPatientDetails;
@@ -13,7 +14,10 @@ interface Props {
 export default function PatientEditDialog({ patient }: Props) {
   const { t } = useTranslation();
   const dialog = usePatientEditDialog(patient);
-  return (
+  const isLoading = 
+    ("isPending" in dialog && Boolean(dialog.isPending)) || 
+    ("isLoading" in dialog && Boolean(dialog.isLoading)) || 
+    ("isSubmitting" in dialog && Boolean(dialog.isSubmitting));  return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
@@ -81,8 +85,14 @@ export default function PatientEditDialog({ patient }: Props) {
             <Button variant="outline">{t("patient.cancel")}</Button>
           </DialogClose>
 
-          <Button onClick={dialog.handleSave}>{t("patient.saveChanges")}</Button>
-        </DialogFooter>
+          <LoadingButton 
+            onClick={dialog.handleSave} 
+            loading={isLoading}
+            className="rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground min-w-[120px] shadow-sm"
+              >
+               {t("patient.saveChanges")}
+  </LoadingButton>
+       </DialogFooter>
       </DialogContent>
     </Dialog>
   );

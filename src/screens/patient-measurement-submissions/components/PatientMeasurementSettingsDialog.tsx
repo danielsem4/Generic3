@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { ClipboardList, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
 import { TimelineCard } from "@/common/components/TimelineCard";
 import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface IProps {
   open: boolean;
@@ -79,14 +79,14 @@ export default function PatientMeasurementSettingsDialog({
       title={t("patientMeasurements.settings.title")}
       cancelText={t("common.cancel")}
       finalizeButton={
-        <Button
+        <LoadingButton
           onClick={onSubmit}
-          disabled={isPending}
-          className="min-w-[220px] h-12 rounded-2xl flex items-center gap-2"
+          loading={isPending}
+          className="min-w-[220px] h-12 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-sm bg-primary text-primary-foreground hover:bg-primary/90"
         >
-          <Send size={18} />
-          {t("patientMeasurements.settings.sendToPatient")}
-        </Button>
+          {!isPending && <Send size={18} />}
+          <span>{t("patientMeasurements.settings.sendToPatient")}</span>
+        </LoadingButton>
       }
     >
       <div className="space-y-6">

@@ -14,6 +14,7 @@ import type { IActivityLog, IActivityLogFilters, IPatientActivity} from "@/commo
 import { ActivityLogFilters } from "./ActivityLogFilters";
 import { formatDate } from "@/common/utils/formatDate";
 import { formatTime } from "@/common/utils/formatTime";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 interface ActivityLogRowProps {
   log: IActivityLog;
 }
@@ -36,6 +37,7 @@ interface ActivityLogTableProps {
   onFilterChange: (updated: Partial<IActivityLogFilters>) => void;
   onResetFilters: () => void;
   onRefresh: () => void;
+  isRefreshing?: boolean;
   activities: IPatientActivity[];
 }
 
@@ -45,6 +47,7 @@ export function ActivityLogTable({
   onFilterChange,
   onResetFilters,
   onRefresh,
+  isRefreshing = false,
   activities,
 }: ActivityLogTableProps) {
   const { t } = useTranslation();
@@ -66,12 +69,15 @@ export function ActivityLogTable({
             {t("patientActivities.resetFilters")}
           </Button>
 
-          <Button
+          <LoadingButton
             onClick={onRefresh}
-            className="bg-primary text-primary-foreground hover:opacity-90 gap-2 h-9 px-4 text-xs transition-opacity shadow-sm"
+            loading={isRefreshing} 
+            loadingText={t("patientActivities.refreshData")} 
+            className="bg-primary text-primary-foreground hover:opacity-90 h-9 px-4 text-xs transition-opacity shadow-sm flex items-center justify-center gap-2 rounded-md font-medium"
           >
-            <RotateCcw size={14} /> {t("patientActivities.refreshData")}
-          </Button>
+            {!isRefreshing && <RotateCcw size={14} />} 
+            <span>{t("patientActivities.refreshData")}</span>
+          </LoadingButton>
         </div>
       </div>
 

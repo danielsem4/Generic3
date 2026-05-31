@@ -46,9 +46,8 @@ export default function PatientMeasurementSubmissionsTable({
     setDeleteId(null);
   };
 
-  const handleConfirmDelete = () => {
+ const handleConfirmDelete = () => {
     if (deleteId) onDelete(deleteId);
-    setDeleteId(null);
   };
 
   return (

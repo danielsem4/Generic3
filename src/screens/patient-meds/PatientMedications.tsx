@@ -30,7 +30,7 @@ export default function PatientMedications() {
     isLoading, 
   } = usePatientMedications(userId!);
 
-  const { intakeLogs, filters, handleFilterChange, handleResetFilters, refetch } =
+  const { intakeLogs, filters, handleFilterChange, handleResetFilters, refetch, isRefetching } =
     usePatientMedicationLogs(userId!);
 
   const [editingPrescription, setEditingPrescription] = useState<IPatientPrescription | null>(null);
@@ -115,6 +115,7 @@ export default function PatientMedications() {
           onFilterChange={handleFilterChange}
           onResetFilters={handleResetFilters}
           onRefresh={refetch}
+          isRefreshing={isRefetching}
           prescriptions={filteredPrescriptions}
         />
       </div>

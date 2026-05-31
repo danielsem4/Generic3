@@ -9,7 +9,7 @@ export function usePatientMedicationLogs(patientId: string) {
 
   const [filters, setFilters] = useState<IMedicationLogFilters>({});
 
-  const { data: intakeLogs = [], refetch } = useQuery({
+  const { data: intakeLogs = [], refetch, isRefetching } = useQuery({
     queryKey: [
       "patient-medication-logs",
       clinicId,
@@ -35,5 +35,6 @@ export function usePatientMedicationLogs(patientId: string) {
     handleFilterChange,
     handleResetFilters,
     refetch,
+    isRefetching,
   };
 }

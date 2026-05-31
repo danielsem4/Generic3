@@ -35,7 +35,6 @@ export function MedicationCard({ item, viewMode, canDelete, onDelete }: Props) {
 
   const handleDeleteConfirm = () => {
     onDelete?.();
-    setDeleteOpen(false);
   };
 
   if (isPrescription(item)) {

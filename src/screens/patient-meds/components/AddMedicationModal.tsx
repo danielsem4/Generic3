@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Pill, CheckCircle2} from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { usePatientMedications } from "../hooks/usePatientMedications";
 import { MedicationForm } from "./MedicationForm";
 import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface IAddMedicationModalProps {
   isOpen: boolean;
@@ -28,14 +28,16 @@ export function AddMedicationModal({ isOpen, setIsOpen, userId }: IAddMedication
       title={t("patientMeds.newPrescription")}
       cancelText={t("patientMeds.cancel")}
       finalizeButton={
-        <Button
+        <LoadingButton
           onClick={handleFinalizeAction}
-          disabled={!hookData.selectedMed || hookData.isAddPending}
-          className="min-w-[320px] h-16 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center gap-3"
+          disabled={!hookData.selectedMed} 
+          loading={hookData.isAddPending} 
+          loadingText={t("common.loading.adding", "Adding...")}
+          className="min-w-[320px] h-16 bg-primary text-xl font-bold rounded-2xl shadow-xl hover:opacity-95 flex items-center justify-center gap-3"
         >
           <CheckCircle2 size={24} />
-          {t("patientMeds.finalize")}
-        </Button>
+          <span>{t("patientMeds.finalize")}</span>
+        </LoadingButton>
       }
     >
       <MedicationForm hookData={hookData} />
