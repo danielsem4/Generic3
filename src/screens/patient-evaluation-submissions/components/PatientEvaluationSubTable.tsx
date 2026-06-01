@@ -1,0 +1,148 @@
+import { useState } from "react";
+import { Eye } from "lucide-react";
+import {
+  Card, CardContent, CardHeader, CardTitle,
+} from "@/components/ui/card";
+import {
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table";
+import { useTranslation } from "react-i18next";
+import { formatDate } from "@/common/utils/formatDate";
+import { useNavigate, useParams } from "react-router-dom";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
+import { DeleteButton } from "@/common/components/DeleteButton";
+
+interface ISubmissionItem {
+  id: string;
+  submissionDate: string;
+  frequency: string;
+  grade: string | number;
+  maxScore: string | number;
+}
+
+interface Props {
+  submissions: ISubmissionItem[];
+  onDelete: (id: string) => void;
+}
+
+export default function PatientEvaluationSubmissionsTable({
+  submissions,
+  onDelete,
+}: Props) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  const handleViewSubmission = (submissionId: string) => {
+    navigate(`/patients/${userId}/evaluation-submissions/${submissionId}`);
+  };
+
+  const handleOpenDelete = (id: string) => {
+    setDeleteId(id);
+  };
+
+  const handleCloseDelete = () => {
+    setDeleteId(null);
+  };
+
+ const handleConfirmDelete = () => {
+    if (deleteId) onDelete(deleteId);
+  };
+
+  return (
+    <Card className="rounded-2xl">
+      <CardHeader>
+        <CardTitle className="text-lg font-semibold">
+          {t("patientEvaluations.submissions.tableTitle")}
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          {t("patientEvaluations.submissions.tableDescription")}
+        </p>
+      </CardHeader>
+
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>
+                {t("patientEvaluations.submissions.columns.submissionDate")}
+              </TableHead>
+              <TableHead>
+                {t("patientEvaluations.submissions.columns.frequency")}
+              </TableHead>
+              <TableHead>
+                {t("patientEvaluations.submissions.columns.grade")}
+              </TableHead>
+              <TableHead className="text-right">
+                {t("patientEvaluations.submissions.columns.actions")}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {submissions.length ? (
+              submissions.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell className="font-medium">
+                    {formatDate(item.submissionDate)}
+                  </TableCell>
+
+                  <TableCell>
+                    <span className="rounded-md bg-muted text-foreground px-2 py-1 text-xs font-semibold">
+                      {item.frequency === "-"
+                        ? "-"
+                        : t(
+                            `patientEvaluations.settings.frequencyOptions.${item.frequency.toLowerCase()}`,
+                            item.frequency,
+                          )}
+                    </span>
+                  </TableCell>
+
+                  <TableCell>
+                    <span className="font-semibold">{item.grade}</span>
+                    <span className="text-muted-foreground">
+                      /{item.maxScore}
+                    </span>
+                  </TableCell>
+
+                  <TableCell>
+                    <div className="flex items-center justify-end gap-3">
+                      <button
+                        onClick={() => handleViewSubmission(item.id)}
+                        className="text-primary hover:opacity-80"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                      <DeleteButton onClick={() => handleOpenDelete(item.id)} />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={4}
+                  className="text-center text-muted-foreground"
+                >
+                  {t("patientEvaluations.submissions.empty")}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </CardContent>
+
+      <ConfirmDialog
+        open={!!deleteId}
+        onOpenChange={handleCloseDelete}
+        title={t("patientEvaluations.deleteConfirm.title")}
+        description={t("patientEvaluations.deleteConfirm.description")}
+        confirmLabel={t("patientEvaluations.deleteConfirm.confirm")}
+        cancelLabel={t("patientEvaluations.deleteConfirm.cancel")}
+        onConfirm={handleConfirmDelete}
+        variant="destructive"
+      />
+    </Card>
+  );
+}

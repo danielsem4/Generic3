@@ -17,16 +17,16 @@ import PatientDetails from "./screens/patient/PatientDetails";
 import ClinicOverview from "./screens/clinic-overview/ClinicOverview";
 import Analytics from "./screens/analytics/Analytics";
 import Activities from "@/screens/activities/ActivitiesPage";
-import MeasurementsPage from "@/screens/measurements/MeasurementsPage";
-import MeasurementBuilder from "@/screens/measurements/MeasurementBuilder";
+import EvaluationsPage from "@/screens/evaluations/EvaluationsPage";
+import EvaluationBuilder from "@/screens/evaluations/EvaluationBuilder";
 import PatientActivities from "./screens/patient-activities/PatientActivities";
-import MeasurementPage from "./screens/patient-measurement/patientMeasurements";
-import PatientMeasurementSubmissionsScreen from "./screens/patient-measurement-submissions/PatientMeasurementSubmissionsScreen";
+import EvaluationPage from "./screens/patient-evaluation/patientEvaluations";
+import PatientEvaluationSubmissionsScreen from "./screens/patient-evaluation-submissions/PatientEvaluationSubmissionsScreen";
 import { AssessmentResultsPage } from "./screens/assesment/AssessmentResultsPage";
 import { PatientFilesPage } from "@/screens/files/PatientFilesPage";
 import MedicationsAnalyticsPage from "./screens/analytics/pages/MedicationsAnalyticsPage";
 import ActivitiesAnalyticsPage from "./screens/analytics/pages/ActivitiesAnalyticsPage";
-import MeasurementsAnalyticsPage from "./screens/analytics/pages/MeasurementsAnalyticsPage";
+import EvaluationsAnalyticsPage from "./screens/analytics/pages/EvaluationsAnalyticsPage";
 
 
 export const router = createBrowserRouter([
@@ -47,20 +47,20 @@ export const router = createBrowserRouter([
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
       { path: "modules/activities", element: <Activities /> },
-      { path: "modules/measurements", element: <MeasurementsPage /> },
-      { path: "modules/measurements/builder", element: <MeasurementBuilder /> },
-      { path: "modules/measurements/builder/:id", element: <MeasurementBuilder /> },
+      { path: "modules/evaluations", element: <EvaluationsPage /> },
+      { path: "modules/evaluations/builder", element: <EvaluationBuilder /> },
+      { path: "modules/evaluations/builder/:id", element: <EvaluationBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "patients/:userId/activities", element: <PatientActivities /> },
-      { path: "patients/:userId/measurements", element: <MeasurementPage /> },
-      { path: "patients/:userId/measurements/:measurementId/submissions", element: <PatientMeasurementSubmissionsScreen /> },
-      { path: "patients/:userId/measurement-submissions/:submissionId", element: <AssessmentResultsPage /> },
+      { path: "patients/:userId/evaluations", element: <EvaluationPage /> },
+      { path: "patients/:userId/evaluations/:evaluationId/submissions", element: <PatientEvaluationSubmissionsScreen /> },
+      { path: "patients/:userId/evaluation-submissions/:submissionId", element: <AssessmentResultsPage /> },
       { path: "patients/:userId/files", element: <PatientFilesPage /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "analytics", element: <Analytics /> },
       { path : "analytics/activities", element: <ActivitiesAnalyticsPage/> },
       { path : "analytics/medications", element: <MedicationsAnalyticsPage /> },
-      { path : "analytics/measurements", element: <MeasurementsAnalyticsPage /> },
+      { path : "analytics/evaluations", element: <EvaluationsAnalyticsPage /> },
     ],
   },
   {

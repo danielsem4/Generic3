@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { getPatientDetails } from "@/api/usersApi";
 import {
   getSingleSubmission,
-  deleteMeasurementAnswer,
-  updateMeasurementAnswerScore,
-} from "@/api/patientMeasurementsApi";
+  deleteEvaluationAnswer,
+  updateEvaluationAnswerScore,
+} from "@/api/patientEvaluationApi";
 
 export function useAssessmentResults() {
   const { userId, submissionId } = useParams<{
@@ -24,7 +24,7 @@ export function useAssessmentResults() {
   const clinicId = patientQuery.data?.clinics?.[0]?.id;
 
   const submissionQuery = useQuery({
-    queryKey: ["patient-measurement-submission", clinicId, userId, submissionId],
+    queryKey: ["patient-evaluation-submission", clinicId, userId, submissionId],
     queryFn: () => getSingleSubmission(clinicId!, userId!, submissionId!),
     enabled: Boolean(clinicId && userId && submissionId),
     retry: false,
@@ -32,7 +32,7 @@ export function useAssessmentResults() {
 
   const editScoreMutation = useMutation({
     mutationFn: ({ answerId, score }: { answerId: string; score: number }) =>
-      updateMeasurementAnswerScore(
+      updateEvaluationAnswerScore(
         clinicId!,
         userId!,
         submissionId!,
@@ -42,32 +42,32 @@ export function useAssessmentResults() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [
-          "patient-measurement-submission",
+          "patient-evaluation-submission",
           clinicId,
           userId,
           submissionId,
         ],
       });
       queryClient.invalidateQueries({
-        queryKey: ["patient-measurement-submissions", clinicId, userId],
+        queryKey: ["patient-evaluation-submissions", clinicId, userId],
       });
     },
   });
 
   const deleteAnswerMutation = useMutation({
     mutationFn: (answerId: string) =>
-      deleteMeasurementAnswer(clinicId!, userId!, submissionId!, answerId),
+      deleteEvaluationAnswer(clinicId!, userId!, submissionId!, answerId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [
-          "patient-measurement-submission",
+          "patient-evaluation-submission",
           clinicId,
           userId,
           submissionId,
         ],
       });
       queryClient.invalidateQueries({
-        queryKey: ["patient-measurement-submissions", clinicId, userId],
+        queryKey: ["patient-evaluation-submissions", clinicId, userId],
       });
     },
   });

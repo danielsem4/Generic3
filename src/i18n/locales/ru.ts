@@ -455,15 +455,15 @@ const ru = {
     deleteSuccess: "Активность успешно удалена.",
   },
 
-  // Patient Measurements
-  patientMeasurements: {
+  // Patient Evaluations
+  patientEvaluations: {
     questionnaires: "Опросники",
     cognitiveTests: "Когнитивные тесты",
     moduleQuestionnaire: "Модульный опросник",
     noData: "Нет доступных данных",
     submissions: {
-      backToMeasurements: "← Назад к измерениям",
-      measurementTitleFallback: "Измерение",
+      backToEvaluations: "← Назад к измерениям",
+      evaluationTitleFallback: "Измерение",
       patientNameFallback: "Пациент",
       pageDescription: "Просмотр истории или настройка новых измерений.",
       settingsButton: "Настройки измерений пациента",
@@ -611,7 +611,7 @@ const ru = {
         title: "Обмен документами",
         description: "Обмен и управление клиническими документами и файлами пациентов.",
       },
-      measurements: {
+      evaluations: {
         title: "Измерения",
         description: "Отслеживание и запись жизненных показателей и клинических измерений.",
       },
@@ -714,7 +714,7 @@ analytics: {
       title: "Аналитика лекарств",
       description: "Анализ использования лекарств, соблюдения режима лечения и связанных с этим тенденций."
     },
-    measurements: {
+    evaluations: {
       title: "Аналитика измерений",
       description: "Просмотр результатов измерений, поданных данных и ответов пациентов."
     },
@@ -735,7 +735,7 @@ analytics: {
     busiestDaysChart: "Самые загруженные дни",
     usageChart: "Использование с течением времени"
   },
-  measurements: {
+  evaluations: {
   title: "Аналитика измерений",
   description: "Просмотр результатов измерений, поданных данных и ответов пациентов.",
   busiestDaysChart: "Самые загруженные дни",
@@ -753,8 +753,8 @@ filters: {
 },
 },
 
-  // Measurements
-  measurements: {
+  // Evaluations
+  evaluations: {
     title: "Измерения",
     createNew: "Создать новое",
     searchPlaceholder: "Поиск измерений...",

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { usePatientDetails } from "./hooks/usePatient";
 import PatientSectionsCard from "./components/PatientCards";
-import EntityHeader from "@/common/components/Patient+measurementPage/PatientHeader";
-import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
+import EntityHeader from "@/common/components/Patient+evaluationPage/PatientHeader";
+import PatientEditDialog from "@/common/components/Patient+evaluationPage/PatientEditDialog";
 import { BackButton } from "@/components/ui/BackButton";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 

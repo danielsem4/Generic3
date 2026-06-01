@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
+import type { IEvaluationSubmissionAnswerRaw } from "@/common/types/patientEvaluationSubmission";
 import { useAssessmentResults } from "./hooks/useAssessmentResults";
 import { ResultsTable } from "./components/ResultsTable";
 import { AnalyticsView } from "./components/AnalyticsView";
@@ -33,21 +33,21 @@ export const AssessmentResultsPage = () => {
     return (
       <div className="p-20 text-center text-destructive bg-destructive/10 rounded-xl border border-destructive/20 m-6">
         <h2 className="text-xl font-bold mb-2">
-          {t("measurements.error_title")}
+          {t("evaluations.error_title")}
         </h2>
-        <p className="text-sm">{t("measurements.error_desc")}</p>
+        <p className="text-sm">{t("evaluations.error_desc")}</p>
       </div>
     );
   }
 
-  const displayAnswers: IMeasurementSubmissionAnswerRaw[] =
+  const displayAnswers: IEvaluationSubmissionAnswerRaw[] =
     submission.answers ?? [];
 
   const translatedFrequency =
     submission.frequency === "-"
       ? "-"
       : t(
-          `patientMeasurements.settings.frequencyOptions.${submission.frequency.toLowerCase()}`,
+          `patientEvaluations.settings.frequencyOptions.${submission.frequency.toLowerCase()}`,
           submission.frequency,
         );
 
@@ -65,7 +65,7 @@ export const AssessmentResultsPage = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-card p-6 rounded-2xl border border-border shadow-sm">
           <div className="text-left">
             <h1 className="text-2xl font-black text-foreground">
-              {submission.measurementName}
+              {submission.evaluationName}
             </h1>
 
             <div className="flex items-center gap-3 mt-2">
@@ -74,7 +74,7 @@ export const AssessmentResultsPage = () => {
               </span>
 
               <p className="text-muted-foreground text-xs font-medium">
-                {t("measurements.submitted_at")}:{" "}
+                {t("evaluations.submitted_at")}:{" "}
                 {submission.submissionDate !== "-"
                   ? new Date(submission.submissionDate).toLocaleDateString()
                   : "-"}
@@ -84,7 +84,7 @@ export const AssessmentResultsPage = () => {
 
           <div className="bg-primary text-primary-foreground px-6 py-3 rounded-xl flex items-baseline gap-2 shadow-lg">
             <span className="text-xs font-bold uppercase tracking-tighter opacity-80">
-              {t("measurements.score")}:
+              {t("evaluations.score")}:
             </span>
             <span className="text-2xl font-black">{submission.grade}</span>
             <span className="font-bold opacity-70">
@@ -103,7 +103,7 @@ export const AssessmentResultsPage = () => {
               }`}
             >
               <List className="w-4 h-4" />
-              {t("measurements.list_view")}
+              {t("evaluations.list_view")}
             </Button>
 
             <Button
@@ -116,7 +116,7 @@ export const AssessmentResultsPage = () => {
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
-              {t("measurements.analytics_view")}
+              {t("evaluations.analytics_view")}
             </Button>
           </div>
         </div>

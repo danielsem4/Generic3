@@ -15,26 +15,26 @@ export interface BusiestDayItem {
   count: number;
 }
 
-// --- Measurements Interfaces ---
-export interface MeasurementsSummary {
-  number_of_measurements: number;
+// --- Evaluation Interfaces ---
+export interface EvaluationsSummary {
+  number_of_evaluations: number;
   most_used: string | null;
   most_unused: string | null;
   total_submissions: number;
 }
 
 export interface AvgCompletionTimeItem {
-  measurement_name: string;
+  evaluation_name: string;
   avg_completion_time_seconds: number;
 }
 
 export interface AvgScoreItem {
-  measurement_name: string;
+  evaluation_name: string;
   avg_score: number | null;
 }
 
-export interface MeasurementsAnalyticsResponse {
-  summary: MeasurementsSummary;
+export interface EvaluationsAnalyticsResponse {
+  summary: EvaluationsSummary;
   usage: AnalyticsUsageItem[];
   busiest_days: BusiestDayItem[];
   avg_completion_time: AvgCompletionTimeItem[];
@@ -70,19 +70,19 @@ export interface ActivitiesAnalyticsResponse {
 }
 
 // API Calls
-export const getMeasurementsAnalytics = async (
+export const getEvaluationsAnalytics = async (
   clinicId: string,
   startDate?: string,
   endDate?: string
-): Promise<MeasurementsAnalyticsResponse> => {
-  const { data } = await api.get(`/api/v1/clinics/${clinicId}/analytics/measurements/`, {
+): Promise<EvaluationsAnalyticsResponse> => {
+  const { data } = await api.get(`/api/v1/clinics/${clinicId}/analytics/evaluations/`, {
     params: buildParams(startDate, endDate),
   });
 
   return {
     ...data,
-    usage: data.usage.map((item: { measurement_name: string; submission_count: number }) => ({
-      name: item.measurement_name,
+    usage: data.usage.map((item: { evaluation_name: string; submission_count: number }) => ({
+      name: item.evaluation_name,
       count: item.submission_count,
     })),
   };

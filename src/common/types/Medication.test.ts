@@ -6,7 +6,7 @@ const catalogItem: IMedication = {
   id: "1",
   medName: "Aspirin",
   medForm: "TAB",
-  medUnitOfMeasurement: "MG",
+  medUnitOfEvaluation: "MG",
 };
 
 const prescriptionItem: IPatientPrescription = {

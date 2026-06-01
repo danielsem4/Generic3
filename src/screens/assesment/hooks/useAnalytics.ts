@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
+import type { IEvaluationSubmissionAnswerRaw } from "@/common/types/patientEvaluationSubmission";
 
-export const useAnalytics = (answers: IMeasurementSubmissionAnswerRaw[]) => {
+export const useAnalytics = (answers: IEvaluationSubmissionAnswerRaw[]) => {
   const { t } = useTranslation();
   const total = answers.length;
   const passedCount = answers.filter((a) => (a.points_earned ?? 0) > 0).length;
@@ -23,8 +23,8 @@ export const useAnalytics = (answers: IMeasurementSubmissionAnswerRaw[]) => {
   ];
 
   const pieData = [
-    { name: t("measurements.analytics.pass"), value: passedCount, color: "oklch(var(--success))" },
-    { name: t("measurements.analytics.fail"), value: failedCount, color: "oklch(var(--destructive))" },
+    { name: t("evaluations.analytics.pass"), value: passedCount, color: "oklch(var(--success))" },
+    { name: t("evaluations.analytics.fail"), value: failedCount, color: "oklch(var(--destructive))" },
   ];
 
   return { avgGrade, passRate, distributionData, pieData, total, passedCount, failedCount };

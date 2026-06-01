@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
+import type { IEvaluationSubmissionAnswerRaw } from "@/common/types/patientEvaluationSubmission";
 
 interface EditAnswerScoreDialogProps {
-  answer: IMeasurementSubmissionAnswerRaw | null;
+  answer: IEvaluationSubmissionAnswerRaw | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSave: (answerId: string, score: number) => void;
@@ -54,7 +54,7 @@ export function EditAnswerScoreDialog({
     <Dialog open={open} onOpenChange={handleDialogOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t("measurements.editScore.title")}</DialogTitle>
+          <DialogTitle>{t("evaluations.editScore.title")}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-3">
@@ -64,16 +64,16 @@ export function EditAnswerScoreDialog({
             min={0}
             value={scoreValue}
             onChange={handleScoreChange}
-            placeholder={t("measurements.editScore.placeholder")}
+            placeholder={t("evaluations.editScore.placeholder")}
           />
         </div>
 
         <DialogFooter>
           <Button variant="outline" onClick={handleCancel}>
-            {t("measurements.editScore.cancel")}
+            {t("evaluations.editScore.cancel")}
           </Button>
           <Button onClick={handleSave}>
-            {t("measurements.editScore.save")}
+            {t("evaluations.editScore.save")}
           </Button>
         </DialogFooter>
       </DialogContent>
