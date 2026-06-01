@@ -9,11 +9,15 @@ import {
   type ResearchPatientFormValues,
 } from "../schema/patientsSchema";
 import { useAddPatient } from "./useAddPatient";
+import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export function useAddPatientDialog() {
   const [open, setOpen] = useState(false);
   const [patientType, setPatientType] = useState<PatientType>("patient");
   const { addPatient, isSubmitting } = useAddPatient();
+  const [error, setErrorMessage] = useState<string | null>(null); 
+  const { t } = useTranslation();
 
   const patientForm = useForm<PatientFormValues>({
     resolver: zodResolver(patientBaseSchema),
@@ -27,6 +31,7 @@ export function useAddPatientDialog() {
 
   const handleTypeChange = (type: PatientType) => {
     setPatientType(type);
+    setErrorMessage(null);
     patientForm.reset();
     researchForm.reset();
   };
@@ -37,19 +42,40 @@ export function useAddPatientDialog() {
       patientForm.reset();
       researchForm.reset();
       setPatientType("patient");
+      setErrorMessage(null);
     }
   };
 
   const onSubmitPatient = async (data: PatientFormValues) => {
-    await addPatient({ ...data, patientType: "patient" });
-    patientForm.reset();
-    setOpen(false);
+    try {
+      setErrorMessage(null);
+
+      await addPatient({ ...data, patientType: "patient" });
+
+      patientForm.reset();
+      setOpen(false);
+    } catch (e: unknown) {
+      console.error("Failed to add patient:", e);
+      setOpen(false); 
+      patientForm.reset();
+      toast.error(t("patients.patientAlreadyExistsError"));
+    }
   };
 
   const onSubmitResearch = async (data: ResearchPatientFormValues) => {
-    await addPatient({ ...data, patientType: "research" });
-    researchForm.reset();
-    setOpen(false);
+    try {
+      setErrorMessage(null);
+
+      await addPatient({ ...data, patientType: "research" });
+
+      researchForm.reset();
+      setOpen(false);
+    } catch (e: unknown) {   
+      console.error("Failed to add patient:", e);   
+      setOpen(false);
+      researchForm.reset();
+      toast.error(t("patients.patientAlreadyExistsError"));
+    }
   };
 
   return {
@@ -62,5 +88,6 @@ export function useAddPatientDialog() {
     handleClose,
     onSubmitPatient,
     onSubmitResearch,
+    errorMessage: error, 
   };
 }

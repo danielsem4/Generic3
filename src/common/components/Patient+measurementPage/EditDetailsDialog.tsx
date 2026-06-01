@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import {Dialog,DialogTrigger,DialogContent,DialogHeader,DialogTitle,DialogFooter,DialogClose,} from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
 import { Pencil } from "lucide-react";
+import { LoadingButton } from "@/components/ui/LoadingButton";
 
 interface Props {
   firstName: string;
@@ -14,6 +15,7 @@ interface Props {
   setPhone: (value: string) => void;
   setEmail: (value: string) => void;
   onSave: () => void;
+  loading: boolean;
 }
 
 export default function PatientInfoEditDialog({
@@ -26,6 +28,7 @@ export default function PatientInfoEditDialog({
   setPhone,
   setEmail,
   onSave,
+  loading,
 }: Props) {
   const { t } = useTranslation();
 
@@ -97,7 +100,11 @@ export default function PatientInfoEditDialog({
             <Button variant="outline">{t("patient.cancel")}</Button>
           </DialogClose>
 
-          <Button onClick={onSave}>{t("patient.saveChanges")}</Button>
+         <DialogClose asChild>
+         <LoadingButton onClick={onSave} loading={loading}>
+              {t("patients.save")}
+            </LoadingButton>
+        </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

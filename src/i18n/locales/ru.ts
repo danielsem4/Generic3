@@ -123,6 +123,8 @@ const ru = {
     phoneNumberPlaceholder: "",
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
+    save: "Сохранить изменения",
+    patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны"
   },
 
   // Clinic Managers

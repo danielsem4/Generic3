@@ -118,6 +118,9 @@ const ar = {
     phoneNumberPlaceholder: "",
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
+    save: "حفظ",
+    patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة"
+
   },
 
   // Clinic Managers
