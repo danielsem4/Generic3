@@ -9,6 +9,7 @@ const TYPE_I18N_KEY: Record<EvaluationType, string> = {
   [EvaluationType.QUESTIONNAIRES]: "evaluations.types.questionnaries",
   [EvaluationType.COGNITIVE_TESTS]: "evaluations.types.cognitiveTests",
   [EvaluationType.MODULE_QUESTIONNAIRE]: "evaluations.types.moduleQuestionnaire",
+  [EvaluationType.MEDICAL_STAFF_EVALUATION]: "evaluations.types.medicalStaffEvaluation",
 };
 
 interface EvaluationTypeColumnProps {

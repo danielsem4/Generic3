@@ -444,6 +444,7 @@ patients: {
     questionnaires: "Questionnaires",
     cognitiveTests: "Cognitive Tests",
     moduleQuestionnaire: "Module Questionnaire",
+    medicalStaffEvaluation: "Medical Staff Evaluation",
     noData: "No data available",
   submissions: {
     backToEvaluations: "← Back to Evaluations",
@@ -824,6 +825,7 @@ modules: {
       questionnaries: "Questionnaires",
       cognitiveTests: "Cognitive Tests",
       moduleQuestionnaire: "Module Questionnaire",
+      medicalStaffEvaluation: "Medical Staff Evaluation",
     },
 
     builder: {

@@ -22,6 +22,7 @@ const MEASUREMENT_TYPES = [
   { value: EvaluationType.QUESTIONNAIRES, labelKey: "evaluations.types.questionnaries" },
   { value: EvaluationType.COGNITIVE_TESTS, labelKey: "evaluations.types.cognitiveTests" },
   { value: EvaluationType.MODULE_QUESTIONNAIRE, labelKey: "evaluations.types.moduleQuestionnaire" },
+  { value: EvaluationType.MEDICAL_STAFF_EVALUATION, labelKey: "evaluations.types.medicalStaffEvaluation" },
 ] as const;
 
 const editEvaluationSchema = z.object({
@@ -120,7 +121,7 @@ export function EditEvaluationDialog({
 
           <div className="space-y-2">
             <Label>{t("evaluations.typeLabel")}</Label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {MEASUREMENT_TYPES.map((item) => (
                 <button
                   key={item.value}

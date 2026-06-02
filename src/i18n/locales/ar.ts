@@ -453,6 +453,7 @@ const ar = {
     questionnaires: "استبيانات",
     cognitiveTests: "اختبارات معرفية",
     moduleQuestionnaire: "استبيان الوحدة",
+    medicalStaffEvaluation: "تقييم الطاقم الطبي",
     noData: "لا توجد بيانات",
     submissions: {
       backToEvaluations: "← العودة إلى القياسات",
@@ -835,6 +836,7 @@ analytics: {
       questionnaries: "الاستبيانات",
       cognitiveTests: "اختبارات معرفية",
       moduleQuestionnaire: "استبيان الوحدة",
+      medicalStaffEvaluation: "تقييم الطاقم الطبي",
     },
 
     builder: {

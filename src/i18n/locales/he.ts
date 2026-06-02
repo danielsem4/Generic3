@@ -456,6 +456,7 @@ const he = {
     questionnaires: "שאלונים",
     cognitiveTests: "מבחנים קוגניטיביים",
     moduleQuestionnaire: "שאלון מודול",
+    medicalStaffEvaluation: "הערכה של צוות רפואי",
     noData: "אין נתונים זמינים",
     submissions: {
       backToEvaluations: "← חזרה למדדים",
@@ -837,6 +838,7 @@ analytics: {
       questionnaries: "שאלונים",
       cognitiveTests: "מבחנים קוגניטיביים",
       moduleQuestionnaire: "שאלון מודול",
+      medicalStaffEvaluation: "הערכה של צוות רפואי",
     },
     versionControl: "ניהול גרסאות",
     branchVersion: "צור גרסה חדשה",

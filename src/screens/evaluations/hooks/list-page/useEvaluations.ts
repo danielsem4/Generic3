@@ -20,6 +20,7 @@ const TYPE_ORDER: EvaluationType[] = [
   EvaluationType.QUESTIONNAIRES,
   EvaluationType.COGNITIVE_TESTS,
   EvaluationType.MODULE_QUESTIONNAIRE,
+  EvaluationType.MEDICAL_STAFF_EVALUATION,
 ];
 
 export function useEvaluations() {

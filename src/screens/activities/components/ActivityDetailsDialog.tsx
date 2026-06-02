@@ -21,9 +21,8 @@ export const ActivityDetailsDialog = ({ activityId, onClose }: Props) => {
 
   return (
     <Dialog open={!!activityId} onOpenChange={onClose}>
-      <DialogContent className="max-w-md rounded-[32px] p-6 border-none shadow-2xl overflow-hidden">
+      <DialogContent className="max-w-md rounded-4xl p-6 border-none shadow-2xl overflow-hidden">
         <DialogHeader className="flex flex-row items-center gap-4 space-y-0 pb-4 border-b border-border/50">
-          {/* אייקון דקורטיבי */}
           <div className="p-3 bg-primary/10 rounded-2xl text-primary">
             <ActivityIcon size={24} strokeWidth={2.5} />
           </div>

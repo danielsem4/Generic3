@@ -460,6 +460,7 @@ const ru = {
     questionnaires: "Опросники",
     cognitiveTests: "Когнитивные тесты",
     moduleQuestionnaire: "Модульный опросник",
+    medicalStaffEvaluation: "Оценка медицинского персонала",
     noData: "Нет доступных данных",
     submissions: {
       backToEvaluations: "← Назад к измерениям",
@@ -841,6 +842,7 @@ filters: {
       questionnaries: "Опросники",
       cognitiveTests: "Когнитивные тесты",
       moduleQuestionnaire: "Опрос модуля",
+      medicalStaffEvaluation: "Оценка медицинского персонала",
     },
 
     builder: {

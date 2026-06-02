@@ -279,6 +279,7 @@ export const EvaluationType = {
   QUESTIONNAIRES: "QUESTIONNAIRES",
   COGNITIVE_TESTS: "COGNITIVE_TESTS",
   MODULE_QUESTIONNAIRE: "MODULE_QUESTIONNAIRE",
+  MEDICAL_STAFF_EVALUATION: "MEDICAL_STAFF_EVALUATION",
 } as const;
 export type EvaluationType = (typeof EvaluationType)[keyof typeof EvaluationType];
 
