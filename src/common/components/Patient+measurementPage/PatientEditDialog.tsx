@@ -4,10 +4,19 @@ import PatientInfoEditDialog from "@/common/components/Patient+measurementPage/E
 
 interface Props {
   readonly patient: IPatientDetails;
+  readonly onUpdated?: (patient: IPatientDetails) => void;
 }
 
-export default function PatientEditDialog({ patient }: Props) {
-  const dialog = usePatientEditDialog(patient);
+export default function PatientEditDialog({ patient, onUpdated }: Props) {
+  const dialog = usePatientEditDialog(patient, onUpdated);
+
+  const handleSave = async () => {
+    const success = await dialog.handleSave();
+
+    if (!success) {
+      alert("Failed to save patient details. Please try again.");
+    }
+  };
 
   return (
     <PatientInfoEditDialog
@@ -19,7 +28,8 @@ export default function PatientEditDialog({ patient }: Props) {
       setLastName={dialog.setLastName}
       setPhone={dialog.setPhone}
       setEmail={dialog.setEmail}
-      onSave={dialog.handleSave}
+      onSave={handleSave}
+      loading={dialog.loading}
     />
   );
 }

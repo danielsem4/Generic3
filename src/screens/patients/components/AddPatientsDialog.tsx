@@ -1,33 +1,50 @@
 import { useTranslation } from "react-i18next";
 import { UserPlus } from "lucide-react";
-import type { FieldError, UseFormRegister } from "react-hook-form";
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAddPatientDialog } from "../hooks/useAddPatientDialog";
 import { LoadingButton } from "@/components/ui/LoadingButton"; 
+import type { FieldError, Path, UseFormRegister } from "react-hook-form";
 
-interface FormFieldProps {
-  id: string;
+type PatientFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+};
+
+type ResearchFormValues = PatientFormValues & {
+  password: string;
+  confirmPassword: string;
+};
+
+interface FormFieldProps<T extends Record<string, unknown>> {
+   id: Path<T>; 
   type?: string;
-  register: UseFormRegister<never>;
+  register: UseFormRegister<T>; 
   error?: FieldError;
 }
 
-function FormField({ id, type = "text", register, error }: FormFieldProps) {
+function FormField<T extends Record<string, unknown>>({
+  id,
+  type = "text",
+  register,
+  error,
+}: FormFieldProps<T>) {
   const { t } = useTranslation();
+
   return (
     <div className="space-y-1.5 flex-1 text-right">
       <label className="text-sm font-bold text-foreground flex items-center gap-1">
-        {t(`patients.${id}Label`)}
+        {t(`patients.${String(id)}Label`)}
         <span className="text-destructive">*</span>
       </label>
       <Input
-        {...register(id as never)}
+          {...register(id)}
         type={type}
-        placeholder={t(`patients.${id}Placeholder`)}
+        placeholder={t(`patients.${String(id)}Placeholder`)} 
         className={error
           ? "border-destructive focus-visible:ring-destructive"
           : "border-border bg-background focus-visible:ring-primary"
@@ -54,11 +71,13 @@ export function AddPatientsDialog() {
     handleClose,
     onSubmitPatient,
     onSubmitResearch,
+    errorMessage,
   } = useAddPatientDialog();
 
   const isResearch = patientType === "research";
 
-  return (
+
+   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogTrigger asChild>
         <Button className="bg-primary hover:bg-primary/90 text-primary-foreground flex gap-2 h-11 px-6 font-bold shadow-sm transition-all">
@@ -73,7 +92,7 @@ export function AddPatientsDialog() {
           </DialogTitle>
         </DialogHeader>
 
-        {/* Type toggle */}
+        {/* toggle */}
         <div className="flex rounded-lg border border-border overflow-hidden mb-2">
           <button
             type="button"
@@ -87,6 +106,7 @@ export function AddPatientsDialog() {
           >
             {t("patients.togglePatient")}
           </button>
+
           <button
             type="button"
             onClick={() => handleTypeChange("research")}
@@ -101,49 +121,99 @@ export function AddPatientsDialog() {
           </button>
         </div>
 
-        {/* Patient form (no password) */}
+        {/* PATIENT FORM */}
         {!isResearch && (
           <form onSubmit={patientForm.handleSubmit(onSubmitPatient)} className="space-y-4">
             <div className="flex gap-4">
-              <FormField id="firstName" register={patientForm.register as never} error={patientForm.formState.errors.firstName} />
-              <FormField id="lastName" register={patientForm.register as never} error={patientForm.formState.errors.lastName} />
+              <FormField<PatientFormValues>
+                id="firstName"
+                register={patientForm.register}
+                error={patientForm.formState.errors.firstName}
+              />
+
+              <FormField<PatientFormValues>
+                id="lastName"
+                register={patientForm.register}
+                error={patientForm.formState.errors.lastName}
+              />
             </div>
-            <div className="space-y-4">
-              <FormField id="email" type="email" register={patientForm.register as never} error={patientForm.formState.errors.email} />
-              <FormField id="phoneNumber" type="tel" register={patientForm.register as never} error={patientForm.formState.errors.phoneNumber} />
-            </div>
-           <LoadingButton
-              type="submit"
-              loading={isSubmitting}
-              loadingText={t("common.loading.registering", "Registering...")}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg font-bold rounded-full mt-6 transition-colors shadow-sm"
-            >
+
+            <FormField<PatientFormValues>
+              id="email"
+              type="email"
+              register={patientForm.register}
+              error={patientForm.formState.errors.email}
+            />
+
+            <FormField<PatientFormValues>
+              id="phoneNumber"
+              type="tel"
+              register={patientForm.register}
+              error={patientForm.formState.errors.phoneNumber}
+            />
+            {errorMessage && (
+           <div className="mt-3 rounded-md border border-destructive bg-destructive/10 p-2 text-sm text-destructive text-center">
+            {errorMessage}
+           </div>
+            )}
+
+            <LoadingButton type="submit" loading={isSubmitting}>
               {t("patients.registerButton")}
             </LoadingButton>
           </form>
         )}
 
-        {/* Research patient form (with password) */}
+        {/* RESEARCH FORM */}
         {isResearch && (
           <form onSubmit={researchForm.handleSubmit(onSubmitResearch)} className="space-y-4">
             <div className="flex gap-4">
-              <FormField id="firstName" register={researchForm.register as never} error={researchForm.formState.errors.firstName} />
-              <FormField id="lastName" register={researchForm.register as never} error={researchForm.formState.errors.lastName} />
+              <FormField<ResearchFormValues>
+                id="firstName"
+                register={researchForm.register}
+                error={researchForm.formState.errors.firstName}
+              />
+
+              <FormField<ResearchFormValues>
+                id="lastName"
+                register={researchForm.register}
+                error={researchForm.formState.errors.lastName}
+              />
             </div>
-            <div className="space-y-4">
-              <FormField id="email" type="email" register={researchForm.register as never} error={researchForm.formState.errors.email} />
-              <FormField id="phoneNumber" type="tel" register={researchForm.register as never} error={researchForm.formState.errors.phoneNumber} />
-            </div>
-            <div className="flex gap-4">
-              <FormField id="password" type="password" register={researchForm.register as never} error={researchForm.formState.errors.password} />
-              <FormField id="confirmPassword" type="password" register={researchForm.register as never} error={researchForm.formState.errors.confirmPassword} />
-            </div>
-           <LoadingButton
-              type="submit"
-              loading={isSubmitting}
-              loadingText={t("common.loading.registering", "Registering...")}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-lg font-bold rounded-full mt-6 transition-colors shadow-sm"
-            >
+
+            <FormField<ResearchFormValues>
+              id="email"
+              type="email"
+              register={researchForm.register}
+              error={researchForm.formState.errors.email}
+            />
+
+            <FormField<ResearchFormValues>
+              id="phoneNumber"
+              type="tel"
+              register={researchForm.register}
+              error={researchForm.formState.errors.phoneNumber}
+            />
+
+            <FormField<ResearchFormValues>
+              id="password"
+              type="password"
+              register={researchForm.register}
+              error={researchForm.formState.errors.password}
+            />
+
+            <FormField<ResearchFormValues>
+              id="confirmPassword"
+              type="password"
+              register={researchForm.register}
+              error={researchForm.formState.errors.confirmPassword}
+            />
+            {errorMessage && (
+             <div className="mt-3 rounded-md border border-destructive bg-destructive/10 p-2 text-sm text-destructive text-center">
+               {errorMessage} 
+              </div>
+              )}
+
+            <LoadingButton type="submit" loading={isSubmitting}>
               {t("patients.registerButton")}
             </LoadingButton>
           </form>

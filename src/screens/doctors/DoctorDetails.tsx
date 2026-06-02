@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, Building2, Pencil } from "lucide-react";
+import { Mail, Phone, Building2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useDoctorDetails } from "./hooks/useDoctorDetails";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 import { BackButton } from "@/components/ui/BackButton"; 
+import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
 
 export default function DoctorDetails() {
   const { t } = useTranslation();
-  const { doctor, isLoading, error } = useDoctorDetails();
+  const { doctor, isLoading, error, refetch } = useDoctorDetails();
 
 
   if (isLoading) {
@@ -60,10 +60,18 @@ export default function DoctorDetails() {
               </div>
             </div>
 
-            <Button variant="outline" size="sm" className="gap-1.5" disabled>
-              <Pencil className="h-3.5 w-3.5" />
-              {t("patient.editDetails")}
-            </Button>
+            <PatientEditDialog
+             patient={{
+             patientId: doctor.id,
+             firstName: doctor.firstName,
+             lastName: doctor.lastName,
+             email: doctor.email,
+             phone: doctor.phone,
+             isResearch: false,
+             clinicName: doctor.clinicName,
+              }}
+                onUpdated={() => refetch()}
+               />
           </div>
 
           <div className="grid grid-cols-1 gap-6 text-sm md:grid-cols-3">

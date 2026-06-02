@@ -5,7 +5,7 @@ import { getDoctorDetails } from "@/api/usersApi";
 export function useDoctorDetails() {
   const { userId } = useParams<{ userId: string }>();
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["doctor", userId],
     queryFn: () => getDoctorDetails(userId!),
     enabled: !!userId,
@@ -23,5 +23,5 @@ export function useDoctorDetails() {
       }
     : null;
 
-  return { doctor, isLoading, error };
+  return { doctor, isLoading, error, refetch };
 }

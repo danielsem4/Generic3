@@ -124,6 +124,8 @@ patients: {
   phoneNumberPlaceholder: "",
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
+  save: "Save Changes",
+  patientAlreadyExistsError: "This patient already exists or the details are invalid"
 },
 
   // Clinic Managers

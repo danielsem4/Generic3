@@ -114,4 +114,20 @@ export const getPatientDetails = async (
   return response.data;
 };
 
+export const updatePatient = async (
+  id: string,
+  data: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+  },
+): Promise<IPatientDetailsResponse> => {
+  const response = await api.patch<IPatientDetailsResponse>(
+    `/api/v1/users/${id}/`,
+    data,
+  );
+
+  return response.data;
+};
 
