@@ -41,10 +41,10 @@ export function usePatientDetails() {
   );
 
   const metrics: ISectionItem[] = (
-    response?.active_measurements ?? []
-  ).map((measurementName, index) => ({
+    response?.active_evaluations ?? []
+  ).map((evaluationName, index) => ({
     id: index + 1,
-    label: measurementName,
+    label: evaluationName,
   }));
 
   const functions: ISectionItem[] = [];

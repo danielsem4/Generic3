@@ -454,15 +454,16 @@ const he = {
     deleteSuccess: "הפעילות נמחקה בהצלחה.",
   },
 
-  // Patient Measurements
-  patientMeasurements: {
+  // Patient Evaluations
+  patientEvaluations: {
     questionnaires: "שאלונים",
     cognitiveTests: "מבחנים קוגניטיביים",
     moduleQuestionnaire: "שאלון מודול",
+    medicalStaffEvaluation: "הערכה של צוות רפואי",
     noData: "אין נתונים זמינים",
     submissions: {
-      backToMeasurements: "← חזרה למדדים",
-      measurementTitleFallback: "מדד",
+      backToEvaluations: "← חזרה למדדים",
+      evaluationTitleFallback: "מדד",
       patientNameFallback: "מטופל",
       pageDescription: "סקירת נתונים היסטוריים או הגדרת מדדים חדשים.",
       settingsButton: "הגדרות מדדים למטופל",
@@ -611,7 +612,7 @@ const he = {
         title: "שיתוף מסמכים",
         description: "שיתוף וניהול מסמכים קליניים וקבצי מטופלים.",
       },
-      measurements: {
+      evaluations: {
         title: "מדידות",
         description: "מעקב ורישום סימנים חיוניים ומדידות קליניות.",
       },
@@ -713,7 +714,7 @@ analytics: {
       title: "אנליטיקת תרופות",
       description: "ניתוח שימוש בתרופות, היענות לטיפול ומגמות קשורות."
     },
-    measurements: {
+    evaluations: {
       title: "אנליטיקת מדדים",
       description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים."
     },
@@ -734,7 +735,7 @@ analytics: {
     busiestDaysChart: "ימים עמוסים ביותר",
     usageChart: "שימוש לאורך זמן"
   },
-  measurements: {
+  evaluations: {
     title: "אנליטיקת מדדים",
     description: "סקירת תוצאות מדדים, הגשות ותגובות מטופלים.",
     busiestDaysChart: "ימים עמוסים ביותר",
@@ -752,8 +753,8 @@ analytics: {
 },
 },
 
-  // Measurements
-  measurements: {
+  // Evaluations
+  evaluations: {
     title: "מדדים",
     createNew: "יצירת חדש",
     searchPlaceholder: "חיפוש מדדים...",
@@ -840,6 +841,7 @@ analytics: {
       questionnaries: "שאלונים",
       cognitiveTests: "מבחנים קוגניטיביים",
       moduleQuestionnaire: "שאלון מודול",
+      medicalStaffEvaluation: "הערכה של צוות רפואי",
     },
     versionControl: "ניהול גרסאות",
     branchVersion: "צור גרסה חדשה",

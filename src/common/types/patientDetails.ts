@@ -16,7 +16,7 @@ export interface IPatientDetailsResponse {
   is_research: boolean;
   clinic_name: string;
   modules: IModule[];
-  active_measurements: string[];
+  active_evaluations: string[];
   clinics: IClinic[];
   // security: {
   //   is_2fa_enabled: boolean;

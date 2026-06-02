@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Activity, Pill, BarChart3 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import SectionsGrid from "@/common/components/Patient+measurementPage/SectionsGrid";
+import SectionsGrid from "@/common/components/Patient+evaluationPage/SectionsGrid";
 import type { ISectionItem, ISectionRouteMapper } from "@/common/types/section";
 
 interface Props {
@@ -21,7 +21,7 @@ export default function PatientSectionsCard({
   const MODULE_ACTIONS: ISectionRouteMapper = {
     Medications: () => navigate("medications"),
     Activities: () => navigate("activities"),
-    Measurements: () => navigate("measurements"),
+    Evaluations: () => navigate("evaluations"),
     "File Share": () => navigate("files")
   };
 

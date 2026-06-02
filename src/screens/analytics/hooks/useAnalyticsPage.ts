@@ -21,20 +21,20 @@ interface UseAnalyticsModulesResult {
 const ICONS: Record<string, React.ElementType> = {
   activities: Activity,
   medications: Pill,
-  measurements: ClipboardList,
+  evaluations: ClipboardList,
 };
 
 const ACCENTS: Record<string, AnalyticsItem["accent"]> = {
   activities: "orange",
   medications: "blue",
-  measurements: "purple",
+  evaluations: "purple",
   gray: "gray",
 };
 
 const VALID_ROUTES = [
   "/analytics/activities",
   "/analytics/medications",
-  "/analytics/measurements",
+  "/analytics/evaluations",
 ];
 
 export function useAnalyticsModules(): UseAnalyticsModulesResult {

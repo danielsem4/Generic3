@@ -53,7 +53,7 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose, clinicActivityIds }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md rounded-[32px] p-0 overflow-hidden border-none shadow-2xl">
+      <DialogContent className="max-w-md rounded-4xl p-0 overflow-hidden border-none shadow-2xl">
         <DialogHeader className="p-6 pb-0">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-black tracking-tight text-center w-full">
@@ -72,7 +72,7 @@ export const AddActivityToClinicDialog = ({ isOpen, onClose, clinicActivityIds }
           </div>
         </DialogHeader>
 
-        <div className="max-h-[350px] overflow-y-auto p-4 space-y-1">
+        <div className="max-h-87.5 overflow-y-auto p-4 space-y-1">
           {isLoading ? (
             <div className="flex justify-center p-10"><Loader2 className="animate-spin text-primary" /></div>
           ) : (

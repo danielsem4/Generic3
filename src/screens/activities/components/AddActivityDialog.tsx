@@ -86,7 +86,7 @@ export function AddActivityDialog({
             <LoadingButton
               type="submit"
               loading={isSubmitting}
-              loadingText={t("common.loading.adding", "Adding...")} // או מפתח תרגום מתאים
+              loadingText={t("common.loading.adding", "Adding...")} 
               className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
             >
               {t("activities.addBtn")}

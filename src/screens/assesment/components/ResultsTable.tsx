@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { IMeasurementSubmissionAnswerRaw } from "@/common/types/patientMeasurementSubmission";
+import type { IEvaluationSubmissionAnswerRaw } from "@/common/types/patientEvaluationSubmission";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, XCircle, Clock, Pencil } from "lucide-react";
 import { ConfirmDialog } from "@/components/common/ConfirmDialog";
@@ -8,7 +8,7 @@ import { DeleteButton } from "@/common/components/DeleteButton";
 import { EditAnswerScoreDialog } from "./EditAnswerScoreDialog";
 
 interface ResultsTableProps {
-  answers: IMeasurementSubmissionAnswerRaw[];
+  answers: IEvaluationSubmissionAnswerRaw[];
   onDelete: (id: string) => void;
   onEditScore: (id: string, score: number) => void;
 }
@@ -21,9 +21,9 @@ export const ResultsTable = ({
   const { t } = useTranslation();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [editAnswer, setEditAnswer] =
-    useState<IMeasurementSubmissionAnswerRaw | null>(null);
+    useState<IEvaluationSubmissionAnswerRaw | null>(null);
 
-  const handleOpenEdit = (answer: IMeasurementSubmissionAnswerRaw) => {
+  const handleOpenEdit = (answer: IEvaluationSubmissionAnswerRaw) => {
     setEditAnswer(answer);
   };
 
@@ -49,19 +49,19 @@ export const ResultsTable = ({
         <thead>
           <tr className="border-b border-border">
             <th className="pb-4 px-4 text-[11px] font-bold uppercase text-muted-foreground">
-              {t("measurements.table.question_label")}
+              {t("evaluations.table.question_label")}
             </th>
             <th className="pb-4 px-4 text-[11px] font-bold uppercase text-muted-foreground">
-              {t("measurements.table.answer_provided")}
+              {t("evaluations.table.answer_provided")}
             </th>
             <th className="pb-4 px-4 text-[11px] font-bold uppercase text-muted-foreground">
-              {t("measurements.table.status")}
+              {t("evaluations.table.status")}
             </th>
             <th className="pb-4 px-4 text-[11px] font-bold uppercase text-muted-foreground">
-              {t("measurements.table.grade")}
+              {t("evaluations.table.grade")}
             </th>
             <th className="pb-4 px-4 text-[11px] font-bold uppercase text-muted-foreground text-center">
-              {t("measurements.table.actions")}
+              {t("evaluations.table.actions")}
             </th>
           </tr>
         </thead>
@@ -99,9 +99,9 @@ export const ResultsTable = ({
                     {isPass && <Clock className="w-3.5 h-3.5" />}
                     {isFail && <XCircle className="w-3.5 h-3.5" />}
 
-                    {isExcellent && t("measurements.status.excellent")}
-                    {isPass && t("measurements.status.pass")}
-                    {isFail && t("measurements.status.fail")}
+                    {isExcellent && t("evaluations.status.excellent")}
+                    {isPass && t("evaluations.status.pass")}
+                    {isFail && t("evaluations.status.fail")}
                   </span>
                 </td>
 
@@ -137,10 +137,10 @@ export const ResultsTable = ({
       <ConfirmDialog
         open={!!deleteId}
         onOpenChange={handleCloseDelete}
-        title={t("measurements.deleteConfirm.title")}
-        description={t("measurements.deleteConfirm.description")}
-        confirmLabel={t("measurements.deleteConfirm.confirm")}
-        cancelLabel={t("measurements.deleteConfirm.cancel")}
+        title={t("evaluations.deleteConfirm.title")}
+        description={t("evaluations.deleteConfirm.description")}
+        confirmLabel={t("evaluations.deleteConfirm.confirm")}
+        cancelLabel={t("evaluations.deleteConfirm.cancel")}
         onConfirm={handleConfirmDelete}
         variant="destructive"
       />

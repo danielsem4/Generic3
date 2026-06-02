@@ -1,0 +1,125 @@
+import { useTranslation } from "react-i18next";
+import { ClipboardList, Send } from "lucide-react";
+import { FullScreenFormModal } from "@/common/components/FullScreenFormModal";
+import { TimelineCard } from "@/common/components/TimelineCard";
+import { FrequencyScheduleManager } from "@/common/components/patient-profile/FrequencyScheduleManager";
+import { LoadingButton } from "@/components/ui/LoadingButton";
+
+interface IProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  evaluationName: string;
+  patientName: string;
+
+  // state
+  startDate: string;
+  setStartDate: (v: string) => void;
+  endDate: string;
+  setEndDate: (v: string) => void;
+
+  // frequency
+  frequency: "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY";
+  setFrequency: (v: "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY") => void;
+  selectedDays: string[];
+  toggleDay: (d: string) => void;
+  timeSlots: string[];
+  addTimeSlot: () => void;
+  removeTimeSlot: (i: number) => void;
+  updateTimeSlot: (i: number, v: string) => void;
+  dayOfMonth: string;
+  setDayOfMonth: (v: string) => void;
+
+  onSubmit: () => void;
+  isPending: boolean;
+}
+
+export default function PatientEvaluationSettingsDialog({
+  open,
+  onOpenChange,
+  evaluationName,
+  patientName,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  frequency,
+  setFrequency,
+  selectedDays,
+  toggleDay,
+  timeSlots,
+  addTimeSlot,
+  removeTimeSlot,
+  updateTimeSlot,
+  dayOfMonth,
+  setDayOfMonth,
+  onSubmit,
+  isPending,
+}: IProps) {
+  const { t, i18n } = useTranslation();
+
+  const frequencyScheduleData = {
+    frequency,
+    setFrequency,
+    selectedDays,
+    toggleDay,
+    timeSlots,
+    addTimeSlot,
+    removeTimeSlot,
+    updateTimeSlot,
+    dayOfMonth,
+    setDayOfMonth,
+  };
+
+  return (
+    <FullScreenFormModal
+      isOpen={open}
+      setIsOpen={onOpenChange}
+      dir={i18n.dir()}
+      icon={<ClipboardList className="text-primary" size={32} />}
+      title={t("patientEvaluations.settings.title")}
+      cancelText={t("common.cancel")}
+      finalizeButton={
+        <LoadingButton
+          onClick={onSubmit}
+          loading={isPending}
+          className="min-w-[220px] h-12 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-sm bg-primary text-primary-foreground hover:bg-primary/90"
+        >
+          {!isPending && <Send size={18} />}
+          <span>{t("patientEvaluations.settings.sendToPatient")}</span>
+        </LoadingButton>
+      }
+    >
+      <div className="space-y-6">
+        {/* header text */}
+        <div>
+          <p className="text-sm text-muted-foreground">
+            {t("patientEvaluations.settings.subtitle", { name: patientName })}
+          </p>
+          <h2 className="text-2xl font-bold">{evaluationName}</h2>
+        </div>
+
+        {/* main cards */}
+        <div className="rounded-[28px] border border-border bg-card p-6 md:p-8">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            
+            {/* timeline */}
+            <TimelineCard
+              label={t("patientEvaluations.settings.timelineLabel")}
+              startDateLabel={t("patientEvaluations.settings.startDate")}
+              endDateLabel={t("patientEvaluations.settings.endDate")}
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
+
+            {/* frequency */}
+            <FrequencyScheduleManager
+              hookData={frequencyScheduleData}
+            />
+          </div>
+        </div>
+      </div>
+    </FullScreenFormModal>
+  );
+}

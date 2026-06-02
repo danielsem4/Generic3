@@ -451,15 +451,16 @@ const ar = {
     deleteSuccess: "تم حذف النشاط بنجاح.",
   },
   
-  // patient measurements
-  patientMeasurements: {
+  // patient evaluations
+  patientEvaluations: {
     questionnaires: "استبيانات",
     cognitiveTests: "اختبارات معرفية",
     moduleQuestionnaire: "استبيان الوحدة",
+    medicalStaffEvaluation: "تقييم الطاقم الطبي",
     noData: "لا توجد بيانات",
     submissions: {
-      backToMeasurements: "← العودة إلى القياسات",
-      measurementTitleFallback: "قياس",
+      backToEvaluations: "← العودة إلى القياسات",
+      evaluationTitleFallback: "قياس",
       patientNameFallback: "مريض",
       pageDescription: "عرض البيانات السابقة أو إعداد قياسات جديدة.",
       settingsButton: "إعدادات قياسات المريض",
@@ -607,7 +608,7 @@ const ar = {
         title: "مشاركة المستندات",
         description: "مشاركة وإدارة المستندات السريرية وملفات المرضى.",
       },
-      measurements: {
+      evaluations: {
         title: "القياسات",
         description: "تتبع وتسجيل العلامات الحيوية والقياسات السريرية.",
       },
@@ -711,7 +712,7 @@ analytics: {
       title: "تحليلات الأدوية",
       description: "تحليل استخدام الأدوية والالتزام بالعلاج والاتجاهات ذات الصلة."
     },
-    measurements: {
+    evaluations: {
       title: "تحليلات القياسات",
       description: "مراجعة نتائج القياسات والتقديمات وردود فعل المرضى."
     },
@@ -732,7 +733,7 @@ analytics: {
     busiestDaysChart: "الأيام الأكثر ازدحاماً",
     usageChart: "الاستخدام بروֹر الوقت"
   },
-  measurements: {
+  evaluations: {
     title: "تحليلات القياسات",
     description: "مراجعة نتائج القياسات والتقديمات وردود فعل المرضى.",
     busiestDaysChart:" الأيام الأكثر ازدحاماً",
@@ -750,8 +751,8 @@ analytics: {
 },
 },
 
-  // Measurements
-  measurements: {
+  // Evaluations
+  evaluations: {
     title: "القياسات",
     createNew: "إنشاء جديد",
     searchPlaceholder: "البحث عن القياسات...",
@@ -838,6 +839,7 @@ analytics: {
       questionnaries: "الاستبيانات",
       cognitiveTests: "اختبارات معرفية",
       moduleQuestionnaire: "استبيان الوحدة",
+      medicalStaffEvaluation: "تقييم الطاقم الطبي",
     },
 
     builder: {
