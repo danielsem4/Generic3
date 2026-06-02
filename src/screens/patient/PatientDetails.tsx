@@ -7,9 +7,10 @@ import { BackButton } from "@/components/ui/BackButton";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 
+
 export default function PatientDetails() {
   const { t } = useTranslation();
-  const { patient, modules, metrics, functions, isLoading, error } =
+  const { patient, modules, metrics, functions, isLoading, error, refetch } =
     usePatientDetails();
 
   if (isLoading) {
@@ -34,7 +35,12 @@ export default function PatientDetails() {
       <BackButton to="/patients" />
       <EntityHeader
        data={patient}
-       renderActions={<PatientEditDialog patient={patient} />}
+       renderActions={
+  <PatientEditDialog
+    patient={patient}
+    onUpdated={() => refetch()}
+  />
+        }
       />
       <PatientSectionsCard
         functions={functions}

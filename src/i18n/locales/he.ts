@@ -123,6 +123,9 @@ const he = {
     phoneNumberPlaceholder: "",
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
+    save: "שמור שינויים",
+    patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים"
+
   },
 
   // Clinic Managers

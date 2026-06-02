@@ -34,18 +34,14 @@ export function ConfirmDialog({
 }: Readonly<ConfirmDialogProps>) {
   const { t } = useTranslation(); 
   
-  // סטטוס טעינה פשוט וטהור - נדלק בלחיצה ולא משתחרר עד שהקומפוננטה יוצאת מהמסך
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const handleConfirmClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // מונע מהדיאלוג להיסגר אוטומטית בשבריר השנייה של הלחיצה
     e.preventDefault();
     e.stopPropagation();
 
-    // מדליק את הספינר מיד ידנית
     setIsButtonLoading(true);
 
-    // מפעיל את פונקציית האישור של האבא (מחיקה/לוגאאוט)
     onConfirm();
   };
 
@@ -58,7 +54,7 @@ export function ConfirmDialog({
     <AlertDialog 
       open={open} 
       onOpenChange={(val) => {
-        if (isButtonLoading) return; // חוסם סגירה בלחיצה בחוץ בזמן שהספינר רץ
+        if (isButtonLoading) return; 
         if (!val) handleCancelClick();
       }}
     >
@@ -77,7 +73,7 @@ export function ConfirmDialog({
           </AlertDialogCancel>
           
           <LoadingButton
-            variant="default" // 🟢 נעול על כחול תמיד! אין שום סיכוי שיהיה אדום
+            variant="default" 
             onClick={handleConfirmClick} 
             loading={isButtonLoading} 
             disabled={isButtonLoading}

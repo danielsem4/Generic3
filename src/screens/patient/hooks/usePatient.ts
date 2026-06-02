@@ -12,6 +12,7 @@ export function usePatientDetails() {
     data: response,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["patient", userId],
     queryFn: () => getPatientDetails(userId!),
@@ -20,6 +21,7 @@ export function usePatientDetails() {
 
   const patient: IPatientDetails | null = response
   ? {
+      id: userId!,
       patientId: response.patient_id,
       firstName: response.first_name,
       lastName: response.last_name,
@@ -47,5 +49,5 @@ export function usePatientDetails() {
 
   const functions: ISectionItem[] = [];
 
-  return { patient, modules, metrics, functions, isLoading, error };
+  return { patient, modules, metrics, functions, isLoading, error, refetch };
 }

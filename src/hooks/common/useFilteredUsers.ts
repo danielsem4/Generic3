@@ -9,6 +9,7 @@ interface IFilteredUsersData {
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isLoading: boolean;
   error: Error | null;
+  refetch: () => void;
 }
 
 export function useFilteredUsers(
@@ -18,7 +19,7 @@ export function useFilteredUsers(
   const [searchTerm, setSearchTerm] = useState("");
   const userId = useAuthStore((s) => s.userId);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: [...queryKey],
     queryFn,
     enabled: !!userId,
@@ -41,5 +42,6 @@ export function useFilteredUsers(
     handleSearchChange,
     isLoading,
     error: error as Error | null,
+    refetch,
   };
 }
