@@ -63,7 +63,8 @@
       "Bash(ls -la /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
       "Bash(cat /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
       "Bash(grep -E \"^export \\(interface I|type I\\)\" /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
-      "Bash(grep -E \"^export \\(interface [^I]|type [^I]\\)\" /Users/klutz/Desktop/Generic3/src/common/types/*.ts)"
+      "Bash(grep -E \"^export \\(interface [^I]|type [^I]\\)\" /Users/klutz/Desktop/Generic3/src/common/types/*.ts)",
+      "Bash(gh pr *)"
     ]
   }
 }
