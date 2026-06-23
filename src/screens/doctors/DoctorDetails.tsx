@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { useDoctorDetails } from "./hooks/useDoctorDetails";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 import { BackButton } from "@/components/ui/BackButton"; 
-import PatientEditDialog from "@/common/components/Patient+measurementPage/PatientEditDialog";
+import PatientEditDialog from "@/common/components/Patient+evaluationPage/PatientEditDialog";
 
 export default function DoctorDetails() {
   const { t } = useTranslation();
