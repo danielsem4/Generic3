@@ -96,31 +96,33 @@ export function ScreenTabBar({
   }
 
   return (
-    <div className="flex items-center gap-1 border-b bg-card px-2 py-1 overflow-x-auto shrink-0">
-      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <SortableContext
-          items={screens.map((s) => s.id)}
-          strategy={horizontalListSortingStrategy}
-        >
-          {screens.map((screen, index) => (
-            <SortableScreenTab
-              key={screen.id}
-              screen={screen}
-              index={index}
-              isActive={index === activeScreenIndex}
-              isEditing={editingIndex === index}
-              editValue={editValue}
-              canDelete={canDeleteScreen}
-              onSelect={onSelectScreen}
-              onStartRename={handleStartRename}
-              onEditValueChange={setEditValue}
-              onCommitRename={handleCommitRename}
-              onCancelRename={handleCancelRename}
-              onDeleteClick={handleDeleteClick}
-            />
-          ))}
-        </SortableContext>
-      </DndContext>
+    <div className="flex items-center gap-1 border-b bg-card px-2 py-1 shrink-0">
+      <div className="flex items-center gap-1 flex-1 min-w-0 overflow-x-auto">
+        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+          <SortableContext
+            items={screens.map((s) => s.id)}
+            strategy={horizontalListSortingStrategy}
+          >
+            {screens.map((screen, index) => (
+              <SortableScreenTab
+                key={screen.id}
+                screen={screen}
+                index={index}
+                isActive={index === activeScreenIndex}
+                isEditing={editingIndex === index}
+                editValue={editValue}
+                canDelete={canDeleteScreen}
+                onSelect={onSelectScreen}
+                onStartRename={handleStartRename}
+                onEditValueChange={setEditValue}
+                onCommitRename={handleCommitRename}
+                onCancelRename={handleCancelRename}
+                onDeleteClick={handleDeleteClick}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
+      </div>
 
       <Button
         variant="ghost"
@@ -133,7 +135,7 @@ export function ScreenTabBar({
       </Button>
 
       {!!totalScore && totalScore > 0 && (
-        <div className="ml-auto shrink-0 text-xs font-medium text-muted-foreground px-2">
+        <div className="shrink-0 text-xs font-medium text-muted-foreground px-2">
           {t("evaluations.builder.totalScore")}: {totalScore}
         </div>
       )}

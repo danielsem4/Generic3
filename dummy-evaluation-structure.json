@@ -1,0 +1,348 @@
+{
+  "screens": [
+    {
+      "title": "Heading",
+      "elements": [
+        {
+          "label": "This is a heading",
+          "element_type": "HEADER",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Paragraph",
+      "elements": [
+        {
+          "label": "This is a paragraph that explains something to the user in plain prose.",
+          "element_type": "PARAGRAPH",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Info Card",
+      "elements": [
+        {
+          "label": "Heads up: this is an info card with helpful context.",
+          "element_type": "INFO_CARD",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Image",
+      "elements": [
+        {
+          "label": "Logo",
+          "element_type": "IMAGE",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Icon",
+      "elements": [
+        {
+          "label": "Star",
+          "element_type": "ICON",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Button",
+      "elements": [
+        {
+          "label": "Continue",
+          "element_type": "BUTTON",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Text Input",
+      "elements": [
+        {
+          "label": "What is your full name?",
+          "element_type": "INPUT_TEXT",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "placeholder": "Enter your name..." },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Number Input",
+      "elements": [
+        {
+          "label": "How old are you?",
+          "element_type": "INPUT_NUMBER",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "placeholder": "Age", "min": 0, "max": 120, "step": 1 },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "30", "points": 5 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Dropdown",
+      "elements": [
+        {
+          "label": "Pick your country",
+          "element_type": "INPUT_SELECT",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {
+            "placeholder": "Select...",
+            "options": ["Israel", "United States", "Germany", "Japan"]
+          },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "Israel", "points": 10 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Multi Select",
+      "elements": [
+        {
+          "label": "Select all symptoms that apply",
+          "element_type": "INPUT_MULTI_SELECT",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {
+            "placeholder": "Choose...",
+            "options": ["Headache", "Fatigue", "Nausea", "Dizziness"]
+          },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [
+            { "answer": "Headache", "points": 5 },
+            { "answer": "Fatigue", "points": 5 }
+          ],
+          "allow_partial_score": true,
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Radio Group",
+      "elements": [
+        {
+          "label": "Do you exercise regularly?",
+          "element_type": "INPUT_RADIO",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "options": ["Yes", "No", "Sometimes"], "layout": "vertical" },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "Yes", "points": 10 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Card Radio Group",
+      "elements": [
+        {
+          "label": "How do you feel today?",
+          "element_type": "INPUT_RADIO",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {
+            "options": ["Great", "Okay", "Bad"],
+            "layout": "horizontal",
+            "display_style": "cards"
+          },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Card Multi Select",
+      "elements": [
+        {
+          "label": "Which conditions have you been diagnosed with?",
+          "element_type": "INPUT_MULTI_SELECT",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {
+            "options": ["Hypertension", "Diabetes", "Asthma"],
+            "layout": "vertical",
+            "display_style": "cards"
+          },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "Hypertension", "points": 5 }],
+          "allow_partial_score": false,
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Date Picker",
+      "elements": [
+        {
+          "label": "What is today's date?",
+          "element_type": "INPUT_DATE",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "placeholder": "Pick a date..." },
+          "correct_answer_type": "DYNAMIC",
+          "correct_answers": [{ "answer": "TODAY_DATE", "points": 10 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Time Picker",
+      "elements": [
+        {
+          "label": "Preferred appointment time",
+          "element_type": "INPUT_TIME",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "placeholder": "Select time..." },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Scale",
+      "elements": [
+        {
+          "label": "Rate your pain (0 = none, 10 = worst)",
+          "element_type": "INPUT_SCALE",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "min": 0, "max": 10, "step": 1, "min_label": "None", "max_label": "Worst" },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "7", "points": 5 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Toggle Switch",
+      "elements": [
+        {
+          "label": "Do you smoke?",
+          "element_type": "INPUT_BOOLEAN",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "true_label": "Yes", "false_label": "No", "default_value": false },
+          "correct_answer_type": "STATIC",
+          "correct_answers": [{ "answer": "false", "points": 5 }],
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Row Container",
+      "elements": [
+        {
+          "label": "First name",
+          "element_type": "INPUT_TEXT",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": { "placeholder": "First name" },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        },
+        {
+          "label": "Last name",
+          "element_type": "INPUT_TEXT",
+          "is_required": false,
+          "row_number": 1,
+          "order_in_row": 2,
+          "config": { "placeholder": "Last name" },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Body Map",
+      "elements": [
+        {
+          "label": "Where do you feel pain?",
+          "element_type": "BODY_MAP_VISUAL",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {
+            "spots": [
+              { "point": "head", "subItems": ["headache", "dizziness"] },
+              { "point": "chest", "subItems": ["tightness", "shortness of breath"] },
+              { "point": "left_knee", "subItems": ["pain", "stiffness"] }
+            ]
+          },
+          "correct_answer_type": "NONE",
+          "version_key": "v1"
+        }
+      ]
+    },
+    {
+      "title": "Cognitive Field",
+      "elements": [
+        {
+          "label": "What year is it?",
+          "element_type": "COGNITIVE_FIELD",
+          "is_required": true,
+          "row_number": 1,
+          "order_in_row": 1,
+          "config": {},
+          "correct_answer_type": "DYNAMIC",
+          "correct_answers": [{ "answer": "CURRENT_YEAR", "points": 10 }],
+          "version_key": "v1"
+        }
+      ]
+    }
+  ]
+}
