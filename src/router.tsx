@@ -19,6 +19,9 @@ import Analytics from "./screens/analytics/Analytics";
 import Activities from "@/screens/activities/ActivitiesPage";
 import EvaluationsPage from "@/screens/evaluations/EvaluationsPage";
 import EvaluationBuilder from "@/screens/evaluations/EvaluationBuilder";
+import GraphsPage from "@/screens/graphs/GraphsPage";
+import GraphBuilder from "@/screens/graphs/GraphBuilder";
+import PatientGraphs from "@/screens/patient-graphs/PatientGraphs";
 import PatientActivities from "./screens/patient-activities/PatientActivities";
 import EvaluationPage from "./screens/patient-evaluation/patientEvaluations";
 import PatientEvaluationSubmissionsScreen from "./screens/patient-evaluation-submissions/PatientEvaluationSubmissionsScreen";
@@ -50,11 +53,15 @@ export const router = createBrowserRouter([
       { path: "modules/evaluations", element: <EvaluationsPage /> },
       { path: "modules/evaluations/builder", element: <EvaluationBuilder /> },
       { path: "modules/evaluations/builder/:id", element: <EvaluationBuilder /> },
+      { path: "modules/graphs", element: <GraphsPage /> },
+      { path: "modules/graphs/builder", element: <GraphBuilder /> },
+      { path: "modules/graphs/builder/:id", element: <GraphBuilder /> },
       { path: "patients/:userId/medications", element: <PatientMedications /> },
       { path: "patients/:userId/activities", element: <PatientActivities /> },
       { path: "patients/:userId/evaluations", element: <EvaluationPage /> },
       { path: "patients/:userId/evaluations/:evaluationId/submissions", element: <PatientEvaluationSubmissionsScreen /> },
       { path: "patients/:userId/evaluation-submissions/:submissionId", element: <AssessmentResultsPage /> },
+      { path: "patients/:userId/graphs", element: <PatientGraphs /> },
       { path: "patients/:userId/files", element: <PatientFilesPage /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "analytics", element: <Analytics /> },
