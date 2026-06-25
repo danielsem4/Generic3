@@ -125,7 +125,8 @@ patients: {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
   save: "Save Changes",
-  patientAlreadyExistsError: "This patient already exists or the details are invalid"
+  patientAlreadyExistsError: "This patient already exists or the details are invalid",
+  patientAddedSuccess: "Patient added successfully",
 },
 
   // Clinic Managers

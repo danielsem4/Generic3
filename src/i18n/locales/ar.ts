@@ -119,7 +119,8 @@ const ar = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "حفظ",
-    patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة"
+    patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة",
+    patientAddedSuccess: "تم إضافة المريض بنجاح",
 
   },
 

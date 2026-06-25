@@ -124,7 +124,8 @@ const he = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "שמור שינויים",
-    patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים"
+    patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים",
+    patientAddedSuccess: "המטופל נוסף בהצלחה",
 
   },
 

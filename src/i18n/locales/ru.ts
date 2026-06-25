@@ -124,7 +124,8 @@ const ru = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "Сохранить изменения",
-    patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны"
+    patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны",
+    patientAddedSuccess: "Пациент успешно добавлен",
   },
 
   // Clinic Managers
