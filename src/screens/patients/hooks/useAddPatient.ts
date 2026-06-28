@@ -25,7 +25,7 @@ export function useAddPatient() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["users", "patients"] });
     },
   });
 

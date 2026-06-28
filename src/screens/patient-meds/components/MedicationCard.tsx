@@ -72,7 +72,7 @@ const handleNotifyClick = () => {
               {prescription.med_name}
             </span>
             <span className="text-[11px] text-muted-foreground font-medium">
-              {t("patientMeds.regularDosage")}
+              {prescription.dosage}
             </span>
           </div>
 

@@ -1,4 +1,4 @@
-import React, { type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 import { Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";

@@ -16,7 +16,6 @@ export function useAddPatientDialog() {
   const [open, setOpen] = useState(false);
   const [patientType, setPatientType] = useState<PatientType>("patient");
   const { addPatient, isSubmitting } = useAddPatient();
-  const [error, setErrorMessage] = useState<string | null>(null); 
   const { t } = useTranslation();
 
   const patientForm = useForm<PatientFormValues>({
@@ -31,7 +30,6 @@ export function useAddPatientDialog() {
 
   const handleTypeChange = (type: PatientType) => {
     setPatientType(type);
-    setErrorMessage(null);
     patientForm.reset();
     researchForm.reset();
   };
@@ -42,16 +40,13 @@ export function useAddPatientDialog() {
       patientForm.reset();
       researchForm.reset();
       setPatientType("patient");
-      setErrorMessage(null);
     }
   };
 
   const onSubmitPatient = async (data: PatientFormValues) => {
     try {
-      setErrorMessage(null);
-
-      await addPatient({ ...data, patientType: "patient" });
-
+        await addPatient({ ...data, patientType: "patient" });
+        toast.success(t("patients.patientAddedSuccess"));
       patientForm.reset();
       setOpen(false);
     } catch (e: unknown) {
@@ -64,9 +59,9 @@ export function useAddPatientDialog() {
 
   const onSubmitResearch = async (data: ResearchPatientFormValues) => {
     try {
-      setErrorMessage(null);
 
       await addPatient({ ...data, patientType: "research" });
+      toast.success(t("patients.patientAddedSuccess"));
 
       researchForm.reset();
       setOpen(false);
@@ -88,6 +83,5 @@ export function useAddPatientDialog() {
     handleClose,
     onSubmitPatient,
     onSubmitResearch,
-    errorMessage: error, 
   };
 }

@@ -119,7 +119,8 @@ const ar = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "حفظ",
-    patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة"
+    patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة",
+    patientAddedSuccess: "تم إضافة المريض بنجاح",
 
   },
 
@@ -326,7 +327,11 @@ const ar = {
       form: "الشكل",
       dosage: "الجرعة",
       status: "الحالة"
-    }
+    },
+    editSuccess: "تم تحديث الوصفة بنجاح.",
+    editError: "فشل في تحديث الوصفة.",
+    deleteSuccess: "تم حذف الوصفة بنجاح.",
+    deleteError: "فشل في حذف الوصفة.",
   },
 
   // Clinic 

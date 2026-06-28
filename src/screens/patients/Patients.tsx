@@ -35,7 +35,7 @@ export default function Patients() {
               {t("patients.description")}
             </p>
           </div>
-          {role !== "CLINIC_MANAGER" && <AddPatientsDialog />}
+          {role === "DOCTOR" && <AddPatientsDialog />}
         </div>
 
         <div className="relative w-full">

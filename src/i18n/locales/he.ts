@@ -124,7 +124,8 @@ const he = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "שמור שינויים",
-    patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים"
+    patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים",
+    patientAddedSuccess: "המטופל נוסף בהצלחה",
 
   },
 
@@ -330,7 +331,11 @@ const he = {
       medName: "שם התרופה",
       form: "צורת מתן",
       dosage: "מינון",
-      status: "סטטוס"
+      status: "סטטוס",
+      editSuccess: "עדכון המרשם בוצע בהצלחה.",
+      editError: "עדכון המרשם נכשל.",
+      deleteSuccess: "המרשם נמחק בהצלחה.",
+      deleteError: "מחיקת המרשם נכשלה.",
     }
   },
 

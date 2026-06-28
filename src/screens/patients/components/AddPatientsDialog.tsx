@@ -71,7 +71,6 @@ export function AddPatientsDialog() {
     handleClose,
     onSubmitPatient,
     onSubmitResearch,
-    errorMessage,
   } = useAddPatientDialog();
 
   const isResearch = patientType === "research";
@@ -151,11 +150,7 @@ export function AddPatientsDialog() {
               register={patientForm.register}
               error={patientForm.formState.errors.phoneNumber}
             />
-            {errorMessage && (
-           <div className="mt-3 rounded-md border border-destructive bg-destructive/10 p-2 text-sm text-destructive text-center">
-            {errorMessage}
-           </div>
-            )}
+            
 
             <LoadingButton type="submit" loading={isSubmitting}>
               {t("patients.registerButton")}
@@ -207,11 +202,7 @@ export function AddPatientsDialog() {
               register={researchForm.register}
               error={researchForm.formState.errors.confirmPassword}
             />
-            {errorMessage && (
-             <div className="mt-3 rounded-md border border-destructive bg-destructive/10 p-2 text-sm text-destructive text-center">
-               {errorMessage} 
-              </div>
-              )}
+            
 
             <LoadingButton type="submit" loading={isSubmitting}>
               {t("patients.registerButton")}

@@ -1,4 +1,4 @@
-import React, { type ReactNode, type ComponentPropsWithoutRef } from "react";
+import { type ReactNode, type ComponentPropsWithoutRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useTranslation } from "react-i18next";

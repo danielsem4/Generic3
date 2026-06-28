@@ -125,7 +125,8 @@ patients: {
   passwordPlaceholder: "********",
   confirmPasswordPlaceholder: "********",
   save: "Save Changes",
-  patientAlreadyExistsError: "This patient already exists or the details are invalid"
+  patientAlreadyExistsError: "This patient already exists or the details are invalid",
+  patientAddedSuccess: "Patient added successfully",
 },
 
   // Clinic Managers
@@ -315,7 +316,11 @@ patients: {
       medName: "Med Name",
       form: "Form",
       dosage: "Dosage",
-      status: "Status"}
+      status: "Status"},
+      editSuccess: "Prescription was updated successfully.",
+      editError: "Failed to update prescription.",
+      deleteSuccess: "Prescription deleted successfully.",
+      deleteError: "Failed to delete prescription."
   },
   
   // Clinic

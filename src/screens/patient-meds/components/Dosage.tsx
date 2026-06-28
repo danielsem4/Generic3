@@ -1,4 +1,4 @@
-import React, {type ChangeEvent } from "react";
+import  {type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Pill } from "lucide-react";
 import { Card } from "@/components/ui/card";

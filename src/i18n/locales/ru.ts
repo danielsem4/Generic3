@@ -124,7 +124,8 @@ const ru = {
     passwordPlaceholder: "********",
     confirmPasswordPlaceholder: "********",
     save: "Сохранить изменения",
-    patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны"
+    patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны",
+    patientAddedSuccess: "Пациент успешно добавлен",
   },
 
   // Clinic Managers
@@ -330,7 +331,11 @@ const ru = {
       form: "Форма",
       dosage: "Дозировка",
       status: "Статус"
-    }
+    },
+    editSuccess: "Успешно обновлено.",
+    editError: "Ошибка при обновлении.",
+    deleteSuccess: "Успешно удалено.",
+    deleteError: "Ошибка при удалении.",
   },
 
   // Clinic
