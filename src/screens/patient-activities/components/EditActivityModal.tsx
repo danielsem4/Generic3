@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Activity, Save} from "lucide-react";
 import type { IPatientActivity } from "@/common/types/activities";

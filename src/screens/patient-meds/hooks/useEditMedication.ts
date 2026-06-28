@@ -16,7 +16,8 @@ export function useEditMedication(patientId: string) {
   const clinicId = useAuthStore((state) => state.clinicId);
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const [dosage, setDosage] = useState("");
+  const [dosageAmount, setDosageAmount] = useState("1");
+  const [dosageUnit, setDosageUnit] = useState("ml");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [frequency, setFrequency] = useState<PrescriptionFrequency>("DAILY");
@@ -66,9 +67,22 @@ export function useEditMedication(patientId: string) {
       return prev.map((slot, i) => (i === index ? value : slot));
     });
   };
+  const parseDosage = (dosage?: string) => {
+  if (!dosage) {
+    return { amount: "1", unit: "ml" };
+  }
 
+  const [amount, unit] = dosage.trim().split(/\s+/);
+
+  return {
+    amount: amount || "1",
+    unit: unit || "ml",
+  };
+};
   const initForm = useCallback((prescription: IPatientPrescription) => {
-    setDosage(prescription.dosage ?? "");
+    const parsedDosage = parseDosage(prescription.dosage);
+    setDosageAmount(parsedDosage.amount);
+    setDosageUnit(parsedDosage.unit);
     setStartDate(prescription.start_date ?? "");
     setEndDate(prescription.end_date ?? "");
     setFrequency(prescription.frequency ?? "DAILY");
@@ -116,7 +130,7 @@ export function useEditMedication(patientId: string) {
       });
 
       return updatePatientMedication(clinicId!, patientId, prescriptionId, {
-        dosage,
+        dosage: `${dosageAmount} ${dosageUnit}`,
         start_date: startDate,
         end_date: endDate,
         frequency,
@@ -135,8 +149,11 @@ export function useEditMedication(patientId: string) {
   });
 
   return {
-    dosage,
-    setDosage,
+    dosageAmount,
+    setDosageAmount,
+
+    dosageUnit,
+    setDosageUnit,
 
     startDate,
     setStartDate,

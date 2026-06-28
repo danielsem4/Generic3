@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Search, Activity, X } from "lucide-react";
 import { Card } from "@/components/ui/card";

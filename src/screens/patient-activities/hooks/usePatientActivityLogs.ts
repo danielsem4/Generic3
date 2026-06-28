@@ -16,20 +16,9 @@ export function usePatientActivityLogs(clinicId: string, userId: string) {
     error,
     refetch,
   } = useQuery({
-    queryKey: ["patient-activity-logs", clinicId, userId],
-    queryFn: () => getPatientActivityLogs(clinicId, userId),
+    queryKey: ["patient-activity-logs", clinicId, userId, filters],
+    queryFn: () => getPatientActivityLogs(clinicId, userId, filters),
     enabled: Boolean(clinicId && userId),
-  });
-
-  const filteredLogs = activityLogs.filter((log) => {
-    const matchesActivity =
-      !filters.activity_name ||
-      log.activity_name.toLowerCase().includes(filters.activity_name.toLowerCase());
-
-    const matchesStartDate =
-      !filters.start_date || log.time_done >= filters.start_date;
-
-    return matchesActivity && matchesStartDate;
   });
 
   const handleFilterChange = (updated: Partial<IActivityLogFilters>) => {
@@ -44,7 +33,7 @@ export function usePatientActivityLogs(clinicId: string, userId: string) {
   };
 
   return {
-    activityLogs: filteredLogs,
+    activityLogs,
     filters,
     handleFilterChange,
     handleResetFilters,

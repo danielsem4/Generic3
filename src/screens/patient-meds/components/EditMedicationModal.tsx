@@ -24,8 +24,10 @@ export function EditMedicationModal({
   const { t, i18n } = useTranslation();
 
   const {
-    dosage,
-    setDosage,
+    dosageAmount,
+    setDosageAmount,
+    dosageUnit,
+    setDosageUnit,
     startDate,
     setStartDate,
     endDate,
@@ -116,17 +118,42 @@ export function EditMedicationModal({
             setEndDate={setEndDate}
           />
 
-          <div className="rounded-[2rem] border-none bg-card p-8 shadow-md space-y-4">
-            <label className="text-[10px] font-bold text-muted-foreground uppercase">
-              {t("patientMeds.dosageLabel")}
-            </label>
+          <div className="rounded-[2rem] border-none bg-card p-8 shadow-md space-y-5">
+  <label className="text-[10px] font-bold text-muted-foreground uppercase flex items-center gap-2">
+    <Pill size={14} /> {t("patientMeds.dosageLabel")}
+  </label>
 
-            <input
-              value={dosage}
-              onChange={(event) => setDosage(event.target.value)}
-              className="w-full h-12 bg-secondary rounded-xl px-4 outline-none border-none text-sm font-medium"
-            />
-          </div>
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <p className="text-[11px] font-bold text-foreground mb-1">
+        {t("patientMeds.amount")}
+      </p>
+      <input
+        type="number"
+        value={dosageAmount}
+        onChange={(event) => setDosageAmount(event.target.value)}
+        className="w-full h-14 bg-secondary rounded-xl px-4 outline-none border-none text-foreground"
+      />
+    </div>
+
+    <div>
+      <p className="text-[11px] font-bold text-foreground mb-1">
+        {t("patientMeds.unit")}
+      </p>
+      <select
+        value={dosageUnit}
+        onChange={(event) => setDosageUnit(event.target.value)}
+        className="w-full h-14 bg-secondary rounded-xl px-4 outline-none border-none text-foreground"
+      >
+        {["ml", "mg", "tabs"].map((unit) => (
+          <option key={unit} value={unit}>
+            {t(`patientMeds.units.${unit}`)}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+</div>
         </div>
 
         <FrequencyScheduleManager hookData={frequencyScheduleData} />
