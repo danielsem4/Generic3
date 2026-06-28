@@ -32,12 +32,12 @@ export default function ProtectedLayout() {
     >
       <AppSidebar variant="inset" open={sidebarOpen} menuItems={menuItems} />
       <SidebarInset
-        className={`flex-1 transition-all duration-300 ${
+        className={`flex-1 h-svh overflow-hidden transition-all duration-300 ${
           sidebarOpen ? "ms-72" : "ms-0"
         }`}
       >
         <SiteHeader onToggleSidebar={handleToggleSidebar} />
-        <div className="flex-1 min-h-screen bg-background overflow-auto transition-all duration-300">
+        <div className="flex-1 min-h-0 bg-background overflow-auto transition-all duration-300">
           <Outlet />
         </div>
       </SidebarInset>

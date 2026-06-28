@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { Activity, Pill, BarChart3 } from "lucide-react";
+import { Activity, Pill, BarChart3, LineChart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import SectionsGrid from "@/common/components/Patient+evaluationPage/SectionsGrid";
 import type { ISectionItem, ISectionRouteMapper } from "@/common/types/section";
+import { usePatientGraphSection } from "@/screens/patient/hooks/usePatientGraphSection";
 
 interface Props {
   readonly functions?: ISectionItem[];
@@ -27,6 +28,8 @@ export default function PatientSectionsCard({
 
   const METRIC_ACTIONS: ISectionRouteMapper = {};
   const FUNCTION_ACTIONS: ISectionRouteMapper = {};
+
+  const { graphItems, graphActions } = usePatientGraphSection();
 
   const sections = [
     {
@@ -58,6 +61,16 @@ export default function PatientSectionsCard({
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
       emptyLabel: t("patient.noData"),
+    },
+    {
+      title: t("patient.graphs"),
+      icon: LineChart,
+      iconClassName: "text-chart-3",
+      items: graphItems,
+      routeMapper: graphActions,
+      editLabel: t("patient.editDetails"),
+      enableLabel: t("patient.enable"),
+      emptyLabel: t("graphs.empty"),
     },
   ];
 

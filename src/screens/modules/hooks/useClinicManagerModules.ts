@@ -8,6 +8,14 @@ import { addClinicModule, removeClinicModule } from "@/api/modulesApi";
 import { useAuthStore } from "@/store/useAuthStore";
 import type { IModule } from "@/common/types/patientDetails";
 
+// Temporary test shim: surfaces the Graphs module before the backend catalog
+// has it. Drops out automatically once the clinic returns a real Graphs module.
+const GRAPHS_TEST_MODULE: IModule = {
+  id: -1,
+  module_name: "Graphs",
+  module_description: "Visualize patient questionnaire data over time.",
+};
+
 export function useClinicManagerModules() {
   const { t } = useTranslation();
   const clinicId = useAuthStore((s) => s.clinicId);
@@ -37,7 +45,14 @@ export function useClinicManagerModules() {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value);
 
-  const filteredModules = clinicModules.filter((m) =>
+  const hasGraphs = clinicModules.some(
+    (m) => m.module_name.toLowerCase() === "graphs",
+  );
+  const displayModules = hasGraphs
+    ? clinicModules
+    : [...clinicModules, GRAPHS_TEST_MODULE];
+
+  const filteredModules = displayModules.filter((m) =>
     m.module_name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 

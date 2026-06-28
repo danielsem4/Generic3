@@ -3,6 +3,7 @@ import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
 
 import { cn } from "@/lib/utils"
+import { formatDateTime } from "@/common/utils/formatDate"
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
@@ -113,6 +114,14 @@ ${colorConfig
 }
 
 const ChartTooltip = RechartsPrimitive.Tooltip
+
+// ISO date-times shown as tooltip values (e.g. a marker point's raw x) render as
+// DD/MM/YYYY HH:MM; ordinary string/number values pass through unchanged.
+const ISO_DATETIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/
+function formatTooltipValue(value: string | number) {
+  if (typeof value === "number") return value.toLocaleString()
+  return ISO_DATETIME.test(value) ? formatDateTime(value) : value
+}
 
 function ChartTooltipContent({
   active,
@@ -252,9 +261,7 @@ function ChartTooltipContent({
                       </div>
                       {item.value != null && (
                         <span className="font-mono font-medium text-foreground tabular-nums">
-                          {typeof item.value === "number"
-                            ? item.value.toLocaleString()
-                            : String(item.value)}
+                          {formatTooltipValue(item.value as string | number)}
                         </span>
                       )}
                     </div>
