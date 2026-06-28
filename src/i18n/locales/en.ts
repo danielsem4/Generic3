@@ -316,7 +316,11 @@ patients: {
       medName: "Med Name",
       form: "Form",
       dosage: "Dosage",
-      status: "Status"}
+      status: "Status"},
+      editSuccess: "Prescription was updated successfully.",
+      editError: "Failed to update prescription.",
+      deleteSuccess: "Prescription deleted successfully.",
+      deleteError: "Failed to delete prescription."
   },
   
   // Clinic

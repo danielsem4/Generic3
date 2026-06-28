@@ -7,11 +7,15 @@ import type {
   IPatientPrescription,
   PrescriptionFrequency,
 } from "@/common/types/Medication";
+import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
+
+
 
 export function useEditMedication(patientId: string) {
   const clinicId = useAuthStore((state) => state.clinicId);
   const queryClient = useQueryClient();
-
+  const { t } = useTranslation();
   const [dosage, setDosage] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -123,6 +127,10 @@ export function useEditMedication(patientId: string) {
       queryClient.invalidateQueries({
         queryKey: ["patient-medications", clinicId, patientId],
       });
+       toast.success(t("patientMeds.editSuccess"));
+   },
+       onError: () => {
+          toast.error(t("patientMeds.editError"));
     },
   });
 

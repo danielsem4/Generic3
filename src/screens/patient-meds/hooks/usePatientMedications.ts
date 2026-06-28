@@ -55,6 +55,10 @@ const { data: serverPrescriptions = [], isLoading: isLoadingPatientMeds } = useQ
       queryClient.invalidateQueries({
         queryKey: ["patient-medications", clinicId, userId],
       });
+       toast.success(t("patientMeds.deleteSuccess"));
+      },
+       onError: () => {
+         toast.error(t("patientMeds.deleteError"));
     },
   });
 

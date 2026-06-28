@@ -327,7 +327,11 @@ const ar = {
       form: "الشكل",
       dosage: "الجرعة",
       status: "الحالة"
-    }
+    },
+    editSuccess: "تم تحديث الوصفة بنجاح.",
+    editError: "فشل في تحديث الوصفة.",
+    deleteSuccess: "تم حذف الوصفة بنجاح.",
+    deleteError: "فشل في حذف الوصفة.",
   },
 
   // Clinic 

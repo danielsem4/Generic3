@@ -331,7 +331,11 @@ const ru = {
       form: "Форма",
       dosage: "Дозировка",
       status: "Статус"
-    }
+    },
+    editSuccess: "Успешно обновлено.",
+    editError: "Ошибка при обновлении.",
+    deleteSuccess: "Успешно удалено.",
+    deleteError: "Ошибка при удалении.",
   },
 
   // Clinic

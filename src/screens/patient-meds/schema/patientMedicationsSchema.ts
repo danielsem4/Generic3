@@ -1,18 +1,6 @@
 // Define exactly as the professor's table
 export type FrequencyType = "ONCE" | "DAILY" | "WEEKLY" | "MONTHLY"; 
-export interface IPatientMedicine {
-  medicine: string;
-  patient: string;
-  clinic: string;
-  doctor: string;
-  frequency: FrequencyType;
-  frequency_data: string[];
-  start_date: string;
-  end_date: string;
-  dosage: string;
-  medName?: string;
-  medForm?: string;
-}
+
 
 // Interface for the actual intake history (matches backend snake_case response)
 export interface IIntakeLog {
