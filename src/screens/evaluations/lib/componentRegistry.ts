@@ -16,6 +16,9 @@ import {
   SlidersHorizontal,
   ToggleLeft,
   MousePointerClick,
+  Mic,
+  Upload,
+  Keyboard,
   Columns,
   Eye,
 } from "lucide-react";
@@ -826,6 +829,97 @@ export const componentRegistry: Record<QComponentType, ComponentRegistryEntry> =
             { label: "Secondary", value: "secondary" },
             { label: "Outline", value: "outline" },
           ],
+        },
+      ],
+    },
+
+    recordButton: {
+      labelKey: "evaluations.components.recordButton",
+      icon: Mic,
+      category: "userInputs",
+      defaultProps: {
+        type: "recordButton",
+        label: "Record Response",
+        required: false,
+        buttonLabel: "Start Recording",
+      },
+      propertyFields: [
+        { key: "label", labelKey: "evaluations.props.label", fieldType: "text" },
+        {
+          key: "buttonLabel",
+          labelKey: "evaluations.props.buttonLabel",
+          fieldType: "text",
+        },
+        {
+          key: "required",
+          labelKey: "evaluations.props.required",
+          fieldType: "toggle",
+        },
+      ],
+    },
+
+    fileUpload: {
+      labelKey: "evaluations.components.fileUpload",
+      icon: Upload,
+      category: "userInputs",
+      defaultProps: {
+        type: "fileUpload",
+        label: "Upload File",
+        required: false,
+        buttonLabel: "Choose File",
+        fileType: "any",
+      },
+      propertyFields: [
+        { key: "label", labelKey: "evaluations.props.label", fieldType: "text" },
+        {
+          key: "buttonLabel",
+          labelKey: "evaluations.props.buttonLabel",
+          fieldType: "text",
+        },
+        {
+          key: "fileType",
+          labelKey: "evaluations.props.fileType",
+          fieldType: "select",
+          options: [
+            { label: "Photo", value: "photo" },
+            { label: "PDF", value: "pdf" },
+            { label: "Document", value: "document" },
+            { label: "Any", value: "any" },
+          ],
+        },
+        {
+          key: "required",
+          labelKey: "evaluations.props.required",
+          fieldType: "toggle",
+        },
+      ],
+    },
+
+    keyboard: {
+      labelKey: "evaluations.components.keyboard",
+      icon: Keyboard,
+      category: "userInputs",
+      defaultProps: {
+        type: "keyboard",
+        label: "Keyboard Input",
+        required: false,
+        keyboardType: "IPA_KEYBOARD",
+      },
+      propertyFields: [
+        { key: "label", labelKey: "evaluations.props.label", fieldType: "text" },
+        {
+          key: "keyboardType",
+          labelKey: "evaluations.props.keyboardType",
+          fieldType: "select",
+          options: [
+            { label: "IPA Keyboard", value: "IPA_KEYBOARD" },
+            { label: "Emoji Keyboard", value: "EMOJI_KEYBOARD" },
+          ],
+        },
+        {
+          key: "required",
+          labelKey: "evaluations.props.required",
+          fieldType: "toggle",
         },
       ],
     },
