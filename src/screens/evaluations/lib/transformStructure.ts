@@ -35,6 +35,9 @@ const FRONTEND_TO_BACKEND_TYPE: Record<string, string> = {
   image: "IMAGE",
   icon: "ICON",
   button: "BUTTON",
+  recordButton: "RECORD_BUTTON",
+  fileUpload: "FILE_UPLOAD",
+  keyboard: "KEYBOARD",
 };
 
 interface CorrectAnswerEntry {
@@ -110,6 +113,15 @@ function buildConfig(component: IQComponent): Record<string, unknown> {
         false_label: component.falseLabel ?? "No",
         default_value: component.defaultValue,
       };
+    case "recordButton":
+      return { button_label: component.buttonLabel ?? "" };
+    case "fileUpload":
+      return {
+        button_label: component.buttonLabel ?? "",
+        file_type: component.fileType,
+      };
+    case "keyboard":
+      return { keyboard_type: component.keyboardType };
     default:
       return {};
   }
@@ -257,6 +269,9 @@ const BACKEND_TO_FRONTEND_TYPE: Record<string, QComponentType> = {
   IMAGE: "image",
   ICON: "icon",
   BUTTON: "button",
+  RECORD_BUTTON: "recordButton",
+  FILE_UPLOAD: "fileUpload",
+  KEYBOARD: "keyboard",
 };
 
 export interface IServerElement {
@@ -546,6 +561,41 @@ function buildComponentFromElement(element: IServerElement): IQComponent | null 
         correctAnswerType: answerType,
         correctAnswer,
         grade,
+      } as IQComponent;
+    }
+    case "recordButton": {
+      return {
+        ...base,
+        type: "recordButton",
+        required,
+        buttonLabel: getString(config, "button_label"),
+      } as IQComponent;
+    }
+    case "fileUpload": {
+      const fileTypeValue = getString(config, "file_type", "any");
+      const fileType: "photo" | "pdf" | "document" | "any" =
+        fileTypeValue === "photo" ||
+        fileTypeValue === "pdf" ||
+        fileTypeValue === "document"
+          ? fileTypeValue
+          : "any";
+      return {
+        ...base,
+        type: "fileUpload",
+        required,
+        buttonLabel: getString(config, "button_label"),
+        fileType,
+      } as IQComponent;
+    }
+    case "keyboard": {
+      const keyboardTypeValue = getString(config, "keyboard_type", "IPA_KEYBOARD");
+      const keyboardType: "EMOJI_KEYBOARD" | "IPA_KEYBOARD" =
+        keyboardTypeValue === "EMOJI_KEYBOARD" ? "EMOJI_KEYBOARD" : "IPA_KEYBOARD";
+      return {
+        ...base,
+        type: "keyboard",
+        required,
+        keyboardType,
       } as IQComponent;
     }
     case "heading":

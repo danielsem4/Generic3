@@ -47,6 +47,12 @@ export function InteractiveComponentPreview({
       return <ToggleSwitchPreview component={component} />;
     case "button":
       return <ButtonPreview component={component} />;
+    case "recordButton":
+      return <RecordButtonPreview component={component} />;
+    case "fileUpload":
+      return <FileUploadPreview component={component} />;
+    case "keyboard":
+      return <KeyboardPreview component={component} />;
     case "visualQuestion":
       return (
         <div className="space-y-1">
@@ -491,5 +497,63 @@ function ButtonPreview({
     >
       {component.text}
     </button>
+  );
+}
+
+function RecordButtonPreview({
+  component,
+}: {
+  component: Extract<IQComponent, { type: "recordButton" }>;
+}) {
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium">{component.label}</label>
+      <button
+        type="button"
+        className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium"
+      >
+        <span className="h-2.5 w-2.5 rounded-full bg-destructive" />
+        {component.buttonLabel || component.label}
+      </button>
+    </div>
+  );
+}
+
+function FileUploadPreview({
+  component,
+}: {
+  component: Extract<IQComponent, { type: "fileUpload" }>;
+}) {
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium">{component.label}</label>
+      <button
+        type="button"
+        className="flex w-full items-center justify-between rounded-md border-2 border-dashed border-muted-foreground/30 bg-muted/20 px-3 py-3 text-sm text-muted-foreground"
+      >
+        <span>{component.buttonLabel || component.label}</span>
+        <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+          {component.fileType}
+        </span>
+      </button>
+    </div>
+  );
+}
+
+function KeyboardPreview({
+  component,
+}: {
+  component: Extract<IQComponent, { type: "keyboard" }>;
+}) {
+  return (
+    <div className="space-y-1">
+      <label className="text-sm font-medium">{component.label}</label>
+      <div className="flex items-center justify-between rounded-md border bg-background px-3 py-2 text-sm text-muted-foreground">
+        <span className="italic">{component.label}</span>
+        <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+          {component.keyboardType}
+        </span>
+      </div>
+    </div>
   );
 }

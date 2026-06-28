@@ -25,6 +25,9 @@ export type QComponentType =
   | "scale"
   | "toggleSwitch"
   | "button"
+  | "recordButton"
+  | "fileUpload"
+  | "keyboard"
   | "rowContainer"
   | "visualQuestion";
 
@@ -220,6 +223,25 @@ export interface IQButton extends IQBase {
   variant: "primary" | "secondary" | "outline";
 }
 
+export interface IQRecordButton extends IQBase {
+  type: "recordButton";
+  required: boolean;
+  buttonLabel?: string;
+}
+
+export interface IQFileUpload extends IQBase {
+  type: "fileUpload";
+  required: boolean;
+  buttonLabel?: string;
+  fileType: "photo" | "pdf" | "document" | "any";
+}
+
+export interface IQKeyboard extends IQBase {
+  type: "keyboard";
+  required: boolean;
+  keyboardType: "EMOJI_KEYBOARD" | "IPA_KEYBOARD";
+}
+
 export interface IQRowContainer extends IQBase {
   type: "rowContainer";
   children: IQComponent[];
@@ -258,6 +280,9 @@ export type IQComponent =
   | IQScale
   | IQToggleSwitch
   | IQButton
+  | IQRecordButton
+  | IQFileUpload
+  | IQKeyboard
   | IQRowContainer
   | IQVisualQuestion;
 

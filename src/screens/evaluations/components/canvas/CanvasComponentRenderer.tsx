@@ -277,6 +277,40 @@ function ComponentPreview({ component }: { component: IQComponent }) {
         </button>
       );
     }
+    case "recordButton":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div className="inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm text-muted-foreground">
+            <span className="h-2.5 w-2.5 rounded-full bg-destructive" />
+            {component.buttonLabel || component.label}
+          </div>
+        </div>
+      );
+    case "fileUpload":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div className="flex items-center justify-between rounded-md border-2 border-dashed border-muted-foreground/30 bg-muted/20 px-3 py-3 text-sm text-muted-foreground">
+            <span>{component.buttonLabel || component.label}</span>
+            <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+              {component.fileType}
+            </span>
+          </div>
+        </div>
+      );
+    case "keyboard":
+      return (
+        <div className="space-y-1">
+          <label className="text-sm font-medium">{component.label}</label>
+          <div className="flex items-center justify-between rounded-md border bg-background px-3 py-2 text-sm text-muted-foreground">
+            <span className="italic">{component.label}</span>
+            <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-mono">
+              {component.keyboardType}
+            </span>
+          </div>
+        </div>
+      );
     case "visualQuestion":
       return (
         <div className="space-y-1">
