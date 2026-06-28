@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useGraphsQuery } from "@/screens/graphs/hooks/queries/useGraphsQuery";
@@ -9,23 +8,15 @@ export function usePatientGraphs() {
   const clinicId = useAuthStore((s) => s.clinicId);
   const { data: graphs = [], isLoading } = useGraphsQuery(clinicId);
 
-  // Seed the selection from the ?graph=<id> link used by the patient card.
-  const [selectedGraphId, setSelectedGraphId] = useState<string | null>(
-    () => searchParams.get("graph"),
-  );
-
-  const handleSelect = (id: string) => setSelectedGraphId(id);
-
-  // Fall back to the first graph when nothing is selected yet (or the
-  // previous selection is no longer present), avoiding a setState effect.
+  // The graph to show comes from the ?graph=<id> link used by the patient
+  // card; fall back to the first graph when it's missing or no longer present.
+  const graphParam = searchParams.get("graph");
   const selectedGraph =
-    graphs.find((g) => g.id === selectedGraphId) ?? graphs[0];
+    graphs.find((g) => g.id === graphParam) ?? graphs[0];
 
   return {
     graphs,
     selectedGraph,
-    selectedGraphId: selectedGraph?.id,
-    handleSelect,
     userId,
     clinicId,
     isLoading,

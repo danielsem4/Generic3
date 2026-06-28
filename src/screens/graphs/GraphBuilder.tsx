@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { useGraphBuilder } from "./hooks/builder/useGraphBuilder";
 import { AxisSelector } from "./components/config/AxisSelector";
+import { OverlaySelector } from "./components/config/OverlaySelector";
 
 const selectClass =
   "h-11 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/30";
@@ -31,6 +32,9 @@ export default function GraphBuilder() {
     setDescription,
     setEvaluationId,
     updateAxis,
+    addOverlay,
+    updateOverlay,
+    removeOverlay,
     handleSave,
     handleBack,
   } = useGraphBuilder();
@@ -139,6 +143,33 @@ export default function GraphBuilder() {
                 onChange={(patch) => updateAxis("yAxis", patch)}
                 error={errors["yAxis.elementId"]}
               />
+            </div>
+          </section>
+
+          <section className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
+                {t("graphs.overlay.section")}
+              </h2>
+              <Button type="button" variant="outline" size="sm" onClick={addOverlay}>
+                {t("graphs.overlay.add")}
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {t("graphs.overlay.hint")}
+            </p>
+
+            <div className="space-y-3">
+              {form.overlays.map((overlay, index) => (
+                <OverlaySelector
+                  key={overlay.id}
+                  overlay={overlay}
+                  evaluations={evaluations}
+                  onChange={(patch) => updateOverlay(overlay.id, patch)}
+                  onRemove={() => removeOverlay(overlay.id)}
+                  error={errors[`overlays.${index}.elementId`]}
+                />
+              ))}
             </div>
           </section>
         </CardContent>

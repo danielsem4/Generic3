@@ -5,6 +5,7 @@ import type {
   IGraphStructure,
   IGraphData,
   IRawDataPoint,
+  IGraphOverlay,
 } from "@/common/types/graph";
 
 interface IAxisConfigRaw {
@@ -27,11 +28,23 @@ export interface IGraphMetaPayload {
   is_active?: boolean;
 }
 
+interface IOverlayRaw {
+  id?: string;
+  type: string;
+  render: string;
+  label?: string | null;
+  color?: string | null;
+  evaluation_id?: string | null;
+  element_id?: string | null;
+  source_name?: string | null;
+}
+
 interface IStructureRaw {
   evaluation_id?: string;
   evaluation?: { id: string; evaluation_name?: string } | null;
   x_axis: IAxisConfigRaw;
   y_axis: IAxisConfigRaw;
+  overlays?: IOverlayRaw[] | null;
 }
 
 interface IDataResponseRaw {
@@ -67,11 +80,39 @@ function mapAxisToRaw(axis: IAxisConfig): IAxisConfigRaw {
   };
 }
 
+function mapOverlayToRaw(overlay: IGraphOverlay): IOverlayRaw {
+  const isQuestion = overlay.type === "QUESTION";
+  return {
+    id: overlay.id,
+    type: overlay.type,
+    render: overlay.render,
+    label: overlay.label ?? null,
+    color: overlay.color ?? null,
+    evaluation_id: isQuestion ? (overlay.evaluationId ?? null) : null,
+    element_id: isQuestion ? (overlay.elementId ?? null) : null,
+    source_name: isQuestion ? null : (overlay.sourceName ?? null),
+  };
+}
+
+function mapRawOverlay(raw: IOverlayRaw): IGraphOverlay {
+  return {
+    id: raw.id ?? crypto.randomUUID(),
+    type: raw.type as IGraphOverlay["type"],
+    render: raw.render as IGraphOverlay["render"],
+    label: raw.label ?? undefined,
+    color: raw.color ?? undefined,
+    evaluationId: raw.evaluation_id ?? undefined,
+    elementId: raw.element_id ?? undefined,
+    sourceName: raw.source_name ?? undefined,
+  };
+}
+
 export function buildStructurePayload(structure: IGraphStructure) {
   return {
     evaluation_id: structure.evaluationId,
     x_axis: mapAxisToRaw(structure.xAxis),
     y_axis: mapAxisToRaw(structure.yAxis),
+    overlays: structure.overlays.map(mapOverlayToRaw),
   };
 }
 
@@ -125,6 +166,7 @@ export async function fetchGraphStructure(
     evaluationName: raw.evaluation?.evaluation_name,
     xAxis: mapRawAxis(raw.x_axis),
     yAxis: mapRawAxis(raw.y_axis),
+    overlays: (raw.overlays ?? []).map(mapRawOverlay),
   };
 }
 

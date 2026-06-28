@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
-import type { IAxisConfig } from "@/common/types/graph";
+import type { IAxisConfig, IGraphOverlay } from "@/common/types/graph";
 import { useEvaluationsQuery } from "@/screens/evaluations/hooks/queries/useEvaluationsQuery";
 import {
   graphConfigSchema,
@@ -22,6 +22,7 @@ const DEFAULT_FORM: GraphConfigFormData = {
   evaluationId: "",
   xAxis: { source: "SUBMISSION_DATE" },
   yAxis: { source: "SUBMISSION_SCORE" },
+  overlays: [],
 };
 
 type AxisKey = "xAxis" | "yAxis";
@@ -56,6 +57,7 @@ export function useGraphBuilder() {
       evaluationId: structure.evaluationId,
       xAxis: structure.xAxis,
       yAxis: structure.yAxis,
+      overlays: structure.overlays ?? [],
     });
   }
 
@@ -81,6 +83,31 @@ export function useGraphBuilder() {
     setForm((f) => ({ ...f, [key]: { ...f[key], ...patch } }));
   }
 
+  function addOverlay() {
+    const overlay: IGraphOverlay = {
+      id: crypto.randomUUID(),
+      type: "QUESTION",
+      render: "MARKERS",
+    };
+    setForm((f) => ({ ...f, overlays: [...f.overlays, overlay] }));
+  }
+
+  function updateOverlay(overlayId: string, patch: Partial<IGraphOverlay>) {
+    setForm((f) => ({
+      ...f,
+      overlays: f.overlays.map((o) =>
+        o.id === overlayId ? { ...o, ...patch } : o,
+      ),
+    }));
+  }
+
+  function removeOverlay(overlayId: string) {
+    setForm((f) => ({
+      ...f,
+      overlays: f.overlays.filter((o) => o.id !== overlayId),
+    }));
+  }
+
   async function handleSave() {
     const result = graphConfigSchema.safeParse(form);
     if (!result.success) {
@@ -92,9 +119,10 @@ export function useGraphBuilder() {
       return;
     }
     setErrors({});
-    const { name, description, evaluationId, xAxis, yAxis } = result.data;
+    const { name, description, evaluationId, xAxis, yAxis, overlays } =
+      result.data;
     const meta = { name, description };
-    const graphStructure = { evaluationId, xAxis, yAxis };
+    const graphStructure = { evaluationId, xAxis, yAxis, overlays };
     try {
       let graphId: string;
       if (isEdit && id) {
@@ -126,6 +154,9 @@ export function useGraphBuilder() {
     setDescription,
     setEvaluationId,
     updateAxis,
+    addOverlay,
+    updateOverlay,
+    removeOverlay,
     handleSave,
     handleBack,
   };

@@ -1,5 +1,6 @@
 import { transformGraphData } from "@/lib/transformGraphData";
 import { useGraphData } from "./useGraphData";
+import { useGraphOverlaysData } from "./useGraphOverlaysData";
 
 export interface ILegendEntry {
   value: number;
@@ -10,8 +11,15 @@ export function useGraphChartData(
   graphId: string,
   patientId: string | undefined,
   clinicId: string | null,
+  date?: string,
 ) {
-  const { data, isLoading } = useGraphData(graphId, patientId, clinicId);
+  const { data, isLoading } = useGraphData(graphId, patientId, clinicId, date);
+  const { overlaySeries, isLoading: overlaysLoading } = useGraphOverlaysData(
+    graphId,
+    patientId,
+    clinicId,
+    date,
+  );
   const points = transformGraphData(data?.points ?? []);
 
   // Only categorical mappings (where the label differs from the numeric value)
@@ -27,8 +35,9 @@ export function useGraphChartData(
     .sort((a, b) => a.value - b.value);
 
   return {
-    isLoading,
+    isLoading: isLoading || overlaysLoading,
     points,
+    overlaySeries,
     xLabel: data?.xLabel,
     yLabel: data?.yLabel,
     legend,
