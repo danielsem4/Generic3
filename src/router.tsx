@@ -27,6 +27,7 @@ import EvaluationPage from "./screens/patient-evaluation/patientEvaluations";
 import PatientEvaluationSubmissionsScreen from "./screens/patient-evaluation-submissions/PatientEvaluationSubmissionsScreen";
 import { AssessmentResultsPage } from "./screens/assesment/AssessmentResultsPage";
 import { PatientFilesPage } from "@/screens/files/PatientFilesPage";
+import FileShare from "@/screens/file-share/FileShare";
 import MedicationsAnalyticsPage from "./screens/analytics/pages/MedicationsAnalyticsPage";
 import ActivitiesAnalyticsPage from "./screens/analytics/pages/ActivitiesAnalyticsPage";
 import EvaluationsAnalyticsPage from "./screens/analytics/pages/EvaluationsAnalyticsPage";
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: "patients/:userId", element: <PatientDetails /> },
       { path: "modules/medications", element: <Medications /> },
       { path: "modules/activities", element: <Activities /> },
+      { path: "modules/file-share", element: <FileShare /> },
       { path: "modules/evaluations", element: <EvaluationsPage /> },
       { path: "modules/evaluations/builder", element: <EvaluationBuilder /> },
       { path: "modules/evaluations/builder/:id", element: <EvaluationBuilder /> },

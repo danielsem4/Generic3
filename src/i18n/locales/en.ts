@@ -1036,6 +1036,12 @@ modules: {
   },
 
   // Files
+  fileShare: {
+    title: "File Sharing",
+    description:
+      "Share and manage documents with patients. Select a patient to view, upload, and download their files.",
+    viewPatients: "View Patients",
+  },
   files: {
     title: "Patient Documents",
     subtitle: "Manage and view shared medical files",
