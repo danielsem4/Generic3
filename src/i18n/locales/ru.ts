@@ -49,6 +49,29 @@ const ru = {
     confirm: "Подтвердить",
   },
 
+  // Forgot Password
+  forgotPassword: {
+    title: "Сброс пароля",
+    description: "Введите ваш email, и мы отправим вам код подтверждения.",
+    emailLabel: "Email",
+    emailPlaceholder: "m@example.com",
+    sendCode: "Отправить код",
+    sending: "Отправка...",
+    newPasswordTitle: "Установить новый пароль",
+    newPasswordDesc: "Выберите надёжный пароль для вашей учётной записи.",
+    newPasswordLabel: "Новый пароль",
+    newPasswordPlaceholder: "********",
+    confirmPasswordLabel: "Подтвердите пароль",
+    confirmPasswordPlaceholder: "********",
+    submit: "Сбросить пароль",
+    submitting: "Сброс...",
+    backToLogin: "Назад ко входу",
+    successTitle: "Пароль сброшен!",
+    successDesc: "Теперь вы можете войти с новым паролем.",
+    errorEmailFailed: "Не удалось отправить код на этот email. Попробуйте снова.",
+    errorResetFailed: "Не удалось сбросить пароль. Попробуйте снова.",
+  },
+
   // Home / Dashboard
   home: {
     loading: "Загрузка данных...",
@@ -69,6 +92,8 @@ const ru = {
     role: "Роль",
     view: "Просмотр",
     viewPatient: "Просмотр пациента",
+    edit: "Редактировать",
+    delete: "Удалить",
     noData: "Данные профиля пользователя недоступны.",
     showing: "Показано {{count}} из {{total}} записей.",
   },
@@ -126,6 +151,14 @@ const ru = {
     save: "Сохранить изменения",
     patientAlreadyExistsError: "Этот пациент уже существует или данные недействительны",
     patientAddedSuccess: "Пациент успешно добавлен",
+
+    editTitle: "Редактировать пациента",
+    deleteTitle: "Удалить пациента",
+    deleteDescription: "Вы уверены, что хотите удалить {{name}}? Это действие нельзя отменить.",
+    saveChanges: "Сохранить изменения",
+    cancel: "Отмена",
+    saveError: "Не удалось сохранить изменения. Пожалуйста, попробуйте снова.",
+    deleteError: "Не удалось удалить пациента. Пожалуйста, попробуйте снова.",
   },
 
   // Clinic Managers
@@ -211,6 +244,14 @@ const ru = {
     errPhone: "Номер телефона должен содержать ровно 10 цифр",
     backToDirectory: "Назад к списку",
     detailError: "Не удалось загрузить данные врача.",
+
+    editTitle: "Редактировать врача",
+    deleteTitle: "Удалить врача",
+    deleteDescription: "Вы уверены, что хотите удалить {{name}}? Это действие нельзя отменить.",
+    saveChanges: "Сохранить изменения",
+    cancel: "Отмена",
+    saveError: "Не удалось сохранить изменения. Пожалуйста, попробуйте снова.",
+    deleteError: "Не удалось удалить врача. Пожалуйста, попробуйте снова.",
   },
 
   // Medications
@@ -801,6 +842,10 @@ analytics: {
     file_share: {
       title: "Обмен файлами",
       description: "Статистика и отслеживание передачи и обмена файлами в системе."
+    },
+    parkinson_sensors: {
+      title: "Аналитика датчиков Паркинсона",
+      description: "Анализ показаний датчиков и тенденций движения для мониторинга болезни Паркинсона."
     }
   },
   activities: {
@@ -1053,6 +1098,12 @@ filters: {
   },
 
   // File
+  fileShare: {
+    title: "Обмен файлами",
+    description:
+      "Делитесь документами и управляйте ими вместе с пациентами. Выберите пациента, чтобы просматривать, загружать и скачивать его файлы.",
+    viewPatients: "Просмотр пациентов",
+  },
   files: {
     title: "Документы пациента",
     subtitle: "Управление и просмотр медицинских файлов",

@@ -49,6 +49,29 @@ const ar = {
     confirm: "تأكيد",
   },
 
+  // Forgot Password
+  forgotPassword: {
+    title: "إعادة تعيين كلمة المرور",
+    description: "أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق.",
+    emailLabel: "البريد الإلكتروني",
+    emailPlaceholder: "m@example.com",
+    sendCode: "إرسال الرمز",
+    sending: "جارٍ الإرسال...",
+    newPasswordTitle: "تعيين كلمة مرور جديدة",
+    newPasswordDesc: "اختر كلمة مرور قوية لحسابك.",
+    newPasswordLabel: "كلمة المرور الجديدة",
+    newPasswordPlaceholder: "********",
+    confirmPasswordLabel: "تأكيد كلمة المرور",
+    confirmPasswordPlaceholder: "********",
+    submit: "إعادة تعيين كلمة المرور",
+    submitting: "جارٍ إعادة التعيين...",
+    backToLogin: "العودة إلى تسجيل الدخول",
+    successTitle: "تمت إعادة تعيين كلمة المرور!",
+    successDesc: "يمكنك الآن تسجيل الدخول بكلمة المرور الجديدة.",
+    errorEmailFailed: "تعذر إرسال الرمز إلى هذا البريد الإلكتروني. حاول مرة أخرى.",
+    errorResetFailed: "فشل في إعادة تعيين كلمة المرور. حاول مرة أخرى.",
+  },
+
   // Home / Dashboard
   home: {
     loading: "جارٍ تحميل البيانات...",
@@ -69,6 +92,8 @@ const ar = {
     role: "الدور",
     view: "عرض",
     viewPatient: "عرض المريض",
+    edit: "تعديل",
+    delete: "حذف",
     noData: "لا تتوفر بيانات ملف تعريف المستخدم.",
     showing: "عرض {{count}} من أصل {{total}} إدخالات.",
   },
@@ -122,6 +147,13 @@ const ar = {
     patientAlreadyExistsError: "هذا المريض موجود بالفعل أو أن التفاصيل غير صحيحة",
     patientAddedSuccess: "تم إضافة المريض بنجاح",
 
+    editTitle: "تعديل المريض",
+    deleteTitle: "حذف المريض",
+    deleteDescription: "هل أنت متأكد أنك تريد حذف {{name}}؟ لا يمكن التراجع عن هذا.",
+    saveChanges: "حفظ التغييرات",
+    cancel: "إلغاء",
+    saveError: "فشل حفظ التغييرات. يرجى المحاولة مرة أخرى.",
+    deleteError: "فشل حذف المريض. يرجى المحاولة مرة أخرى.",
   },
 
   // Clinic Managers
@@ -207,6 +239,14 @@ const ar = {
     errPhone: "يجب أن يتكون رقم الهاتف من 10 أرقام بالضبط",
     backToDirectory: "العودة إلى الدليل",
     detailError: "فشل في تحميل بيانات الطبيب.",
+
+    editTitle: "تعديل الطبيب",
+    deleteTitle: "حذف الطبيب",
+    deleteDescription: "هل أنت متأكد أنك تريد حذف {{name}}؟ لا يمكن التراجع عن هذا.",
+    saveChanges: "حفظ التغييرات",
+    cancel: "إلغاء",
+    saveError: "فشل حفظ التغييرات. يرجى المحاولة مرة أخرى.",
+    deleteError: "فشل حذف الطبيب. يرجى المحاولة مرة أخرى.",
   },
 
   // Medications
@@ -796,6 +836,10 @@ analytics: {
     file_share: {
       title: "مشاركة الملفات",
       description: "الإحصائيات وتعقب نقل ومشاركة الملفات داخل النظام."
+    },
+    parkinson_sensors: {
+      title: "تحليلات مستشعرات باركنسون",
+      description: "تحليل قراءات المستشعرات واتجاهات الحركة لمراقبة باركنسون."
     }
   },
   activities: {
@@ -1048,6 +1092,12 @@ analytics: {
   },
 
   // Files
+  fileShare: {
+    title: "مشاركة الملفات",
+    description:
+      "شارك المستندات وأدرها مع المرضى. اختر مريضًا لعرض ملفاته ورفعها وتنزيلها.",
+    viewPatients: "عرض المرضى",
+  },
   files: {
     title: "مستندات المريض",
     subtitle: "إدارة وعرض الملفات الطبية",

@@ -29,8 +29,10 @@ export default function Login() {
     handlePasswordChange,
     handleTogglePassword,
     handleRememberMeChange,
+    handleForgotPassword,
     handleSubmit,
     handleTwoFaSubmit,
+    handleTwoFaCancel,
     handleClinicSelect,
   } = useLoginLogic();
 
@@ -117,6 +119,7 @@ export default function Login() {
                   </label>
                   <button
                     type="button"
+                    onClick={handleForgotPassword}
                     className="text-sm text-primary hover:text-primary/80 font-medium bg-transparent border-none p-0 cursor-pointer"
                   >
                     {t("login.forgotPassword")}
@@ -142,6 +145,7 @@ export default function Login() {
         isPending={isTwoFaPending}
         onChange={setTwoFaCode}
         onSubmit={handleTwoFaSubmit}
+        onCancel={handleTwoFaCancel}
       />
     </div>
   );

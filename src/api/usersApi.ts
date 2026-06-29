@@ -49,6 +49,25 @@ export const deleteClinicManager = async (id: string): Promise<void> => {
   await api.delete(`/api/v1/users/${id}/`);
 };
 
+export interface IUpdateUserPayload {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+}
+
+export const updateUser = async (
+  id: string,
+  data: IUpdateUserPayload,
+): Promise<IUser> => {
+  const response = await api.patch<IUser>(`/api/v1/users/${id}/`, data);
+  return response.data;
+};
+
+export const deleteUser = async (id: string): Promise<void> => {
+  await api.delete(`/api/v1/users/${id}/`);
+};
+
 export const getDoctors = async (): Promise<IUser[]> => {
   const response = await api.get<IPaginatedResponse<IUser>>(
     "/api/v1/users/doctors/",

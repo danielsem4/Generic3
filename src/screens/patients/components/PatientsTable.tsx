@@ -1,15 +1,17 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { IUser } from "@/common/Users";
 import { useTranslation } from "react-i18next";
-import { Eye } from "lucide-react";
+import { Eye, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface PatientsTableProps {
   patients: IUser[];
   viewBasePath?: string;
+  onEdit?: (user: IUser) => void;
+  onDelete?: (user: IUser) => void;
 }
 
-export const PatientsTable = ({ patients, viewBasePath = "/patients" }: PatientsTableProps) => {
+export const PatientsTable = ({ patients, viewBasePath = "/patients", onEdit, onDelete }: PatientsTableProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -43,13 +45,33 @@ export const PatientsTable = ({ patients, viewBasePath = "/patients" }: Patients
                 </span>
               </TableCell>
               <TableCell className="py-4 text-center">
-                <button
-                  className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label={t("home.viewPatient")}
-                  onClick={() => handleViewUser(user.id ?? user.email)}
-                >
-                  <Eye size={16} />
-                </button>
+                <div className="inline-flex items-center gap-1 justify-center">
+                  <button
+                    className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label={t("home.viewPatient")}
+                    onClick={() => handleViewUser(user.id ?? user.email)}
+                  >
+                    <Eye size={16} />
+                  </button>
+                  {onEdit && (
+                    <button
+                      className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition"
+                      aria-label={t("home.edit")}
+                      onClick={() => onEdit(user)}
+                    >
+                      <Pencil size={16} />
+                    </button>
+                  )}
+                  {onDelete && (
+                    <button
+                      className="inline-flex items-center justify-center rounded-md border border-border p-2 text-muted-foreground hover:text-destructive hover:border-destructive/50 hover:bg-muted transition"
+                      aria-label={t("home.delete")}
+                      onClick={() => onDelete(user)}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  )}
+                </div>
               </TableCell>
             </TableRow>
           ))
