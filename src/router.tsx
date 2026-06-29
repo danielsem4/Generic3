@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "@/screens/login/Login";
 import VerifyCode from "@/screens/verify/VerifyCode";
+import ForgotPassword from "@/screens/forgot-password/ForgotPassword";
 import ClinicSelection from "@/screens/clinic-selection/ClinicSelection";
 import Modules from "@/screens/modules/modules";
 import ProtectedLayout from "@/common/components/layouts/ProtectedLayout";
@@ -36,6 +37,7 @@ import EvaluationsAnalyticsPage from "./screens/analytics/pages/EvaluationsAnaly
 export const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   { path: "/verify", element: <VerifyCode /> },
+  { path: "/forgot-password", element: <ForgotPassword /> },
   { path: "/clinic-selection", element: <ClinicSelection /> },
   {
     element: <ProtectedLayout />,

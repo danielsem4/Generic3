@@ -50,6 +50,29 @@ const en = {
     confirm: "Confirm",
   },
 
+  // Forgot Password
+  forgotPassword: {
+    title: "Reset your password",
+    description: "Enter your email and we'll send you a verification code.",
+    emailLabel: "Email",
+    emailPlaceholder: "m@example.com",
+    sendCode: "Send code",
+    sending: "Sending...",
+    newPasswordTitle: "Set a new password",
+    newPasswordDesc: "Choose a strong password for your account.",
+    newPasswordLabel: "New Password",
+    newPasswordPlaceholder: "********",
+    confirmPasswordLabel: "Confirm Password",
+    confirmPasswordPlaceholder: "********",
+    submit: "Reset password",
+    submitting: "Resetting...",
+    backToLogin: "Back to login",
+    successTitle: "Password reset!",
+    successDesc: "You can now log in with your new password.",
+    errorEmailFailed: "We couldn't send a code to this email. Please try again.",
+    errorResetFailed: "Failed to reset password. Please try again.",
+  },
+
   // Home / Dashboard
   home: {
     loading: "Loading data...",
@@ -70,6 +93,8 @@ const en = {
     role: "Role",
     view: "View",
     viewPatient: "View patient",
+    edit: "Edit",
+    delete: "Delete",
     noData: "No user profile data available.",
     showing: "Showing {{count}} of {{total}} total entries.",
   },
@@ -127,6 +152,14 @@ patients: {
   save: "Save Changes",
   patientAlreadyExistsError: "This patient already exists or the details are invalid",
   patientAddedSuccess: "Patient added successfully",
+
+  editTitle: "Edit Patient",
+  deleteTitle: "Delete Patient",
+  deleteDescription: "Are you sure you want to delete {{name}}? This cannot be undone.",
+  saveChanges: "Save Changes",
+  cancel: "Cancel",
+  saveError: "Failed to save changes. Please try again.",
+  deleteError: "Failed to delete patient. Please try again.",
 },
 
   // Clinic Managers
@@ -212,6 +245,14 @@ patients: {
     errPhone: "Phone number must be exactly 10 digits",
     backToDirectory: "Back to Directory",
     detailError: "Failed to load doctor details.",
+
+    editTitle: "Edit Doctor",
+    deleteTitle: "Delete Doctor",
+    deleteDescription: "Are you sure you want to delete {{name}}? This cannot be undone.",
+    saveChanges: "Save Changes",
+    cancel: "Cancel",
+    saveError: "Failed to save changes. Please try again.",
+    deleteError: "Failed to delete doctor. Please try again.",
   },
 
   // Medications
@@ -781,10 +822,14 @@ modules: {
       title: "Evaluations Analytics",
       description: "Review evaluation results, submissions, and patient responses.",
     },
-    file_share: { 
+    file_share: {
     title: "File Sharing",
     description: "Statistics and tracking of file transfers and shares within the system."
 },
+    parkinson_sensors: {
+      title: "Parkinson Sensors Analytics",
+      description: "Analyze sensor readings and movement trends for Parkinson's monitoring.",
+    },
   },
     activities: {
       title: "Activities Analytics",

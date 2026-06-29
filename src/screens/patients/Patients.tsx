@@ -7,12 +7,29 @@ import { usePatients } from "./hooks/usePatients";
 import { PatientsTable } from "./components/PatientsTable";
 import { useTranslation } from "react-i18next";
 import { useRole } from "@/hooks/common/useRole";
+import { useUserActions } from "@/hooks/common/useUserActions";
+import { EditUserDialog } from "@/components/common/EditUserDialog";
+import { ConfirmDialog } from "@/components/common/ConfirmDialog";
 import { LoadingSpinner } from "@/common/components/LoadingSpinner";
 
 export default function Patients() {
   const { t } = useTranslation();
   const role = useRole();
   const { filteredUsers, searchTerm, handleSearchChange, isLoading } = usePatients();
+  const {
+    form,
+    isFormOpen,
+    userToDelete,
+    isSubmitting,
+    isDeleting,
+    openEdit,
+    closeForm,
+    openDelete,
+    closeDelete,
+    handleSubmit,
+    handleDelete,
+  } = useUserActions({ queryKey: ["users", "patients"], ns: "patients" });
+  const canManage = role === "DOCTOR";
 
   if (isLoading) {
     return (
@@ -58,10 +75,37 @@ export default function Patients() {
           </CardHeader>
 
           <CardContent className="p-0">
-            <PatientsTable patients={filteredUsers} />
+            <PatientsTable
+              patients={filteredUsers}
+              onEdit={canManage ? openEdit : undefined}
+              onDelete={canManage ? openDelete : undefined}
+            />
           </CardContent>
         </Card>
       </div>
+
+      <EditUserDialog
+        isOpen={isFormOpen}
+        ns="patients"
+        form={form}
+        isSubmitting={isSubmitting}
+        onClose={closeForm}
+        onSubmit={handleSubmit}
+      />
+
+      <ConfirmDialog
+        open={!!userToDelete}
+        onOpenChange={(open) => { if (!open) closeDelete(); }}
+        title={t("patients.deleteTitle")}
+        description={t("patients.deleteDescription", {
+          name: `${userToDelete?.first_name} ${userToDelete?.last_name}`,
+        })}
+        confirmLabel={t("patients.deleteTitle")}
+        cancelLabel={t("patients.cancel")}
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+        variant="destructive"
+      />
     </div>
   );
 }

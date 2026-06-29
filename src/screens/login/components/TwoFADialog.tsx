@@ -15,12 +15,18 @@ interface TwoFADialogProps {
   isPending: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
+  onCancel: () => void;
 }
 
-export function TwoFADialog({ open, code, isPending, onChange, onSubmit }: TwoFADialogProps) {
+export function TwoFADialog({ open, code, isPending, onChange, onSubmit, onCancel }: TwoFADialogProps) {
   const { t } = useTranslation();
+
+  const handleOpenChange = (next: boolean) => {
+    if (!next) onCancel();
+  };
+
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("login.twoFaTitle")}</DialogTitle>

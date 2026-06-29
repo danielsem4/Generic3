@@ -56,6 +56,10 @@ export function useLoginLogic() {
     setRememberMe(e.target.checked);
   };
 
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError(null);
@@ -108,6 +112,12 @@ export function useLoginLogic() {
     }
   };
 
+  const handleTwoFaCancel = () => {
+    setStep("credentials");
+    setTwoFaCode("");
+    setPendingUserId("");
+  };
+
   const handleClinicSelect = async (clinicId: string) => {
     setIsClinicPending(true);
     try {
@@ -143,8 +153,10 @@ export function useLoginLogic() {
     handlePasswordChange,
     handleTogglePassword,
     handleRememberMeChange,
+    handleForgotPassword,
     handleSubmit,
     handleTwoFaSubmit,
+    handleTwoFaCancel,
     handleClinicSelect,
   };
 }

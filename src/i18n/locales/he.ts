@@ -49,6 +49,29 @@ const he = {
     confirm: "אשר",
   },
 
+  // Forgot Password
+  forgotPassword: {
+    title: "איפוס הסיסמה",
+    description: "הזן את הדוא\"ל שלך ונשלח לך קוד אימות.",
+    emailLabel: "דוא\"ל",
+    emailPlaceholder: "m@example.com",
+    sendCode: "שלח קוד",
+    sending: "שולח...",
+    newPasswordTitle: "הגדרת סיסמה חדשה",
+    newPasswordDesc: "בחר סיסמה חזקה לחשבונך.",
+    newPasswordLabel: "סיסמה חדשה",
+    newPasswordPlaceholder: "********",
+    confirmPasswordLabel: "אימות סיסמה",
+    confirmPasswordPlaceholder: "********",
+    submit: "אפס סיסמה",
+    submitting: "מאפס...",
+    backToLogin: "חזרה להתחברות",
+    successTitle: "הסיסמה אופסה!",
+    successDesc: "כעת תוכל להתחבר עם הסיסמה החדשה.",
+    errorEmailFailed: "לא הצלחנו לשלוח קוד לדוא\"ל זה. נסה שוב.",
+    errorResetFailed: "איפוס הסיסמה נכשל. נסה שוב.",
+  },
+
   // Home / Dashboard
   home: {
     loading: "טוען נתונים...",
@@ -69,6 +92,8 @@ const he = {
     role: "תפקיד",
     view: "צפייה",
     viewPatient: "צפה במטופל",
+    edit: "עריכה",
+    delete: "מחיקה",
     noData: "אין נתוני פרופיל משתמש זמינים.",
     showing: "מציג {{count}} מתוך {{total}} רשומות.",
   },
@@ -127,6 +152,13 @@ const he = {
     patientAlreadyExistsError: "המטופל כבר קיים או שהפרטים אינם תקינים",
     patientAddedSuccess: "המטופל נוסף בהצלחה",
 
+    editTitle: "עריכת מטופל",
+    deleteTitle: "מחיקת מטופל",
+    deleteDescription: "האם אתה בטוח שברצונך למחוק את {{name}}? לא ניתן לבטל פעולה זו.",
+    saveChanges: "שמור שינויים",
+    cancel: "ביטול",
+    saveError: "שמירת השינויים נכשלה. אנא נסה שוב.",
+    deleteError: "מחיקת המטופל נכשלה. אנא נסה שוב.",
   },
 
   // Clinic Managers
@@ -212,6 +244,14 @@ const he = {
     errPhone: "מספר הטלפון חייב להכיל בדיוק 10 ספרות",
     backToDirectory: "חזרה לרשימה",
     detailError: "טעינת פרטי הרופא נכשלה.",
+
+    editTitle: "עריכת רופא",
+    deleteTitle: "מחיקת רופא",
+    deleteDescription: "האם אתה בטוח שברצונך למחוק את {{name}}? לא ניתן לבטל פעולה זו.",
+    saveChanges: "שמור שינויים",
+    cancel: "ביטול",
+    saveError: "שמירת השינויים נכשלה. אנא נסה שוב.",
+    deleteError: "מחיקת הרופא נכשלה. אנא נסה שוב.",
   },
 
   // Medications
@@ -798,7 +838,11 @@ analytics: {
     file_share: {
     title: "שיתוף קבצים",
     description: "סטטיסטיקות ומעקב אחר העברות ושיתופי קבצים במערכת."
-}
+},
+    parkinson_sensors: {
+      title: "אנליטיקת חיישני פרקינסון",
+      description: "ניתוח קריאות חיישנים ומגמות תנועה לניטור פרקינסון."
+    }
   },
   activities: {
     title: "אנליטיקת פעילויות",
