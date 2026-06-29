@@ -21,7 +21,6 @@ export function usePatientDetails() {
 
   const patient: IPatientDetails | null = response
   ? {
-      id: userId!,
       patientId: response.patient_id,
       firstName: response.first_name,
       lastName: response.last_name,
