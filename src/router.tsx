@@ -29,6 +29,8 @@ import PatientEvaluationSubmissionsScreen from "./screens/patient-evaluation-sub
 import { AssessmentResultsPage } from "./screens/assesment/AssessmentResultsPage";
 import { PatientFilesPage } from "@/screens/files/PatientFilesPage";
 import FileShare from "@/screens/file-share/FileShare";
+import ParkinsonSensors from "@/screens/parkinson-sensors/ParkinsonSensors";
+import PatientSensors from "@/screens/parkinson-sensors/PatientSensors";
 import MedicationsAnalyticsPage from "./screens/analytics/pages/MedicationsAnalyticsPage";
 import ActivitiesAnalyticsPage from "./screens/analytics/pages/ActivitiesAnalyticsPage";
 import EvaluationsAnalyticsPage from "./screens/analytics/pages/EvaluationsAnalyticsPage";
@@ -54,6 +56,7 @@ export const router = createBrowserRouter([
       { path: "modules/medications", element: <Medications /> },
       { path: "modules/activities", element: <Activities /> },
       { path: "modules/file-share", element: <FileShare /> },
+      { path: "modules/parkinson-sensors", element: <ParkinsonSensors /> },
       { path: "modules/evaluations", element: <EvaluationsPage /> },
       { path: "modules/evaluations/builder", element: <EvaluationBuilder /> },
       { path: "modules/evaluations/builder/:id", element: <EvaluationBuilder /> },
@@ -67,6 +70,7 @@ export const router = createBrowserRouter([
       { path: "patients/:userId/evaluation-submissions/:submissionId", element: <AssessmentResultsPage /> },
       { path: "patients/:userId/graphs", element: <PatientGraphs /> },
       { path: "patients/:userId/files", element: <PatientFilesPage /> },
+      { path: "patients/:userId/sensors", element: <PatientSensors /> },
       { path: "clinic", element: <ClinicOverview /> },
       { path: "analytics", element: <Analytics /> },
       { path : "analytics/activities", element: <ActivitiesAnalyticsPage/> },

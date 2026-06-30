@@ -1087,6 +1087,79 @@ modules: {
       "Share and manage documents with patients. Select a patient to view, upload, and download their files.",
     viewPatients: "View Patients",
   },
+  parkinsonSensors: {
+    title: "Parkinson Sensors",
+    description:
+      "Collect and analyze wearable motion-sensor data for Parkinson's motor assessment. The mobile app continuously reads accelerometer, gyroscope and step data to detect tremor, falls, near-falls and ON/OFF medication states, then uploads the results for clinical review. Select a patient to view their sensor data.",
+    viewPatients: "View Patients",
+    calc: {
+      heading: "How the calculations work",
+      intro:
+        "ON/OFF medication state is estimated by comparing the patient's current activity against their own personal baseline, built up over time on the device.",
+      metricsTitle: "1. Compute activity metrics",
+      metricsBody:
+        "Over a window of at least 60 samples it computes the average acceleration magnitude, acceleration variability (standard deviation), average gyroscope magnitude, and step frequency (Δ steps per minute).",
+      baselineTitle: "2. Compute baseline",
+      baselineBody:
+        "Those metrics are averaged over time, with their standard deviations, into a personal baseline stored in a local Room database. Calibration is \"complete\" only after at least 30 samples spanning at least 4 hours (one medication cycle).",
+      classifyTitle: "3. Classify ON/OFF state",
+      classifyBody:
+        "The classifier turns the current metrics into a single weighted score versus the baseline and maps it to an ON, OFF or UNDETERMINED state.",
+      classifyPoints: [
+        "Z-score per dimension: (current − baseline mean) / baseline standard deviation. A positive value means more active than usual.",
+        "Weighted composite score: acceleration magnitude 0.3, step frequency 0.3, acceleration variability 0.2, gyroscope activity 0.2.",
+        "Hysteresis band (−0.2 to +0.2): the state only flips when the score crosses the band, otherwise it keeps the previous state to avoid flickering. Score > 0.2 → ON, < −0.2 → OFF.",
+        "Confidence = min(|score| / 2, 1).",
+        "Returns UNDETERMINED until calibration is complete.",
+      ],
+    },
+    detectors: {
+      heading: "Detected events",
+      colEvent: "Event",
+      colSensors: "Primary sensors",
+      colMethod: "Core method",
+      tremor: {
+        name: "Tremor",
+        sensors: "Linear acceleration + gyroscope + step + light",
+        method:
+          "FFT power-ratio in the 4–6.5 Hz band, gyroscope frequency-match, with an 8 s duration gate.",
+      },
+      fall: {
+        name: "Fall",
+        sensors: "Raw acceleration + linear acceleration + gyroscope",
+        method:
+          "Free-fall (< 3 m/s²) → impact (> 15 m/s²) → 2.5 s of immobility (low average and low standard deviation).",
+      },
+      nearFall: {
+        name: "Near-fall",
+        sensors: "Linear acceleration + gyroscope",
+        method:
+          "At least 3 spikes > 14 m/s² plus gyroscope > 3.5, followed by recovery to normal within 3 s.",
+      },
+      onOff: {
+        name: "ON/OFF state",
+        sensors: "Acceleration + gyroscope + steps",
+        method:
+          "Weighted z-scores against the personal 4-hour baseline, with a hysteresis band.",
+      },
+    },
+    upload: {
+      heading: "Upload flow",
+      body:
+        "Detected events (with their raw accelerometer/gyroscope buffers and aggregated sensor data) are mapped to a server request tagged with the patient and clinic IDs, and uploaded via the sensors service. The ON/OFF state module has its own DTO, mapper and server request path.",
+    },
+    patientView: {
+      empty: "No sensor data uploaded yet.",
+      error_title: "Could not load sensor data",
+      error_desc: "Something went wrong while fetching the sensor data. Please try again.",
+      table: {
+        event: "Event",
+        detectedAt: "Detected at",
+        sensors: "Sensors",
+        details: "Details",
+      },
+    },
+  },
   files: {
     title: "Patient Documents",
     subtitle: "Manage and view shared medical files",
