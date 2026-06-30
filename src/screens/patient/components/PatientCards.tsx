@@ -26,7 +26,22 @@ export default function PatientSectionsCard({
     "File Share": () => navigate("files")
   };
 
-  const METRIC_ACTIONS: ISectionRouteMapper = {};
+  const SENSORS_LABEL = t("parkinsonSensors.title");
+  const hasParkinsonSensors = modules.some((module) =>
+    module.label.toLowerCase().includes("parkinson sensors"),
+  );
+
+  const moduleItems: ISectionItem[] = modules.filter(
+    (module) => !module.label.toLowerCase().includes("parkinson sensors"),
+  );
+
+  const metricItems: ISectionItem[] = hasParkinsonSensors
+    ? [...metrics, { id: "parkinson-sensors", label: SENSORS_LABEL }]
+    : metrics;
+
+  const METRIC_ACTIONS: ISectionRouteMapper = hasParkinsonSensors
+    ? { [SENSORS_LABEL]: () => navigate("sensors") }
+    : {};
   const FUNCTION_ACTIONS: ISectionRouteMapper = {};
 
   const { graphItems, graphActions } = usePatientGraphSection();
@@ -36,7 +51,7 @@ export default function PatientSectionsCard({
       title: t("patient.modules"),
       icon: Pill,
       iconClassName: "text-chart-1",
-      items: modules,
+      items: moduleItems,
       routeMapper: MODULE_ACTIONS,
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
@@ -46,7 +61,7 @@ export default function PatientSectionsCard({
       title: t("patient.metrics"),
       icon: Activity,
       iconClassName: "text-chart-2",
-      items: metrics,
+      items: metricItems,
       routeMapper: METRIC_ACTIONS,
       editLabel: t("patient.editDetails"),
       enableLabel: t("patient.enable"),
