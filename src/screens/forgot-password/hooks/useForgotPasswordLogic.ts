@@ -3,16 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
-import { verify2FA } from "@/api/authApi";
-import { useRequestPasswordReset, useResetPassword } from "./useForgotPassword";
+import {
+  useRequestPasswordReset,
+  useVerifyResetCode,
+  useResetPassword,
+} from "./useForgotPassword";
 import {
   newPasswordSchema,
   type NewPasswordFormValues,
 } from "../schema/forgotPasswordSchema";
 
-type ForgotPasswordStep = "email" | "two_fa" | "new_password";
+type ForgotPasswordStep = "email" | "code" | "new_password";
 
 export function useForgotPasswordLogic() {
   const { userId } = useAuthStore();
@@ -20,15 +24,14 @@ export function useForgotPasswordLogic() {
   const { t } = useTranslation();
 
   const requestReset = useRequestPasswordReset();
+  const verifyCode = useVerifyResetCode();
   const resetPasswordMutation = useResetPassword();
 
   const [step, setStep] = useState<ForgotPasswordStep>("email");
   const [email, setEmail] = useState("");
-  const [pendingUserId, setPendingUserId] = useState("");
   const [code, setCode] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [isCodePending, setIsCodePending] = useState(false);
 
   const isAlreadyLoggedIn = Boolean(userId);
 
@@ -53,9 +56,8 @@ export function useForgotPasswordLogic() {
     e.preventDefault();
     setFormError(null);
     try {
-      const { user_id } = await requestReset.mutateAsync({ email });
-      setPendingUserId(user_id);
-      setStep("two_fa");
+      await requestReset.mutateAsync({ email });
+      setStep("code");
     } catch {
       setFormError(t("forgotPassword.errorEmailFailed"));
       toast.error(t("forgotPassword.errorEmailFailed"));
@@ -63,27 +65,33 @@ export function useForgotPasswordLogic() {
   };
 
   const handleCodeSubmit = async () => {
-    setIsCodePending(true);
     try {
-      await verify2FA({ user_id: pendingUserId, code });
+      await verifyCode.mutateAsync({ email, code });
       setStep("new_password");
     } catch {
-      toast.error(t("login.failedTitle"));
-    } finally {
-      setIsCodePending(false);
+      setCode("");
+      toast.error(t("forgotPassword.errorCodeInvalid"));
+    }
+  };
+
+  const handleResendCode = async () => {
+    try {
+      await requestReset.mutateAsync({ email });
+      toast.success(t("forgotPassword.resendSuccess"));
+    } catch {
+      toast.error(t("forgotPassword.errorEmailFailed"));
     }
   };
 
   const handleCodeCancel = () => {
     setStep("email");
     setCode("");
-    setPendingUserId("");
   };
 
   const handlePasswordSubmit = passwordForm.handleSubmit(async (values) => {
     try {
       await resetPasswordMutation.mutateAsync({
-        user_id: pendingUserId,
+        email,
         new_password: values.password,
       });
       toast.success(t("forgotPassword.successTitle"), {
@@ -91,8 +99,16 @@ export function useForgotPasswordLogic() {
         duration: 2000,
       });
       navigate("/");
-    } catch {
-      toast.error(t("forgotPassword.errorResetFailed"));
+    } catch (error) {
+      const data = isAxiosError(error) ? error.response?.data : undefined;
+      const notVerified = JSON.stringify(data ?? "").includes("Code not verified");
+      if (notVerified) {
+        setCode("");
+        setStep("email");
+        toast.error(t("forgotPassword.errorCodeNotVerified"));
+      } else {
+        toast.error(t("forgotPassword.errorResetFailed"));
+      }
     }
   });
 
@@ -105,7 +121,7 @@ export function useForgotPasswordLogic() {
     formError,
     isAlreadyLoggedIn,
     isEmailPending: requestReset.isPending,
-    isCodePending,
+    isCodePending: verifyCode.isPending,
     isResetPending: resetPasswordMutation.isPending,
     passwordForm,
     t,
@@ -114,6 +130,7 @@ export function useForgotPasswordLogic() {
     handleBackToLogin,
     handleEmailSubmit,
     handleCodeSubmit,
+    handleResendCode,
     handleCodeCancel,
     handlePasswordSubmit,
   };
