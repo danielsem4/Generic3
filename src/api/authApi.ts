@@ -23,14 +23,17 @@ export const logout = () =>
 export const verify2FA = (payload: { user_id: string; code: string }) =>
   api.post<LoginResponse>("/api/v1/auth/2fa/verify/", payload);
 
-// Sends a 2FA code to the user's email to start a password reset.
-// Assumed endpoint — confirm exact URL/shape with backend.
+// Step 1 — sends a verification code to the user's email to start a password
+// reset. Always returns 200 regardless of whether the email exists (no enumeration).
 export const requestPasswordReset = (payload: { email: string }) =>
-  api.post<{ user_id: string }>("/api/v1/auth/password/forgot/", payload);
+  api.post("/api/v1/auth/password/forgot/", payload);
 
-// Sets a new password after the 2FA code has been verified.
-// Assumed endpoint — confirm exact URL/shape with backend.
-export const resetPassword = (payload: { user_id: string; new_password: string }) =>
+// Step 2 — verifies the emailed code. 200 = valid, 400 = invalid/expired.
+export const verifyResetCode = (payload: { email: string; code: string }) =>
+  api.post("/api/v1/auth/password/verify-code/", payload);
+
+// Step 3 — sets a new password after the code has been verified server-side.
+export const resetPassword = (payload: { email: string; new_password: string }) =>
   api.post("/api/v1/auth/password/reset/", payload);
 
 export const selectClinic = (payload: { user_id: string; clinic_id: string }) =>

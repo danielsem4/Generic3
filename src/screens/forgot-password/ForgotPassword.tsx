@@ -25,6 +25,7 @@ export default function ForgotPassword() {
     handleBackToLogin,
     handleEmailSubmit,
     handleCodeSubmit,
+    handleResendCode,
     handleCodeCancel,
     handlePasswordSubmit,
   } = useForgotPasswordLogic();
@@ -88,12 +89,17 @@ export default function ForgotPassword() {
       </Card>
 
       <TwoFADialog
-        open={step === "two_fa"}
+        open={step === "code"}
         code={code}
         isPending={isCodePending}
         onChange={setCode}
         onSubmit={handleCodeSubmit}
         onCancel={handleCodeCancel}
+        title={t("forgotPassword.codeTitle")}
+        description={t("forgotPassword.codeDesc")}
+        onResend={handleResendCode}
+        resendLabel={t("forgotPassword.resend")}
+        isResendPending={isEmailPending}
       />
     </div>
   );

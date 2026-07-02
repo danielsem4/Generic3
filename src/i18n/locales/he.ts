@@ -70,6 +70,12 @@ const he = {
     successDesc: "כעת תוכל להתחבר עם הסיסמה החדשה.",
     errorEmailFailed: "לא הצלחנו לשלוח קוד לדוא\"ל זה. נסה שוב.",
     errorResetFailed: "איפוס הסיסמה נכשל. נסה שוב.",
+    errorCodeInvalid: "קוד שגוי או שפג תוקפו. נסה שוב.",
+    errorCodeNotVerified: "יש לאמת את הקוד לפני הגדרת סיסמה חדשה.",
+    codeTitle: "הזן קוד אימות",
+    codeDesc: "הזן את הקוד בן 6 הספרות ששלחנו לדוא\"ל שלך.",
+    resend: "שלח קוד מחדש",
+    resendSuccess: "קוד חדש נשלח לדוא\"ל שלך.",
   },
 
   // Home / Dashboard

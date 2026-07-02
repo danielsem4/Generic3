@@ -16,9 +16,28 @@ interface TwoFADialogProps {
   onChange: (value: string) => void;
   onSubmit: () => void;
   onCancel: () => void;
+  title?: string;
+  description?: string;
+  confirmLabel?: string;
+  onResend?: () => void;
+  resendLabel?: string;
+  isResendPending?: boolean;
 }
 
-export function TwoFADialog({ open, code, isPending, onChange, onSubmit, onCancel }: TwoFADialogProps) {
+export function TwoFADialog({
+  open,
+  code,
+  isPending,
+  onChange,
+  onSubmit,
+  onCancel,
+  title,
+  description,
+  confirmLabel,
+  onResend,
+  resendLabel,
+  isResendPending,
+}: TwoFADialogProps) {
   const { t } = useTranslation();
 
   const handleOpenChange = (next: boolean) => {
@@ -29,8 +48,8 @@ export function TwoFADialog({ open, code, isPending, onChange, onSubmit, onCance
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t("login.twoFaTitle")}</DialogTitle>
-          <DialogDescription>{t("login.twoFaDesc")}</DialogDescription>
+          <DialogTitle>{title ?? t("login.twoFaTitle")}</DialogTitle>
+          <DialogDescription>{description ?? t("login.twoFaDesc")}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center gap-6 py-2">
           <InputOTP maxLength={6} value={code} onChange={onChange}>
@@ -48,8 +67,19 @@ export function TwoFADialog({ open, code, isPending, onChange, onSubmit, onCance
             disabled={code.length !== 6 || isPending}
             onClick={onSubmit}
           >
-            {isPending ? t("login.verifying") : t("login.confirm")}
+            {isPending ? t("login.verifying") : confirmLabel ?? t("login.confirm")}
           </Button>
+          {onResend && (
+            <Button
+              type="button"
+              variant="ghost"
+              className="text-sm text-primary hover:text-primary/80 font-medium"
+              disabled={isResendPending}
+              onClick={onResend}
+            >
+              {resendLabel ?? t("login.confirm")}
+            </Button>
+          )}
         </div>
       </DialogContent>
     </Dialog>

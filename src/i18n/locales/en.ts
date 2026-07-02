@@ -71,6 +71,12 @@ const en = {
     successDesc: "You can now log in with your new password.",
     errorEmailFailed: "We couldn't send a code to this email. Please try again.",
     errorResetFailed: "Failed to reset password. Please try again.",
+    errorCodeInvalid: "Invalid or expired code. Please try again.",
+    errorCodeNotVerified: "Please verify the code before setting a new password.",
+    codeTitle: "Enter verification code",
+    codeDesc: "Enter the 6-digit code we sent to your email.",
+    resend: "Resend code",
+    resendSuccess: "A new code has been sent to your email.",
   },
 
   // Home / Dashboard
